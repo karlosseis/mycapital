@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticker: MyString
+  name: MyString
+  exchange: MyString
+  name_country: MyString
+  category: MyString
+
+two:
+  ticker: MyString
+  name: MyString
+  exchange: MyString
+  name_country: MyString
+  category: MyString

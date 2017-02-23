@@ -1,0 +1,21 @@
+<%= simple_form_for(@expected_dividend) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :company %>
+    <%= f.association :operationtype %>
+    <%= f.input :operation_date %>
+    <%= f.input :quantity %>
+    <%= f.input :price_unit %>
+    <%= f.input :amount %>
+    <%= f.association :currency %>
+    <%= f.input :origin_price %>
+    <%= f.input :origin_price_unit %>
+    <%= f.input :origin_amount %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

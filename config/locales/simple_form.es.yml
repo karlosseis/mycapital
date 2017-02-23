@@ -1,0 +1,83 @@
+es:
+  simple_form:
+    "yes": 'Sí'
+    "no": 'No'
+    labels:
+      company:
+        name:  "Nombre"
+        symbol: "Símbolo"
+        stockexchange: "Mercado de valores"
+        sector: "Sector"
+        share_price: "Precio acción"
+        currency: "Moneda"
+        search_symbol: "Símbolo de búsqueda en yahoo"
+        date_share_price: "Fecha precio"
+        dividend_sum: "Dividendos"
+        puchased_sum: "Comprado"
+        sold_sum: "Vendido"
+        ampliated_sum: "Ampliado"
+        quantity_puchased: "Cantidad comprada"
+        quantity_sold: "Cantidad vendida"
+        quantity_ampliated: "Cantidad ampliada"
+        shares_sum: "Total de acciones"
+        invested_sum: "Total invertido"
+        average_price: "Precio medio"
+        share_price_global_currency: "Precio acción"
+        estimated_value_global_currency: "Precio estimado"
+        estimated_benefit_global_currency: "Beneficio estimado"
+        perc_estimated_benefit_global_currency: "% Beneficio estimado"
+        average_price_origin_currency: "Precio medio"
+      operation:
+        company: "Empresa"
+        titulo_editar: "Editar %{operacion} para %{empresa}" 
+        titulo_nueva: "%{operacion} para %{empresa}"                
+        company: "Empresa"
+        operationtype: "Tipo"
+        amount: "Importe Neto"
+        comments: "Comentarios"
+        commission: "Corretaje"
+        currency: "Moneda"
+        destination_tax: "Retención en destino"
+        exchange_rate: "Tipo de cambio"
+        fee: "Gastos bolsa"
+        gross_amount: "Importe bruto"
+        net_amount: "Importe neto"
+        operation_date: "Fecha operación"
+        origin_price: "Precio origen"
+        price: "Precio"
+        quantity: "Número de títulos"
+        withholding_tax: "Retención en origen"
+    hints:
+      company:
+        name: ""
+    placeholders:
+      company:
+        search_symbol: "Identificador en yahoo para recuperar la cotización del valor. Por ejemplo, ABE.MC, SAN.MC, GSK.."
+
+    required:
+      text: 'requerido'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Por favor, revisa los siguientes problemas:"
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

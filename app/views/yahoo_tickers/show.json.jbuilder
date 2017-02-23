@@ -1,0 +1,1 @@
+json.partial! "yahoo_tickers/yahoo_ticker", yahoo_ticker: @yahoo_ticker

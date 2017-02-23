@@ -1,0 +1,2 @@
+json.extract! expected_dividend, :id, :company_id, :operationtype_id, :operation_date, :quantity, :price_unit, :amount, :currency_id, :origin_price, :origin_price_unit, :origin_amount, :user_id, :created_at, :updated_at
+json.url expected_dividend_url(expected_dividend, format: :json)

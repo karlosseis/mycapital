@@ -1,0 +1,1 @@
+json.partial! "stockexchanges/stockexchange", stockexchange: @stockexchange

@@ -1,0 +1,41 @@
+
+    <table  class="table  table-striped">
+    <thead>
+      <tr>            
+        <th><%= t(:'simple_form.labels.operation.operation_date') %></th>      
+        <th><%= t(:'simple_form.labels.operation.amount') %></th>
+        <th><%= t(:'simple_form.labels.operation.quantity') %></th>
+        <th><%= t(:'simple_form.labels.operation.price') %></th>        
+
+        <th><%= t(:'simple_form.labels.operation.commission') %></th>
+        <th><%= t(:'simple_form.labels.operation.fee') %></th>
+        <th><%= t(:'simple_form.labels.operation.origin_price') %></th>
+        <th><%= t(:'simple_form.labels.operation.currency') %></th>        
+        <th><%= t(:'simple_form.labels.operation.exchange_rate') %></th>
+
+        <th><%= t(:'simple_form.labels.operation.comments') %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+     <tbody>
+      <% @company.operations.where("operationtype_id=" + operationtype_id.to_s).order(operation_date: :desc).each do |operation| %>
+        <tr>          
+          <td><%= I18n.l(operation.operation_date) %></td>         
+          <td><%= operation.amount %></td>        
+          <td><%= operation.quantity %></td>
+          <td><%= operation.price %></td>
+
+          <td><%= operation.commission %></td>
+          <td><%= operation.fee %></td>
+          <td><%= operation.origin_price %></td>          
+          <td><%= operation.currency %></td>          
+          <td><%= operation.exchange_rate %></td>
+
+          <td><%= operation.comments %></td>      
+          <td><%= link_to t("edit"), edit_company_operation_path(@company, operation) %> </td>            
+          <td><%= link_to t("destroy"), operation, method: :delete %></td>    
+               
+        </tr>
+      <% end %>
+    </tbody>
+    </table>

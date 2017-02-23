@@ -1,0 +1,51 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  symbol: MyString
+  stockexchange_id: 
+  sector_id: 
+  share_price: 1.5
+  search_symbol: MyString
+  date_share_price: 2017-02-16
+  dividend_sum: 1.5
+  puchased_sum: 1.5
+  sold_sum: 1.5
+  ampliated_sum: 1.5
+  quantity_puchased: 1.5
+  quantity_sold: 1.5
+  quantity_ampliated: 1.5
+  shares_sum: 1.5
+  invested_sum: 1.5
+  average_price: 1.5
+  share_price_global_currency: 1.5
+  estimated_value_global_currency: 1.5
+  estimated_benefit_global_currency: 1.5
+  perc_estimated_benefit_global_currency: 1.5
+  average_price_origin_currency: 1.5
+  user_id: 
+
+two:
+  name: MyString
+  symbol: MyString
+  stockexchange_id: 
+  sector_id: 
+  share_price: 1.5
+  search_symbol: MyString
+  date_share_price: 2017-02-16
+  dividend_sum: 1.5
+  puchased_sum: 1.5
+  sold_sum: 1.5
+  ampliated_sum: 1.5
+  quantity_puchased: 1.5
+  quantity_sold: 1.5
+  quantity_ampliated: 1.5
+  shares_sum: 1.5
+  invested_sum: 1.5
+  average_price: 1.5
+  share_price_global_currency: 1.5
+  estimated_value_global_currency: 1.5
+  estimated_benefit_global_currency: 1.5
+  perc_estimated_benefit_global_currency: 1.5
+  average_price_origin_currency: 1.5
+  user_id: 

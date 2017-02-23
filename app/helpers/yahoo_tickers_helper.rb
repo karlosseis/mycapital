@@ -1,0 +1,2 @@
+module YahooTickersHelper
+end

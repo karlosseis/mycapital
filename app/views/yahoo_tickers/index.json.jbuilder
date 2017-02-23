@@ -1,0 +1,1 @@
+json.array! @yahoo_tickers, partial: 'yahoo_tickers/yahoo_ticker', as: :yahoo_ticker

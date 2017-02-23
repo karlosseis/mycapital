@@ -1,0 +1,155 @@
+<p id="notice"><%= notice %></p>
+
+
+
+
+
+<% mi_portfolio = MyPortfolioSummary.new(Company) %>
+ 
+
+
+
+
+<h1> <%= t(:'my_portfolio') %></h1>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+        <div class="row">
+           <div class="text-center"  ><strong><%= t(:'portfolio_value') %></strong></div>          
+        </div> 
+
+         <div class="row">
+           <div class="col-md-6 text-left"><strong><%= t(:'global_value') %>:</strong></div>
+           <div class="col-md-6 text-right"><%= number_to_currency(mi_portfolio.global_value) %></div>
+        </div>   
+
+
+         <div class="row">
+           <div class="col-md-6 text-left"><strong><%= t(:'dif') %>:</strong></div>
+           <div class="col-md-6 text-right">
+            <% if mi_portfolio.global_benefit.to_f >= 0 %>
+              <font color="#009933"><%= number_to_currency(mi_portfolio.global_benefit) %></font>
+            <% else %>
+              <font color="#ff0000"><%= number_to_currency(mi_portfolio.global_benefit) %></font>
+            <% end %>    
+          </div>
+          </div>
+
+          
+
+         <div class="row">
+           <div class="col-md-6 text-left"><strong>%:</strong></div>
+           <div class="col-md-6 text-right">
+            <% if mi_portfolio.global_perc_benefit.to_f >= 0 %>
+              <font color="#009933"><%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
+            <% else %>
+              <font color="#ff0000"><%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
+            <% end %>    
+           </div>
+        </div>
+
+
+         <div class="row">
+           <div class="col-md-6 text-left"><strong><%= t(:'global_invested') %>:</strong></div>
+           <div class="col-md-6 text-right"><%= number_to_currency(mi_portfolio.global_invested) %></div>
+        </div>  
+
+     
+
+    </div>
+
+    <div class="col-md-4">
+       <div class="row">
+           <div class="text-center"  ><strong><%= t(:'last_purchases') %></strong></div>          
+        </div>   
+
+           <div class="row">
+               <div class="col-md-3 text-left"><strong><%= t(:'simple_form.labels.company.symbol') %></strong></div>
+               <div class="col-md-5 text-center"><strong><%= t(:'simple_form.labels.operation.operation_date')%></strong></div>
+               <div class="col-md-4 text-right"><strong><%= number_to_currency(t(:'price')) %></strong></div>
+           </div> 
+           <% mi_portfolio.last_purchases(3).each do |p| %>
+          <div class="row">
+               <div class="col-md-3 text-left"><%= p.company.symbol  %></div>
+                <div class="col-md-5 text-center"><%= I18n.l(p.operation_date)  %></div>
+                <div class="col-md-4 text-right"><%= number_to_currency(p.price)  %></div>
+           </div> 
+          <% end %>      
+    </div>
+
+  <div class="col-md-4">
+       <div class="row">
+           <div class="text-center" ><strong><%= t(:'next_dividends') %></strong></div>          
+        </div>   
+
+           <div class="row">
+               <div class="col-md-3 text-left"><strong><%= t(:'simple_form.labels.company.symbol') %></strong></div>
+               <div class="col-md-5 text-center"><strong><%= t(:'simple_form.labels.operation.operation_date')%></strong></div>
+               <div class="col-md-4 text-right"><strong><%= t(:'price') %></strong></div>
+           </div> 
+           <% mi_portfolio.next_dividends(3).each do |p| %>
+          <div class="row">
+               <div class="col-md-3 text-left"><%= p.company.symbol  %></div>
+                <div class="col-md-5 text-center"><%= I18n.l(p.operation_date)  %></div>
+                <div class="col-md-4 text-right"><%= number_to_currency(p.amount)  %></div>
+           </div> 
+          <% end %>      
+    </div> 
+    </div>
+</div>   
+
+
+
+
+ <%= mi_portfolio = nil %>
+
+
+<h1<%= t(:'my_portfolio') %></h1>
+  
+ 
+  
+
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th style="text-align:left"><%= t(:'simple_form.labels.company.name') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company.symbol') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.share_price') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company.date_share_price') %></th>      
+     
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.estimated_value_global_currency') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.invested_sum') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.estimated_benefit_global_currency') %></th>
+      <th style="text-align:right">%</th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.average_price') %></th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td style="text-align:left"><%= link_to company.name, company %></td>
+        <td style="text-align:center"><%= company.symbol %></td>        
+        <td style="text-align:right"><%= company.share_price_formatted %></td>      
+        <td style="text-align:center"><%= company.date_share_price_formatted%> </td>        
+        <td style="text-align:right"><%= number_to_currency(company.estimated_value_global_currency) %></td>    
+        <td style="text-align:right"><%= number_to_currency(company.invested_sum) %></td>   
+        <td style="text-align:right">    <% if company.estimated_benefit_global_currency.to_f >= 0 %>
+        <font color="#009933"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
+    <% else %>
+        <font color="#ff0000"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
+    <% end %>      </td>   
+        <td style="text-align:right"><%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %></td>   
+        <td style="text-align:right"><%= number_to_currency(company.average_price) %></td>  
+   
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t(:'new_company') , new_company_path %>

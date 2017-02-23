@@ -1,0 +1,26 @@
+
+<%= simple_form_for([@company, @operation], html: { autocomplete: 'off' }) do |f| %>
+ <%= f.error_notification %>
+ <%= f.hidden_field  :operationtype_id, html5: true %> 
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :operation_date, as: :date, html5: true %>
+      <%= f.input :net_amount  %>
+      <%= f.input :gross_amount  %>
+      <%= f.input :withholding_tax  %>
+      <%= f.input :destination_tax  %>
+    </div>
+   <div class="col-md-4">
+      <%= f.input :quantity , as: :integer %>
+      <%= f.input :comments  %>
+    </div>    
+  </div>
+
+  <div class="form-actions">  
+    <input type="submit" class="btn btn-success" value=<%= t("save") %> >
+    <%= link_to  t("cancel") , company_path(@company), :class => "btn btn-info", :style=>'color:#FFFFFF;' %>   
+  </div>
+
+
+<% end %>
+

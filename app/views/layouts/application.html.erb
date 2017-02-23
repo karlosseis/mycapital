@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Apelo</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+ 
+<br>
+<br>
+<br>
+
+ <%= render 'layouts/flash_messages' %>
+  <%= render 'layouts/menu' %>
+
+
+    <div class="container">
+    <%= yield %>
+    </div>
+</body>
+</html>

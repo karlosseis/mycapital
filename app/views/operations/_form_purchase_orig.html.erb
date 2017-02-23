@@ -1,0 +1,69 @@
+<h2>Nueva compra</h2>
+
+<%= simple_form_for([@company, @operation]) do |f| %>
+  <% if @operation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@operation.errors.count, "error") %> prohibited this operation from being saved:</h2>
+
+      <ul>
+      <% @operation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @company.name %>
+  </p>
+  <%= f.hidden_field  :operationtype_id, html5: true %> 
+  <div class="field">
+    <%= f.label :operation_date %><br>
+    <!-- <%= f.date_field :operation_date %> -->
+    <%= f.date_select :operation_date %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>  
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>  
+  <div class="field">
+    <%= f.label :origin_price %><br>
+    <%= f.text_field :origin_price %>
+  </div>
+  <div class="field">
+    <%= f.label :currency_id %><br>
+    <%= f.collection_select :currency_id, Currency.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :commission %><br>
+    <%= f.text_field :commission %>
+  </div>  
+  <div class="field">
+    <%= f.label :fee %><br>
+    <%= f.text_field :fee %>
+  </div>
+  <div class="field">
+    <%= f.label :exchange_rate %><br>
+    <%= f.text_field :exchange_rate %>
+  </div>  
+  <div class="field">
+    <%= f.label :comments %><br>
+    <%= f.text_area :comments %>
+  </div>
+
+ <div class="form-actions">
+    
+    <input type="submit" class="btn btn-info" value="Submit">
+    
+  </div>
+<% end %>
