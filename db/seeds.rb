@@ -1,73 +1,67 @@
-Country.create!([
-  {name: "España"},
-  {name: "USA"}
-])
-Currency.create!([
-  {name: "EUR", symbol: "€"},
-  {name: "USD", symbol: "$"}
-])
+Country.create(id:1, name: 'España')
+Country.create(id:2, name: 'USA')
 
-Operationtype.create!([
-  {name: "Dividendo"},
-  {name: "Venta"},
-  {name: "Compra"},
-  {name: "Ampliación"}
-])
-Sector.create!([
-  {name: "Petróleo"},
-  {name: "Electricidad y Gas"},
-  {name: "Energías Renovables"},
-  {name: "Mineral, Metales y Transformación"},
-  {name: "Fabric. y Montaje Bienes de Equipo"},
-  {name: "Construcción"},
-  {name: "Ingeniería y Otros"},
-  {name: "Alimentación y Bebidas"},
-  {name: "Textil, Vestido y Calzado"},
-  {name: "Papel y Artes Gráficas"},
-  {name: "Ocio, Turismo y Hostelería"},
-  {name: "Comercio"},
-  {name: "Medios de Comunicación y Publicidad"},
-  {name: "Transporte y Distribución"},
-  {name: "Autopistas y Aparcamientos"},
-  {name: "Otros Servicios"},
-  {name: "Bancos y Cajas de Ahorro"},
-  {name: "Seguros"},
-  {name: "Servicios de Inversión"},
-  {name: "Telecomunicaciones y Otros"},
-  {name: "Electrónica y Software"},
-  {name: "Productos farmaceúticos y Biotecnología"},
-  {name: "REIT"},
-  {name: "Electrónica y Software"},
-  {name: "Otros Bienes de Consumo"}
-])
-Stockexchange.create!([
-  {name: "M.CONTINUO", country_id: 1, currency_id: 1},
-  {name: "NYSE", country_id: 2, currency_id: 2},
-  {name: "NASDAQ", country_id: 2, currency_id: 2}
-])
 
+Currency.create(id:1, name: 'EUR')
+Currency.create(id:2, name: 'USD')
+
+Stockexchange.create(id:1, name: 'M.CONTINUO', country_id: 1, currency_id:1)
+Stockexchange.create(id:2, name: 'NYSE', country_id: 2, currency_id:2)
+Stockexchange.create(id:3, name: 'NASDAQ', country_id: 2, currency_id:2)
+
+Operationtype.create(id:1, name: 'Dividendo')
+Operationtype.create(id:2, name: 'Venta')
+Operationtype.create(id:3, name: 'Compra')
+Operationtype.create(id:4, name: 'Ampliación')
+
+
+Sector.create(id:2  , name: 'Petróleo')
+Sector.create(id:3  , name: 'Electricidad y Gas')
+Sector.create(id:4  , name: 'Energías Renovables')
+Sector.create(id:5  , name: 'Mineral, Metales y Transformación')
+Sector.create(id:6  , name: 'Fabric. y Montaje Bienes de Equipo')
+Sector.create(id:7  , name: 'Construcción')
+Sector.create(id:8  , name: 'Ingeniería y Otros')
+Sector.create(id:9  , name: 'Alimentación y Bebidas')
+Sector.create(id:10 , name: 'Textil, Vestido y Calzado')
+Sector.create(id:11 , name: 'Papel y Artes Gráficas')
+Sector.create(id:12 , name: 'Ocio, Turismo y Hostelería')
+Sector.create(id:13 , name: 'Comercio')
+Sector.create(id:14 , name: 'Medios de Comunicación y Publicidad')
+Sector.create(id:15 , name: 'Transporte y Distribución')
+Sector.create(id:16 , name: 'Autopistas y Aparcamientos')
+Sector.create(id:17 , name: 'Otros Servicios')
+Sector.create(id:18 , name: 'Bancos y Cajas de Ahorro')
+Sector.create(id:19 , name: 'Seguros')
+Sector.create(id:20 , name: 'Servicios de Inversión')
+Sector.create(id:21 , name: 'Telecomunicaciones y Otros')
+Sector.create(id:22 , name: 'Electrónica y Software')
+Sector.create(id:23 , name: 'Productos farmaceúticos y Biotecnología')
+Sector.create(id:24 , name: 'REIT')
+Sector.create(id:25 , name: 'Electrónica y Software')
+Sector.create(id:26 , name: 'Otros Bienes de Consumo')
 
 Company.create!([
-  {name: "ABERTIS", symbol: "ABE", stockexchange_id: 1, sector_id: 16, share_price: nil, search_symbol: "ABE.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "AT T", symbol: "T", stockexchange_id: 2, sector_id: 21, share_price: nil, search_symbol: "T", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "BANCO SANTANDER", symbol: "SAN", stockexchange_id: 1, sector_id: 18, share_price: nil, search_symbol: "SAN.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "BOLSAS Y MERCADOS ESPAÑOLES", symbol: "BME", stockexchange_id: 1, sector_id: 20, share_price: nil, search_symbol: "BME.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "CONSOLIDATED EDISON INC", symbol: "ED", stockexchange_id: 2, sector_id: 3, share_price: nil, search_symbol: "ED", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "DURO FELGUERA", symbol: "MDF", stockexchange_id: 1, sector_id: 8, share_price: nil, search_symbol: "MDF.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "ENAGAS", symbol: "ENG", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "ENG.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "GAS NATURAL", symbol: "GAS", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "GAS.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "GLAXOSMITHKLINE PLC ADR", symbol: "GSK", stockexchange_id: 2, sector_id: 23, share_price: nil, search_symbol: "GSK", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "HCP", symbol: "HCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "HCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "MAPFRE", symbol: "MAP", stockexchange_id: 1, sector_id: 19, share_price: nil, search_symbol: "MAP.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "MICROSOFT CORP", symbol: "MSFT", stockexchange_id: 3, sector_id: 22, share_price: nil, search_symbol: "MSFT", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "OMEGA HEALTHCARE INVESTORS INC", symbol: "OHI", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "OHI", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "RED ELECTRICA", symbol: "REE", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "REE.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "REPSOL YPF", symbol: "REP", stockexchange_id: 1, sector_id: 2, share_price: nil, search_symbol: "REP.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "STATOIL ASA", symbol: "STO", stockexchange_id: 2, sector_id: 2, share_price: nil, search_symbol: "STO", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "TELEFONICA", symbol: "TEF", stockexchange_id: 1, sector_id: 21, share_price: nil, search_symbol: "TEF.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "UNILEVER PLC", symbol: "UL", stockexchange_id: 2, sector_id: 26, share_price: nil, search_symbol: "UL", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "MONSANTO", symbol: "MON", stockexchange_id: 2, sector_id: 9, share_price: nil, search_symbol: "MON", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
-  {name: "QUALITY CARE PROPERTIES", symbol: "QCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "QCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1}
+  {id:1 , name: "ABERTIS", symbol: "ABE", stockexchange_id: 1, sector_id: 16, share_price: nil, search_symbol: "ABE.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:19 ,name: "AT T", symbol: "T", stockexchange_id: 2, sector_id: 21, share_price: nil, search_symbol: "T", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:20 ,name: "BANCO SANTANDER", symbol: "SAN", stockexchange_id: 1, sector_id: 18, share_price: nil, search_symbol: "SAN.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:21 ,name: "BOLSAS Y MERCADOS ESPAÑOLES", symbol: "BME", stockexchange_id: 1, sector_id: 20, share_price: nil, search_symbol: "BME.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:22 ,name: "CONSOLIDATED EDISON INC", symbol: "ED", stockexchange_id: 2, sector_id: 3, share_price: nil, search_symbol: "ED", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:23 ,name: "DURO FELGUERA", symbol: "MDF", stockexchange_id: 1, sector_id: 8, share_price: nil, search_symbol: "MDF.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:24 ,name: "ENAGAS", symbol: "ENG", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "ENG.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:25 ,name: "GAS NATURAL", symbol: "GAS", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "GAS.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:26 ,name: "GLAXOSMITHKLINE PLC ADR", symbol: "GSK", stockexchange_id: 2, sector_id: 23, share_price: nil, search_symbol: "GSK", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:27 ,name: "HCP", symbol: "HCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "HCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:28 ,name: "MAPFRE", symbol: "MAP", stockexchange_id: 1, sector_id: 19, share_price: nil, search_symbol: "MAP.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:29 ,name: "MICROSOFT CORP", symbol: "MSFT", stockexchange_id: 3, sector_id: 22, share_price: nil, search_symbol: "MSFT", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:30 ,name: "OMEGA HEALTHCARE INVESTORS INC", symbol: "OHI", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "OHI", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:31 ,name: "RED ELECTRICA", symbol: "REE", stockexchange_id: 1, sector_id: 3, share_price: nil, search_symbol: "REE.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:32 ,name: "REPSOL YPF", symbol: "REP", stockexchange_id: 1, sector_id: 2, share_price: nil, search_symbol: "REP.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:33 ,name: "STATOIL ASA", symbol: "STO", stockexchange_id: 2, sector_id: 2, share_price: nil, search_symbol: "STO", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:34 ,name: "TELEFONICA", symbol: "TEF", stockexchange_id: 1, sector_id: 21, share_price: nil, search_symbol: "TEF.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:35 ,name: "UNILEVER PLC", symbol: "UL", stockexchange_id: 2, sector_id: 26, share_price: nil, search_symbol: "UL", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:36 ,name: "MONSANTO", symbol: "MON", stockexchange_id: 2, sector_id: 9, share_price: nil, search_symbol: "MON", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
+  {id:37 ,name: "QUALITY CARE PROPERTIES", symbol: "QCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "QCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1}
 ])
 
 Operation.create!([

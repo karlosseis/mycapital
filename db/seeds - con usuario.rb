@@ -1,6 +1,56 @@
 User.create!([
   {email: "karlos.666@gmail.com", encrypted_password: "$2a$11$Je9w/buWllIPOOtV8V50qeVE4dSfjLrzMLbrfXXciUhJtGfPYfHgy", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2017-02-19 18:56:26", last_sign_in_at: "2017-02-19 18:56:26", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", first_name: nil, last_name: nil, permission_level: nil}
 ])
+Country.create!([
+  {name: "España"},
+  {name: "USA"}
+])
+Currency.create!([
+  {name: "EUR", symbol: "€"},
+  {name: "USD", symbol: "$"}
+])
+
+Operationtype.create!([
+  {name: "Dividendo"},
+  {name: "Venta"},
+  {name: "Compra"},
+  {name: "Ampliación"}
+])
+Sector.create!([
+  {name: "Petróleo"},
+  {name: "Electricidad y Gas"},
+  {name: "Energías Renovables"},
+  {name: "Mineral, Metales y Transformación"},
+  {name: "Fabric. y Montaje Bienes de Equipo"},
+  {name: "Construcción"},
+  {name: "Ingeniería y Otros"},
+  {name: "Alimentación y Bebidas"},
+  {name: "Textil, Vestido y Calzado"},
+  {name: "Papel y Artes Gráficas"},
+  {name: "Ocio, Turismo y Hostelería"},
+  {name: "Comercio"},
+  {name: "Medios de Comunicación y Publicidad"},
+  {name: "Transporte y Distribución"},
+  {name: "Autopistas y Aparcamientos"},
+  {name: "Otros Servicios"},
+  {name: "Bancos y Cajas de Ahorro"},
+  {name: "Seguros"},
+  {name: "Servicios de Inversión"},
+  {name: "Telecomunicaciones y Otros"},
+  {name: "Electrónica y Software"},
+  {name: "Productos farmaceúticos y Biotecnología"},
+  {name: "REIT"},
+  {name: "Electrónica y Software"},
+  {name: "Otros Bienes de Consumo"}
+])
+Stockexchange.create!([
+  {name: "M.CONTINUO", country_id: 1, currency_id: 1},
+  {name: "NYSE", country_id: 2, currency_id: 2},
+  {name: "NASDAQ", country_id: 2, currency_id: 2}
+])
+
+
+
 Company.create!([
   {name: "ABERTIS", symbol: "ABE", stockexchange_id: 1, sector_id: 16, share_price: nil, search_symbol: "ABE.MC", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1},
   {name: "AT T", symbol: "T", stockexchange_id: 2, sector_id: 21, share_price: nil, search_symbol: "T", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1},
@@ -23,14 +73,7 @@ Company.create!([
   {name: "MONSANTO", symbol: "MON", stockexchange_id: 2, sector_id: 9, share_price: nil, search_symbol: "MON", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1},
   {name: "QUALITY CARE PROPERTIES", symbol: "QCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "QCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1}
 ])
-Country.create!([
-  {name: "España"},
-  {name: "USA"}
-])
-Currency.create!([
-  {name: "EUR", symbol: "€"},
-  {name: "USD", symbol: "$"}
-])
+
 Operation.create!([
   {company_id: 34, operationtype_id: 4, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2015-04-17", origin_price: 0.0, price: 0.0, quantity: 2, withholding_tax: 0.0, user_id: 1},
   {company_id: 32, operationtype_id: 3, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-01-01", origin_price: 0.0, price: 0.0, quantity: 12, withholding_tax: 0.0, user_id: 1},
@@ -253,42 +296,4 @@ Operation.create!([
   {company_id: 1, operationtype_id: 3, amount: 1013.49, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-14", origin_price: 12.535, price: 12.535, quantity: 80, withholding_tax: 0.0, user_id: 1},
   {company_id: 31, operationtype_id: 3, amount: 1014.11, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-24", origin_price: 16.72, price: 16.72, quantity: 60, withholding_tax: 0.0, user_id: 1},
   {company_id: 20, operationtype_id: 4, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-01", origin_price: 0.0, price: 0.0, quantity: 3, withholding_tax: 0.0, user_id: 1}
-])
-Operationtype.create!([
-  {name: "Dividendo"},
-  {name: "Venta"},
-  {name: "Compra"},
-  {name: "Ampliación"}
-])
-Sector.create!([
-  {name: "Petróleo"},
-  {name: "Electricidad y Gas"},
-  {name: "Energías Renovables"},
-  {name: "Mineral, Metales y Transformación"},
-  {name: "Fabric. y Montaje Bienes de Equipo"},
-  {name: "Construcción"},
-  {name: "Ingeniería y Otros"},
-  {name: "Alimentación y Bebidas"},
-  {name: "Textil, Vestido y Calzado"},
-  {name: "Papel y Artes Gráficas"},
-  {name: "Ocio, Turismo y Hostelería"},
-  {name: "Comercio"},
-  {name: "Medios de Comunicación y Publicidad"},
-  {name: "Transporte y Distribución"},
-  {name: "Autopistas y Aparcamientos"},
-  {name: "Otros Servicios"},
-  {name: "Bancos y Cajas de Ahorro"},
-  {name: "Seguros"},
-  {name: "Servicios de Inversión"},
-  {name: "Telecomunicaciones y Otros"},
-  {name: "Electrónica y Software"},
-  {name: "Productos farmaceúticos y Biotecnología"},
-  {name: "REIT"},
-  {name: "Electrónica y Software"},
-  {name: "Otros Bienes de Consumo"}
-])
-Stockexchange.create!([
-  {name: "M.CONTINUO", country_id: 1, currency_id: 1},
-  {name: "NYSE", country_id: 2, currency_id: 2},
-  {name: "NASDAQ", country_id: 2, currency_id: 2}
 ])
