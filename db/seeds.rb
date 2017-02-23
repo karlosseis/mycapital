@@ -2,8 +2,8 @@ Country.create(id:1, name: 'España')
 Country.create(id:2, name: 'USA')
 
 
-Currency.create(id:1, name: 'EUR')
-Currency.create(id:2, name: 'USD')
+Currency.create(id:1, name: 'EUR', symbol:'€')
+Currency.create(id:2, name: 'USD', symbol: '$')
 
 Stockexchange.create(id:1, name: 'M.CONTINUO', country_id: 1, currency_id:1)
 Stockexchange.create(id:2, name: 'NYSE', country_id: 2, currency_id:2)
