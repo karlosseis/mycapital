@@ -1,3 +1,12 @@
+Country.create!([
+  {name: "España"},
+  {name: "USA"}
+])
+Currency.create!([
+  {name: "EUR", symbol: "€"},
+  {name: "USD", symbol: "$"}
+])
+
 Operationtype.create!([
   {name: "Dividendo"},
   {name: "Venta"},
@@ -60,14 +69,7 @@ Company.create!([
   {name: "MONSANTO", symbol: "MON", stockexchange_id: 2, sector_id: 9, share_price: nil, search_symbol: "MON", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil},
   {name: "QUALITY CARE PROPERTIES", symbol: "QCP", stockexchange_id: 2, sector_id: 24, share_price: nil, search_symbol: "QCP", date_share_price: nil, dividend_sum: nil, puchased_sum: nil, sold_sum: nil, ampliated_sum: nil, quantity_puchased: nil, quantity_sold: nil, quantity_ampliated: nil, shares_sum: nil, invested_sum: nil, average_price: nil, share_price_global_currency: nil, estimated_value_global_currency: nil, estimated_benefit_global_currency: nil, perc_estimated_benefit_global_currency: nil, average_price_origin_currency: nil, user_id: 1}
 ])
-Country.create!([
-  {name: "España"},
-  {name: "USA"}
-])
-Currency.create!([
-  {name: "EUR", symbol: "€"},
-  {name: "USD", symbol: "$"}
-])
+
 Operation.create!([
   {company_id: 34, operationtype_id: 4, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2015-04-17", origin_price: 0.0, price: 0.0, quantity: 2, withholding_tax: 0.0},
   {company_id: 32, operationtype_id: 3, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-01-01", origin_price: 0.0, price: 0.0, quantity: 12, withholding_tax: 0.0},
