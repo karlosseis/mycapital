@@ -18,13 +18,14 @@ class Operation < ActiveRecord::Base
  
   validates :operation_date, presence: true
   validates :quantity,  presence: true, :numericality => { :greater_than => 0}
+  validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
 
   validates :price, :numericality => { :greater_than => 0}, if: :is_purchase?  
   validates :amount, :numericality => { :greater_than => 0}, if: :is_purchase?
   validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
   validates :fee, :numericality => { :greater_than => 0}, if: :is_purchase? 
   validates :origin_price, :numericality => { :greater_than => 0}, if: :is_purchase? 
-  validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
+
   validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
 
   validates :price, :numericality => { :greater_than => 0}, if: :is_sale?  
@@ -32,7 +33,6 @@ class Operation < ActiveRecord::Base
   validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
   validates :fee, :numericality => { :greater_than => 0}, if: :is_sale? 
   validates :origin_price, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
   validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
 
 
@@ -41,7 +41,6 @@ class Operation < ActiveRecord::Base
   validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
   validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
   validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
-  validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
   validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
 
 
@@ -51,7 +50,7 @@ class Operation < ActiveRecord::Base
   validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
   
   def foreign_currency_field_required?
-     self.currency.to_s != Mycapital::CURRENCY_PURCHASE.to_s
+     self.currency.to_s != Mycapital::CURRENCY_PURCHASE.to_s && !self.is_dividend?
   end
 
   def is_purchase?

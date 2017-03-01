@@ -5,29 +5,29 @@
 #   gem 'sqlite3'
 #
 
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   reconnect: false
-#   database: mycapital_dev
-#   pool: 5
-#   username: root
-#   password: ruby
-#   host: 192.168.0.161
-
-# development:
-#   <<: *default
-#   database: mycapital_dev #db/development.sqlite3
-
-
 default: &default
-  adapter: sqlite3
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: mycapital_dev
   pool: 5
-  timeout: 5000
+  username: root
+  password: ruby
+  host: 192.168.43.109
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: mycapital_dev #db/development.sqlite3
+
+
+# default: &default
+#   adapter: sqlite3
+#   pool: 5
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

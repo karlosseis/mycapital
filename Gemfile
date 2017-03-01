@@ -41,6 +41,9 @@ gem 'delayed_job_active_record'
 
 gem 'mysql2'
 gem 'seed_dump'
+
+gem "chartkick"
+gem 'groupdate'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

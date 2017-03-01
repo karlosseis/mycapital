@@ -8,9 +8,9 @@ class YahooTickersController < ApplicationController
   end
 
   def create_company
-   Company.new(name: 'hola') 
-   Company.save() 
-
+   Company.new(name: 'hola333') 
+   Company.save
+ 
   end
 
 

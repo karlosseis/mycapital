@@ -12,13 +12,15 @@ Rails.application.routes.draw do
   devise_for :users
   resources :yahoo_tickers
 
- # Handles User accept terms 
-  resources :yahoo_tickers do
-    collection do
-      post 'create_company', :action => :create_company
-    end 
-  end
+ # # Handles User accept terms 
+ #  resources :yahoo_tickers do
+ #    collection do
+ #      post 'create_company'
+ #    end 
+ #  end
   
+  post 'create_company' => 'yahoo_tickers#create_company', as: :create_company
+
   resources :operations  #, :only => [:index, :delete]
   get 'portfolio', to: 'companies#portfolio'
 

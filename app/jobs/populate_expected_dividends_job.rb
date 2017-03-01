@@ -8,8 +8,10 @@ class PopulateExpectedDividendsJob < ActiveJob::Base
     	# le sumamos un año a la fecha del cobro de dividendo para que salga el año actual
     	
 		ExpectedDividend.delete_all
-
-    	 Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_day - 1.year,  Time.now.end_of_day)
+#Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_day - 1.year,  Time.now.end_of_day)
+#.find_each do |oper|
+		
+    	 Operation.where('operationtype_id = ? and year(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year - 1)
 .find_each do |oper|
 			ExpectedDividend.create(:operationtype_id => oper.operationtype_id,
 									:company_id => oper.company_id,

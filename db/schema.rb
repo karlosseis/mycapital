@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223175119) do
+ActiveRecord::Schema.define(version: 20170224090746) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                                   limit: 255
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at",                                                       null: false
   end
 
-  add_index "companies", ["sector_id"], name: "index_companies_on_sector_id"
-  add_index "companies", ["stockexchange_id"], name: "index_companies_on_stockexchange_id"
-  add_index "companies", ["user_id"], name: "index_companies_on_user_id"
+  add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree
+  add_index "companies", ["stockexchange_id"], name: "index_companies_on_stockexchange_id", using: :btree
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "expected_dividends", force: :cascade do |t|
     t.integer  "company_id",        limit: 4
@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "expected_dividends", ["company_id"], name: "index_expected_dividends_on_company_id"
-  add_index "expected_dividends", ["currency_id"], name: "index_expected_dividends_on_currency_id"
-  add_index "expected_dividends", ["operationtype_id"], name: "index_expected_dividends_on_operationtype_id"
-  add_index "expected_dividends", ["user_id"], name: "index_expected_dividends_on_user_id"
+  add_index "expected_dividends", ["company_id"], name: "index_expected_dividends_on_company_id", using: :btree
+  add_index "expected_dividends", ["currency_id"], name: "index_expected_dividends_on_currency_id", using: :btree
+  add_index "expected_dividends", ["operationtype_id"], name: "index_expected_dividends_on_operationtype_id", using: :btree
+  add_index "expected_dividends", ["user_id"], name: "index_expected_dividends_on_user_id", using: :btree
 
   create_table "operations", force: :cascade do |t|
     t.integer  "company_id",       limit: 4
@@ -117,10 +117,10 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at",                     null: false
   end
 
-  add_index "operations", ["company_id"], name: "index_operations_on_company_id"
-  add_index "operations", ["currency_id"], name: "index_operations_on_currency_id"
-  add_index "operations", ["operationtype_id"], name: "index_operations_on_operationtype_id"
-  add_index "operations", ["user_id"], name: "index_operations_on_user_id"
+  add_index "operations", ["company_id"], name: "index_operations_on_company_id", using: :btree
+  add_index "operations", ["currency_id"], name: "index_operations_on_currency_id", using: :btree
+  add_index "operations", ["operationtype_id"], name: "index_operations_on_operationtype_id", using: :btree
+  add_index "operations", ["user_id"], name: "index_operations_on_user_id", using: :btree
 
   create_table "operationtypes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -142,8 +142,8 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "stockexchanges", ["country_id"], name: "index_stockexchanges_on_country_id"
-  add_index "stockexchanges", ["currency_id"], name: "index_stockexchanges_on_currency_id"
+  add_index "stockexchanges", ["country_id"], name: "index_stockexchanges_on_country_id", using: :btree
+  add_index "stockexchanges", ["currency_id"], name: "index_stockexchanges_on_currency_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -158,13 +158,13 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.string   "last_sign_in_ip",        limit: 255
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
-    t.integer  "permission_level",       limit: 4
+    t.integer  "permission_level",       limit: 4,   default: 1
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "yahoo_tickers", force: :cascade do |t|
     t.string   "ticker",       limit: 255
@@ -176,4 +176,17 @@ ActiveRecord::Schema.define(version: 20170223175119) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "companies", "sectors"
+  add_foreign_key "companies", "stockexchanges"
+  add_foreign_key "companies", "users"
+  add_foreign_key "expected_dividends", "companies"
+  add_foreign_key "expected_dividends", "currencies"
+  add_foreign_key "expected_dividends", "operationtypes"
+  add_foreign_key "expected_dividends", "users"
+  add_foreign_key "operations", "companies"
+  add_foreign_key "operations", "currencies"
+  add_foreign_key "operations", "operationtypes"
+  add_foreign_key "operations", "users"
+  add_foreign_key "stockexchanges", "countries"
+  add_foreign_key "stockexchanges", "currencies"
 end

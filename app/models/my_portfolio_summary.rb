@@ -45,7 +45,23 @@ class MyPortfolioSummary
 	end
 
 	def next_dividends(number)
-		ExpectedDividend.where(operationtype_id: Mycapital::OP_DIVIDEND).order(operation_date: :asc).limit(number)		
-
+		ExpectedDividend.where('operationtype_id = ? and operation_date >= ?', Mycapital::OP_DIVIDEND, Time.now).order(operation_date: :asc).limit(number)		
 	end	
+
+	def dividends_current_year	
+		Operation.where('operationtype_id = ? and year(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year).sum(:net_amount)
+	end
+
+	def dividends_current_month	
+		Operation.where('operationtype_id = ? and year(operation_date) = ? and month(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year, Time.now.month).sum(:net_amount)
+	end
+
+	def expected_dividends_current_year	
+		ExpectedDividend.where('operationtype_id = ? and year(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year).sum(:amount)
+	end
+
+	def expected_dividends_current_month	
+		ExpectedDividend.where('operationtype_id = ? and year(operation_date) = ? and month(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year, Time.now.month).sum(:amount)
+	end
+
 end

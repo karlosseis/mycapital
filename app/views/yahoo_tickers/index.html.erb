@@ -31,7 +31,7 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
       <th></th>
       <th></th>
       <th></th>
-      th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -43,7 +43,7 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
         <td><%= yahoo_ticker.exchange %></td>
         <td><%= yahoo_ticker.name_country %></td>
         <td><%= yahoo_ticker.category %></td>
-        <td><%= link_to 'Crear empresa', create_company %></td>
+        <td><%= link_to 'Crear empresa', edit_company_path(yahoo_ticker, nombre_yahoo: yahoo_ticker.name, ticker_yahoo:yahoo_ticker.ticker) %></td> 
 
         <td><%= link_to 'Show', yahoo_ticker %></td>
         <td><%= link_to 'Edit', edit_yahoo_ticker_path(yahoo_ticker) %></td>

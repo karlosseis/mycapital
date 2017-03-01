@@ -31,6 +31,18 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    unless params[:nombre_yahoo].nil?
+
+      # no recibe el symbol
+      # se queda como eidtando el id del ticker, p.ej el 1
+      # luego graba bien, pero queda feo. Además, yo no creo que funcione si el usuaro no tiene visibilidad sobre la empresa 1
+
+
+      
+      @company =  current_user.companies.new(name: params[:nombre_yahoo], symbol: params[:ticker])
+      #redirect_to new_company_path(@company)
+       
+    end
   end
 
   # POST /companies
