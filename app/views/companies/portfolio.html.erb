@@ -207,7 +207,7 @@ $(document).ready(function(){
     <% end %>      </td>   
         <td style="text-align:right"><%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %></td>   
         <td style="text-align:right"><%= number_to_currency(company.average_price) %></td>  
-        <td style="text-align:center">Hace <%= time_ago_in_words(company.date_share_price_formatted)%> </td>    
+        <td style="text-align:center">Hace <%= time_ago_in_words(company.date_share_price)%> </td>    
       </tr>
     <% end %>
   </tbody>
