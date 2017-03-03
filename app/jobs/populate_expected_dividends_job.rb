@@ -11,7 +11,7 @@ class PopulateExpectedDividendsJob < ActiveJob::Base
 #Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_day - 1.year,  Time.now.end_of_day)
 #.find_each do |oper|
 		
-    	 Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now - 1.year).beginning_of_year(Time.now - 1.year).end_of_year)
+    	 Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now - 1.year).beginning_of_year,(Time.now - 1.year).end_of_year)
 .find_each do |oper|
 			ExpectedDividend.create(:operationtype_id => oper.operationtype_id,
 									:company_id => oper.company_id,
