@@ -9,8 +9,7 @@
         <th style="text-align:right"><%=t(:'simple_form.labels.operation.commission') %></th>
         <th style="text-align:right"><%=t(:'simple_form.labels.operation.fee') %></th>
         <th style="text-align:right"><%=t(:'simple_form.labels.operation.origin_price') %></th>        
-        <th style="text-align:right"><%=t(:'simple_form.labels.operation.exchange_rate') %></th>
-        <th><%= t(:'simple_form.labels.operation.comments') %></th>      
+        <th style="text-align:right"><%=t(:'simple_form.labels.operation.exchange_rate') %></th>        
       </tr>
     </thead>
      <tbody>
@@ -25,8 +24,7 @@
           <td style="text-align:right"><%= number_to_currency(operation.fee) %></td>
           <td style="text-align:right"><%= operation.origin_price_formatted %></td>                            
           <td style="text-align:right"><%= number_with_delimiter(operation.exchange_rate) %></td>
-
-          <td><%= operation.comments %></td>      
+            
           <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
           <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
                
