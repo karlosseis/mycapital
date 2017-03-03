@@ -3,7 +3,7 @@ module OperationsHelper
   def render_operation_conditionally
     case @operation.operationtype_id
     when Mycapital::OP_DIVIDEND
-       render :partial => 'form_dividend'
+       render :partial => 'form_purchase'
     when Mycapital::OP_SALE
        render :partial => 'form_purchase'
     when Mycapital::OP_PURCHASE
