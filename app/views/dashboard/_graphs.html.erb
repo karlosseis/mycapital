@@ -1,0 +1,22 @@
+<div class="container">
+
+     <div class="row">
+       <div class="col-md-4">
+      <%= line_chart [
+        {name: "Previsto", data: ExpectedDividend.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_month(:operation_date).sum(:amount)},
+        {name: "Real", data: Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now - 1.year).beginning_of_year,(Time.now - 1.year).end_of_year).group_by_month(:operation_date).sum(:net_amount)}
+      ] , title: t(:'graph_dividend_year_com') %>
+       </div>
+
+
+       <div class="col-md-4">
+      <%= column_chart Operation.where(:operationtype_id => Mycapital::OP_PURCHASE).group_by_year(:operation_date, format: "%Y").sum(:amount), title: t(:'graph_year_purchases'), tooltips: "jodeeeer" %>
+
+       </div>
+       <div class="col-md-4">
+      <%= pie_chart Operation.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date, format: "%Y").sum(:net_amount), donut: true, title: t(:'graph_dividend_historic') %>
+       </div>
+    </div>   
+
+   
+</div>
