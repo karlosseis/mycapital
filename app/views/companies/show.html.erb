@@ -73,7 +73,7 @@
       <%= render :partial => 'form_summary'  %>
     </div>
     <div id="menu1" class="tab-pane fade">      
-       <%= render :partial => 'operations/index_simple_dividends', locals: {operationtype_id: Mycapital::OP_DIVIDEND}  %>
+       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_DIVIDEND}  %>
     </div>
     <div id="menu2" class="tab-pane fade">      
       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_PURCHASE}  %>   
