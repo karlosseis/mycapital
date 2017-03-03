@@ -58,7 +58,6 @@
     </div>
 </div>   
 
-
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home"><%= t(:'summary') %></a></li>
     <li><a data-toggle="tab" href="#menu1"><%= t(:'dividends') %></a></li>
@@ -73,7 +72,7 @@
       <%= render :partial => 'form_summary'  %>
     </div>
     <div id="menu1" class="tab-pane fade">      
-       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_DIVIDEND}  %>
+       <%= render :partial => 'operations/index_simple_dividends', locals: {operationtype_id: Mycapital::OP_DIVIDEND}  %>
     </div>
     <div id="menu2" class="tab-pane fade">      
       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_PURCHASE}  %>   

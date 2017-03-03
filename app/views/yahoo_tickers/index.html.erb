@@ -17,12 +17,12 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
 <script> $(document).ready(function(){ $('#myTable').dataTable(); }); </script>
 
 
-<h1>Listing Yahoo Tickers</h1>
+<h1><%= t(:'simple_form.labels.yahoo_ticker.seleccionar_empresa') %></h1>
 
 
 <%= simple_form_for :search,  url: yahoo_tickers_path , :method => :get, id: "search-form" do |f| %>
-    <%= f.input :search, :autofocus => true %>
-    <%= f.submit "Search",  :class =>"btn btn-primary" %>
+    <%= f.input :search, :autofocus => true ,:label => t(:'simple_form.labels.yahoo_ticker.search') %>
+    <%= f.submit t(:'simple_form.labels.yahoo_ticker.search_btn'),  :class =>"btn btn-primary" %>
 <% end %>
 
 
@@ -31,11 +31,11 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
 <table id="myTable2" class="table  table-striped">  
   <thead>
     <tr>
-      <th>Ticker</th>
-      <th>Name</th>
-      <th>Exchange</th>
-      <th>Name country</th>
-      <th>Category</th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.ticker') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.name') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.exchange') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.name_country') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.sector') %></th>
       <th></th>     
     </tr>
   </thead>
@@ -49,7 +49,7 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
         <td><%= yahoo_ticker.exchange %></td>
         <td><%= yahoo_ticker.name_country %></td>
         <td><%= yahoo_ticker.category %></td>
-        <td><%= link_to 'Crear empresa', background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;' %></td>       
+        <td><%= link_to t(:'simple_form.labels.yahoo_ticker.crear_empresa'), background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;' %></td>       
       </tr>
     <% end %>
     

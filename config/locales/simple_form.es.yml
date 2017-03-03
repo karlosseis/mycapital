@@ -8,7 +8,7 @@ es:
         email: Correo electrónico
         password: Contraseña
         password_confirmation: Confirmar contraseña
-        remember_me: Recordarme     
+        remember_me: Recordarme            
       company:
         name:  "Nombre"
         symbol: "Símbolo"
@@ -53,6 +53,16 @@ es:
         price: "Precio"
         quantity: "Número de títulos"
         withholding_tax: "Retención en origen"
+      yahoo_ticker:
+        seleccionar_empresa: "Seleccionar empresa"
+        search: "Filtrar"
+        name:  "Nombre"
+        ticker: "Símbolo"
+        exchange: "Mercado de valores"
+        sector: "Sector"
+        name_country: "País"  
+        crear_empresa: "Crear empresa"   
+        search_btn: "Buscar"  
     hints:
       company:
         name: ""
