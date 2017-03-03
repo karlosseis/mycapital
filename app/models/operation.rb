@@ -1,4 +1,5 @@
 class Operation < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
   belongs_to :company
   belongs_to :operationtype
   belongs_to :currency
@@ -48,6 +49,11 @@ class Operation < ActiveRecord::Base
   validates :gross_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
   validates :withholding_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
   validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
+
+
+  def origin_price_formatted
+    number_to_currency(self.origin_price, unit:self.currency.symbol, seperator: ",", delimiter: ".")
+  end
   
   def foreign_currency_field_required?
      self.currency.to_s != Mycapital::CURRENCY_PURCHASE.to_s && !self.is_dividend?

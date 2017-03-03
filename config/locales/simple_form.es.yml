@@ -3,6 +3,12 @@ es:
     "yes": 'Sí'
     "no": 'No'
     labels:
+      user:
+        current_password: Contraseña actual
+        email: Correo electrónico
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+        remember_me: Recordarme     
       company:
         name:  "Nombre"
         symbol: "Símbolo"
@@ -50,6 +56,7 @@ es:
     hints:
       company:
         name: ""
+        
     placeholders:
       company:
         search_symbol: "Identificador en yahoo para recuperar la cotización del valor. Por ejemplo, ABE.MC, SAN.MC, GSK.."

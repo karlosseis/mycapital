@@ -31,7 +31,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    unless params[:nombre_yahoo].nil?
+  #  unless params[:nombre_yahoo].nil?
 
       # no recibe el symbol
       # se queda como eidtando el id del ticker, p.ej el 1
@@ -39,10 +39,10 @@ class CompaniesController < ApplicationController
 
 
       
-      @company =  current_user.companies.new(name: params[:nombre_yahoo], symbol: params[:ticker])
+   #   @company =  current_user.companies.new(name: params[:nombre_yahoo], symbol: params[:ticker])
       #redirect_to new_company_path(@company)
        
-    end
+    #end
   end
 
   # POST /companies
@@ -52,7 +52,9 @@ class CompaniesController < ApplicationController
     @company =  current_user.companies.new(company_params)
 
     respond_to do |format|
-      if  @company.save
+      @company.set_update_summary
+      @company.set_stock_price
+      if  @company.save        
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
@@ -67,6 +69,7 @@ class CompaniesController < ApplicationController
   def update
     #byebug
     respond_to do |format|
+      @company.set_stock_price
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }

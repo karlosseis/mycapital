@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'background_actions/create_company'
+
+  get 'background_action/create_company'
+
+  get 'dashboard/index'
+
   resources :expected_dividends
   resources :companies do
     resources :operations
@@ -10,18 +16,15 @@ Rails.application.routes.draw do
   resources :currencies
   resources :countries
   devise_for :users
-  resources :yahoo_tickers
-
- # # Handles User accept terms 
- #  resources :yahoo_tickers do
- #    collection do
- #      post 'create_company'
- #    end 
- #  end
+  resources :yahoo_tickers , :only => [:index]
+  
   
   post 'create_company' => 'yahoo_tickers#create_company', as: :create_company
 
   resources :operations  #, :only => [:index, :delete]
+
+  resources :dashboards
+
   get 'portfolio', to: 'companies#portfolio'
 
   get 'welcome/index'

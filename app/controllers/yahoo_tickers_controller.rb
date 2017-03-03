@@ -1,15 +1,26 @@
 class YahooTickersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_yahoo_ticker, only: [:show, :edit, :update, :destroy]
 
   # GET /yahoo_tickers
   # GET /yahoo_tickers.json
   def index
-    @yahoo_tickers = YahooTicker.all
+
+    if params[:search]
+      @yahoo_tickers = YahooTicker.search(params[:search]).page(params[:page]).per(30)
+    else
+     @yahoo_tickers = YahooTicker.page(params[:page]).per(30)
+   
+    end
+
+
   end
 
   def create_company
-   Company.new(name: 'hola333') 
-   Company.save
+   
+   redirect_to root_url, notice: 'Products imported.'
+   #Company.new(name: 'hola333') 
+   #Company.save
  
   end
 
@@ -29,6 +40,8 @@ class YahooTickersController < ApplicationController
   # GET /yahoo_tickers/1/edit
   def edit
   end
+
+
 
   # POST /yahoo_tickers
   # POST /yahoo_tickers.json

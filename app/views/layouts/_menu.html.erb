@@ -20,14 +20,15 @@
          
           <ul class="nav navbar-nav">
             <% if current_user %>
+             <li><%= link_to t("menu_dashboard"), dashboard_index_path %></li>
               <li><%= link_to t("menu_portfolio"), portfolio_path %></li>
               <li><%= link_to t("menu_companies"), companies_path %></li>
-              <li><%= link_to t("menu_operations"), operations_path %></li>
-              <li><%= link_to "Yahoo Tickers", yahoo_tickers_path %></li>
+              
+              <!-- <li><%= link_to "Yahoo Tickers", yahoo_tickers_path %></li>
+ -->
 
-
-              <% if current_user.permission_level == "0" %>
-                <li><%= link_to t("menu_balances"), balances_path %></li>  
+              <% if current_user.permission_level == 0 %>
+                <li><%= link_to t("menu_operations"), operations_path %></li>               
               <% end %>          
             <% end %> 
           </ul>

@@ -12,7 +12,7 @@ include ActionView::Helpers::NumberHelper
   validates :name, presence: true
   validates :symbol, presence: true
   validates :stockexchange, presence: true
-  validates :sector, presence: true
+  #validates :sector, presence: true
   validates :search_symbol, presence: true
   
 
@@ -21,6 +21,11 @@ include ActionView::Helpers::NumberHelper
   def to_s
     name
   end  
+
+  def get_id
+    id
+    
+  end
 
   def  date_share_price_formatted
     date_price = ""
@@ -273,7 +278,7 @@ include ActionView::Helpers::NumberHelper
         # hay que guardar también la fecha
         # montar un proceso que lea todas las empresas y guardar fecha y precio 
         self.set_update_summary
-        self.save
+        #self.save
   end
 
 

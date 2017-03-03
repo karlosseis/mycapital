@@ -21,15 +21,14 @@
 
 es:
   app_name: "Mi capital"
-
+  menu_dashboard: "Panel de control"
   menu_portfolio: "Cartera"
   menu_companies: "Empresas"
   menu_balances: "Balances"
   menu_operations: "Operaciones"
   menu_edit_profile: "Editar perfil"
   menu_login: "Iniciar sesión"
-  menu_logout: "Cerrar sesión"
-
+  menu_logout: "Cerrar sesión"  
   save: "Guardar"
   cancel: "Cancelar"
   edit: "Editar"
@@ -54,10 +53,15 @@ es:
   global_value: "Actual"
   last_purchases: "Últimas compras"
   next_dividends: "Próximos dividendos"
+  purchased_year: Compras año
   dif: "Dif"
   price: "Precio"
   global_invested: "Invertido"
-
+  dividends_month: "Dividendos mes"
+  dividends_year: "Dividendos año"
+  graph_year_purchases: "Compras anuales"
+  graph_dividend_year_com: "Dividendos año actual"
+  graph_dividend_historic: "Histórico dividendos"
   activerecord:
     errors:
       messages:

@@ -8,6 +8,7 @@ class SharePricesUpdateJob < ActiveJob::Base
 
 			begin
   		  		q.set_stock_price
+  		  		q.save
 			rescue => ex
 			  logger.error ex.message
 			end

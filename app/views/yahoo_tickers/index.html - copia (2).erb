@@ -16,19 +16,19 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
 
 <script> $(document).ready(function(){ $('#myTable').dataTable(); }); </script>
 
+<p id="notice"><%= notice %></p>
 
 <h1>Listing Yahoo Tickers</h1>
 
 
 <%= simple_form_for :search,  url: yahoo_tickers_path , :method => :get, id: "search-form" do |f| %>
     <%= f.input :search, :autofocus => true %>
-    <%= f.submit "Search",  :class =>"btn btn-primary" %>
+    <%= f.submit "Search" %>
 <% end %>
 
 
 
-     <%= paginate(@yahoo_tickers) %>
-<table id="myTable2" class="table  table-striped">  
+<table id="myTable" class="table  table-striped">  
   <thead>
     <tr>
       <th>Ticker</th>
@@ -36,12 +36,14 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
       <th>Exchange</th>
       <th>Name country</th>
       <th>Category</th>
-      <th></th>     
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
-
     <% @yahoo_tickers.each do |yahoo_ticker| %>
       <tr>
         <td><%= yahoo_ticker.ticker %></td>
@@ -49,12 +51,16 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
         <td><%= yahoo_ticker.exchange %></td>
         <td><%= yahoo_ticker.name_country %></td>
         <td><%= yahoo_ticker.category %></td>
-        <td><%= link_to 'Crear empresa', background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;' %></td>       
+        <td><%= link_to 'Crear empresa', background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange) %></td> 
+
+        <td><%= link_to 'Show', yahoo_ticker %></td>
+        <td><%= link_to 'Edit', edit_yahoo_ticker_path(yahoo_ticker) %></td>
+        <td><%= link_to 'Destroy', yahoo_ticker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-    
   </tbody>
 </table>
-<%= paginate(@yahoo_tickers) %>
+
 <br>
 
+<%= link_to 'New Yahoo ticker', new_yahoo_ticker_path %>

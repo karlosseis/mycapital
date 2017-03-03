@@ -19,6 +19,7 @@ src="http://cdn.datatables.net/plug-ins/1.10.13/api/sum().js"></script>
 $(document).ready(function(){
     $('#myTable').dataTable({  
   searching: false,
+  "paging": false,
   "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
@@ -30,145 +31,12 @@ $(document).ready(function(){
 
 <p id="notice"><%= notice %></p>
 
-<%= line_chart [
-  {name: "Previsto", data: ExpectedDividend.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_month(:operation_date).sum(:amount)},
-  {name: "Real", data: Operation.where('operationtype_id = ? and year(operation_date) = ?', Mycapital::OP_DIVIDEND, Time.now.year).group_by_month(:operation_date).sum(:net_amount)}
-] %>
-
-<%= column_chart Operation.where(:operationtype_id => Mycapital::OP_PURCHASE).group_by_year(:operation_date, format: "%Y").sum(:amount) %>
-
-<%= line_chart ExpectedDividend.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_month(:operation_date).sum(:amount) %>
-
-
-<%= pie_chart({"Football" => 10, "Basketball" => 5}, donut: true) %>
-
-
-<% mi_portfolio = MyPortfolioSummary.new(Company) %>
- 
-<div class="card-deck">
-  <div class="card">
-    
-    
-    <div class="card-block">
-      <h4 class="card-title">Dividendos Año Cobr / Prev</h4>
-      <p class="card-text"><%= number_to_currency(mi_portfolio.dividends_current_year) %> / <%= number_to_currency(mi_portfolio.expected_dividends_current_year) %></p>
-      <a href="#" class="btn btn-primary">Ir al detalle</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-block">
-      <h4 class="card-title">Div. mes Cobr / Prev </h4>
-      <p class="card-text"><%= number_to_currency(mi_portfolio.dividends_current_month) %> / <%= number_to_currency(mi_portfolio.expected_dividends_current_month) %></p>
-      <a href="#" class="btn btn-primary">Ir al detalle</a>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-    </div>
-  </div>
-</div>
 
 
 
 
-<h1> <%= t(:'my_portfolio') %></h1>
-<div class="container">
 
-  <div class="row">
-    <div class="col-md-4">
-        <div class="row">
-           <div class="text-center"  ><strong><%= t(:'portfolio_value') %></strong></div>          
-        </div> 
-
-         <div class="row">
-           <div class="col-md-6 text-left"><strong><%= t(:'global_value') %>:</strong></div>
-           <div class="col-md-6 text-right"><%= number_to_currency(mi_portfolio.global_value) %></div>
-        </div>   
-
-
-         <div class="row">
-           <div class="col-md-6 text-left"><strong><%= t(:'dif') %>:</strong></div>
-           <div class="col-md-6 text-right">
-            <% if mi_portfolio.global_benefit.to_f >= 0 %>
-              <font color="#009933"><%= number_to_currency(mi_portfolio.global_benefit) %></font>
-            <% else %>
-              <font color="#ff0000"><%= number_to_currency(mi_portfolio.global_benefit) %></font>
-            <% end %>    
-          </div>
-          </div>
-
-          
-
-         <div class="row">
-           <div class="col-md-6 text-left"><strong>%:</strong></div>
-           <div class="col-md-6 text-right">
-            <% if mi_portfolio.global_perc_benefit.to_f >= 0 %>
-              <font color="#009933"><%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
-            <% else %>
-              <font color="#ff0000"><%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
-            <% end %>    
-           </div>
-        </div>
-
-
-         <div class="row">
-           <div class="col-md-6 text-left"><strong><%= t(:'global_invested') %>:</strong></div>
-           <div class="col-md-6 text-right"><%= number_to_currency(mi_portfolio.global_invested) %></div>
-        </div>  
-
-     
-
-    </div>
-
-    <div class="col-md-4">
-       <div class="row">
-           <div class="text-center"  ><strong><%= t(:'last_purchases') %></strong></div>          
-        </div>   
-
-           <div class="row">
-               <div class="col-md-3 text-left"><strong><%= t(:'simple_form.labels.company.symbol') %></strong></div>
-               <div class="col-md-5 text-center"><strong><%= t(:'simple_form.labels.operation.operation_date')%></strong></div>
-               <div class="col-md-4 text-right"><strong><%= number_to_currency(t(:'price')) %></strong></div>
-           </div> 
-           <% mi_portfolio.last_purchases(3).each do |p| %>
-          <div class="row">
-               <div class="col-md-3 text-left"><%= p.company.symbol  %></div>
-                <div class="col-md-5 text-center"><%= I18n.l(p.operation_date)  %></div>
-                <div class="col-md-4 text-right"><%= number_to_currency(p.price)  %></div>
-           </div> 
-          <% end %>      
-    </div>
-
-  <div class="col-md-4">
-       <div class="row">
-           <div class="text-center" ><strong><%= t(:'next_dividends') %></strong></div>          
-        </div>   
-
-           <div class="row">
-               <div class="col-md-3 text-left"><strong><%= t(:'simple_form.labels.company.symbol') %></strong></div>
-               <div class="col-md-5 text-center"><strong><%= t(:'simple_form.labels.operation.operation_date')%></strong></div>
-               <div class="col-md-4 text-right"><strong><%= t(:'price') %></strong></div>
-           </div> 
-           <% mi_portfolio.next_dividends(3).each do |p| %>
-          <div class="row">
-               <div class="col-md-3 text-left"><%= p.company.symbol  %></div>
-                <div class="col-md-5 text-center"><%= I18n.l(p.operation_date)  %></div>
-                <div class="col-md-4 text-right"><%= number_to_currency(p.amount)  %></div>
-           </div> 
-          <% end %>      
-    </div> 
-    </div>
-</div>   
-
-
-
-
- <%= mi_portfolio = nil %>
-
-
-<h1<%= t(:'my_portfolio') %></h1>
+<h1><%= t(:'my_portfolio') %></h1>
   
  
   
@@ -215,4 +83,4 @@ $(document).ready(function(){
 
 <br>
 
-<%= link_to t(:'new_company') , new_company_path %>
+
