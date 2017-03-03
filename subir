@@ -1,4 +1,4 @@
 git add .
-git commit -m "bastante fino"
+git commit -m "automatica por batch"
 git push heroku master
 

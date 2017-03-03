@@ -1,4 +1,3 @@
-
 <%= simple_form_for([@company, @operation], html: { autocomplete: 'off' }) do |f| %>
  <%= f.error_notification %>
  <%= f.hidden_field  :operationtype_id, html5: true %> 
@@ -16,8 +15,6 @@
     </div>    
     <div class="col-md-4">
 
-      
-
       <% unless @operation.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s %> 
  
              <%= f.association :currency, :disabled => true %> 
@@ -25,12 +22,7 @@
              <%= f.input :exchange_rate       %> 
              
        <% end %>
-    
-      
-
-   
-
-      
+  
     </div>
     
   </div>

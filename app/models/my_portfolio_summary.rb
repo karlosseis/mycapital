@@ -48,6 +48,10 @@ class MyPortfolioSummary
     ExpectedDividend.where('operationtype_id = ? and operation_date >= ?', Mycapital::OP_DIVIDEND, Time.now).order(operation_date: :asc).limit(number)    
   end 
 
+  def purchases_current_year  
+    Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_PURCHASE, Time.now.beginning_of_year,Time.now.end_of_year).sum(:amount)
+  end
+
   def dividends_current_year  
     Operation.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).sum(:net_amount)
   end

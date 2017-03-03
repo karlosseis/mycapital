@@ -8,12 +8,6 @@ src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
-
-
-
-<p id="notice"><%= notice %></p>
-
-
 <% mi_portfolio = MyPortfolioSummary.new(Company) %>
 
 
@@ -48,7 +42,7 @@ src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></scrip
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
       <h4 class="card-title text-center"><%= t(:'purchased_year') %></h4>
-      <h1 class="card-text text-center">666666</h1>   
+      <h1 class="card-text text-center"><%= number_to_currency(mi_portfolio.purchases_current_year) %></h1>   
     </div>
   </div>
   
