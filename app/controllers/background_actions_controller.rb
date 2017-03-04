@@ -24,7 +24,7 @@ class BackgroundActionsController < ApplicationController
 	  end
 	  
 	  search_symbol = symbol
-	  symbol.gsub! ".MC", ""
+	  symbol = symbol.gsub( ".MC", "")
 	  @company =  current_user.companies.new(name: params[:yahoo_name], symbol: symbol, search_symbol: search_symbol, stockexchange: stock)
 	  @company.save!
 	  redirect_to edit_company_path(@company)
