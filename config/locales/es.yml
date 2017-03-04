@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
-  app_name: "Mi capital"
+  app_name: "Bye ING Broker"
   menu_dashboard: "Panel de control"
   menu_portfolio: "Cartera"
   menu_companies: "Empresas"

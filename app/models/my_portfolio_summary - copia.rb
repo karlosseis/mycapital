@@ -1,7 +1,5 @@
 class MyPortfolioSummary 
-   #  <%=  k = MyPortfolioSummary.new(@companies)  %>
- #<p> Saluda <%= k.kapullo %> </p>
- # # método inicializar clase
+  
   def initialize(comp)
     # atributos   
  #    @total = 0
@@ -11,7 +9,7 @@ class MyPortfolioSummary
   # end
 
   
-  @priv_global_value = comp.sum(:estimated_value_global_currency) 
+    @priv_global_value = comp.sum(:estimated_value_global_currency) 
     @priv_global_benefit = comp.sum(:estimated_benefit_global_currency) 
     @priv_global_invested = comp.sum(:invested_sum) 
   end  

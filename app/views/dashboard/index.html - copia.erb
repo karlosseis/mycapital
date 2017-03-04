@@ -1,25 +1,37 @@
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" 
+href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+<script type="text/javascript" 
+src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" 
+src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<div class="container">
+
+<% mi_portfolio = MyPortfolioSummary.new(Company) %>
+
+TOTAL: <%=  @total  %> 
+
 <div class="card-deck">
 
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
       <h4 class="card-title text-center"><%= t(:'portfolio_value') %></h4>
-      <h1 class="card-text text-center"><%= number_to_currency(@global_value) %></h1>
+      <h1 class="card-text text-center"><%= number_to_currency(mi_portfolio.global_value) %></h1>
         <br>
          <div class="row">
            <div class="col-md-6 text-left">
-              <% if @global_benefit.to_f >= 0 %>
-                <font color="#009933">+<%= number_to_currency(@global_benefit) %></font>
+              <% if mi_portfolio.global_benefit.to_f >= 0 %>
+                <font color="#009933">+<%= number_to_currency(mi_portfolio.global_benefit) %></font>
               <% else %>
-                <font color="#ff0000"><%= number_to_currency(@global_benefit) %></font>
+                <font color="#ff0000"><%= number_to_currency(mi_portfolio.global_benefit) %></font>
               <% end %>    
             </div>
            <div class="col-md-6 text-right"><strong>
-              <% if @global_perc_benefit.to_f >= 0 %>
-                  <font color="#009933">+<%= number_to_percentage(@global_perc_benefit, precision: 2)   %></font>
+              <% if mi_portfolio.global_perc_benefit.to_f >= 0 %>
+                  <font color="#009933">+<%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
                 <% else %>
-                  <font color="#ff0000"><%= number_to_percentage(@global_perc_benefit, precision: 2)   %></font>
+                  <font color="#ff0000"><%= number_to_percentage(mi_portfolio.global_perc_benefit, precision: 2)   %></font>
                 <% end %>    
                </strong>
           </div>       
@@ -30,15 +42,15 @@
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
       <h4 class="card-title text-center"><%= t(:'purchased_year') %></h4>
-      <h1 class="card-text text-center"><%= number_to_currency(@purchases_current_year) %></h1>   
+      <h1 class="card-text text-center"><%= number_to_currency(mi_portfolio.purchases_current_year) %></h1>   
     </div>
   </div>
   
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
       <h4 class="card-title text-center"><%= t(:'dividends_month') %></h4>
-      <h1 class="card-text text-center"><%= number_to_currency(@dividends_current_month) %></h1>
-      <h4 class="card-text text-center"><%= number_to_currency(@expected_dividends_current_month) %></h4>    
+      <h1 class="card-text text-center"><%= number_to_currency(mi_portfolio.dividends_current_month) %></h1>
+      <h4 class="card-text text-center"><%= number_to_currency(mi_portfolio.expected_dividends_current_month) %></h4>    
     </div>
   </div>
 
@@ -47,8 +59,8 @@
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
       <h4 class="card-title text-center"><%= t(:'dividends_year') %></h4>
-      <h1 class="card-text text-center"><%= number_to_currency(@dividends_current_year) %></h1>
-      <h4 class="card-text text-center"><%= number_to_currency(@expected_dividends_current_year) %></h4>
+      <h1 class="card-text text-center"><%= number_to_currency(mi_portfolio.dividends_current_year) %></h1>
+      <h4 class="card-text text-center"><%= number_to_currency(mi_portfolio.expected_dividends_current_year) %></h4>
       
 
     </div>
@@ -78,7 +90,7 @@
           </thead>
 
           <tbody>
-            <% @last_purchases.each do |p| %>
+            <% mi_portfolio.last_purchases(3).each do |p| %>
               <tr>
                 <td style="text-align:left"><%= p.company.symbol  %></td>
                 <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>      
@@ -104,7 +116,7 @@
           </thead>
 
           <tbody>
-            <% @next_dividends.each do |p| %>
+            <% mi_portfolio.next_dividends(3).each do |p| %>
               <tr>
                 <td style="text-align:left"><%= p.company.symbol  %></td>
                 <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>        
@@ -125,4 +137,6 @@
 
  
 
-</div>
+ <%= mi_portfolio = nil %>
+
+
