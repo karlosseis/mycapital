@@ -23,8 +23,9 @@ class BackgroundActionsController < ApplicationController
 	  	stock = Stockexchange.find_by_name("NYSE")
 	  end
 	  
+	  search_symbol = symbol
 	  symbol.gsub! ".MC", ""
-	  @company =  current_user.companies.new(name: params[:yahoo_name], symbol: symbol, search_symbol: params[:yahoo_ticker], stockexchange: stock)
+	  @company =  current_user.companies.new(name: params[:yahoo_name], symbol: symbol, search_symbol: search_symbol, stockexchange: stock)
 	  @company.save!
 	  redirect_to edit_company_path(@company)
 
