@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
 include ActionView::Helpers::NumberHelper
+include ActionView::Helpers::DateHelper
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
@@ -25,6 +26,16 @@ include ActionView::Helpers::NumberHelper
   def get_id
     id
     
+  end
+
+
+  def  date_share_price_time_ago
+    date_price = ""
+    unless date_share_price.nil?
+      date_price = "Hace " + time_ago_in_words(date_share_price)
+    end
+
+    date_price
   end
 
   def  date_share_price_formatted

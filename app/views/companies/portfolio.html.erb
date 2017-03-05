@@ -20,11 +20,9 @@ $(document).ready(function(){
 });
 </script>
 
-
-<div class="container">
-<h1 class="text-left"><%= t(:'my_portfolio') %></h1>
- </div> 
- 
+ <h1 class = "page-header">
+  <%= t(:'my_portfolio') %>
+</h1>
   
 
 <table id="myTable" class="table  table-striped">
@@ -61,7 +59,7 @@ $(document).ready(function(){
     <% end %>      </td>   
         <td style="text-align:right"><%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %></td>   
         <td style="text-align:right"><%= number_to_currency(company.average_price) %></td>  
-        <td style="text-align:center">Hace <%= time_ago_in_words(company.date_share_price)%> </td>    
+        <td style="text-align:center"><%= company.date_share_price_time_ago%></td>    
       </tr>
     <% end %>
   </tbody>

@@ -1,13 +1,15 @@
 <head> 
  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
+ <h2 class = "page-header">
+  <%= @company.name %> <small><%= link_to t("edit"), edit_company_path(@company) %></small>
+</h2>
+  
 
-<br>
 
-<h2><%= @company.name %> <small><%= link_to t("edit"), edit_company_path(@company) %></small></h2>
 <div class="row">    
     <div class="col-md-5" >
       
