@@ -285,7 +285,7 @@ Operation.create!([
   {company_id: 24, operationtype_id: 3, amount: 1009.58, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-14", origin_price: 23.25, price: 23.25, quantity: 43, withholding_tax: 0.0},
   {company_id: 1, operationtype_id: 3, amount: 1013.49, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-14", origin_price: 12.535, price: 12.535, quantity: 80, withholding_tax: 0.0},
   {company_id: 31, operationtype_id: 3, amount: 1014.11, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-24", origin_price: 16.72, price: 16.72, quantity: 60, withholding_tax: 0.0},
-  {company_id: 20, operationtype_id: 4, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-01", origin_price: 0.0, price: 0.0, quantity: 3, withholding_tax: 0.0, user_id: 1}
+  {company_id: 20, operationtype_id: 4, amount: 0.0, comments: "", commission: 0.0, currency_id: 1, destination_tax: 0.0, exchange_rate: 0.0, fee: 0.0, gross_amount: 0.0, net_amount: 0.0, operation_date: "2016-11-01", origin_price: 0.0, price: 0.0, quantity: 3, withholding_tax: 0.0}
 ])
 
 YahooTicker.create!([
