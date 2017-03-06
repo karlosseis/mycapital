@@ -20,8 +20,8 @@
         <td style="text-align:right"><%=number_to_currency( operation.withholding_tax) %></td>
         <td style="text-align:right"><%=number_to_currency( operation.destination_tax) %></td>          
         <td style="text-align:right"><%= number_with_delimiter(operation.quantity) %></td>      
-        <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
-        <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+        <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-sm btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
              
       </tr>
     <% end %>

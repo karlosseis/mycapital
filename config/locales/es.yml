@@ -22,6 +22,7 @@
 es:
   app_name: "Bye ING Broker"
   menu_dashboard: "Panel de control"
+  menu_saludo: "Hola %{name}"
   menu_portfolio: "Cartera"
   menu_companies: "Empresas"
   menu_balances: "Balances"
@@ -62,6 +63,7 @@ es:
   graph_year_purchases: "Compras anuales"
   graph_dividend_year_com: "Dividendos año actual"
   graph_dividend_historic: "Histórico dividendos"
+  dashboard_title: "Posición global"
   activerecord:
     errors:
       messages:

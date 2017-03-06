@@ -25,8 +25,8 @@
           <td style="text-align:right"><%= operation.origin_price_formatted %></td>                            
           <td style="text-align:right"><%= number_with_delimiter(operation.exchange_rate) %></td>
             
-          <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
-          <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+          <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+          <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
                
         </tr>
       <% end %>

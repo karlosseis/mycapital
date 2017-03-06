@@ -1,5 +1,7 @@
 
-<h1><%= t(:'simple_form.labels.yahoo_ticker.seleccionar_empresa') %></h1>
+<h2 class = "page-header">
+  <%= t(:'simple_form.labels.yahoo_ticker.seleccionar_empresa') %>
+</h2>      
 
 
 <%= simple_form_for :search,  url: yahoo_tickers_path , :method => :get, id: "search-form" do |f| %>
@@ -31,7 +33,7 @@
         <td><%= yahoo_ticker.exchange %></td>
         <td><%= yahoo_ticker.name_country %></td>
         <td><%= yahoo_ticker.category %></td>
-        <td><%= link_to t(:'simple_form.labels.yahoo_ticker.crear_empresa'), background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-xs', :style=>'color:#FFFFFF;' %></td>       
+        <td><%= link_to t(:'simple_form.labels.yahoo_ticker.crear_empresa'), background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-sm', :style=>'color:#FFFFFF;' %></td>       
       </tr>
     <% end %>
     

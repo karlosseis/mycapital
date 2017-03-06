@@ -26,7 +26,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Hola <%= current_user %>  -->
                 <% if current_user %>                    
-                    <li><%= link_to  t("menu_edit_profile")  ,edit_user_registration_path %></li>
+                    <!-- <li><%= link_to  t("menu_edit_profile")  ,edit_user_registration_path %></li> -->
+                    <li><%= link_to  t("menu_saludo", name: current_user )  ,edit_user_registration_path %></li>
                     <li><%= link_to t("menu_logout"), destroy_user_session_path, method: :delete %></li>
                 <% else %>
                     <li><%= link_to t("menu_login"), new_user_session_path %></li>
