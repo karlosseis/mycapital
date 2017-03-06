@@ -3,6 +3,11 @@
   <%= t(:'simple_form.labels.yahoo_ticker.seleccionar_empresa') %>
 </h2>      
 
+<% if current_user.permission_level == 0 %>
+  <%= link_to 'New Yahoo ticker', new_yahoo_ticker_path %>            
+<% end %>          
+
+
 
 <%= simple_form_for :search,  url: yahoo_tickers_path , :method => :get, id: "search-form" do |f| %>
     <%= f.input :search, :autofocus => true ,:label => t(:'simple_form.labels.yahoo_ticker.search') %>
