@@ -32,17 +32,17 @@
       <div class="row">
         <div class="col-md-6" >    
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.invested_sum') %></h6>
-            <h5 class="text-center"><strong><%= number_to_currency(@company.invested_sum)  %></strong></h5>
+            <h5 class="text-center"><%= number_to_currency(@company.invested_sum)  %></h5>
 
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.average_price_origin_currency') %></h6>
-            <h5 class="text-center"><strong><%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %></strong></h5>
+            <h5 class="text-center"><%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %></h5>
         </div>
 
         <div class="col-md-6" >    
             <h6 class="text-muted text-center">Última compra</h6>
-            <h5 class="text-center"><strong><%= @company.last_purchase[:a]%></strong> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
+            <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
             <h6 class="text-muted text-center">Próximo dividendo</h6>
-            <h5 class="text-center"><strong><%= @company.next_dividend[:a]  %></strong> <small> (<%= @company.next_dividend[:b]  %>)</small></h5>
+            <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>
         </div>
 
       </div>

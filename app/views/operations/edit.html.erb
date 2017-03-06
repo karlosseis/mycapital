@@ -1,5 +1,5 @@
 <h1 class = "page-header">
-	<%= t(:'simple_form.labels.operation.titulo_editar', operacion: @operation.operationtype.to_s.downcase, empresa: @company.name) %>
+	<%= t(:'simple_form.labels.operation.titulo_editar', operacion: @operation.operationtype.to_s.downcase, empresa: @operation.company.name) %>
 </h1>
 
 <%= render_operation_conditionally %>

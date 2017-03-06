@@ -8,7 +8,10 @@ es:
         email: Correo electrónico
         password: Contraseña
         password_confirmation: Confirmar contraseña
-        remember_me: Recordarme            
+        remember_me: Recordarme    
+        first_name: Nombre
+        last_name: Apellido
+
       company:
         name:  "Nombre"
         symbol: "Símbolo"
