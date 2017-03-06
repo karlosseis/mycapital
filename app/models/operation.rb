@@ -17,38 +17,38 @@ class Operation < ActiveRecord::Base
   #   end
   # end
  
-  validates :operation_date, presence: true
-  validates :quantity,  presence: true, :numericality => { :greater_than => 0}
-  validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
+  # validates :operation_date, presence: true
+  # validates :quantity,  presence: true, :numericality => { :greater_than => 0}
+  # validates :exchange_rate, :numericality => { :greater_than => 0}, if: :foreign_currency_field_required? 
 
-  validates :price, :numericality => { :greater_than => 0}, if: :is_purchase?  
-  validates :amount, :numericality => { :greater_than => 0}, if: :is_purchase?
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
-  validates :fee, :numericality => { :greater_than => 0}, if: :is_purchase? 
-  validates :origin_price, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  # validates :price, :numericality => { :greater_than => 0}, if: :is_purchase?  
+  # validates :amount, :numericality => { :greater_than => 0}, if: :is_purchase?
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  # validates :fee, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  # validates :origin_price, :numericality => { :greater_than => 0}, if: :is_purchase? 
 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
 
-  validates :price, :numericality => { :greater_than => 0}, if: :is_sale?  
-  validates :amount, :numericality => { :greater_than => 0}, if: :is_sale?
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :fee, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :origin_price, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
-
-
-  validates :price, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :amount, :numericality => { :greater_than => 0}, if: :is_ampliation?
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
-  validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
-  validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+  # validates :price, :numericality => { :greater_than => 0}, if: :is_sale?  
+  # validates :amount, :numericality => { :greater_than => 0}, if: :is_sale?
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
+  # validates :fee, :numericality => { :greater_than => 0}, if: :is_sale? 
+  # validates :origin_price, :numericality => { :greater_than => 0}, if: :is_sale? 
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
 
 
-  validates :net_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
-  validates :gross_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
-  validates :withholding_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
-  validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
+  # validates :price, :numericality => { :greater_than => 0}, if: :is_sale? 
+  # validates :amount, :numericality => { :greater_than => 0}, if: :is_ampliation?
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+  # validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+  # validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
+  # validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+
+
+  # validates :net_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
+  # validates :gross_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
+  # validates :withholding_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
+  # validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
 
 
   def origin_price_formatted
