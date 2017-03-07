@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :currencies
   resources :countries
   devise_for :users
-  resources :yahoo_tickers , :only => [:index, :new]
+  resources :yahoo_tickers #, :only => [:index, :new]
   
   
   post 'create_company' => 'yahoo_tickers#create_company', as: :create_company

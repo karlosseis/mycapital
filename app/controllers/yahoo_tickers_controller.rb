@@ -50,7 +50,7 @@ class YahooTickersController < ApplicationController
 
     respond_to do |format|
       if @yahoo_ticker.save
-        format.html { redirect_to @yahoo_ticker, notice: 'Yahoo ticker was successfully created.' }
+        format.html { redirect_to  yahoo_tickers_path, notice: 'Yahoo ticker was successfully created.' }
         format.json { render :show, status: :created, location: @yahoo_ticker }
       else
         format.html { render :new }
@@ -64,7 +64,7 @@ class YahooTickersController < ApplicationController
   def update
     respond_to do |format|
       if @yahoo_ticker.update(yahoo_ticker_params)
-        format.html { redirect_to @yahoo_ticker, notice: 'Yahoo ticker was successfully updated.' }
+        format.html { redirect_to yahoo_tickers_path, notice: 'Yahoo ticker was successfully updated.' }
         format.json { render :show, status: :ok, location: @yahoo_ticker }
       else
         format.html { render :edit }
