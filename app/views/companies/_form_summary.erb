@@ -89,20 +89,37 @@
 
 
     <br>
-   <div class="row">
-    <div class="col-md-3 text-right"><%= @company.stockexchange.currency.symbol%></div>
-    <div class="col-md-1 text-right"><%= Mycapital::CURRENCY_PURCHASE_SYMBOL %></div>
-   </div>  
 
-   <div class="row">
-      <div class="col-md-2 text-right"><%= t(:'simple_form.labels.company.average_price') %>:</div>
-      <div class="col-md-1 text-right"><strong><%= number_with_delimiter(@company.average_price_origin_currency) %></strong></div>
-      <div class="col-md-1 text-right"><strong><%= number_with_delimiter(@company.average_price)  %></strong></div>
 
-   </div>  
 
-    <div class="row">
-     <div class="col-md-2 text-right"> <%= t(:'simple_form.labels.company.share_price_global_currency') %>:</div>
-     <div class="col-md-1 text-right"><strong><%= number_with_delimiter(@company.share_price)  %></strong></div>
-     <div class="col-md-1 text-right"><strong><%= number_with_delimiter(@company.share_price_global_currency)  %></strong></div>
-    </div>  
+       <div class="row">
+          
+        
+       
+
+  
+
+        <div class="col-md-2 text-right">
+                <br>
+                <%= t(:'simple_form.labels.company.average_price') %>:<br>
+                <%= t(:'simple_form.labels.company.share_price_global_currency') %>:<br>
+        </div>
+
+
+        <div class="col-md-1 text-right">
+            <% unless @company.stockexchange.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s %>        
+              <%= @company.stockexchange.currency.symbol%><br>
+              <strong><%= number_with_delimiter(@company.average_price_origin_currency) %></strong><br>
+              <strong><%= number_with_delimiter(@company.share_price)  %></strong><br>
+            <% end %>
+        </div>
+
+        <div class="col-md-1 text-right">
+          <%= Mycapital::CURRENCY_PURCHASE_SYMBOL %><br>
+          <strong><%= number_with_delimiter(@company.average_price)  %></strong><br>
+          <strong><%= number_with_delimiter(@company.share_price_global_currency)  %></strong>
+        </div>
+
+        </div>  
+
+  </div>     
