@@ -78,7 +78,7 @@ include ActionView::Helpers::DateHelper
 
   def next_dividend
     # ordenamos ascendente para que salga el próximo, sino saldría el último del año. 
-    div = self.expected_dividends.order(operation_date: :asc).limit(1)   
+    div = self.expected_dividends.where('operation_date >= ?', (Time.now).beginning_of_day).order(operation_date: :asc).limit(1) 
     amount = ""
     date_dividend = ""
 
