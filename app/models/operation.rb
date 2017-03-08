@@ -37,11 +37,11 @@ class Operation < ActiveRecord::Base
  
 
 
-  validates :price, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :amount, :numericality => { :greater_than => 0}, if: :is_ampliation?
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
-  validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
-  validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
+  #validates :price, :numericality => { :greater_than => 0}, if: :is_sale? 
+  #validates :amount, :numericality => { :greater_than => 0}, if: :is_ampliation?
+  #validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+  #validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+  #validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
  
 
 
