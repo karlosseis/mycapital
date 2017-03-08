@@ -271,7 +271,8 @@ include ActionView::Helpers::DateHelper
           # @stock.failure?
 
           # pero cuando devuelve datos el método da error.
-
+      # 08.03.2017 - Aun así, si la empresa no cotiza desde hace mucho, el history no recupera nada y peta (ej. GOWEX). Pongo control de errores
+    begin
     @stock = StockQuote::Stock.history(self.search_symbol, date_last_week.strftime("%Y-%m-%d"),  date_today.strftime("%Y-%m-%d"))
    
         
@@ -290,6 +291,9 @@ include ActionView::Helpers::DateHelper
         # montar un proceso que lea todas las empresas y guardar fecha y precio 
         self.set_update_summary
         #self.save
+    rescue
+
+    end
   end
 
 
