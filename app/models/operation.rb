@@ -27,14 +27,14 @@ class Operation < ActiveRecord::Base
   validates :fee, :numericality => { :greater_than => 0}, if: :is_purchase? 
   validates :origin_price, :numericality => { :greater_than => 0}, if: :is_purchase? 
 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  
 
   validates :price, :numericality => { :greater_than => 0}, if: :is_sale?  
   validates :amount, :numericality => { :greater_than => 0}, if: :is_sale?
   validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
   validates :fee, :numericality => { :greater_than => 0}, if: :is_sale? 
   validates :origin_price, :numericality => { :greater_than => 0}, if: :is_sale? 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_sale? 
+ 
 
 
   validates :price, :numericality => { :greater_than => 0}, if: :is_sale? 
@@ -42,7 +42,7 @@ class Operation < ActiveRecord::Base
   validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
   validates :fee, :numericality => { :greater_than => 0}, if: :is_ampliation? 
   validates :origin_price, :numericality => { :greater_than => -1}, if: :is_ampliation? 
-  validates :commission, :numericality => { :greater_than => 0}, if: :is_ampliation? 
+ 
 
 
   validates :net_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
