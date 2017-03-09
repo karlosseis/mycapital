@@ -47,7 +47,7 @@ class Operation < ActiveRecord::Base
 
   validates :net_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
   validates :gross_amount, :numericality => { :greater_than => 0}, if: :is_dividend?
-  validates :withholding_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
+  #validates :withholding_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
   validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
 
 
