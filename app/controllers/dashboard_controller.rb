@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
 
-	PopulateExpectedDividendsJob.perform_now(us: current_user)
+	  PopulateExpectedDividendsJob.perform_now()
 	
   	@global_value = current_user.companies.sum(:estimated_value_global_currency).round(2)
     @global_benefit = current_user.companies.sum(:estimated_benefit_global_currency).round(2) 
@@ -38,4 +38,24 @@ class DashboardController < ApplicationController
 
 
   end
+
+  
+
+  def index_pivot_dividend
+
+    data = current_user.operations.all.select(:operationtype_id, :amount, :company_id)
+     #data = current_user.operations.select(:operationtype_id, :amount).joins(:company).includes(:company).select(:name)
+    g = PivotTable::Grid.new do |g|
+        g.source_data = data
+        g.column_name = :operationtype_id
+        g.value_name   = :amount
+        g.row_name = :company_id
+      end   
+
+    g.build
+
+
+    @k = g
+  end
+
 end

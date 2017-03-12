@@ -18,8 +18,11 @@
  -->
 
               <% if current_user.permission_level == 0 %>
-                <li><%= link_to t("menu_operations"), operations_path %></li>               
-              <% end %>          
+                <li><%= link_to t("menu_operations"), operations_path %></li>       
+                <li><%= link_to "Pivot", index_pivot_dividend_path %></li>     
+                        
+              <% end %> 
+                    
             <% end %> 
           </ul>
       

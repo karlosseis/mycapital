@@ -206,6 +206,6 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :search_symbol, :user_id)
-      #params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :dividend_sum, :puchased_sum, :sold_sum, :ampliated_sum, :quantity_puchased, :quantity_sold, :quantity_ampliated, :shares_sum, :invested_sum, :average_price, :share_price_global_currency, :estimated_value_global_currency, :estimated_benefit_global_currency, :perc_estimated_benefit_global_currency, :date_share_price)
+      #params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :dividend_sum, :puchased_sum, :sold_sum, :ampliated_sum, :quantity_puchased, :quantity_sold, :quantity_ampliated, :shares_sum, :invested_sum, :average_price, :share_price_global_currency, :estimated_value_global_currency, :estimated_benefit_global_currency, :perc_estimated_benefit_global_currency, :date_share_price, :average_price_origin_currency_real, :average_price_real)
     end
 end

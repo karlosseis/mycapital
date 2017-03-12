@@ -50,6 +50,8 @@ gem 'roo'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 
+gem 'pivot_table'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

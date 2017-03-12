@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224090746) do
+ActiveRecord::Schema.define(version: 20170312231144) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                                   limit: 255
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20170224090746) do
     t.integer  "user_id",                                limit: 4
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
+    t.float    "average_price_real",                     limit: 24
+    t.float    "average_price_origin_currency_real",     limit: 24
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree

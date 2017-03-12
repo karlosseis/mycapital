@@ -31,6 +31,7 @@ es:
         shares_sum: "Total de acciones"
         invested_sum: "Total invertido"
         average_price: "Precio medio"
+        average_price_real: "Precio medio real"
         share_price_global_currency: "Precio actual"
         estimated_value_global_currency: "Precio estimado"
         estimated_benefit_global_currency: "Beneficio estimado"

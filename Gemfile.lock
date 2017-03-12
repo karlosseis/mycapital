@@ -116,6 +116,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.19.0)
+    pivot_table (1.0.0)
     rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -228,6 +229,7 @@ DEPENDENCIES
   kaminari-bootstrap
   mysql2
   pg
+  pivot_table
   rails (= 4.2.5.1)
   rails_12factor
   roo

@@ -14,3 +14,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+.navbar .brand, .navbar .nav > li > a:hover {
+    color: #FAFAFA;  /*VERDE */
+    background-color: #6E6E6E;  
+}

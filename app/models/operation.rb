@@ -51,6 +51,7 @@ class Operation < ActiveRecord::Base
   validates :destination_tax, :numericality => { :greater_than => 0}, if: :is_dividend?
 
 
+
   def origin_price_formatted
     number_to_currency(self.origin_price, unit:self.currency.symbol, seperator: ",", delimiter: ".")
   end

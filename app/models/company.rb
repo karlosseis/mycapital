@@ -145,23 +145,28 @@ include ActionView::Helpers::DateHelper
 
   def set_average_price 
     # precio medio de la acción en base a las compras realizadas (moneda de la aplicación, EUROS)
-      total = 0        
+      total = 0
+      total_real = 0        
       self.operations.where.not(:operationtype_id => Mycapital::OP_DIVIDEND).each do |op| 
         unless op.price.nil? || op.quantity.nil?
 
           if op.operationtype_id == Mycapital::OP_SALE 
             # si es una venta tenemos que restarle el valor del importe
             total = total - (op.price *  op.quantity)
+            total_real = total_real - op.amount
           else
             total = total + (op.price *  op.quantity)
+            total_real = total_real + op.amount
           end
         end
         
       end    
       unless self.shares_sum == 0 
         total = total / self.shares_sum   
+        total_real = total_real / self.shares_sum   
       end 
       self.average_price = total.round(2)
+      self.average_price_real = total_real.round(2)
 
       # (# compra 1 * precio 1) + (# compra 2*precio 2) + (# venta 1*precio1) + (# ampliacion 1*precio1)/ (#compra1 + #compra2 + # venta 1 +  # ampliacion 1)
       # hay que tener en cuenta las ventas y también las ampliaciones
@@ -213,23 +218,33 @@ include ActionView::Helpers::DateHelper
 
   # Por acabar
   def set_average_price_origin_currency
-      total = 0        
+      total = 0  
+      total_real = 0       
       self.operations.where.not(:operationtype_id => Mycapital::OP_DIVIDEND).each do |op| 
         unless op.origin_price.nil? || op.quantity.nil?
-
+          exchange_to_origin_price = 0  
+          unless op.exchange_rate ==0   
+             # calculamos la tasa a aplicar para convertir de EUR a USD porque la que tenemos guardada es de USD a EUR
+             exchange_to_origin_price = 1 / op.exchange_rate
+          end
           if op.operationtype_id == Mycapital::OP_SALE 
             # si es una venta tenemos que restarle el valor del importe
             total = total - (op.origin_price *  op.quantity)
+            total_real = total_real - (op.amount *  exchange_to_origin_price)
           else
             total = total + (op.origin_price *  op.quantity)
+            total_real = total_real + (op.amount *  exchange_to_origin_price)
           end
         end
         
       end    
       unless self.shares_sum == 0 
         total = total / self.shares_sum   
+        total_real = total_real / self.shares_sum   
       end 
       self.average_price_origin_currency = total.round(2)
+      self.average_price_origin_currency_real = total_real.round(2)
+
 
       # (# compra 1 * precio 1) + (# compra 2*precio 2) + (# venta 1*precio1) + (# ampliacion 1*precio1)/ (#compra1 + #compra2 + # venta 1 +  # ampliacion 1)
       # hay que tener en cuenta las ventas y también las ampliaciones

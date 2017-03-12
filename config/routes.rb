@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :dashboards
 
   get 'portfolio', to: 'companies#portfolio'
+  get 'index_pivot_dividend', to: 'dashboard#index_pivot_dividend'
 
   get 'welcome/index'
 
