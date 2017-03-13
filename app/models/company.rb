@@ -93,6 +93,15 @@ include ActionView::Helpers::DateHelper
 
   end
 
+  def expected_yoc
+ 
+    total_expected = self.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:amount)
+    unless invested_sum==0
+      perc_expected = (total_expected * 100) / invested_sum
+    end
+    perc_expected
+  end
+
   def share_price_global_currency 
     # share prices in currency purchases (ie, all the operations are bought in euros, 
     # the currency will be euros)

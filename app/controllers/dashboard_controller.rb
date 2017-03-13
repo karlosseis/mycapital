@@ -41,7 +41,7 @@ class DashboardController < ApplicationController
 
   
 
-  def index_pivot_dividend
+  def index_historic_dividend
 
     # Buscamos todos los dividendos
     opers = current_user.operations.select(:company_id, :operation_date, :net_amount).where(:operationtype_id => Mycapital::OP_DIVIDEND).order('operation_date').group_by { |u| u.operation_date.beginning_of_month }
@@ -109,8 +109,8 @@ class DashboardController < ApplicationController
          @years.each do |key, value|
              @years[key] = 0            
          end           
-      
-          @meses[num_mes].each do |key, value| 
+          unless @meses[num_mes].nil?
+           @meses[num_mes].each do |key, value| 
          
               
                @years.each do |key_year, value_year|
@@ -121,7 +121,9 @@ class DashboardController < ApplicationController
                  end 
                end
 
-           end 
+           end            
+          end
+
 
          @meses_totales[num_mes]   = @years
 

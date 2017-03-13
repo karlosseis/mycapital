@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-4" >
             <h2 class="text-center"><%=@company.share_price_formatted %></h2>
-            <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>
+            <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>          
         </div>
       </div>
     </div>
@@ -36,6 +36,8 @@
 
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.average_price_origin_currency') %></h6>
             <h5 class="text-center"><%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %></h5>
+            <h6 class="text-muted text-center">Rentabilidad Prev.</h6>            
+            <h5 class="text-center"><%=number_to_percentage(@company.expected_yoc, precision: 2) %></h5>            
         </div>
 
         <div class="col-md-6" >    

@@ -28,6 +28,7 @@ es:
   menu_balances: "Balances"
   menu_operations: "Operaciones"
   menu_edit_profile: "Editar perfil"
+  menu_historic_dividend: "Histórico de dividendos"
   menu_login: "Iniciar sesión"
   menu_logout: "Cerrar sesión"  
   save: "Guardar"
