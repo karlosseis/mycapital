@@ -1,4 +1,4 @@
 git add .
-git commit -m "automatica por batch"
+git commit -m "historico dividendos"
 git push heroku master
 

@@ -1,0 +1,164 @@
+<h1>Hola</h1>
+
+<% 
+
+opers = current_user.operations.select(:company_id, :operation_date, :net_amount).where(:operationtype_id => Mycapital::OP_DIVIDEND).order('operation_date').group_by { |u| u.operation_date.beginning_of_month }
+ %>
+
+  <% 
+  years = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date).sum(:amount)
+   %>
+<% year_min = 0 %>
+  <strong>Años</strong>
+  <% years.each do |key, value| %>
+      <%= key %>
+      <%if year_min == 0  then  
+        year_min = key.year  
+       end %>
+    <% end %>
+
+  <br>  
+
+  <strong>Meses</strong><br>
+
+  <% meses = []  %>
+
+  <% opers.each do |key, value|  %>
+    
+  <%year_array = key.year - year_min  %>
+
+  <%  value.each do |op|   %>
+  <%    years_company = [] %>
+  <%    if meses[key.month].nil? then  %>   
+  <%      years_company[year_array] = op.net_amount %>
+  <%      meses[key.month] = {Company.find(op.company_id).name => years_company} %>
+  <%    else %>
+  <%      empresas_mes =  meses[key.month]  %>    
+  <%      if empresas_mes[Company.find(op.company_id).name].nil? then %>
+  <%        # Primer registro de la empresa en el mes, lo añadimos %>
+  <%        years_company[year_array] = op.net_amount %>
+  <%        meses[key.month].merge!(Company.find(op.company_id).name => years_company) %>
+  <%      else %>
+  <%        # la empresa tiene registro en el mes pero quizá no en el año. Lo validamos. %>
+  <%        years_company = empresas_mes[Company.find(op.company_id).name] %>
+  <%        if years_company[year_array].nil? then %>
+  <%          years_company[year_array] = op.net_amount %>
+  <%        else %>
+  <%          years_company[year_array] = years_company[year_array] + op.net_amount %>
+  <%        end %>
+  <%        meses[key.month].merge!(Company.find(op.company_id).name => years_company) %>
+  <%      end %>
+  <%    end %>
+
+
+ <!--  <% [0,1,2,3,4,5,6,7,8,9,10,11].each do |num_mes|  %>
+      <strong><%= num_mes %>: </strong> <%= meses[num_mes] %> <br>
+    <% end %> -->
+    
+  <%  end %>
+
+        
+  <% end %>
+<br>
+
+
+
+<!--    <% meses.each do |mes|  %>
+      <%= mes %> <br>
+    <% end %> -->
+
+  
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Mes</th>
+      <th>Empresa</th>
+    <% years.each do |key, value| %>
+        <th><%= key.year %></th>  
+      <% end %>    
+        <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  <% [1,2,3,4,5,6,7,8,9,10,11,12].each do |num_mes|  %>
+      
+        
+        <% primer_item_mes = 1 %>
+        <% meses[num_mes].each do |key, value| %>
+        <tr>
+            <td><%= if primer_item_mes == 1 then 
+                num_mes 
+                end %> </td> 
+            <td><%= key %></td> 
+            <% total_empresa = 0 %>
+             <% years.each do |key_year, value_year| %>
+             
+               <td><%= value[key_year.year-year_min] %></td>  
+               
+
+               <% unless value[key_year.year-year_min].nil? 
+                  total_empresa = total_empresa + value[key_year.year-year_min] 
+                  end %>
+            <% end %>  
+            <td><strong><%=total_empresa.round(2)%></strong></td>
+
+            <% primer_item_mes = 0 %>
+        </tr>
+        <% end %>    
+        
+      
+    <% end %>
+   
+  </tbody>
+</table>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Mes</th>
+      <th>Empresa</th>
+      <th>2016</th>
+      <th>2017</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% opers.each do |key, value| %>
+    
+  
+    <tr>
+      <% i = 0 %>
+        <td><strong><%= key %></strong></td>
+      <% value.each do |op|%>
+      <% if i != 0 then %>
+        <td></td>         
+      <% end %>
+      <% i=1 %>
+          <td><%= Company.find(op.company_id) %></td>
+          <td><%= op.net_amount %></td>   
+      
+      </tr>
+
+
+
+    <% end %>
+    
+  <% end %>
+
+   
+  </tbody>
+</table>
+</div>
+
+<!-- 
+<% @k.columns.each do |col| %>
+  <th><%= col.header %></th>
+  <th><%= col.data %></th>
+<% end %>
+ -->
+

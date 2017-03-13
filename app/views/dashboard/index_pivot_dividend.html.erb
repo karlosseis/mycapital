@@ -1,109 +1,82 @@
-<h1>Hola</h1>
-
-<% 
-
-opers = current_user.operations.select(:company_id, :operation_date, :net_amount).where(:operationtype_id => Mycapital::OP_DIVIDEND).order('operation_date').group_by { |u| u.operation_date.beginning_of_month }
- %>
-
-	<% 
-	years = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date).sum(:amount)
-	 %>
-<% year_min = 0 %>
- 	<strong>Años</strong>
-	<% years.each do |key, value| %>
-  		<%= key %>
-  		<%if year_min == 0  then  
-  			year_min = key.year  
-  		 end %>
-  	<% end %>
-
-	<br>	
-
-	<strong>Meses</strong><br>
-
-	<% meses = []  %>
-
-	<% opers.each do |key, value|  %>
-		
-	<%year_array = key.year - year_min  %>
-
-	<%	value.each do |op|   %>
-	<%		years_company = [] %>
-	<%		if meses[key.month].nil? then	 %>		
-	Primera de todas 	<%= Company.find(op.company_id).name %> <br>
-	<%			years_company[year_array] = op.net_amount %>
-	<%			meses[key.month] = {Company.find(op.company_id).name => years_company} %>
-	<%		else %>
-	<%			empresas_mes =  meses[key.month]  %>		
-	<%			if empresas_mes[Company.find(op.company_id).name].nil? then %>
-	<%				# Primer registro de la empresa en el mes, lo añadimos %>
-	No existe <%= Company.find(op.company_id).name %> <br>
-	<%				years_company[year_array] = op.net_amount %>
-	<%				meses[key.month] = {Company.find(op.company_id).name => years_company} %>
-	<%			else %>
-	<%				# la empresa tiene registro en el mes pero quizá no en el año. Lo validamos. %>
-	EXISTE <%= Company.find(op.company_id).name %> <br>
-	<%				years_company = empresas_mes[Company.find(op.company_id).name] %>
-	<%				if years_company[year_array].nil? then %>
-	<%					years_company[year_array] = op.net_amount %>
-	<%				else %>
-	<%					years_company[year_array] = years_company[key.year] + op.net_amount %>
-	<%				end %>
-	<%				meses[key.month] = {Company.find(op.company_id).name => years_company} %>
-	<%			end %>
-	<%		end %>
-	<%	end %>
-
-				
-	<% end %>
-<br>
----------------------------------------------------
-
-  	<% meses.each do |mes|  %>
-  		<%= mes %>
-  	<% end %>
-
-	
-
-
+ <h2 class = "page-header">
+  <%= t(:'simple_form.labels.dashboard.dividend_historic_title') %>
+</h2> 
+ 
 
 <table class="table">
   <thead>
     <tr>
-      <th>Mes</th>
-      <th>Empresa</th>
-      <th>2016</th>
-      <th>2017</th>
+      <th><%= t(:'simple_form.labels.dashboard.month_name')%> </th>
+      <th><%= t(:'simple_form.labels.dashboard.company_name')%> </th>
+    <% @years.each do |key, value| %>
+        <th style="text-align:right"><%= key.year %></th>  
+      <% end %>    
+        <th>Total</th>
     </tr>
   </thead>
 
   <tbody>
-	<% opers.each do |key, value| %>
-		
-	
- 	  <tr>
-        <td><strong><%= key %></strong></td>
-	        <% value.each do |op|%>
-	        <td><%= Company.find(op.company_id) %></td>
-	        <td><%= op.net_amount %></td>   
 
-      </tr>
+  <% [1,2,3,4,5,6,7,8,9,10,11,12].each do |num_mes|  %>
 
+        <% @years.each do |key, value|
+              @years[key] = 0 
+        end  %>
+        
+        <% primer_item_mes = 1 %>
+        <% @meses[num_mes].each do |key, value| %>
+        <tr>
+            <td><%= if primer_item_mes == 1 then 
+                 t("date.month_names")[num_mes].humanize
+                end %> 
+            </td> 
 
+            <td><%= key %></td> <!-- Nombre de la empresa -->
 
-		<% end %>
-		
-	<% end %>
+            <% total_empresa = 0 %>
+             <% @years.each do |key_year, value_year| %>
+             
+               <td style="text-align:right"><%= number_to_currency(value[key_year.year-@year_min]) %></td>  <!-- dividendo para mes y año -->
+               
 
-   
+               <% unless value[key_year.year-@year_min].nil? 
+                  total_empresa = total_empresa + value[key_year.year-@year_min] 
+                  @years[key_year] = @years[key_year] + value[key_year.year-@year_min]
+                  end %>
+
+            <% end %>  
+            <td style="text-align:right"><strong><%=number_to_currency(total_empresa.round(2))%></strong></td> <!-- Suma de dividendos de la empresa en el mes y por todos los años -->
+
+            <% primer_item_mes = 0 %>
+
+          
+        </tr>
+        
+  
+        <% end %>    
+        <tr>
+        	<td></td>     
+            <td style="text-align:right"><strong><%= t(:'simple_form.labels.dashboard.total_mes', mes: t("date.month_names")[num_mes]) %></strong></td>
+              <% @meses_totales[num_mes].each do |key, value| %>
+                    <td style="text-align:right"><strong><%= number_to_currency(value) %></strong></td>  
+                  <% end %>  
+               
+        </td>
+        </tr>        
+      
+    <% end %>
+     <tr>  
+     	<td></td>     
+        <td style="text-align:right"><strong><%= t(:'simple_form.labels.dashboard.total_anual') %></strong></td>
+          <% @years_totales.each do |key, value| %>
+                <td style="text-align:right"><strong><%= number_to_currency(value) %></strong></td>  
+              <% end %>  
+         
+    </td>
+    </tr>      
   </tbody>
 </table>
-</div>
 
-<!-- 
-<% @k.columns.each do |col| %>
-  <th><%= col.header %></th>
-  <th><%= col.data %></th>
-<% end %>
- -->
+
+
 

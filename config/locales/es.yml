@@ -62,7 +62,7 @@ es:
   dividends_year: "Dividendos año"
   graph_year_purchases: "Compras anuales"
   graph_dividend_year_com: "Dividendos año actual"
-  graph_dividend_historic: "Histórico dividendos"
+  graph_dividend_historic: "Histórico de dividendos"
   dashboard_title: "Posición global"
   activerecord:
     errors:

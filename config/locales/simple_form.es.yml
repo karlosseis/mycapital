@@ -66,11 +66,16 @@ es:
         sector: "Sector"
         name_country: "País"  
         crear_empresa: "Crear empresa"   
-        search_btn: "Buscar"  
+        search_btn: "Buscar" 
+      dashboard: 
+        company_name: "Empresa"
+        month_name: "Mes"
+        dividend_historic_title: "Histórico de dividendos"
+        total_mes:  "Total %{mes}:" 
+        total_anual: "Total año"
     hints:
       company:
         name: ""
-        
     placeholders:
       company:
         search_symbol: "Identificador en yahoo para recuperar la cotización del valor. Por ejemplo, ABE.MC, SAN.MC, GSK.."
