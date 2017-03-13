@@ -180,9 +180,9 @@ include ActionView::Helpers::DateHelper
 
 
   def set_invested_sum 
-    # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros)
+    # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros) + las ampliaciones, que también pueden costar dinero
     # hace cambiar el precio medio de la acción y el beneficio estimado
-     self.invested_sum = puchased_sum.to_f - sold_sum.to_f
+     self.invested_sum = puchased_sum.to_f - sold_sum.to_f + ampliated_sum.to_f
      self.set_average_price()
      self.set_estimated_benefit_global_currency()
   end 
