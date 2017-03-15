@@ -6,9 +6,9 @@ class BalancesController < ApplicationController
   # GET /balances.json
   def index
     @balances = current_user.balances.order('balance_date DESC').all
-    @graph_cash_data = current_user.balances.where('balance_date >= ?', (Time.now - 1.year).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:cash_sum)
-    @graph_portfolio_data = current_user.balances.where('balance_date >= ?', (Time.now - 1.year).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:portfolio_sum)
-    @graph_equity_data = current_user.balances.where('balance_date >= ?', (Time.now - 1.year).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:total_sum)
+    @graph_cash_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:cash_sum)
+    @graph_portfolio_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:portfolio_sum)
+    @graph_equity_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:total_sum)
   end
 
 
@@ -81,6 +81,6 @@ class BalancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def balance_params
-      params.require(:balance).permit(:name, :balance_date, :user_id, balance_details_attributes: [ :id, :name, :amount, :account_id, :user_id ])
+      params.require(:balance).permit(:name, :balance_date, :details, :user_id, balance_details_attributes: [ :id, :name, :amount, :account_id, :user_id ])
     end
 end

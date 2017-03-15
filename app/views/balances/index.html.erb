@@ -49,7 +49,7 @@
     <% @balances.each do |balance| %>
       <tr>
         <td style="text-align:left"><%= link_to balance.name, balance %></td>   
-        <td style="text-align:center"><%= balance.balance_date %></td> 
+        <td style="text-align:center"><%= I18n.l(balance.balance_date) %></td> 
         <td style="text-align:right"><%= number_to_currency(balance.total_sum) %></td>   
         <td style="text-align:right"><%= number_to_currency(balance.cash_sum) %></td>   
         <td style="text-align:right"><%= number_to_currency(balance.portfolio_sum) %></td> 
