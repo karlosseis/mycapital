@@ -1,0 +1,33 @@
+<%= simple_form_for(@bank) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+  </div>
+
+  <div class="row">    
+      <div class="col-md-10 form-actions" >
+
+            <input type="submit" class="btn btn-success"   value=<%= t("save") %> >
+            <%= link_to t("cancel"), @bank, :class => "btn btn-info", :style=>'color:#FFFFFF;' %>            
+      </div>
+    <div class="col-md-2 text-right form-actions" >        
+            <%= link_to t("destroy"), @bank,  :class => "btn btn-danger", :style=>'color:#FFFFFF;' , method: :delete, data: { confirm: t("are_you_sure") } %>    
+      </div>   
+  </div>
+
+
+  <h2>Accounts</h2>
+    <%= f.fields_for :accounts do |cuentas| %>
+     <div class="account_fields">
+       <div class="field">
+          <%= cuentas.label :name %><br>
+          <%= cuentas.text_field :name %>
+           <%= cuentas.check_box :_destroy %>
+           <%= cuentas.label :_destroy, 'remove' %>        
+        </div>
+      </div>
+  <% end %>
+
+  
+<% end %>

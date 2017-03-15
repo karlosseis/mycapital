@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :balance_details
+  resources :balances
+  resources :accounts
+  resources :banks
   get 'background_actions/create_company'
 
   get 'background_action/create_company'
@@ -27,6 +31,7 @@ Rails.application.routes.draw do
 
   get 'portfolio', to: 'companies#portfolio'
   get 'index_historic_dividend', to: 'dashboard#index_historic_dividend'
+  get 'index_expect_real_dividend_month', to: 'dashboard#index_expect_real_dividend_month'
 
   get 'welcome/index'
 

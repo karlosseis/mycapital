@@ -11,7 +11,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312231144) do
+ActiveRecord::Schema.define(version: 20170315190534) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.integer  "account_type_id", limit: 4
+    t.integer  "bank_id",         limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "accounts", ["bank_id"], name: "index_accounts_on_bank_id", using: :btree
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
+
+  create_table "balance_details", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.float    "amount",       limit: 24
+    t.date     "balance_date"
+    t.integer  "balance_id",   limit: 4
+    t.integer  "account_id",   limit: 4
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "balance_details", ["account_id"], name: "index_balance_details_on_account_id", using: :btree
+  add_index "balance_details", ["balance_id"], name: "index_balance_details_on_balance_id", using: :btree
+  add_index "balance_details", ["user_id"], name: "index_balance_details_on_user_id", using: :btree
+
+  create_table "balances", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.date     "balance_date"
+    t.integer  "user_id",       limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.text     "details",       limit: 65535
+    t.float    "total_sum",     limit: 24
+    t.float    "cash_sum",      limit: 24
+    t.float    "loan_sum",      limit: 24
+    t.float    "portfolio_sum", limit: 24
+  end
+
+  add_index "balances", ["user_id"], name: "index_balances_on_user_id", using: :btree
+
+  create_table "banks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "banks", ["user_id"], name: "index_banks_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                                   limit: 255
@@ -178,6 +229,13 @@ ActiveRecord::Schema.define(version: 20170312231144) do
     t.datetime "updated_at",               null: false
   end
 
+  add_foreign_key "accounts", "banks"
+  add_foreign_key "accounts", "users"
+  add_foreign_key "balance_details", "accounts"
+  add_foreign_key "balance_details", "balances"
+  add_foreign_key "balance_details", "users"
+  add_foreign_key "balances", "users"
+  add_foreign_key "banks", "users"
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"
   add_foreign_key "companies", "users"

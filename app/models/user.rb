@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   has_many :companies
   has_many :operations
   has_many :expected_dividends
+  has_many :banks
+  has_many :accounts
+  has_many :balances
+  has_many :balance_details
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

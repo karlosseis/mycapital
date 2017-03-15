@@ -1,4 +1,4 @@
 git add .
-git commit -m "yoc"
+git commit -m "balances"
 git push heroku master
 

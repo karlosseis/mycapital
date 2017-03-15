@@ -99,7 +99,7 @@
 
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">    
     <div class="card-block">
-      <h4 class="card-title text-center"><%= t(:'next_dividends') %></h4>
+      <h4 class="card-title text-center"><%= link_to t(:'next_dividends'),index_expect_real_dividend_month_path %></h4>
         <table id="myTable" class="table  table-striped">
           <thead>
             <tr>
@@ -112,7 +112,7 @@
           <tbody>
             <% @next_dividends.each do |p| %>
               <tr>
-                <td style="text-align:left"><%= p.company.symbol  %></td>
+                <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
                 <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>        
                 <td style="text-align:right"><%= number_to_currency(p.amount)  %></td>              
               </tr>

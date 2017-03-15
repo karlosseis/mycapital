@@ -37,6 +37,7 @@ es:
         estimated_benefit_global_currency: "Beneficio estimado"
         perc_estimated_benefit_global_currency: "% Beneficio estimado"
         average_price_origin_currency: "Precio medio"
+        yoc: "YoC"
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 
@@ -73,6 +74,47 @@ es:
         dividend_historic_title: "Histórico de dividendos"
         total_mes:  "Total %{mes}:" 
         total_anual: "Total año"
+        expected_real_dividend_title:  "Dividendos reales y previstos de %{mes}"
+        real_dividend_month: Dividendos cobrados
+        expected_dividend_month: Dividendos previstos
+      banks:
+        lista_titulo: Bancos
+        titulo_editar: Editar banco
+        titulo_nuevo: Nuevo banco        
+        name: Nombre
+      accounts:
+        lista_titulo: Cuentas
+        titulo_editar: Editar cuenta
+        titulo_nuevo: Nueva cuenta
+        account_type_id: Tipo
+        name: Nombre
+        bank: Banco
+        user: Usuario
+      balances:
+        lista_titulo: Balances
+        titulo_editar: Editar balance
+        titulo_nuevo: Nuevo balance      
+        name: Descripcion
+        balance_date: Fecha
+        user: Usuario
+        total_sum: Total
+        cash_sum: Efectivo
+        portfolio_sum: Cartera
+        loan_sum: Préstamo
+        details: Detalles
+        graph_cash: Efectivo
+        graph_portfolio: Cartera
+        graph_equity: Patrimonio neto
+      balance_details:
+        lista_titulo: Detalles
+        titulo_editar: Editar detalle
+        titulo_nuevo: Nuevo detalle
+        name: Descripcion
+        amount: Saldo
+        balance_date: Fecha
+        balance: Balance
+        account: Cuenta
+        user: Usuario
     hints:
       company:
         name: ""

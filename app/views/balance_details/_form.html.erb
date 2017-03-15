@@ -1,0 +1,21 @@
+<%= simple_form_for(@balance_detail) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :amount %> 
+    <%= f.association :balance %>
+    <%= f.association :account %>
+  </div>
+
+  <div class="row">    
+      <div class="col-md-10 form-actions" >
+
+            <input type="submit" class="btn btn-success"   value=<%= t("save") %> >
+            <%= link_to t("cancel"), @balance_detail, :class => "btn btn-info", :style=>'color:#FFFFFF;' %>            
+      </div>
+    <div class="col-md-2 text-right form-actions" >        
+            <%= link_to t("destroy"), @balance_detail,  :class => "btn btn-danger", :style=>'color:#FFFFFF;' , method: :delete, data: { confirm: t("are_you_sure") } %>    
+      </div>   
+  </div>
+<% end %>

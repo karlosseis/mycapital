@@ -19,9 +19,7 @@
 
               <% if current_user.permission_level == 0 %>
                 <li><%= link_to t("menu_operations"), operations_path %></li>   
-
-
-                        
+                <li><%= link_to t("menu_balances"), balances_path %></li>  
               <% end %> 
                         
             <% end %> 
