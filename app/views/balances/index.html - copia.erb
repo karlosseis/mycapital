@@ -67,8 +67,8 @@
              unless dif_tot ==0
                meses_pn_0 = balance.total_sum / dif_tot
           end %>
-          <div class="row" style="text-align:right"><%= number_with_delimiter(meses_pn_0.round(2)) %></div>
-     
+          <div class="row" style="text-align:right"><%= number_to_currency(meses_pn_0, :precision => 0) %></div>
+    
         <% 
          ant_cash =  balance.cash_sum 
          ant_tot = balance.total_sum 
