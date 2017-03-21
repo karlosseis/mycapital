@@ -73,8 +73,9 @@
 
             <% current_user.accounts.each do |acc| %>
               <% det = balance.balance_details.find_by account_id: acc.id %>
+              account_id = <%= acc.id %>  <br>
               <% if det.nil? then %>
-               <div class="row" style="text-align:right"><%= number_to_currency(9, :precision => 0) %></div>
+               <div class="row" style="text-align:right"><%= number_to_currency(0, :precision => 0) %></div>
               <% else %>
                <div class="row" style="text-align:right"><%= number_to_currency(det.amount, :precision => 0) %></div>
               <% end %>
