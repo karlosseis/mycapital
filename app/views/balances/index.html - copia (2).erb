@@ -34,76 +34,47 @@
 <br>
     <div class="container">
 
- 
+      <div class="col-md-2">
+        <div class="row" style="text-align:left"><br></div>
+        <div class="row" style="text-align:left"><strong>Efectivo</strong></div>
+        <div class="row" style="text-align:left"><strong>Patrimonio neto</strong></div>
+        <div class="row" style="text-align:left"><strong>Dif ahorrado</strong></div>
+        <div class="row" style="text-align:left"><strong>Dif patrimonio neto</strong></div>
+        <div class="row" style="text-align:left"><strong>Meses PN = 0 </strong></div>
+      </div> 
 
       <% dif_cash = 0
          dif_tot = 0 
 
          ant_cash = 0 
-         ant_tot = 0 
-
-         primera_vez = 1 %>
+         ant_tot = 0 %>
 
       <% current_user.balances.where('balance_date >= ?', (Time.now - 8.month).beginning_of_day).order('balance_date ASC').each do |balance| %>
-
-        
-          <% if primera_vez == 1 then %>
-
-              <div class="col-md-2">
-                <div class="row" style="text-align:left"><br></div>
-                <% current_user.accounts.each do |acc| %>
-                  <div class="row" style="text-align:left"><strong><%= acc.name %></strong></div>
-                <% end %> 
-                <div class="row" style="text-align:left"><br></div>               
-                <div class="row" style="text-align:left"><strong>Efectivo</strong></div>
-                <div class="row" style="text-align:left"><strong>Patrimonio neto</strong></div>
-                <div class="row" style="text-align:left"><strong>Dif ahorrado</strong></div>
-                <div class="row" style="text-align:left"><strong>Dif patrimonio neto</strong></div>
-                <div class="row" style="text-align:left"><strong>Meses PN = 0 </strong></div>
-              </div>
-
-               <% primera_vez = 0 %>
-          <% end %>
-
-           
-
-          <div class="col-md-1">
-
-            <div class="row" style="text-align:right"><strong><%= I18n.l(balance.balance_date, format: :month_year) %></strong></div>
-
-            <% current_user.accounts.each do |acc| %>
-              <% det = balance.balance_details.find_by account_id: acc.id %>
-              <% if det.nil? then %>
-               <div class="row" style="text-align:right"><%= number_to_currency(0, :precision => 0) %></div>
-              <% else %>
-               <div class="row" style="text-align:right"><%= number_to_currency(det.amount, :precision => 0) %></div>
-              <% end %>
-            <% end %> 
-            <div class="row" style="text-align:left"><br></div>
-            <div class="row" style="text-align:right"><%= number_to_currency(balance.cash_sum, :precision => 0) %></div>
-            <div class="row" style="text-align:right"><%= number_to_currency(balance.total_sum, :precision => 0) %></div>
-            <% 
-              if ant_cash != 0 then
-                dif_cash = balance.cash_sum - ant_cash
-                dif_tot = balance.total_sum - ant_tot
-              end
-            %>  
-            <div class="row" style="text-align:right"><%= number_to_currency(dif_cash, :precision => 0) %></div>
-            <div class="row" style="text-align:right"><%= number_to_currency(dif_tot, :precision => 0) %></div>
-
-            <%  meses_pn_0= 0
-               unless dif_tot ==0
-                 meses_pn_0 = balance.total_sum / dif_tot
-            end %>
-            <div class="row" style="text-align:right"><%= number_with_delimiter(meses_pn_0.round(2)) %></div>
-       
+        <div class="col-md-1">
+          <div class="row" style="text-align:right"><strong><%= I18n.l(balance.balance_date, format: :month_year) %></strong></div>
+          <div class="row" style="text-align:right"><%= number_to_currency(balance.cash_sum, :precision => 0) %></div>
+          <div class="row" style="text-align:right"><%= number_to_currency(balance.total_sum, :precision => 0) %></div>
           <% 
-           ant_cash =  balance.cash_sum 
-           ant_tot = balance.total_sum 
-           %>
+            if ant_cash != 0 then
+              dif_cash = balance.cash_sum - ant_cash
+              dif_tot = balance.total_sum - ant_tot
+            end
+          %>  
+          <div class="row" style="text-align:right"><%= number_to_currency(dif_cash, :precision => 0) %></div>
+          <div class="row" style="text-align:right"><%= number_to_currency(dif_tot, :precision => 0) %></div>
 
-          </div>
-           
+          <%  meses_pn_0= 0
+             unless dif_tot ==0
+               meses_pn_0 = balance.total_sum / dif_tot
+          end %>
+          <div class="row" style="text-align:right"><%= number_with_delimiter(meses_pn_0.round(2)) %></div>
+     
+        <% 
+         ant_cash =  balance.cash_sum 
+         ant_tot = balance.total_sum 
+         %>
+
+        </div>    
       <% end %>
     </div>
 <div class="row"><br></div>

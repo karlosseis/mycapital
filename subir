@@ -1,4 +1,4 @@
 git add .
-git commit -m "balances"
+git commit -m "tabla balances con detalle importes cuenta"
 git push heroku master
 

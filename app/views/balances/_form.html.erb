@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <%= f.fields_for :balance_details do |detail| %>
-      <tr>     
+      <tr>    
           <td><%= detail.collection_select :account_id, current_user.accounts.all, :id, :name %></td>
           <td style="text-align:right"><%= detail.number_field :amount, class: :text_field, step: :any %></td>                   
           <td><%= detail.text_field :name %></td>        
