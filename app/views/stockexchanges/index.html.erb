@@ -8,6 +8,8 @@
       <th>Name</th>
       <th>Country</th>
       <th>Currency</th>
+      <th>Google Prefix</th>
+      <th>Yahoo Sufix</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +20,9 @@
         <td><%= stockexchange.name %></td>
         <td><%= stockexchange.country %></td>
         <td><%= stockexchange.currency %></td>
+        <td><%= stockexchange.google_prefix %></td>
+        <td><%= stockexchange.yahoo_suffix %></td>
+
         <td><%= link_to 'Show', stockexchange %></td>
         <td><%= link_to 'Edit', edit_stockexchange_path(stockexchange) %></td>
         <td><%= link_to 'Destroy', stockexchange, method: :delete, data: { confirm: 'Are you sure?' } %></td>

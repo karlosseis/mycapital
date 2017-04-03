@@ -73,13 +73,16 @@ include ActionView::Helpers::DateHelper
     number_to_currency(self.share_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
   end
 
-  def url_google_finance
-    if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
-      prefix = "BME:"
-    else
-      prefix = ""
+  def google_symbol
+    prefix = ""
+    unless self.stockexchange.google_prefix.nil?
+      prefix = self.stockexchange.google_prefix
     end
-    "https://www.google.com/finance?q=" + prefix + self.symbol
+    prefix + self.symbol
+  end
+  
+  def url_google_finance
+    "https://www.google.com/finance?q=" + self.google_symbol
   end
 
   def last_purchase
@@ -360,5 +363,21 @@ include ActionView::Helpers::DateHelper
     end
   end
 
+  def set_stock_price_google
+    
+    uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
+
+    rs = Net::HTTP.get(uri)
+
+    rs.delete! '//'
+
+    a = JSON.parse(rs) 
+
+    self.share_price =  a[0]["l"] 
+    self.date_share_price = a[0]["lt_dts"]
+    #self.set_update_summary
+
+
+  end
 
 end

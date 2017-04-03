@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329231535) do
+ActiveRecord::Schema.define(version: 20170403224845) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -271,11 +271,13 @@ ActiveRecord::Schema.define(version: 20170329231535) do
   end
 
   create_table "stockexchanges", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "country_id",  limit: 4
-    t.integer  "currency_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",          limit: 255
+    t.integer  "country_id",    limit: 4
+    t.integer  "currency_id",   limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "google_prefix", limit: 255
+    t.string   "yahoo_suffix",  limit: 255
   end
 
   add_index "stockexchanges", ["country_id"], name: "index_stockexchanges_on_country_id", using: :btree
