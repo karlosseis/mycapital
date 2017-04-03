@@ -375,7 +375,7 @@ include ActionView::Helpers::DateHelper
 
     self.share_price =  a[0]["l"] 
     self.date_share_price = a[0]["lt_dts"]
-    #self.set_update_summary
+    self.set_update_summary
 
 
   end
