@@ -38,6 +38,15 @@ es:
         perc_estimated_benefit_global_currency: "% Beneficio estimado"
         average_price_origin_currency: "Precio medio"
         yoc: "YoC"
+        target_price_1: Objetivo 1
+        target_price_2: Objetivo 2
+        target_sell_price: Precio objetivo venta
+        traffic_light_id: Semáforo
+        investors_url: Web accionistas
+        dif_target_price: Dif. Precio Objetivo
+        porc_dif_target_price: "% Dif"
+        dividend_last_result: "Último Div. Anual"
+        perc_dividend_last_result: "% Div"
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 
@@ -115,6 +124,77 @@ es:
         balance: Balance
         account: Cuenta
         user: Usuario
+      company_comment:
+        comment: Comentario
+        url: Web
+      company_result:
+        year_result: Año Resultado
+        es_oficial: Datos extraidos de la web oficial
+        cotizacion: "Cotización media"
+        cotiz_max: Cotización máxima
+        cotiz_min: Cotización mínima
+        patrimonio_neto: Patrimonio Neto
+        gastos_generales: Gastos generales
+        gastos_desarrollo: Gastos de desarrollo
+        ventas: Ventas
+        ebitda: EBITDA
+        ebit: EBIT
+        beneficio_neto_ordinario: Beneficio neto ordinario
+        beneficion_neto_total: Beneficio neto total
+        deuda_largo_plazo: Deuda a largo plazo
+        deuda_corto_plazo: Deuda a corto plazo
+        deuda_neta: Deuda neta
+        cf_explotacion: Cash flow explotación
+        cf_inversion: Cash flow inversión
+        cf_financiacion: Cash flow financiación
+        cf_neto: Cash flow neto
+        dividendo_ordinario: Dividendo ordinario
+        dividendo_extraordinario: Dividendo extraordinario
+        dividendo_total: Dividendo total
+        num_acciones: Nº acciones
+        bpa: BPA    
+        payout: Payout
+        pago_dividendos: Dividendos pagados
+        per_max: PER máximo
+        per_med: PER medio
+        per_min: PER mínimo
+        fecha_resultado: Fecha publicación resultados
+        comment: Comentarios        
+    tooltips:
+      company:
+        target_price_1: Precio objetivo de compra en la moneda del mercado
+        target_price_2: Precio objetivo de compra FUERTE en la moneda del mercado
+      company_results:
+        cotizacion: Cotización media del año
+        cotiz_max: Cotización máxima del año
+        cotiz_min: Cotización mínima del año
+        patrimonio_neto: Total activo - Total pasivo
+        gastos_generales: General expenses
+        gastos_desarrollo: Development expenses
+        ventas: Operating revenues
+        ebitda: EBITDA
+        ebit: EBIT
+        beneficio_neto_ordinario: Beneficio neto ordinario
+        beneficion_neto_total: Beneficio neto total
+        deuda_largo_plazo: Deuda a largo plazo
+        deuda_corto_plazo: Deuda a corto plazo
+        deuda_neta: Deuda neta
+        cf_explotacion: Cash flow explotación
+        cf_inversion: Cash flow inversión
+        cf_financiacion: Cash flow financiación
+        cf_neto: Cash flow neto
+        dividendo_ordinario: Dividendo neto
+        dividendo_extraordinario: Dividendo extraordinario
+        dividendo_total: Dividendo total
+        num_acciones: Nº acciones
+        bpa: BPA o EPS
+        payout: Payout
+        pago_dividendos: Importe total destinado a pagar dividendos
+        per_max: PER (price-to-earnings ratio) máximo. PER = Cotización / BPA
+        per_med: PER (price-to-earnings ratio) medio. PER = Cotización / BPA
+        per_min: PER (price-to-earnings ratio) mínimo. PER = Cotización / BPA
+        fecha_resultado: Año al que pertenecen los resultados
+        comment: Comentarios            
     hints:
       company:
         name: ""

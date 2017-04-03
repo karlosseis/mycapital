@@ -7,7 +7,9 @@ include ActionView::Helpers::DateHelper
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
-
+  has_many :expert_target_prices
+  has_many :company_comments
+  has_many :company_results
 
 
   validates :name, presence: true
@@ -16,6 +18,7 @@ include ActionView::Helpers::DateHelper
   #validates :sector, presence: true
   validates :search_symbol, presence: true
   
+  enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0}
 
   accepts_nested_attributes_for :operations,reject_if: proc { |attributes| attributes['amount'].blank? }
 
@@ -24,8 +27,27 @@ include ActionView::Helpers::DateHelper
   end  
 
   def get_id
-    id
-    
+    id    
+  end
+
+  def dividend_last_result 
+    # Dividendo del úlitmo resultado guardado en la empresa
+
+    res = self.company_results.order(year_result: :desc).limit(1) 
+    div = 0  
+    res.each do |p| 
+       div = p.dividendo_ordinario
+    end
+
+    div  
+  end
+
+  def perc_dividend_last_result
+    perc_expected = 0
+    unless self.dividend_last_result==0
+      perc_expected = (self.dividend_last_result * 100) / self.share_price
+    end
+    perc_expected
   end
 
 
@@ -95,11 +117,29 @@ include ActionView::Helpers::DateHelper
 
   def expected_yoc
  
+    
     total_expected = self.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:amount)
     unless invested_sum==0
       perc_expected = (total_expected * 100) / invested_sum
     end
     perc_expected
+  end
+
+  def dif_target_price 
+    self.share_price_global_currency - self.target_price_1
+  end
+
+  def target_price_1_formatted
+    number_to_currency(self.target_price_1, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+
+  end
+
+  def porc_dif_target_price    
+    perc_result = 0 
+    unless self.dif_target_price<=0
+      perc_result = (self.dif_target_price * 100) / self.share_price_global_currency
+    end
+    perc_result    
   end
 
   def share_price_global_currency 

@@ -1,0 +1,29 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th>Date target price</th>
+      <th>Target price 1</th>
+      <th>Target price 2</th>
+      <th>Web name</th>
+      <th>Url</th>            
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.expert_target_prices.order("date_target_price DESC").each do |expert_target_price| %>
+      <tr>
+        <td><%= I18n.l(expert_target_price.date_target_price) %></td>
+        <td><%= expert_target_price.target_price_1 %></td>
+        <td><%= expert_target_price.target_price_2 %></td>
+        <td><%= expert_target_price.reference_web %></td>
+        <td><%= expert_target_price.url %></td>        
+        <td><%= link_to t("edit"), edit_company_expert_target_price_path(@company,expert_target_price), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), expert_target_price, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

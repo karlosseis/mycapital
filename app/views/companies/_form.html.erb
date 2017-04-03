@@ -7,6 +7,12 @@
     <%= f.association :stockexchange %>
     <%= f.association :sector %>
     <%= f.input :search_symbol  , :disabled => true %>
+    <%= f.input :target_price_1  ,  input_html: {:title => t(:'simple_form.tooltips.company.target_price_1')}  %>    
+    <%= f.input :target_price_2  ,  input_html: {:title => t(:'simple_form.tooltips.company.target_price_2')}  %>   
+    <%= f.input :target_sell_price  %>      
+    <%= f.input :traffic_light_id, collection: current_user.companies.traffic_light_ids.keys, include_blank: false %>
+    <%= f.input :investors_url %>
+
   </div>
   
 

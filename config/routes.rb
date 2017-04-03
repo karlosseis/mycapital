@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'targets/index'
+
+  resources :company_results
+  resources :company_comments
+  resources :reference_webs
+  resources :expert_target_prices
   resources :balance_details
   resources :balances
   resources :accounts
@@ -13,6 +19,9 @@ Rails.application.routes.draw do
   resources :expected_dividends
   resources :companies do
     resources :operations
+    resources :expert_target_prices
+    resources :company_comments
+    resources :company_results
   end
   resources :stockexchanges
   resources :sectors

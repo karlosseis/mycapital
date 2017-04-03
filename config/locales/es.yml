@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
-  app_name: "Bye ING Broker"
+  app_name: "Mi capital"
   menu_dashboard: "Panel de control"
   menu_saludo: "Hola %{name}"
   menu_portfolio: "Cartera"
@@ -29,6 +29,7 @@ es:
   menu_operations: "Operaciones"
   menu_edit_profile: "Editar perfil"
   menu_historic_dividend: "Histórico de dividendos"
+  menu_target: En la mira
   menu_login: "Iniciar sesión"
   menu_logout: "Cerrar sesión"  
   save: "Guardar"
@@ -40,14 +41,24 @@ es:
   new_company: "Nueva empresa"
   edit_company: "Editar empresa"
   list_companies: "Empresas"
-  new_dividend: "Nuevo dividendo"
-  new_purchase: "Nueva compra"
-  new_sale: "Nueva venta "
-  new_ampliation: "Nueva ampliación "
+  list_targets: En la mira
+  new_dividend: "Dividendo"
+  new_purchase: "Compra"
+  new_sale: "Venta"
+  new_ampliation: "Ampliación"
+  new_expert_price: Experto
+  new_comment: Comentario
+  new_resultado: Resultado
   summary: "Resumen"
   dividends: "Dividendos"
   purchases: "Compras"
   sales: "Ventas"
+  tab_expert_prices: "Precio expertos"
+  tab_comments: Comentarios
+  tab_results: Resultados
+  tab_historic_dividends: Hist. Div
+  tab_ratios: Ratios
+  tab_cash_flows: CF
   ampliations: "Ampliaciones"
   list_operations: "Listado de operaciones"
   my_portfolio: "Mi cartera"
@@ -65,6 +76,10 @@ es:
   graph_dividend_year_com: "Dividendos año actual"
   graph_dividend_historic: "Histórico de dividendos"
   dashboard_title: "Posición global"
+  new_company_comment: "Nuevo comentario"
+  edit_company_comment: "Editar comentario"
+  new_company_result: "Nuevo resultado"
+  edit_company_result: "Editar resultado"
   activerecord:
     errors:
       messages:
@@ -108,6 +123,7 @@ es:
       long: "%d de %B de %Y"
       short: "%d de %b"
       month_year:  "%b %Y"
+      only_year: "%Y"
     month_names:
     -
     - enero
@@ -288,6 +304,7 @@ es:
       default: "%A, %d de %B de %Y %H:%M:%S %z"
       long: "%d de %B de %Y %H:%M"
       short: "%d de %b %H:%M"
+      only_date: "%d/%m/%Y"
     pm: pm
   views:
     pagination:

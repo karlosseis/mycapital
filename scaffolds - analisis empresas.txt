@@ -1,0 +1,30 @@
+rails g migration add_various_to_companies target_price_1:float target_price_2:float traffic_light_id:integer investors_url:string
+
+
+
+rails generate scaffold ExpertTargetPrice date_target_price:date target_price_1:float target_price_2:float web_name_id:integer url:string company:references
+
+
+
+rails g migration add_user_id_to_expert_target_prices user_id:integer
+
+rails g migration RemoveWebNameIdFromExpertTargetPrice web_name_id:integer
+
+rails generate scaffold ReferenceWeb name:text url:string user:references
+
+
+rails g migration RemoveReferenceWebFromExpertTargetPrice reference_web:integer
+rails g migration add_reference_web_id2_to_expert_target_prices reference_web_id:integer
+
+rails generate scaffold Comment comment:text url:string company:references user:references
+
+rails g migration RemoveNameFromReferenceWeb name:text
+rails g migration add_name_to_reference_webs name:string
+
+- añadir realción con usuarios en ExpertTargetPrice
+
+rails generate scaffold Result tipo_resultado_id:integer fecha_resultado:date es_oficial:boolean cotizacion:float cotiz_max:float cotiz_min:float patrimonio_neto:float gastos_generales:float gastos_desarrollo:float ventas:float ebitda:float ebit:float beneficio_neto_ordinario:float beneficion_neto_total:float deuda_largo_plazo:float deuda_corto_plazo:float deuda_neta:float cf_explotacion:float cf_inversion:float cf_financiacion:float cf_neto:float dividendo_ordinario:float dividendo_extraordinario:float dividendo_total:float num_acciones:float bpa:float payout:float pago_dividendos:float per_max:float per_med:float per_min:float company:references user:references
+
+
+
+

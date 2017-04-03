@@ -1,0 +1,38 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:'simple_form.labels.company_results.year_result') %></th>
+      <th><%= t(:'simple_form.labels.company_results.bpa') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cotizacion') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cotiz_max') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cotiz_min') %></th>
+      <th><%= t(:'simple_form.labels.company_results.per_max') %></th>
+      <th><%= t(:'simple_form.labels.company_results.per_med') %></th>
+      <th><%= t(:'simple_form.labels.company_results.per_min') %></th>     
+      <th><%= t(:'simple_form.labels.company_results.num_acciones') %></th>                
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.company_results.order('year_result DESC').each do |company_result| %>
+      <tr>        
+        <td><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
+        <td><%= number_with_delimiter(company_result.bpa) %></td>
+        <td><%= number_with_delimiter(company_result.cotizacion) %></td>
+        <td><%= number_with_delimiter(company_result.cotiz_max) %></td>
+        <td><%= number_with_delimiter(company_result.cotiz_min) %></td>
+        <td><%= number_with_delimiter(company_result.per_max) %></td>
+        <td><%= number_with_delimiter(company_result.per_med) %></td>
+        <td><%= number_with_delimiter(company_result.per_min) %></td>   
+        <td><%= number_with_delimiter(company_result.num_acciones) %></td>
+        
+
+       <td><%= link_to t("edit"), edit_company_company_result_path(@company,company_result), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_result, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

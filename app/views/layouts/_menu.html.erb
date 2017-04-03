@@ -14,10 +14,12 @@
               <li><%= link_to t("menu_portfolio"), portfolio_path %></li>
               <li><%= link_to t("menu_companies"), companies_path %></li>
               <li><%= link_to t("menu_historic_dividend"), index_historic_dividend_path %></li>
+
               <!-- <li><%= link_to "Yahoo Tickers", yahoo_tickers_path %></li>
  -->
 
               <% if current_user.permission_level == 0 %>
+                 <li><%= link_to t("menu_target"), targets_index_path %></li>
                 <li><%= link_to t("menu_operations"), operations_path %></li>   
                 <li><%= link_to t("menu_balances"), balances_path %></li>  
               <% end %> 

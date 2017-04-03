@@ -1,0 +1,33 @@
+
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Comment</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>    
+    <% @company.company_comments.order('created_at DESC').each do |company_comment| %>
+      <tr>
+        <td><%= I18n.l(company_comment.created_at, :format => :only_date) %></td>
+        <td><%= simple_format(company_comment.comment) %></td>
+        <td>
+
+               <a href=<%= company_comment.url %>  target = "_blank">
+                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+          </a>   
+        </td>
+
+        <td><%= link_to t("edit"), edit_company_company_comment_path(@company,company_comment), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_comment, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

@@ -1,0 +1,48 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:'simple_form.labels.company_results.year_result') %></th>     
+      <th><%= t(:'simple_form.labels.company_results.beneficion_neto_total') %></th> 
+      <th><%= t(:'simple_form.labels.company_results.patrimonio_neto') %></th>
+      <th><%= t(:'simple_form.labels.company_results.gastos_generales') %></th>
+      <th><%= t(:'simple_form.labels.company_results.gastos_desarrollo') %></th>
+      <th><%= t(:'simple_form.labels.company_results.ventas') %></th>
+      <th><%= t(:'simple_form.labels.company_results.ebitha') %></th>
+      <th><%= t(:'simple_form.labels.company_results.ebit') %></th>
+      <th><%= t(:'simple_form.labels.company_results.beneficio_neto_ordinario') %></th>
+      
+      <th><%= t(:'simple_form.labels.company_results.deuda_largo_plazo') %></th>
+      <th><%= t(:'simple_form.labels.company_results.deuda_corto_plazo') %></th>
+      <th><%= t(:'simple_form.labels.company_results.deuda_neta') %></th>
+      <th><%= t(:'simple_form.labels.company_results.es_oficial') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.company_results.order('year_result DESC').each do |company_result| %>
+      <tr>        
+        <td><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
+        <td><%= number_to_human(company_result.beneficion_neto_total, precision: 11) %></td>
+
+        <td><%= number_to_human(company_result.patrimonio_neto, precision: 11) %></td>
+        <td><%= number_to_human(company_result.gastos_generales, precision: 11) %></td>
+        <td><%= number_to_human(company_result.gastos_desarrollo, precision: 11) %></td>
+        <td><%= number_to_human(company_result.ventas, precision: 11) %></td>
+        <td><%= number_to_human(company_result.ebitda, precision: 11) %></td>
+        <td><%= number_to_human(company_result.ebit, precision: 11) %></td>
+        <td><%= number_to_human(company_result.beneficio_neto_ordinario, precision: 11) %></td>
+        
+        <td><%= number_to_human(company_result.deuda_largo_plazo, precision: 11) %></td>
+        <td><%= number_to_human(company_result.deuda_corto_plazo, precision: 11) %></td>
+        <td><%= number_to_human(company_result.deuda_neta, precision: 11) %></td>
+        <td><%= company_result.es_oficial %></td>
+       <td><%= link_to t("edit"), edit_company_company_result_path(@company,company_result), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_result, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

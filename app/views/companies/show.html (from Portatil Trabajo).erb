@@ -1,0 +1,130 @@
+<head> 
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+ <h2 class = "page-header">
+  <%= @company.name %> <small><%= link_to t("edit"), edit_company_path(@company) %></small>
+
+</h2>
+  <p>Asterisk icon: <span class="glyphicon glyphicon-eur"></span></p>
+
+<div class="row">
+  
+
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <%= link_to t("new_dividend"), new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_DIVIDEND) , :class => "btn btn-secondary" %>
+        <%= link_to  t("new_purchase"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_PURCHASE)  , :class => "btn btn-secondary" %>
+        <%= link_to  t("new_sale"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_SALE) , :class => "btn btn-secondary" %>
+        <%= link_to  t("new_ampliation"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_AMPLIATION) , :class => "btn btn-secondary" %>
+         <%= link_to  t("new_expert_price"), new_company_expert_target_price_path(@company) , :class => "btn btn-secondary" %>   
+        <%= link_to  t("new_comment"), new_company_company_comment_path(@company) , :class => "btn btn-secondary" %>   
+        <%= link_to  t("new_resultado"), new_company_company_result_path(@company) , :class => "btn btn-secondary" %>          
+      </div>
+
+ 
+
+</div>
+
+
+<div class="row">    
+    <div class="col-md-5" >
+      
+      <div class="row">
+        <div class="col-md-8" >                     
+          <h6 class="text-muted"><%= @company.stockexchange %></h6>
+          <h5><%= @company.sector %></h5>
+          <a href=<%= @company.url_google_finance %>  target = "_blank"><img class="img-responsive hidden-xs" src="../gfinance.jpg" width="16" height="16" alt=""/></a> 
+          <h5><%= @company.traffic_light_id %></h5>
+          <h5><%= @company.target_price_1 %></h5>
+          <h5><%= @company.target_price_2 %></h5>
+          <h5><%= @company.target_sell_price %></h5>          
+          <a href=<%= @company.investors_url %>  target = "_blank">Web Relación con el inversor</a>
+        </div>
+        <div class="col-md-4" >
+            <h2 class="text-center"><%=@company.share_price_formatted %></h2>
+            <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>          
+        </div>
+      </div>
+    </div>
+   
+  
+   
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-6" >    
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.invested_sum') %></h6>
+            <h5 class="text-center"><%= number_to_currency(@company.invested_sum)  %></h5>
+
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.average_price_origin_currency') %></h6>
+            <h5 class="text-center"><%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %></h5>
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.yoc') %></h6>            
+            <h5 class="text-center"><%=number_to_percentage(@company.expected_yoc, precision: 2) %></h5>            
+        </div>
+
+        <div class="col-md-6" >    
+            <h6 class="text-muted text-center">Última compra</h6>
+            <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
+            <h6 class="text-muted text-center">Próximo dividendo</h6>
+            <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>
+        </div>
+
+      </div>
+
+    </div>
+ 
+ 
+</div>   
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home"><%= t(:'summary') %></a></li>
+    <li><a data-toggle="tab" href="#menu1"><%= t(:'dividends') %></a></li>
+    <li><a data-toggle="tab" href="#menu2"><%= t(:'purchases') %></a></li>
+    <li><a data-toggle="tab" href="#menu3"><%= t(:'sales') %></a></li>
+    <li><a data-toggle="tab" href="#menu4"><%= t(:'ampliations') %></a></li>
+    <li><a data-toggle="tab" href="#menu5"><%= t(:'tab_expert_prices') %></a></li>
+    <li><a data-toggle="tab" href="#menu6"><%= t(:'tab_comments') %></a></li>
+    <li><a data-toggle="tab" href="#menu7"><%= t(:'tab_results') %></a></li>
+    <li><a data-toggle="tab" href="#menu8"><%= t(:'tab_historic_dividends') %></a></li>
+    <li><a data-toggle="tab" href="#menu9"><%= t(:'tab_ratios') %></a></li>
+    <li><a data-toggle="tab" href="#menu10"><%= t(:'tab_cash_flows') %></a></li>
+  </ul>
+  <br>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <%= render :partial => 'form_summary'  %>
+    </div>
+    <div id="menu1" class="tab-pane fade">      
+       <%= render :partial => 'operations/index_simple_dividends', locals: {operationtype_id: Mycapital::OP_DIVIDEND}  %>
+    </div>
+    <div id="menu2" class="tab-pane fade">      
+      <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_PURCHASE}  %>   
+    </div>
+    <div id="menu3" class="tab-pane fade">      
+      <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_SALE}  %>   
+    </div>
+    <div id="menu4" class="tab-pane fade">      
+      <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_AMPLIATION}  %>
+    </div>  
+    <div id="menu5" class="tab-pane fade">      
+      <%= render :partial => 'expert_target_prices/index_company' %>
+    </div> 
+    <div id="menu6" class="tab-pane fade">      
+      <%= render :partial => 'company_comments/index_company' %>
+    </div> 
+    <div id="menu7" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_company' %>
+    </div>     
+    <div id="menu8" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_dividend' %>
+    </div> 
+    <div id="menu9" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_ratio' %>
+    </div>     
+    <div id="menu10" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_cash_flow' %>
+    </div>     
+  </div>

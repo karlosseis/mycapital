@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_many :accounts
   has_many :balances
   has_many :balance_details
+  has_many :expert_target_prices
+  has_many :reference_webs
+  has_many :company_comments
+  has_many :company_results
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

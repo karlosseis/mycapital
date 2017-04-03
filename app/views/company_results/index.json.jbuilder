@@ -1,0 +1,1 @@
+json.array! @company_results, partial: 'company_results/company_result', as: :company_result

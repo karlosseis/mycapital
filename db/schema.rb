@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315190534) do
+ActiveRecord::Schema.define(version: 20170329231535) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -92,11 +92,70 @@ ActiveRecord::Schema.define(version: 20170315190534) do
     t.datetime "updated_at",                                                       null: false
     t.float    "average_price_real",                     limit: 24
     t.float    "average_price_origin_currency_real",     limit: 24
+    t.float    "target_price_1",                         limit: 24,  default: 0.0
+    t.float    "target_price_2",                         limit: 24,  default: 0.0
+    t.integer  "traffic_light_id",                       limit: 4,   default: 0
+    t.string   "investors_url",                          limit: 255
+    t.float    "target_sell_price",                      limit: 24,  default: 0.0
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree
   add_index "companies", ["stockexchange_id"], name: "index_companies_on_stockexchange_id", using: :btree
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
+
+  create_table "company_comments", force: :cascade do |t|
+    t.text     "comment",    limit: 65535
+    t.string   "url",        limit: 255
+    t.integer  "company_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "company_comments", ["company_id"], name: "index_company_comments_on_company_id", using: :btree
+  add_index "company_comments", ["user_id"], name: "index_company_comments_on_user_id", using: :btree
+
+  create_table "company_results", force: :cascade do |t|
+    t.date     "fecha_resultado"
+    t.boolean  "es_oficial"
+    t.float    "cotizacion",               limit: 24,    default: 0.0
+    t.float    "cotiz_max",                limit: 24,    default: 0.0
+    t.float    "cotiz_min",                limit: 24,    default: 0.0
+    t.float    "patrimonio_neto",          limit: 24,    default: 0.0
+    t.float    "gastos_generales",         limit: 24,    default: 0.0
+    t.float    "gastos_desarrollo",        limit: 24,    default: 0.0
+    t.float    "ventas",                   limit: 24,    default: 0.0
+    t.float    "ebitda",                   limit: 24,    default: 0.0
+    t.float    "ebit",                     limit: 24,    default: 0.0
+    t.float    "beneficio_neto_ordinario", limit: 24,    default: 0.0
+    t.float    "beneficion_neto_total",    limit: 24,    default: 0.0
+    t.float    "deuda_largo_plazo",        limit: 24,    default: 0.0
+    t.float    "deuda_corto_plazo",        limit: 24,    default: 0.0
+    t.float    "deuda_neta",               limit: 24,    default: 0.0
+    t.float    "cf_explotacion",           limit: 24,    default: 0.0
+    t.float    "cf_inversion",             limit: 24,    default: 0.0
+    t.float    "cf_financiacion",          limit: 24,    default: 0.0
+    t.float    "cf_neto",                  limit: 24,    default: 0.0
+    t.float    "dividendo_ordinario",      limit: 24,    default: 0.0
+    t.float    "dividendo_extraordinario", limit: 24,    default: 0.0
+    t.float    "dividendo_total",          limit: 24,    default: 0.0
+    t.float    "num_acciones",             limit: 24,    default: 0.0
+    t.float    "bpa",                      limit: 24,    default: 0.0
+    t.float    "payout",                   limit: 24,    default: 0.0
+    t.float    "pago_dividendos",          limit: 24,    default: 0.0
+    t.float    "per_max",                  limit: 24,    default: 0.0
+    t.float    "per_med",                  limit: 24,    default: 0.0
+    t.float    "per_min",                  limit: 24,    default: 0.0
+    t.integer  "company_id",               limit: 4
+    t.integer  "user_id",                  limit: 4
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.date     "year_result"
+    t.text     "comment",                  limit: 65535
+  end
+
+  add_index "company_results", ["company_id"], name: "index_company_results_on_company_id", using: :btree
+  add_index "company_results", ["user_id"], name: "index_company_results_on_user_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -148,6 +207,20 @@ ActiveRecord::Schema.define(version: 20170315190534) do
   add_index "expected_dividends", ["operationtype_id"], name: "index_expected_dividends_on_operationtype_id", using: :btree
   add_index "expected_dividends", ["user_id"], name: "index_expected_dividends_on_user_id", using: :btree
 
+  create_table "expert_target_prices", force: :cascade do |t|
+    t.date     "date_target_price"
+    t.float    "target_price_1",    limit: 24
+    t.float    "target_price_2",    limit: 24
+    t.string   "url",               limit: 255
+    t.integer  "company_id",        limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "user_id",           limit: 4
+    t.integer  "reference_web_id",  limit: 4
+  end
+
+  add_index "expert_target_prices", ["company_id"], name: "index_expert_target_prices_on_company_id", using: :btree
+
   create_table "operations", force: :cascade do |t|
     t.integer  "company_id",       limit: 4
     t.integer  "operationtype_id", limit: 4
@@ -180,6 +253,16 @@ ActiveRecord::Schema.define(version: 20170315190534) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "reference_webs", force: :cascade do |t|
+    t.string   "url",        limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 255
+  end
+
+  add_index "reference_webs", ["user_id"], name: "index_reference_webs_on_user_id", using: :btree
 
   create_table "sectors", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -239,14 +322,20 @@ ActiveRecord::Schema.define(version: 20170315190534) do
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"
   add_foreign_key "companies", "users"
+  add_foreign_key "company_comments", "companies"
+  add_foreign_key "company_comments", "users"
+  add_foreign_key "company_results", "companies"
+  add_foreign_key "company_results", "users"
   add_foreign_key "expected_dividends", "companies"
   add_foreign_key "expected_dividends", "currencies"
   add_foreign_key "expected_dividends", "operationtypes"
   add_foreign_key "expected_dividends", "users"
+  add_foreign_key "expert_target_prices", "companies"
   add_foreign_key "operations", "companies"
   add_foreign_key "operations", "currencies"
   add_foreign_key "operations", "operationtypes"
   add_foreign_key "operations", "users"
+  add_foreign_key "reference_webs", "users"
   add_foreign_key "stockexchanges", "countries"
   add_foreign_key "stockexchanges", "currencies"
 end

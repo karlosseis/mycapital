@@ -1,0 +1,1 @@
+json.array! @expert_target_prices, partial: 'expert_target_prices/expert_target_price', as: :expert_target_price

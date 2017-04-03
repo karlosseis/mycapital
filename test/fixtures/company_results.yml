@@ -1,0 +1,69 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha_resultado: 2017-03-29
+  es_oficial: false
+  cotizacion: 1.5
+  cotiz_max: 1.5
+  cotiz_min: 1.5
+  patrimonio_neto: 1.5
+  gastos_generales: 1.5
+  gastos_desarrollo: 1.5
+  ventas: 1.5
+  ebitda: 1.5
+  ebit: 1.5
+  beneficio_neto_ordinario: 1.5
+  beneficion_neto_total: 1.5
+  deuda_largo_plazo: 1.5
+  deuda_corto_plazo: 1.5
+  deuda_neta: 1.5
+  cf_explotacion: 1.5
+  cf_inversion: 1.5
+  cf_financiacion: 1.5
+  cf_neto: 1.5
+  dividendo_ordinario: 1.5
+  dividendo_extraordinario: 1.5
+  dividendo_total: 1.5
+  num_acciones: 1.5
+  bpa: 1.5
+  payout: 1.5
+  pago_dividendos: 1.5
+  per_max: 1.5
+  per_med: 1.5
+  per_min: 1.5
+  company_id: 
+  user_id: 
+
+two:
+  fecha_resultado: 2017-03-29
+  es_oficial: false
+  cotizacion: 1.5
+  cotiz_max: 1.5
+  cotiz_min: 1.5
+  patrimonio_neto: 1.5
+  gastos_generales: 1.5
+  gastos_desarrollo: 1.5
+  ventas: 1.5
+  ebitda: 1.5
+  ebit: 1.5
+  beneficio_neto_ordinario: 1.5
+  beneficion_neto_total: 1.5
+  deuda_largo_plazo: 1.5
+  deuda_corto_plazo: 1.5
+  deuda_neta: 1.5
+  cf_explotacion: 1.5
+  cf_inversion: 1.5
+  cf_financiacion: 1.5
+  cf_neto: 1.5
+  dividendo_ordinario: 1.5
+  dividendo_extraordinario: 1.5
+  dividendo_total: 1.5
+  num_acciones: 1.5
+  bpa: 1.5
+  payout: 1.5
+  pago_dividendos: 1.5
+  per_max: 1.5
+  per_med: 1.5
+  per_min: 1.5
+  company_id: 
+  user_id: 

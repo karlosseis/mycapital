@@ -5,9 +5,68 @@
 </head>
 
  <h2 class = "page-header">
-  <%= @company.name %> <small><%= link_to t("edit"), edit_company_path(@company) %></small>
+
+    <div class="row">
+      <div class="col-md-4" >
+        <%= @company.name %> 
+        <% if @company.verde? then %>
+          <span class="glyphicon glyphicon-thumbs-up" style="color:green" aria-hidden="true"></span>
+        <% end %>
+        <% if  @company.rojo? then %>
+          <span class="glyphicon glyphicon-thumbs-down"  style="color:red" aria-hidden="true"></span>
+        <% end %>
+
+        <% if  @company.amarillo? then %>
+          <span class="glyphicon glyphicon-hand-up"  style="color:orange" aria-hidden="true"></span>
+        <% end %>
+
+        <% if  @company.gris? then %>
+          <span class="glyphicon glyphicon-hand-up"  style="color:grey" aria-hidden="true"></span>
+        <% end %>
+
+
+
+     </div>
+     <div class="col-md-8 text-right" >
+
+
+        <%= link_to edit_company_path(@company)  , class: "btn btn-secondary" , title: t("edit"), style:"color:#373a3c ;" do %>
+          <i class="glyphicon glyphicon-edit"></i>
+        <% end %>
+
+        <div class="btn-group" role="group" aria-label="...">
+          <%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_DIVIDEND) , class: "btn btn-secondary" , title: t("new_dividend"), style:"color:#373a3c ;" do %>
+            <i class="glyphicon glyphicon-euro"></i>
+          <% end %>
+
+          <%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_PURCHASE) , class: "btn btn-secondary" , title: t("new_purchase") , style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-shopping-cart"></i>
+          <% end %>
+
+          <%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_SALE) , class: "btn btn-secondary" , title: t("new_sale"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-share"></i>
+          <% end %>
+
+          <%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_AMPLIATION) , class: "btn btn-secondary" , title: t("new_ampliation"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-expand"></i>
+          <% end %>
+
+          <%= link_to  new_company_expert_target_price_path(@company) , class: "btn btn-secondary" , title: t("new_expert_price"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-info-sign"></i>
+          <% end %>
+
+          <%= link_to new_company_company_comment_path(@company) , class: "btn btn-secondary" , title: t("new_comment"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-comment"></i>
+          <% end %>                
+
+          <%= link_to new_company_company_result_path(@company) , class: "btn btn-secondary" , title: t("new_resultado"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-folder-open"></i>
+          <% end %> 
+        </div> 
+     </div>
+  </div>
 </h2>
-  
+
 
 
 <div class="row">    
@@ -16,21 +75,27 @@
       <div class="row">
         <div class="col-md-8" >                     
           <h6 class="text-muted"><%= @company.stockexchange %></h6>
-          <h5><%= @company.sector %></h5>
-          <a href=<%= @company.url_google_finance %>  target = "_blank"><img class="img-responsive hidden-xs" src="../gfinance.jpg" width="16" height="16" alt=""/></a> 
+          <h5><%= @company.sector %></h5>          
+          <a href=<%= @company.url_google_finance %>  target = "_blank">
+            <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+          </a> 
+          <a href=<%= @company.investors_url %>  target = "_blank">
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+          </a>           
+        
+         
+          
         </div>
         <div class="col-md-4" >
             <h2 class="text-center"><%=@company.share_price_formatted %></h2>
             <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>          
         </div>
       </div>
-    </div>
+    </div>     
    
-  
-   
-    <div class="col-md-5">
+    <div class="col-md-7">
       <div class="row">
-        <div class="col-md-6" >    
+        <div class="col-md-4" >    
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.invested_sum') %></h6>
             <h5 class="text-center"><%= number_to_currency(@company.invested_sum)  %></h5>
 
@@ -40,26 +105,31 @@
             <h5 class="text-center"><%=number_to_percentage(@company.expected_yoc, precision: 2) %></h5>            
         </div>
 
-        <div class="col-md-6" >    
+        <div class="col-md-4" >    
             <h6 class="text-muted text-center">Última compra</h6>
             <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
             <h6 class="text-muted text-center">Próximo dividendo</h6>
             <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>
         </div>
 
+        <div class="col-md-4" >    
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.target_price_1') %></h6>
+            <h5 class="text-center"><%= number_to_currency(@company.target_price_1)  %></h5>
+
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.target_price_2') %></h6>
+            <h5 class="text-center"><%= number_to_currency(@company.target_price_2)  %></h5>
+
+            <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.target_sell_price') %></h6>            
+            <h5 class="text-center"><%= number_to_currency(@company.target_sell_price)  %></h5>
+        </div>
+ 
+
+
       </div>
 
     </div>
-    <div class="col-md-2">
-
-      <div class="btn-group-vertical" role="group" aria-label="Basic example">
-        <%= link_to t("new_dividend"), new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_DIVIDEND) , :class => "btn btn-secondary" %>
-        <%= link_to  t("new_purchase"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_PURCHASE)  , :class => "btn btn-secondary" %>
-        <%= link_to  t("new_sale"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_SALE) , :class => "btn btn-secondary" %>
-        <%= link_to  t("new_ampliation"), new_company_operation_path(@company, :operationtype_id => Mycapital::OP_AMPLIATION) , :class => "btn btn-secondary" %>
-      </div>
-
-    </div>
+ 
+ 
 </div>   
 
   <ul class="nav nav-tabs">
@@ -68,6 +138,12 @@
     <li><a data-toggle="tab" href="#menu2"><%= t(:'purchases') %></a></li>
     <li><a data-toggle="tab" href="#menu3"><%= t(:'sales') %></a></li>
     <li><a data-toggle="tab" href="#menu4"><%= t(:'ampliations') %></a></li>
+    <li><a data-toggle="tab" href="#menu5"><%= t(:'tab_expert_prices') %></a></li>
+    <li><a data-toggle="tab" href="#menu6"><%= t(:'tab_comments') %></a></li>
+    <li><a data-toggle="tab" href="#menu7"><%= t(:'tab_results') %></a></li>
+    <li><a data-toggle="tab" href="#menu8"><%= t(:'tab_historic_dividends') %></a></li>
+    <li><a data-toggle="tab" href="#menu9"><%= t(:'tab_ratios') %></a></li>
+    <li><a data-toggle="tab" href="#menu10"><%= t(:'tab_cash_flows') %></a></li>
   </ul>
   <br>
 
@@ -86,5 +162,23 @@
     </div>
     <div id="menu4" class="tab-pane fade">      
       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_AMPLIATION}  %>
-    </div>        
+    </div>  
+    <div id="menu5" class="tab-pane fade">      
+      <%= render :partial => 'expert_target_prices/index_company' %>
+    </div> 
+    <div id="menu6" class="tab-pane fade">      
+      <%= render :partial => 'company_comments/index_company' %>
+    </div> 
+    <div id="menu7" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_company' %>
+    </div>     
+    <div id="menu8" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_dividend' %>
+    </div> 
+    <div id="menu9" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_ratio' %>
+    </div>     
+    <div id="menu10" class="tab-pane fade">      
+      <%= render :partial => 'company_results/index_historic_cash_flow' %>
+    </div>     
   </div>

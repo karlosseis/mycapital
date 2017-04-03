@@ -1,0 +1,39 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:'simple_form.labels.company_results.year_result') %></th>      
+ 
+
+      <th><%= t(:'simple_form.labels.company_results.cf_explotacion') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cf_inversion') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cf_financiacion') %></th>
+      <th><%= t(:'simple_form.labels.company_results.cf_neto') %></th>
+      <th><%= t(:'simple_form.labels.company_results.es_oficial') %></th>
+
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.company_results.order('year_result DESC').each do |company_result| %>
+      <tr>        
+        <td><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
+        
+
+        <td><%= number_to_human(company_result.cf_explotacion, precision: 11) %></td>
+        <td><%= number_to_human(company_result.cf_inversion, precision: 11) %></td>
+        <td><%= number_to_human(company_result.cf_financiacion, precision: 11) %></td>
+        <td><%= number_to_human(company_result.cf_neto, precision: 11) %></td>
+        <td><%= company_result.es_oficial %></td>
+
+
+
+       <td><%= link_to t("edit"), edit_company_company_result_path(@company,company_result), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_result, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
