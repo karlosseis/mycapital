@@ -1,4 +1,4 @@
 git add .
-git commit -m "google finance"
+git commit -m "compile a true"
 git push heroku master
 
