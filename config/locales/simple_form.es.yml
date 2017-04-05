@@ -127,6 +127,7 @@ es:
       company_comment:
         comment: Comentario
         url: Web
+        date_comment: Fecha
       company_result:
         year_result: Año Resultado
         es_oficial: Datos extraidos de la web oficial

@@ -11,9 +11,14 @@
   </thead>
 
   <tbody>    
-    <% @company.company_comments.order('created_at DESC').each do |company_comment| %>
+    <% @company.company_comments.order('date_comment DESC').each do |company_comment| %>
       <tr>
-        <td><%= I18n.l(company_comment.created_at, :format => :only_date) %></td>
+        <td>
+          <% unless company_comment.date_comment.nil? %>
+          <%= I18n.l(company_comment.date_comment) %>  
+          <% end %>
+          
+        </td>
         <td><%= simple_format(company_comment.comment) %></td>
         <td>
 

@@ -1,4 +1,4 @@
 git add .
-git commit -m "compile a true"
+git commit -m "fecha en comentarios"
 git push heroku master
 

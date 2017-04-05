@@ -19,7 +19,7 @@ class CompanyCommentsController < ApplicationController
     #@company_comment = CompanyComment.new
     parent = Company.find(params[:company_id])
     #@company_comment = parent.company_comments.new()    
-    @expert_target_price = parent.company_comments.new(date_comment: Time.now.strftime('%d-%m-%Y'))
+    @company_comment = parent.company_comments.new(date_comment: Time.now.strftime('%d-%m-%Y'))
     
   end
 
@@ -83,6 +83,6 @@ class CompanyCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_comment_params
-      params.require(:company_comment).permit(:comment, :url, :company_id, :user_id, :date_comment)
+      params.require(:company_comment).permit(:comment, :url, :company_id, :user_id,:date_comment)
     end
 end
