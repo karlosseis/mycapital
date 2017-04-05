@@ -83,6 +83,6 @@ class CompanyCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_comment_params
-      params.require(:company_comment).permit(:comment, :url, :company_id, :user_id,:date_comment)
+      params.require(:company_comment).permit(:comment, :url, :company_id, :user_id, :date_comment)
     end
 end

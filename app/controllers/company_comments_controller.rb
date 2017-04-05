@@ -19,7 +19,7 @@ class CompanyCommentsController < ApplicationController
     #@company_comment = CompanyComment.new
     parent = Company.find(params[:company_id])
     #@company_comment = parent.company_comments.new()    
-    @expert_target_price = parent.company_comments.new(date_comment: Time.now.strftime('%d-%m-%Y'))
+    @company_comment = parent.company_comments.new(date_comment: Time.now.strftime('%d-%m-%Y'))
     
   end
 
