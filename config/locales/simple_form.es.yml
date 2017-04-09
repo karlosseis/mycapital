@@ -14,6 +14,7 @@ es:
 
       company:
         name:  "Nombre"
+        company: "Empresa"
         symbol: "Símbolo"
         stockexchange: "Mercado de valores"
         sector: "Sector"
@@ -47,6 +48,7 @@ es:
         porc_dif_target_price: "% Dif"
         dividend_last_result: "Último Div. Anual"
         perc_dividend_last_result: "% Div"
+        var_percent: "% Var"
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 

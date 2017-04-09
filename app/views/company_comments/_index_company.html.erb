@@ -2,9 +2,9 @@
 <table  class="table  table-striped">
   <thead>
     <tr>
-      <th>Fecha</th>
-      <th>Comment</th>
-      <th>Url</th>
+      <th><%= t(:'simple_form.labels.company_comment.date_comment') %></th>
+      <th><%= t(:'simple_form.labels.company_comment.comment') %></th>
+      <th><%= t(:'simple_form.labels.company_comment.url') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -21,10 +21,11 @@
         </td>
         <td><%= simple_format(company_comment.comment) %></td>
         <td>
-
-               <a href=<%= company_comment.url %>  target = "_blank">
-                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-          </a>   
+              <% unless company_comment.url.nil? %>
+                 <a href=<%= company_comment.url %>  target = "_blank">
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                  </a>   
+               <% end %> 
         </td>
 
         <td><%= link_to t("edit"), edit_company_company_comment_path(@company,company_comment), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            

@@ -1,4 +1,4 @@
 git add .
-git commit -m "fecha en comentarios"
+git commit -m "punto de mira"
 git push heroku master
 

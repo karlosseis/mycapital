@@ -21,6 +21,17 @@ include ActionView::Helpers::DateHelper
   enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0}
 
   accepts_nested_attributes_for :operations,reject_if: proc { |attributes| attributes['amount'].blank? }
+  
+  @stock_price = 0
+  @var_price = 0
+  @var_percent = 0
+
+  after_find :get_stock_price_google
+
+  def get_google_finance_data
+    get_stock_price_google
+  end
+
 
   def to_s
     name
@@ -44,8 +55,8 @@ include ActionView::Helpers::DateHelper
 
   def perc_dividend_last_result
     perc_expected = 0
-    unless self.dividend_last_result==0
-      perc_expected = (self.dividend_last_result * 100) / self.share_price
+    unless self.stock_price==0
+      perc_expected = (self.dividend_last_result * 100) / self.stock_price
     end
     perc_expected
   end
@@ -136,6 +147,18 @@ include ActionView::Helpers::DateHelper
     number_to_currency(self.target_price_1, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
 
   end
+
+  def target_price_2_formatted
+    number_to_currency(self.target_price_2, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+
+  end
+
+  def target_sell_price_formatted
+    number_to_currency(self.target_sell_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+
+  end
+
+  
 
   def porc_dif_target_price    
     perc_result = 0 
@@ -363,21 +386,67 @@ include ActionView::Helpers::DateHelper
     end
   end
 
-  def set_stock_price_google
+ def get_stock_price_google
     
-    uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
+        uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
-    rs = Net::HTTP.get(uri)
+        rs = Net::HTTP.get(uri)
 
-    rs.delete! '//'
+        price = 0
+        unless rs ==  "httpserver.cc: Response Code 400\n"
+        
+          rs.delete! '//'
 
-    a = JSON.parse(rs) 
+          a = JSON.parse(rs) 
 
-    self.share_price =  a[0]["l"] 
-    self.date_share_price = a[0]["lt_dts"]
-    #self.set_update_summary
+          @stock_price =  a[0]["l"] 
+          @var_price =  a[0]["c"] 
+          @var_percent= a[0]["cp"] 
+        
+          
+        end
+        price
+  end
 
 
+  def stock_price
+    @stock_price.to_f
+  end
+
+  def var_price
+     @var_price.to_f
+  end
+
+  def stock_price_formatted
+    number_to_currency(@stock_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+  end
+
+  def var_price_formatted
+    number_to_currency(@var_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+  end  
+
+  def var_percent
+    @var_percent.to_f
+  end
+
+  def set_stock_price_google
+   
+        
+        uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
+
+        rs = Net::HTTP.get(uri)
+        unless rs ==  "httpserver.cc: Response Code 400\n"
+        
+          rs.delete! '//'
+
+          a = JSON.parse(rs) 
+
+          self.share_price =  a[0]["l"].to_f 
+          self.date_share_price = a[0]["lt_dts"].to_f
+          #self.set_update_summary
+        end
+
+    
   end
 
 end
