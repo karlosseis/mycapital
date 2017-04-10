@@ -55,7 +55,7 @@ include ActionView::Helpers::DateHelper
 
   def perc_dividend_last_result
     perc_expected = 0
-    unless self.stock_price==0
+    unless self.stock_price==0 or self.stock_price.nil?
       perc_expected = (self.dividend_last_result * 100) / self.stock_price
     end
     perc_expected
