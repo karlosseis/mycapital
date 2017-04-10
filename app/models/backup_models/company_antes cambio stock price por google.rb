@@ -25,7 +25,6 @@ include ActionView::Helpers::DateHelper
   @stock_price = 0
   @var_price = 0
   @var_percent = 0
-  @date_price = ''
 
   after_find :get_stock_price_google
 
@@ -67,7 +66,7 @@ include ActionView::Helpers::DateHelper
 
   def  date_share_price_time_ago
     date_price = ""
-    unless @date_price.nil?
+    unless date_share_price.nil?
       date_price = "Hace " + time_ago_in_words(date_share_price)
     end
 
@@ -76,15 +75,15 @@ include ActionView::Helpers::DateHelper
 
   def  date_share_price_formatted
     date_price = ""
-    unless @date_price.nil?
-      date_price = I18n.l(@date_price)
+    unless date_share_price.nil?
+      date_price = I18n.l(date_share_price)
     end
 
     date_price
   end
 
   def share_price_formatted
-    number_to_currency(self.stock_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.share_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
   end
 
   def google_symbol
@@ -133,6 +132,7 @@ include ActionView::Helpers::DateHelper
   end
 
   def expected_yoc
+ 
     
     total_expected = self.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:amount)
     unless invested_sum==0
@@ -165,7 +165,7 @@ include ActionView::Helpers::DateHelper
   def porc_dif_target_price    
     perc_result = 0 
     unless self.dif_target_price<=0
-      perc_result = (self.dif_target_price * 100) / self.stock_price
+      perc_result = (self.dif_target_price * 100) / self.share_price
     end
     perc_result    
   end
@@ -175,14 +175,14 @@ include ActionView::Helpers::DateHelper
     # the currency will be euros)
     total = 0
     if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
-       total = self.stock_price
+       total = self.share_price
     else
       require 'money'
       require 'money/bank/google_currency'      
       bank = Money::Bank::GoogleCurrency.new
       
       begin
-        total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+        total = self.share_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
       rescue  
         total = 0
       end
@@ -404,8 +404,6 @@ include ActionView::Helpers::DateHelper
           @stock_price =  a[0]["l"] 
           @var_price =  a[0]["c"] 
           @var_percent= a[0]["cp"] 
-          @date_price= a[0]["lt_dts"].to_date 
-          
         
           
         end

@@ -1,4 +1,4 @@
 git add .
-git commit -m "punto de mira"
+git commit -m "recuperar precio acción online"
 git push heroku master
 
