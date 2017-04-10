@@ -142,7 +142,7 @@ include ActionView::Helpers::DateHelper
   end
 
   def dif_target_price 
-    self.share_price_global_currency - self.target_price_1
+    self.share_price - self.target_price_1
   end
 
   def target_price_1_formatted
@@ -165,7 +165,7 @@ include ActionView::Helpers::DateHelper
   def porc_dif_target_price    
     perc_result = 0 
     unless self.dif_target_price<=0
-      perc_result = (self.dif_target_price * 100) / self.share_price_global_currency
+      perc_result = (self.dif_target_price * 100) / self.share_price
     end
     perc_result    
   end
