@@ -49,7 +49,9 @@ include ActionView::Helpers::DateHelper
     res.each do |p| 
        div = p.dividendo_ordinario
     end
-    if div.nil? then div = 0
+    if div.nil? then 
+      div = 0
+    end
     div  
   end
 
