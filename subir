@@ -1,4 +1,4 @@
 git add .
-git commit -m "recuperar precio acción online intento 2"
+git commit -m "quitado el backup de model"
 git push heroku master
 
