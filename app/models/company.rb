@@ -142,7 +142,7 @@ include ActionView::Helpers::DateHelper
   end
 
   def dif_target_price 
-    self.share_price - self.target_price_1
+    self.stock_price - self.target_price_1
   end
 
   def target_price_1_formatted

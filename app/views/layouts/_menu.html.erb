@@ -17,9 +17,9 @@
 
               <!-- <li><%= link_to "Yahoo Tickers", yahoo_tickers_path %></li>
  -->
-
+              <li><%= link_to t("menu_target"), targets_index_path %></li>
               <% if current_user.permission_level == 0 %>
-                 <li><%= link_to t("menu_target"), targets_index_path %></li>
+                 
                 <li><%= link_to t("menu_operations"), operations_path %></li>   
                 <li><%= link_to t("menu_balances"), balances_path %></li>  
               <% end %> 
