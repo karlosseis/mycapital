@@ -1,4 +1,4 @@
 git add .
-git commit -m "quitado el backup de model"
+git commit -m "URL con icono en precio expertos"
 git push heroku master
 

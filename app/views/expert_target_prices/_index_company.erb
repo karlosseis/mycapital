@@ -8,7 +8,7 @@
       <th>Url</th>            
     </tr>
   </thead>
-
+ 
   <tbody>
     <% @company.expert_target_prices.order("date_target_price DESC").each do |expert_target_price| %>
       <tr>
@@ -16,7 +16,14 @@
         <td><%= expert_target_price.target_price_1 %></td>
         <td><%= expert_target_price.target_price_2 %></td>
         <td><%= expert_target_price.reference_web %></td>
-        <td><%= expert_target_price.url %></td>        
+        <td>
+              <% unless expert_target_price.url.nil? %>
+                 <a href=<%= expert_target_price.url %>  target = "_blank">
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                  </a>   
+               <% end %> 
+        </td>        
+              
         <td><%= link_to t("edit"), edit_company_expert_target_price_path(@company,expert_target_price), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
         <td><%= link_to t("destroy"), expert_target_price, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
 
