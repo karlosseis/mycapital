@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405195138) do
+ActiveRecord::Schema.define(version: 20170418114616) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -69,34 +69,36 @@ ActiveRecord::Schema.define(version: 20170405195138) do
     t.string   "symbol",                                 limit: 255
     t.integer  "stockexchange_id",                       limit: 4
     t.integer  "sector_id",                              limit: 4
-    t.float    "share_price",                            limit: 24,  default: 0.0
+    t.float    "share_price",                            limit: 24,    default: 0.0
     t.string   "search_symbol",                          limit: 255
     t.date     "date_share_price"
-    t.float    "dividend_sum",                           limit: 24,  default: 0.0
-    t.float    "puchased_sum",                           limit: 24,  default: 0.0
-    t.float    "sold_sum",                               limit: 24,  default: 0.0
-    t.float    "ampliated_sum",                          limit: 24,  default: 0.0
-    t.float    "quantity_puchased",                      limit: 24,  default: 0.0
-    t.float    "quantity_sold",                          limit: 24,  default: 0.0
-    t.float    "quantity_ampliated",                     limit: 24,  default: 0.0
-    t.float    "shares_sum",                             limit: 24,  default: 0.0
-    t.float    "invested_sum",                           limit: 24,  default: 0.0
-    t.float    "average_price",                          limit: 24,  default: 0.0
-    t.float    "share_price_global_currency",            limit: 24,  default: 0.0
-    t.float    "estimated_value_global_currency",        limit: 24,  default: 0.0
-    t.float    "estimated_benefit_global_currency",      limit: 24,  default: 0.0
-    t.float    "perc_estimated_benefit_global_currency", limit: 24,  default: 0.0
-    t.float    "average_price_origin_currency",          limit: 24,  default: 0.0
+    t.float    "dividend_sum",                           limit: 24,    default: 0.0
+    t.float    "puchased_sum",                           limit: 24,    default: 0.0
+    t.float    "sold_sum",                               limit: 24,    default: 0.0
+    t.float    "ampliated_sum",                          limit: 24,    default: 0.0
+    t.float    "quantity_puchased",                      limit: 24,    default: 0.0
+    t.float    "quantity_sold",                          limit: 24,    default: 0.0
+    t.float    "quantity_ampliated",                     limit: 24,    default: 0.0
+    t.float    "shares_sum",                             limit: 24,    default: 0.0
+    t.float    "invested_sum",                           limit: 24,    default: 0.0
+    t.float    "average_price",                          limit: 24,    default: 0.0
+    t.float    "share_price_global_currency",            limit: 24,    default: 0.0
+    t.float    "estimated_value_global_currency",        limit: 24,    default: 0.0
+    t.float    "estimated_benefit_global_currency",      limit: 24,    default: 0.0
+    t.float    "perc_estimated_benefit_global_currency", limit: 24,    default: 0.0
+    t.float    "average_price_origin_currency",          limit: 24,    default: 0.0
     t.integer  "user_id",                                limit: 4
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
     t.float    "average_price_real",                     limit: 24
     t.float    "average_price_origin_currency_real",     limit: 24
-    t.float    "target_price_1",                         limit: 24,  default: 0.0
-    t.float    "target_price_2",                         limit: 24,  default: 0.0
-    t.integer  "traffic_light_id",                       limit: 4,   default: 0
+    t.float    "target_price_1",                         limit: 24,    default: 0.0
+    t.float    "target_price_2",                         limit: 24,    default: 0.0
+    t.integer  "traffic_light_id",                       limit: 4,     default: 0
     t.string   "investors_url",                          limit: 255
-    t.float    "target_sell_price",                      limit: 24,  default: 0.0
+    t.float    "target_sell_price",                      limit: 24,    default: 0.0
+    t.boolean  "dividend_aristocrat"
+    t.text     "activity_description",                   limit: 65535
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree

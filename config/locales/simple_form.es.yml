@@ -49,6 +49,8 @@ es:
         dividend_last_result: "Último Div. Anual"
         perc_dividend_last_result: "% Div"
         var_percent: "% Var"
+        activity_description: Actividad de la empresa
+        dividend_aristocrat: Aristócrata
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 

@@ -1,4 +1,4 @@
 git add .
-git commit -m "URL con icono en precio expertos"
+git commit -m "descripción actividad en empresa y dividend aristocrat check"
 git push heroku master
 
