@@ -1,4 +1,4 @@
 git add .
-git commit -m "corrijo graficas balances"
+git commit -m "fix turbolinks"
 git push heroku master
 
