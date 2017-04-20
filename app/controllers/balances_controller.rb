@@ -6,9 +6,9 @@ class BalancesController < ApplicationController
   # GET /balances.json
   def index
     @balances = current_user.balances.order('balance_date DESC').all
-    @graph_cash_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:cash_sum)
-    @graph_portfolio_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:portfolio_sum)
-    @graph_equity_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date, format: "%B-%Y").sum(:total_sum)
+    @graph_cash_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date).sum(:cash_sum)
+    @graph_portfolio_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date).sum(:portfolio_sum)
+    @graph_equity_data = current_user.balances.where('balance_date >= ?', (Time.now - 12.month).beginning_of_day).group_by_month(:balance_date).sum(:total_sum)
   end
 
 

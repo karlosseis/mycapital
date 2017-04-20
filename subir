@@ -1,4 +1,4 @@
 git add .
-git commit -m "descripción actividad en empresa y dividend aristocrat check"
+git commit -m "corrijo graficas balances"
 git push heroku master
 
