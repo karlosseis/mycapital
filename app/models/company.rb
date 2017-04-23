@@ -108,6 +108,10 @@ include ActionView::Helpers::DateHelper
     number_to_currency(self.stock_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
   end
 
+  def average_price_origin_currency_formatted
+    number_to_currency(self.average_price_origin_currency, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+  end
+
   def google_symbol
     prefix = ""
     unless self.stockexchange.google_prefix.nil?
