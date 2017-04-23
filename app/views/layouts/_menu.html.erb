@@ -28,7 +28,7 @@
            
           </ul>
 
-
+          <% if current_user %>
             <ul class="navbar-form navbar-left" >
               <%= form_tag({:controller => "companies", :action => "index"}, :method => :get) do %>
 
@@ -38,7 +38,7 @@
 
               <% end %>   
             </ul>
-      
+          <% end %> 
 
             <ul class="nav navbar-nav navbar-right">
                 <!-- Hola <%= current_user %>  -->
