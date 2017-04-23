@@ -17,7 +17,14 @@
 
 
 .navbar .brand, .navbar .nav > li > a:hover {
-    color: #FAFAFA;  /*VERDE */
-    background-color: #6E6E6E;  
+    color: #FAFAFA;  
+    background-color: #0275d8;  
+
 }
 
+
+
+a:hover { 
+font-weight:bold;
+text-decoration:none;
+}

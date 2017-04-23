@@ -21,14 +21,14 @@
 
 es:
   app_name: "Mi capital"
-  menu_dashboard: "Panel de control"
+  menu_dashboard: "Dashboard"
   menu_saludo: "Hola %{name}"
   menu_portfolio: "Cartera"
   menu_companies: "Empresas"
   menu_balances: "Balances"
   menu_operations: "Operaciones"
   menu_edit_profile: "Editar perfil"
-  menu_historic_dividend: "Histórico de dividendos"
+  menu_historic_dividend: "Histórico dividendos"
   menu_target: En la mira
   menu_login: "Iniciar sesión"
   menu_logout: "Cerrar sesión"  

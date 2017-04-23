@@ -1,4 +1,4 @@
 git add .
-git commit -m "caja buscar en navbar"
+git commit -m "cambiado estilo links"
 git push heroku master
 
