@@ -27,7 +27,7 @@ include ActionView::Helpers::DateHelper
   @var_percent = 0
   @date_price = ''
 
-  after_find :get_stock_price_google
+  #after_find :get_stock_price_google
 
   def self.search(search)
 
