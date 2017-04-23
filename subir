@@ -1,4 +1,4 @@
 git add .
-git commit -m "cambiado estilo links"
+git commit -m "varios"
 git push heroku master
 

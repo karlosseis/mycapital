@@ -132,6 +132,12 @@ es:
         comment: Comentario
         url: Web
         date_comment: Fecha
+      expert_target_price:
+        date_target_price: Fecha
+        target_price_1: Precio objetivo 1
+        target_price_2: Precio objetivo 2
+        reference_web: Web referencia
+        url: URL
       company_result:
         year_result: Año Resultado
         es_oficial: Datos extraidos de la web oficial
