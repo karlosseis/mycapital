@@ -8,7 +8,27 @@ class CompaniesController < ApplicationController
 
   def index
     
-    @companies = current_user.companies.all
+    #@companies = current_user.companies.all
+
+   if params[:searchbox]
+      @companies = current_user.companies.search(params[:searchbox])
+
+      respond_to do |format|
+
+        if @companies.count == 1 then
+          @company = Company.find(@companies[0].id)
+          format.html { redirect_to @company }
+        else
+
+          format.html # index.html.erb
+        end 
+      end
+    else
+     @companies = current_user.companies.all
+    end
+
+
+
   end
 
   def portfolio

@@ -29,6 +29,21 @@ include ActionView::Helpers::DateHelper
 
   after_find :get_stock_price_google
 
+  def self.search(search)
+
+   if search 
+
+      where('name LIKE ?', "%#{search}%")
+
+    else
+
+      scoped
+
+    end
+
+  end
+
+
   def get_google_finance_data
     get_stock_price_google
   end

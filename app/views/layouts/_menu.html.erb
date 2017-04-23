@@ -20,13 +20,26 @@
               <li><%= link_to t("menu_target"), targets_index_path %></li>
               <% if current_user.permission_level == 0 %>
                  
-                <li><%= link_to t("menu_operations"), operations_path %></li>   
+                <!-- <li><%= link_to t("menu_operations"), operations_path %></li>    -->
                 <li><%= link_to t("menu_balances"), balances_path %></li>  
               <% end %> 
                         
             <% end %> 
+           
           </ul>
+
+
+            <ul class="navbar-form navbar-left" >
+              <%= form_tag({:controller => "companies", :action => "index"}, :method => :get) do %>
+
+                <%= text_field_tag "searchbox", params[:searchbox] , class: 'form-control',  placeholder: 'Buscar empresa...' %>
+
+              <!--   <%= submit_tag "Buscar", :name => nil , class: 'btn btn-default'%> -->
+
+              <% end %>   
+            </ul>
       
+
             <ul class="nav navbar-nav navbar-right">
                 <!-- Hola <%= current_user %>  -->
                 <% if current_user %>                    

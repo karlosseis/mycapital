@@ -1,4 +1,4 @@
 git add .
-git commit -m "fix turbolinks"
+git commit -m "caja buscar en navbar"
 git push heroku master
 
