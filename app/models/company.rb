@@ -32,8 +32,12 @@ include ActionView::Helpers::DateHelper
   def self.search(search)
 
    if search 
-
-      where('name LIKE ?', "%#{search}%")
+    
+      if Rails.env.production?
+       where('name ILIKE ?', "%#{search}%")
+      else
+        where('name LIKE ?', "%#{search}%")
+      end
 
     else
 
@@ -42,6 +46,8 @@ include ActionView::Helpers::DateHelper
     end
 
   end
+
+
 
 
   def get_google_finance_data
