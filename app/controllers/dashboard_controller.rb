@@ -81,22 +81,22 @@ class DashboardController < ApplicationController
         years_company = [] 
         if @meses[key.month].nil? then     
           years_company[year_array] = op.net_amount 
-          @meses[key.month] = {comp[op.company_id] => years_company} 
+          @meses[key.month] = {comp_array[op.company_id] => years_company} 
         else 
           empresas_mes =  @meses[key.month]      
-          if empresas_mes[comp[op.company_id]].nil? then 
+          if empresas_mes[comp_array[op.company_id]].nil? then 
             # Primer registro de la empresa en el mes, lo añadimos 
             years_company[year_array] = op.net_amount 
-            @meses[key.month].merge!(comp[op.company_id] => years_company) 
+            @meses[key.month].merge!(comp_array[op.company_id] => years_company) 
           else 
             # la empresa tiene registro en el mes pero quizá no en el año. Lo validamos. 
-            years_company = empresas_mes[comp[op.company_id]] 
+            years_company = empresas_mes[comp_array[op.company_id]] 
             if years_company[year_array].nil? then 
               years_company[year_array] = op.net_amount 
             else 
               years_company[year_array] = years_company[year_array] + op.net_amount 
             end 
-            @meses[key.month].merge!(comp[op.company_id] => years_company) 
+            @meses[key.month].merge!(comp_array[op.company_id] => years_company) 
           end 
         end 
       end
