@@ -114,9 +114,14 @@ include ActionView::Helpers::DateHelper
 
   def google_symbol
     prefix = ""
-    unless self.stockexchange.google_prefix.nil?
-      prefix = self.stockexchange.google_prefix
+
+    unless @google_prefix.nil?
+        prefix = @google_prefix[self.stockexchange_id]
     end
+
+    # unless self.stockexchange.google_prefix.nil?
+    #   prefix = self.stockexchange.google_prefix
+    # end
     prefix + self.symbol
   end
   
