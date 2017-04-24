@@ -49,7 +49,7 @@ class DashboardController < ApplicationController
     # Extraemos los años que hemos tenido dividendos para poder montar una matriz con ellos y saber las columnas de la tabla
     @years = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date).sum(:amount)
 
-    # Averiguamos cuál es el año más pequeño. Esto servirá para restarlo en la vector y que no queden tantas posiciones en blanco. 
+    # Averiguamos cuál es el año más pequeño. Esto servirá para restarlo en el vector y que no queden tantas posiciones en blanco. 
     # P.ej, si ponemos @meses[2016], se crean todas las posiciones hasta 2016. 
     #  si ponemos @meses[2016 - @year_min] (suponiendo que @year_min = 2015), sólo se creará la posición 0 y 1
     @year_min = 0 
@@ -64,6 +64,14 @@ class DashboardController < ApplicationController
 
     end 
 
+    comp_array = {}
+
+    comp = current_user.companies.all
+
+    comp.each do |c| 
+        comp_array[c.id] = c.name
+    
+    end 
 
     @meses = []  
 
@@ -73,22 +81,22 @@ class DashboardController < ApplicationController
         years_company = [] 
         if @meses[key.month].nil? then     
           years_company[year_array] = op.net_amount 
-          @meses[key.month] = {Company.find(op.company_id).name => years_company} 
+          @meses[key.month] = {comp[op.company_id] => years_company} 
         else 
           empresas_mes =  @meses[key.month]      
-          if empresas_mes[Company.find(op.company_id).name].nil? then 
+          if empresas_mes[comp[op.company_id]].nil? then 
             # Primer registro de la empresa en el mes, lo añadimos 
             years_company[year_array] = op.net_amount 
-            @meses[key.month].merge!(Company.find(op.company_id).name => years_company) 
+            @meses[key.month].merge!(comp[op.company_id] => years_company) 
           else 
             # la empresa tiene registro en el mes pero quizá no en el año. Lo validamos. 
-            years_company = empresas_mes[Company.find(op.company_id).name] 
+            years_company = empresas_mes[comp[op.company_id]] 
             if years_company[year_array].nil? then 
               years_company[year_array] = op.net_amount 
             else 
               years_company[year_array] = years_company[year_array] + op.net_amount 
             end 
-            @meses[key.month].merge!(Company.find(op.company_id).name => years_company) 
+            @meses[key.month].merge!(comp[op.company_id] => years_company) 
           end 
         end 
       end
