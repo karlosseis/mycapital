@@ -1,4 +1,4 @@
 git add .
-git commit -m "varios"
+git commit -m "solución simbolo google sin prefijo. Variable global para lista de stocks"
 git push heroku master
 

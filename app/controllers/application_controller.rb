@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_stockexchange_prefixsymbols
+  #before_action :set_stockexchange_prefixsymbols
+ 
+
     protected
 
         def configure_permitted_parameters
@@ -13,16 +15,16 @@ class ApplicationController < ActionController::Base
         end
 
 
-    private
-    def set_stockexchange_prefixsymbols
-		@google_prefix = {}
+  #   private
+  #   def set_stockexchange_prefixsymbols
+		# @google_prefix = {}
 
-		@stocks = Stockexchange.all
+		# @stocks = Stockexchange.all
 
-	    @stocks.each do |stockexchange| 
-	    	@google_prefix[stockexchange.id] = stockexchange.google_prefix
+	 #    @stocks.each do |stockexchange| 
+	 #    	@google_prefix[stockexchange.id] = stockexchange.google_prefix
 	  
-	     end 
+	 #     end 
 
-    end
+  #   end
 end

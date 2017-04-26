@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
 include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
+require 'settings.rb'  
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
@@ -113,16 +114,18 @@ include ActionView::Helpers::DateHelper
   end
 
   def google_symbol
-    prefix = ""
+     prefix = ""
 
-    unless @google_prefix.nil?
-        prefix = @google_prefix[self.stockexchange_id]
-    end
+     unless Settings.google_prefixes.nil?
+         prefix = Settings.google_prefixes[self.stockexchange_id]
+     end
 
     # unless self.stockexchange.google_prefix.nil?
     #   prefix = self.stockexchange.google_prefix
     # end
     prefix + self.symbol
+
+    
   end
   
   def url_google_finance

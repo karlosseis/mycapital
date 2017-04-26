@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-
   # GET /companies
   # GET /companies.json
 
@@ -9,7 +8,7 @@ class CompaniesController < ApplicationController
   def index
     
     #@companies = current_user.companies.all
-
+   
    if params[:searchbox]
       @companies = current_user.companies.search(params[:searchbox])
 
@@ -41,6 +40,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     #@operation = Operation.new  
+
   end
 
   # GET /companies/new
@@ -228,4 +228,7 @@ class CompaniesController < ApplicationController
       params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :search_symbol, :user_id, :target_price_1,:target_price_2, :traffic_light_id, :investors_url, :target_sell_price, :dividend_aristocrat, :activity_description)
       #params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :dividend_sum, :puchased_sum, :sold_sum, :ampliated_sum, :quantity_puchased, :quantity_sold, :quantity_ampliated, :shares_sum, :invested_sum, :average_price, :share_price_global_currency, :estimated_value_global_currency, :estimated_benefit_global_currency, :perc_estimated_benefit_global_currency, :date_share_price, :average_price_origin_currency_real, :average_price_real)
     end
+  
+
+
 end
