@@ -435,6 +435,7 @@ require 'settings.rb'
           a = JSON.parse(rs) 
 
           @stock_price =  a[0]["l"] 
+          @stock_price.sub!(',','')
           @var_price =  a[0]["c"] 
           @var_percent= a[0]["cp"] 
           @date_price= a[0]["lt_dts"].to_date 
