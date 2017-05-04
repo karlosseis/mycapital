@@ -44,7 +44,20 @@ $(document).ready(function(){
             }
 } );
 });
+
+$(document).ready(function(){
+    $('#danger').dataTable({  
+  searching: false,
+  "bInfo" : false,
+  "paging": false,
+  "aaSorting": [[8,'asc']],
+  "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+} );
+});
 </script>
+
 
 
 <div class="row">    
@@ -70,6 +83,7 @@ $(document).ready(function(){
 
 
  <%= render :partial => 'list_color', locals: {companies_color: @greys, row_color: "info"} %>
+ <%= render :partial => 'list_color', locals: {companies_color: @reds, row_color: "danger"} %>
 
 
 <br>
