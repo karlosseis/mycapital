@@ -478,7 +478,9 @@ require 'settings.rb'
 
           a = JSON.parse(rs) 
 
-          self.share_price =  a[0]["l"].to_f 
+          price = a[0]["l"]
+          price.sub!(',','')  #le quito el . porque precios mayores de 1000 dan error (ej: 1,002.1)
+          self.share_price =  price.to_f 
           self.date_share_price = a[0]["lt_dts"].to_f
           #self.set_update_summary
         end
