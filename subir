@@ -1,4 +1,4 @@
 git add .
-git commit -m "solución stock prices mayores de 1000"
+git commit -m "añadir resultado formulario reordenado "
 git push heroku master
 

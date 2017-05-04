@@ -1,50 +1,65 @@
 <%= simple_form_for([@company,@company_result], html: { autocomplete: 'off' }) do |f| %>
 
   <div class="form-inputs">
-    <%= f.input :year_result  , as: :date, html5: true %>
+
+     <div class="row">
+        <div class="col-md-3">
+            <%= f.input :year_result  , as: :date, html5: true %>
+        </div>
+        <div class="col-md-3">
+             <%= f.input :fecha_resultado, as: :date, html5: true ,  input_html: {:title => t(:'simple_form.tooltips.company_results.fecha_resultado')}  %>
+        </div>
+        <div class="col-md-5">
+            <%= f.input :comment ,  input_html: {:title => t(:'simple_form.tooltips.company_results.comment')}  %>                
+        </div>
+
+    </div>
     <%= f.input :es_oficial %>
-    <%= f.input :fecha_resultado, as: :date, html5: true ,  input_html: {:title => t(:'simple_form.tooltips.company_results.fecha_resultado')}  %>
-    <%= f.input :comment ,  input_html: {:title => t(:'simple_form.tooltips.company_results.comment')}  %>    
-
- <div class="row">
-    <div class="col-md-4">
-        <%= f.input :ventas ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ventas')}  %>
-        <%= f.input :gastos_generales ,  input_html: {:title => t(:'simple_form.tooltips.company_results.gastos_generales')}  %>
-        <%= f.input :gastos_desarrollo ,  input_html: {:title => t(:'simple_form.tooltips.company_results.gastos_desarrollo')}  %>    
-        <%= f.input :ebitda ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ebitda')}  %>
-        <%= f.input :ebit ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ebit')}  %>
-        <%= f.input :beneficio_neto_ordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.beneficio_neto_ordinario')}  %>
-        <%= f.input :beneficion_neto_total ,  input_html: {:title => t(:'simple_form.tooltips.company_results.beneficion_neto_total')}  %>
-        <%= f.input :deuda_largo_plazo,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_largo_plazo')}  %>
-        <%= f.input :deuda_corto_plazo ,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_corto_plazo')}  %>
-        <%= f.input :deuda_neta ,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_neta')}  %>
-        <%= f.input :patrimonio_neto,  input_html: {:title => t(:'simple_form.tooltips.company_results.patrimonio_neto')}  %>
-    </div>    
     
-    <div class="col-md-4">
-        <%= f.input :cf_explotacion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_explotacion')}  %>
-        <%= f.input :cf_inversion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_inversion')}  %>
-        <%= f.input :cf_financiacion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_financiacion')}  %>
-        <%= f.input :cf_neto ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_neto')}  %>
-        <%= f.input :dividendo_ordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_ordinario')}  %>
-        <%= f.input :dividendo_extraordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_extraordinario')}  %>
-        <%= f.input :dividendo_total ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_total')}  %>
-        <%= f.input :payout ,  input_html: {:title => t(:'simple_form.tooltips.company_results.payout')}  %>
-        <%= f.input :pago_dividendos ,  input_html: {:title => t(:'simple_form.tooltips.company_results.pago_dividendos')}  %>
-    </div>  
+        
 
-    <div class="col-md-4">
-        <%= f.input :num_acciones ,  input_html: {:title => t(:'simple_form.tooltips.company_results.num_acciones')}  %>
-        <%= f.input :cotizacion , input_html: { :title => t(:'simple_form.tooltips.company_results.cotizacion') }%>
-        <%= f.input :cotiz_max,  input_html: {:title => t(:'simple_form.tooltips.company_results.cotiz_max')}  %>
-        <%= f.input :cotiz_min,  input_html: {:title => t(:'simple_form.tooltips.company_results.cotiz_min')}  %>
-        <%= f.input :bpa ,  input_html: {:title => t(:'simple_form.tooltips.company_results.bpa')}  %>
-        <%= f.input :per_max ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_max')}  %>
-        <%= f.input :per_med ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_med')}  %>
-        <%= f.input :per_min ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_min')}  %>
-    </div>  
+     <div class="row">
+        <div class="col-md-3">
+            <%= f.input :ventas ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ventas')}  %>
+            <%= f.input :gastos_generales ,  input_html: {:title => t(:'simple_form.tooltips.company_results.gastos_generales')}  %>
+            <%= f.input :gastos_desarrollo ,  input_html: {:title => t(:'simple_form.tooltips.company_results.gastos_desarrollo')}  %>    
+            <%= f.input :ebitda ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ebitda')}  %>
+            <%= f.input :ebit ,  input_html: {:title => t(:'simple_form.tooltips.company_results.ebit')}  %>
+            <%= f.input :beneficio_neto_ordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.beneficio_neto_ordinario')}  %>
+            <%= f.input :beneficion_neto_total ,  input_html: {:title => t(:'simple_form.tooltips.company_results.beneficion_neto_total')}  %>
+            <%= f.input :deuda_largo_plazo,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_largo_plazo')}  %>
+            <%= f.input :deuda_corto_plazo ,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_corto_plazo')}  %>
+            <%= f.input :deuda_neta ,  input_html: {:title => t(:'simple_form.tooltips.company_results.deuda_neta')}  %>
+            <%= f.input :patrimonio_neto,  input_html: {:title => t(:'simple_form.tooltips.company_results.patrimonio_neto')}  %>
+        </div>    
+        
+        <div class="col-md-3">
+            <%= f.input :cf_explotacion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_explotacion')}  %>
+            <%= f.input :cf_inversion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_inversion')}  %>
+            <%= f.input :cf_financiacion ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_financiacion')}  %>
+            <%= f.input :cf_neto ,  input_html: {:title => t(:'simple_form.tooltips.company_results.cf_neto')}  %>
+        </div>  
 
-  </div>
+       <div class="col-md-3">
+            <%= f.input :dividendo_ordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_ordinario')}  %>
+            <%= f.input :dividendo_extraordinario ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_extraordinario')}  %>
+            <%= f.input :dividendo_total ,  input_html: {:title => t(:'simple_form.tooltips.company_results.dividendo_total')}  %>
+            <%= f.input :payout ,  input_html: {:title => t(:'simple_form.tooltips.company_results.payout')}  %>
+            <%= f.input :pago_dividendos ,  input_html: {:title => t(:'simple_form.tooltips.company_results.pago_dividendos')}  %>
+        </div>  
+
+        <div class="col-md-3">
+            <%= f.input :num_acciones ,  input_html: {:title => t(:'simple_form.tooltips.company_results.num_acciones')}  %>
+            <%= f.input :cotizacion , input_html: { :title => t(:'simple_form.tooltips.company_results.cotizacion') }%>
+            <%= f.input :cotiz_max,  input_html: {:title => t(:'simple_form.tooltips.company_results.cotiz_max')}  %>
+            <%= f.input :cotiz_min,  input_html: {:title => t(:'simple_form.tooltips.company_results.cotiz_min')}  %>
+            <%= f.input :bpa ,  input_html: {:title => t(:'simple_form.tooltips.company_results.bpa')}  %>
+            <%= f.input :per_max ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_max')}  %>
+            <%= f.input :per_med ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_med')}  %>
+            <%= f.input :per_min ,  input_html: {:title => t(:'simple_form.tooltips.company_results.per_min')}  %>
+        </div>  
+
+      </div>
 
     
   </div>
