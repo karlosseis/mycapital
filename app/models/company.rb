@@ -216,6 +216,11 @@ require 'settings.rb'
       
       begin
         total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+        # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
+        # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
+        if self.stockexchange.currency.name == 'GBP' then
+          total = total / 100
+        end
       rescue  
         total = 0
       end
