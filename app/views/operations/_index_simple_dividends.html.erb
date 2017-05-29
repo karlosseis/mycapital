@@ -8,6 +8,7 @@
       <th style="text-align:right"><%= t(:'simple_form.labels.operation.withholding_tax') %></th>        
       <th style="text-align:right"><%= t(:'simple_form.labels.operation.destination_tax') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.operation.quantity') %></th>      
+      <th style="text-align:right"><%= t(:'simple_form.labels.operation.dividend_per_share') %></th>      
     </tr>
   </thead>
    <tbody>
@@ -19,7 +20,11 @@
         <td style="text-align:right"><%= number_to_currency(operation.gross_amount) %></td>
         <td style="text-align:right"><%=number_to_currency( operation.withholding_tax) %></td>
         <td style="text-align:right"><%=number_to_currency( operation.destination_tax) %></td>          
-        <td style="text-align:right"><%= number_with_delimiter(operation.quantity) %></td>      
+        <td style="text-align:right"><%= number_with_delimiter(operation.quantity) %></td>   
+        <td style="text-align:right"><%= number_to_currency(operation.dividend_per_share) %></td>   
+
+
+
         <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-sm btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
         <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
              

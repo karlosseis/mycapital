@@ -95,4 +95,10 @@ class Operation < ActiveRecord::Base
      end
   end
 
+  def dividend_per_share
+    unless self.quantity.nil? or self.quantity == 0 
+      self.net_amount / self.quantity
+    end
+  end
+
 end
