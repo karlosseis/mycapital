@@ -13,7 +13,7 @@
       <th style="text-align:left"><%= t(:'simple_form.labels.company.stockexchange') %></th>      
       <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.dividend_aristocrat') %></th>
+      
       <th style="text-align:right"><%= t(:'simple_form.labels.company.is_aristocrat') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>
       
@@ -41,9 +41,6 @@
         <td style="text-align:left"><%= company.stockexchange %></td>         
         <td style="text-align:right"><%= company.target_price_1_formatted %></td>          
         <td style="text-align:right"><%= number_to_percentage(company.porc_dif_target_price, precision: 2) %></td> 
-        <td style="text-align:center">          <% if company.dividend_aristocrat %>            
-            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
-          <% end %>  </td>
       
         <td style="text-align:center">          <% if company.is_aristocrat %>            
             <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
