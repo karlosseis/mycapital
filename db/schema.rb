@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418114616) do
+ActiveRecord::Schema.define(version: 20170530144639) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170418114616) do
     t.float    "target_sell_price",                      limit: 24,    default: 0.0
     t.boolean  "dividend_aristocrat"
     t.text     "activity_description",                   limit: 65535
+    t.integer  "first_uninterrupted_year_div",           limit: 4
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree

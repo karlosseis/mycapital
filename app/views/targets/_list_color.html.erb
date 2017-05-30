@@ -14,6 +14,8 @@
       <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.dividend_aristocrat') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.is_aristocrat') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>
       
     </tr>
   </thead>
@@ -42,7 +44,13 @@
         <td style="text-align:center">          <% if company.dividend_aristocrat %>            
             <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
           <% end %>  </td>
-      </tr>
+      
+        <td style="text-align:center">          <% if company.is_aristocrat %>            
+            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
+          <% end %>  </td>
+      
+      <td style="text-align:left"><%= company.years_with_dividend %></td>   
+      </tr>     
     <% end %>
   </tbody>
 </table>

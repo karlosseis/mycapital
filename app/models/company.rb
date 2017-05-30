@@ -494,4 +494,16 @@ require 'settings.rb'
     
   end
 
+  def years_with_dividend
+    ret = 0
+    unless self.first_uninterrupted_year_div.nil? or self.first_uninterrupted_year_div == 0 
+      ret = Date.today.year - self.first_uninterrupted_year_div
+    end
+    ret
+  end
+
+
+  def is_aristocrat
+    self.years_with_dividend  > 25
+  end
 end

@@ -51,6 +51,9 @@ es:
         var_percent: "% Var"
         activity_description: Actividad de la empresa
         dividend_aristocrat: Aristócrata
+        first_uninterrupted_year_div: Año inicio dividendos ininterrumpidos e incrementados
+        years_with_dividend: Años Div
+        is_aristocrat: Aristócrata
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 
@@ -175,6 +178,7 @@ es:
       company:
         target_price_1: Precio objetivo de compra en la moneda del mercado
         target_price_2: Precio objetivo de compra FUERTE en la moneda del mercado
+        first_uninterrupted_year_div: Año a partir del cuál la empresa siempre ha incrementado o mantenido el dividendo
       company_results:
         cotizacion: Cotización media del año
         cotiz_max: Cotización máxima del año
