@@ -16,7 +16,7 @@ es:
         name:  "Nombre"
         company: "Empresa"
         symbol: "Símbolo"
-        stockexchange: "Mercado de valores"
+        stockexchange: "Mercado"
         sector: "Sector"
         share_price: "Precio acción"
         currency: "Moneda"
