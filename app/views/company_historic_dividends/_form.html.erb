@@ -4,15 +4,15 @@
   <div class="form-inputs">
     <div class="row">    
       <div class="col-md-6" >
-        <%= f.input :exdividend_date , as: :date, html5: true  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.exdividend_date')}  %>
-        <%= f.input :record_date , as: :date, html5: true  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.record_date')}  %>
-        <%= f.input :announce_date , as: :date, html5: true ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.announce_date')}  %>
+        <%= f.input :exdividend_date , as: :string  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.exdividend_date')}  %>
+        <%= f.input :record_date , as: :string  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.record_date')}  %>
+        <%= f.input :announce_date , as: :string,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.announce_date')}  %>
                
       </div>
 
       <div class="col-md-6" >
 
-        <%= f.input :payment_date , as: :date, html5: true  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.payment_date')}  %>
+        <%= f.input :payment_date , as: :string  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.payment_date')}  %>
         <%= f.input :amount %>
         <%= f.input :dividend_type, collection: current_user.companies.dividend_types.keys, include_blank: false %>
 
