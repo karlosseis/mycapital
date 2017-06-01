@@ -6,19 +6,17 @@
     <tr>
       <th></th>
       <th style="text-align:left"><%= t(:'simple_form.labels.company.company') %></th>
-      <th style="text-align:center"><%= t(:'simple_form.labels.company.symbol') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company.ticker') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.share_price') %></th>              
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.var_percent') %></th>            
+      <th style="text-align:center"><%= t(:'simple_form.labels.company.var_percent') %></th>            
       <th style="text-align:right"><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></th>                    
-      <th style="text-align:left"><%= t(:'simple_form.labels.company.stockexchange') %></th>      
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th>
+      
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>      
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th> 
       <th style="text-align:right"><%= t(:'simple_form.labels.company.payout') %></th>
       <th style="text-align:center"><%= t(:'simple_form.labels.company.next_exdividend_date') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.market_cap') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.is_aristocrat') %></th>      
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>
-      
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.market_cap') %></th>      
+      <th style="text-align:center"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>      
     </tr>
   </thead>
 
@@ -29,9 +27,12 @@
             <span class="glyphicon glyphicon-star" style="color:black" aria-hidden="true"></span>
           <% end %>  </td>
         <td style="text-align:left"><%= link_to company.name, company %></td>
-        <td style="text-align:center"><a href=<%= company.url_google_finance %>  target = "_blank"><%= company.symbol %></a></td>
+        <td style="text-align:center">
+          <a href=<%= company.url_google_finance %>  target = "_blank"><%= company.google_symbol %></a>
+          
+        </td>
         <td style="text-align:right"><%= company.stock_price_formatted %></td>                            
-        <td style="text-align:right">    
+        <td style="text-align:center">    
           <% if company.var_percent.to_f >= 0 %>
             <font color="#009933"><%= number_to_percentage(company.var_percent, precision: 2) %></font>
           <% else %>
@@ -39,20 +40,29 @@
           <% end %>     
        </td>          
         <td style="text-align:right"><%= number_to_percentage(company.perc_dividend_last_result, precision: 2) %></td>          
-        
-        <td style="text-align:left"><%= company.stockexchange %></td>         
-        <td style="text-align:right"><%= company.target_price_1_formatted %></td>          
-        <td style="text-align:right"><%= number_to_percentage(company.porc_dif_target_price, precision: 2) %></td> 
+                  
+           
+        <td style="text-align:right">
+          <%= company.target_price_1_formatted %>
+          
+        </td>          
+        <td style="text-align:right">
+          
+          <%= number_to_percentage(company.porc_dif_target_price, precision: 2) %>
+        </td>          
         <td style="text-align:right"><%= number_to_percentage(company.payout, precision: 0) %></td> 
         <td style="text-align:center"><%= format_date(company.next_exdividend_date) %></td> 
-        <td style="text-align:right"><%= number_to_human(company.market_cap, precision: 11) %></td>  
+        <td style="text-align:right"><%= number_to_human(company.market_cap, precision: 3) %></td>  
 
 
         <td style="text-align:center">          <% if company.is_aristocrat %>            
+            <%= company.years_with_dividend %>
             <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
-          <% end %>  </td>
+            
+          <% end %>  
+        </td>
       
-      <td style="text-align:left"><%= company.years_with_dividend %></td>   
+         
       </tr>     
     <% end %>
   </tbody>

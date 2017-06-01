@@ -16,6 +16,7 @@ es:
         name:  "Nombre"
         company: "Empresa"
         symbol: "Símbolo"
+        ticker: "T"
         stockexchange: "Mercado"
         sector: "Sector"
         share_price: "Precio acción"
