@@ -1,4 +1,4 @@
 git add .
-git commit -m "añadir simbolo a monedas y exchange rate de peniques "
+git commit -m "historico dividendos / cambios cabecera empresa "
 git push heroku master
 

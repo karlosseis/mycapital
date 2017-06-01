@@ -54,6 +54,13 @@ es:
         first_uninterrupted_year_div: Año inicio dividendos ininterrumpidos e incrementados
         years_with_dividend: Años Div
         is_aristocrat: Aristócrata
+        market_cap: Capitalización
+        dividend_payments_quantity: Nº dividendos por año
+        historic_dividend_url: URL histórico dividendos empresa
+        next_exdividend_date: Ex-dividendo
+        next_dividend_date: Próx. Dividendo
+        next_dividend_amount: Dividendo
+
       operation:
         company: "Empresa"
         titulo_editar: "Editar %{operacion} para %{empresa}" 
@@ -173,8 +180,20 @@ es:
         per_med: PER medio
         per_min: PER mínimo
         fecha_resultado: Fecha publicación resultados
-        comment: Comentarios        
+        comment: Comentarios  
+      company_historic_dividend:
+        exdividend_date: Fecha Ex-Dividendo
+        record_date: Fecha de registro
+        announce_date: Fecha de declaración
+        payment_date: Fecha de pago
+        amount: Importe bruto
+        dividend_type: Tipo
     tooltips:
+      company_historic_dividend:
+        exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.
+        record_date: Día que se relacionan o listan (registran) los accionistas con derecho a recibir el dividendo.
+        announce_date: Cuando se comunica la aprobación del reparto de dividendos señalando la fecha ex dividendo
+        payment_date: Cuando se materializa el pago del dividendo y lógicamente es la última de las fechas.
       company:
         target_price_1: Precio objetivo de compra en la moneda del mercado
         target_price_2: Precio objetivo de compra FUERTE en la moneda del mercado

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :company_historic_dividends
   get 'targets/index'
 
   resources :company_results
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
     resources :expert_target_prices
     resources :company_comments
     resources :company_results
+    resources :company_historic_dividends
   end
   resources :stockexchanges
   resources :sectors

@@ -49,6 +49,7 @@ es:
   new_expert_price: Experto
   new_comment: Comentario
   new_resultado: Resultado
+  new_historic_dividend: Nuevo dividendo histórico
   summary: "Resumen"
   dividends: "Dividendos"
   purchases: "Compras"
@@ -59,6 +60,8 @@ es:
   tab_historic_dividends: Hist. Div
   tab_ratios: Ratios
   tab_cash_flows: CF
+  tab_hist_payments: Histórico de pagos
+  tab_hist_payments_year: Total dividendos por año
   ampliations: "Ampliaciones"
   list_operations: "Listado de operaciones"
   my_portfolio: "Mi cartera"
@@ -80,6 +83,8 @@ es:
   edit_company_comment: "Editar comentario"
   new_company_result: "Nuevo resultado"
   edit_company_result: "Editar resultado"
+  new_historic_dividend: Nuevo dividendo histórico
+  edit_historic_dividend: Editar dividendo histórico
   activerecord:
     errors:
       messages:

@@ -11,6 +11,7 @@ require 'settings.rb'
   has_many :expert_target_prices
   has_many :company_comments
   has_many :company_results
+  has_many :company_historic_dividends
 
 
   validates :name, presence: true
@@ -20,6 +21,7 @@ require 'settings.rb'
   validates :search_symbol, presence: true
   
   enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0}
+  enum dividend_type:  { ordinario: 0, extraordinario: 1}
 
   accepts_nested_attributes_for :operations,reject_if: proc { |attributes| attributes['amount'].blank? }
   
@@ -64,23 +66,12 @@ require 'settings.rb'
     id    
   end
 
-  def dividend_last_result 
-    # Dividendo del úlitmo resultado guardado en la empresa
 
-    res = self.company_results.order(year_result: :desc).limit(1) 
-    div = 0  
-    res.each do |p| 
-       div = p.dividendo_ordinario
-    end
-    if div.nil? then 
-      div = 0
-    end
-    div  
-  end
+
 
   def perc_dividend_last_result
     perc_expected = 0
-    unless self.stock_price==0 or self.stock_price.nil? 
+    unless self.stock_price==0 or self.stock_price.nil? or self.dividend_last_result ==0 or self.dividend_last_result.nil?
       perc_expected = (self.dividend_last_result * 100) / self.stock_price
     end
     perc_expected
@@ -389,6 +380,35 @@ require 'settings.rb'
 
   end
 
+  def set_last_result_values 
+    # guardamos en la cabecera de la empresa datos del último resultado: payout, número acciones...
+
+    res = self.company_results.order(year_result: :desc).limit(1) 
+    div = 0  
+    res.each do |p| 
+       self.payout = p.payout
+       self.shares_quantity = p.num_acciones
+       self.dividend_last_result = p.dividendo_ordinario
+
+    end
+  
+  end
+
+  def set_next_official_dividend_values 
+    # guardamos en la cabecera de la empresa datos del próximo dividendo anunciado por la empresa
+
+    res = self.company_historic_dividends.order(payment_date: :desc).limit(1) 
+    div = 0  
+    res.each do |p| 
+       self.next_exdividend_date = p.exdividend_date
+       self.next_dividend_date = p.payment_date
+       self.next_dividend_amount = p.amount
+       
+
+    end
+  
+  end
+
   def set_stock_price
       
       date_last_week = Time.new
@@ -506,4 +526,9 @@ require 'settings.rb'
   def is_aristocrat
     self.years_with_dividend  > 25
   end
+
+  def market_cap
+    self.shares_quantity * self.stock_price
+  end
+
 end

@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <div class="row">    
-      <div class="col-md-6" >
+      <div class="col-md-4" >
         <%= f.input :name %>        
         <%= f.association :stockexchange %>
         <%= f.association :sector %>
@@ -12,7 +12,7 @@
         <%= f.input :first_uninterrupted_year_div  ,  input_html: {:title => t(:'simple_form.tooltips.company.first_uninterrupted_year_div')}  %>            
       </div>
 
-      <div class="col-md-6" >
+      <div class="col-md-4" >
 
         <%= f.input :target_price_1  ,  input_html: {:title => t(:'simple_form.tooltips.company.target_price_1')}  %>    
         <%= f.input :target_price_2  ,  input_html: {:title => t(:'simple_form.tooltips.company.target_price_2')}  %>   
@@ -22,6 +22,13 @@
         <%= f.input :search_symbol  , :disabled => true %>
 
       </div>
+
+      <div class="col-md-4" >
+        <%= f.input :dividend_payments_quantity %>  
+        <%= f.input :historic_dividend_url %>  
+        <%= f.input :first_uninterrupted_year_div  ,  input_html: {:title => t(:'simple_form.tooltips.company.first_uninterrupted_year_div')}  %>
+
+      </div>      
 
     </div>
   </div>

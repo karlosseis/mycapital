@@ -16,6 +16,10 @@
     </div>
     <%= f.input :es_oficial %>
     
+  <div class="form-actions">  
+    <input type="submit" class="btn btn-success" value=<%= t("save") %> >
+    <%= link_to  t("cancel") , company_path(@company_result.company), :class => "btn btn-info", :style=>'color:#FFFFFF;' %>   
+  </div>    
         
 
      <div class="row">

@@ -1,12 +1,12 @@
 <table  class="table  table-striped">
   <thead>
     <tr>
-      <th><%= t(:'simple_form.labels.company_results.year_result') %></th>
-      <th><%= t(:'simple_form.labels.company_results.payout') %></th>  
-      <th><%= t(:'simple_form.labels.company_results.dividendo_total') %></th>
-      <th><%= t(:'simple_form.labels.company_results.dividendo_ordinario') %></th>
-      <th><%= t(:'simple_form.labels.company_results.dividendo_extraordinario') %></th>
-      <th><%= t(:'simple_form.labels.company_results.pago_dividendos') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.year_result') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.payout') %></th>  
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.dividendo_total') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.dividendo_ordinario') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.dividendo_extraordinario') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.pago_dividendos') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -15,13 +15,13 @@
   <tbody>
     <% @company.company_results.order('year_result DESC').each do |company_result| %>
       <tr>   
-        <td><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
-        <td><%= number_to_human(company_result.payout, precision: 11) %></td>  
-        <td><%= number_to_human(company_result.dividendo_total, precision: 11) %></td>  
-        <td><%= number_to_human(company_result.dividendo_ordinario, precision: 11) %></td>
-        <td><%= number_to_human(company_result.dividendo_extraordinario, precision: 11) %></td>
+        <td style="text-align:right"><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
+        <td style="text-align:right"><%= number_to_percentage(company_result.payout, precision: 0) %></td>  
+        <td style="text-align:right"><%= number_to_human(company_result.dividendo_total, precision: 11) %></td>  
+        <td style="text-align:right"><%= number_to_human(company_result.dividendo_ordinario, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.dividendo_extraordinario, precision: 11) %></td>
 
-        <td><%= number_to_human(company_result.pago_dividendos, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.pago_dividendos, precision: 11) %></td>
 
        <td><%= link_to t("edit"), edit_company_company_result_path(@company,company_result), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
         <td><%= link_to t("destroy"), company_result, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    

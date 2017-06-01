@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530144639) do
+ActiveRecord::Schema.define(version: 20170531164613) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 20170530144639) do
     t.boolean  "dividend_aristocrat"
     t.text     "activity_description",                   limit: 65535
     t.integer  "first_uninterrupted_year_div",           limit: 4
+    t.float    "shares_quantity",                        limit: 24,    default: 0.0
+    t.float    "payout",                                 limit: 24,    default: 0.0
+    t.integer  "dividend_payments_quantity",             limit: 4,     default: 0
+    t.string   "historic_dividend_url",                  limit: 255
+    t.float    "dividend_last_result",                   limit: 24
+    t.date     "next_exdividend_date"
+    t.date     "next_dividend_date"
+    t.float    "next_dividend_amount",                   limit: 24
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree
@@ -118,6 +126,22 @@ ActiveRecord::Schema.define(version: 20170530144639) do
 
   add_index "company_comments", ["company_id"], name: "index_company_comments_on_company_id", using: :btree
   add_index "company_comments", ["user_id"], name: "index_company_comments_on_user_id", using: :btree
+
+  create_table "company_historic_dividends", force: :cascade do |t|
+    t.date     "exdividend_date"
+    t.date     "record_date"
+    t.date     "announce_date"
+    t.integer  "dividend_type",   limit: 4,  default: 0
+    t.integer  "company_id",      limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.date     "payment_date"
+    t.float    "amount",          limit: 24
+  end
+
+  add_index "company_historic_dividends", ["company_id"], name: "index_company_historic_dividends_on_company_id", using: :btree
+  add_index "company_historic_dividends", ["user_id"], name: "index_company_historic_dividends_on_user_id", using: :btree
 
   create_table "company_results", force: :cascade do |t|
     t.date     "fecha_resultado"
@@ -330,6 +354,8 @@ ActiveRecord::Schema.define(version: 20170530144639) do
   add_foreign_key "companies", "users"
   add_foreign_key "company_comments", "companies"
   add_foreign_key "company_comments", "users"
+  add_foreign_key "company_historic_dividends", "companies"
+  add_foreign_key "company_historic_dividends", "users"
   add_foreign_key "company_results", "companies"
   add_foreign_key "company_results", "users"
   add_foreign_key "expected_dividends", "companies"

@@ -7,7 +7,7 @@ class Operation < ActiveRecord::Base
   
   before_validation :update_origin_price
   after_save :update_company
-  after_destroy :update_company
+  after_destroy :update_company 
  
   # after_initialize  :set_operation_date
   

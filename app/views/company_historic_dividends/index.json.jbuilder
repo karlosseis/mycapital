@@ -1,0 +1,1 @@
+json.array! @company_historic_dividends, partial: 'company_historic_dividends/company_historic_dividend', as: :company_historic_dividend

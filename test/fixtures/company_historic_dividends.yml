@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exdividend_date: 2017-05-30
+  record_date: 2017-05-30
+  announce_date: 2017-05-30
+  payment_Date: 2017-05-30
+  amount: MyString
+  float: 2017-05-30
+  dividend_type: 1
+  company_id: 
+  user_id: 
+
+two:
+  exdividend_date: 2017-05-30
+  record_date: 2017-05-30
+  announce_date: 2017-05-30
+  payment_Date: 2017-05-30
+  amount: MyString
+  float: 2017-05-30
+  dividend_type: 1
+  company_id: 
+  user_id: 

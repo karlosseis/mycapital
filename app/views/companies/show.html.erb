@@ -62,6 +62,9 @@
           <%= link_to new_company_company_result_path(@company) , class: "btn btn-secondary" , title: t("new_resultado"), style:"color:#373a3c;" do %>
             <i class="glyphicon glyphicon-folder-open"></i>
           <% end %> 
+          <%= link_to new_company_company_historic_dividend_path(@company) , class: "btn btn-secondary" , title: t("new_historic_dividend"), style:"color:#373a3c;" do %>
+            <i class="glyphicon glyphicon-calendar"></i>
+          <% end %>           
         </div> 
      </div>
   </div>
@@ -82,14 +85,25 @@
           </a>  -->
           <a href=<%= @company.investors_url %>  target = "_blank">
             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-          </a>           
+          </a>   
+          <a href=<%= @company.historic_dividend_url %>  target = "_blank">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          </a>                    
           <p><%= @company.activity_description %> </p>
          
           
         </div>
         <div class="col-md-4" >
             <h2 class="text-center"><%=@company.share_price_formatted %></h2>
-            <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>          
+         <h6 class="text-center">   
+         <% if @company.var_percent.to_f >= 0 %>
+            <font color="#009933"><%= number_to_percentage(@company.var_percent, precision: 2) %></font>
+          <% else %>
+              <font color="#ff0000"><%= number_to_percentage(@company.var_percent, precision: 2) %></font>
+          <% end %>   
+          </h6>  
+
+            <!-- <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>    -->       
         </div>
       </div>
     </div>     
@@ -107,13 +121,18 @@
         </div>
 
         <div class="col-md-4" >    
+            <h6 class="text-muted text-center">Próximo dividendo</h6>
+            <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>          
             <h6 class="text-muted text-center">Última compra</h6>
             <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
-            <h6 class="text-muted text-center">Próximo dividendo</h6>
-            <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>
         </div>
 
-        <div class="col-md-4" >    
+        <div class="col-md-4" >            
+            <h6 class="text-muted text-center">Pago próx. dividendo</h6>
+            <h5 class="text-center"><%= number_to_currency(@company.next_dividend_amount, :unit => @company.stockexchange.currency.symbol)  %><small> (<%= format_date(@company.next_dividend_date)  %>)</small></h5>
+        </div>
+
+<!--         <div class="col-md-4" >    
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.target_price_1') %></h6>
             <h5 class="text-center"><%= @company.target_price_1_formatted %></h5>
 
@@ -122,7 +141,7 @@
 
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.target_sell_price') %></h6>            
             <h5 class="text-center"><%= @company.target_sell_price_formatted  %></h5>
-        </div>
+        </div> -->
  
 
 
@@ -144,7 +163,7 @@
     <li><a data-toggle="tab" href="#menu7"><%= t(:'tab_results') %></a></li>
     <li><a data-toggle="tab" href="#menu8"><%= t(:'tab_historic_dividends') %></a></li>
     <li><a data-toggle="tab" href="#menu9"><%= t(:'tab_ratios') %></a></li>
-    <li><a data-toggle="tab" href="#menu10"><%= t(:'tab_cash_flows') %></a></li>
+    <li><a data-toggle="tab" href="#menu10"><%= t(:'tab_cash_flows') %></a></li>    
   </ul>
   <br>
 
@@ -174,7 +193,19 @@
       <%= render :partial => 'company_results/index_company' %>
     </div>     
     <div id="menu8" class="tab-pane fade">      
-      <%= render :partial => 'company_results/index_historic_dividend' %>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#subhome"><%= t(:'tab_hist_payments') %></a></li>        
+        <li><a data-toggle="tab" href="#submenu11"><%= t(:'tab_hist_payments_year') %></a></li>
+      </ul>  
+       <div class="tab-content">
+          <div id="subhome" class="tab-pane fade in active">      
+            <%= render :partial => 'company_historic_dividends/index_company' %>
+          </div>             
+          <div id="submenu11" class="tab-pane fade">
+            <%= render :partial => 'company_results/index_historic_dividend' %>
+          </div>
+      </div>          
+      
     </div> 
     <div id="menu9" class="tab-pane fade">      
       <%= render :partial => 'company_results/index_historic_ratio' %>
