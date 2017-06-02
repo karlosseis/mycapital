@@ -1,4 +1,4 @@
 git add .
-git commit -m "historico dividendos / cambios cabecera empresa "
+git commit -m "anys div en target "
 git push heroku master
 

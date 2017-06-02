@@ -55,10 +55,10 @@
         <td style="text-align:right"><%= number_to_human(company.market_cap, precision: 3) %></td>  
 
 
-        <td style="text-align:center">          <% if company.is_aristocrat %>            
-            <%= company.years_with_dividend %>
-            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
-            
+        <td style="text-align:center">          
+          <%= company.years_with_dividend %>
+          <% if company.is_aristocrat %>                        
+            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>            
           <% end %>  
         </td>
       
