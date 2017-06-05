@@ -77,6 +77,13 @@ require 'settings.rb'
     perc_expected
   end
 
+  def perc_estimated_year_dividend_amount
+    perc_expected = 0
+    unless self.stock_price==0 or self.stock_price.nil? or self.estimated_year_dividend_amount ==0 or self.estimated_year_dividend_amount.nil?
+      perc_expected = (self.estimated_year_dividend_amount * 100) / self.stock_price
+    end
+    perc_expected
+  end
 
   def  date_share_price_time_ago
     date_price = ""
@@ -395,7 +402,7 @@ require 'settings.rb'
   end
 
   def set_next_official_dividend_values 
-    # guardamos en la cabecera de la empresa datos del próximo dividendo anunciado por la empresa
+    # guardamos en la cabecera de la empresa datos del próximo dividendo anunciado por la empresa y el estimado para este año
 
     res = self.company_historic_dividends.order(payment_date: :desc).limit(1) 
     div = 0  
@@ -406,6 +413,17 @@ require 'settings.rb'
        
 
     end
+
+    # recuperamos los últimox X dividendos (donde X es el número de pagos anuales de la empresa)
+    @last_divs = self.company_historic_dividends.select(:amount).where("amount > ?", 0).order(payment_date: :desc).limit(self.dividend_payments_quantity)
+    
+    @total_amount = 0 
+    
+    @last_divs.each do |a|      
+      @total_amount = @total_amount + a.amount
+    end
+    self.estimated_year_dividend_amount = @total_amount
+
   
   end
 

@@ -266,10 +266,10 @@ es:
       decimal_units:
         format: "%n %u"
         units:
-          billion: mil millones
+          billion: MM
           million:
-            one: millón
-            other: millones
+            one: M
+            other: M
           quadrillion: mil billones
           thousand: mil
           trillion:

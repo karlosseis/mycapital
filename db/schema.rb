@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531164613) do
+ActiveRecord::Schema.define(version: 20170605194323) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170531164613) do
     t.date     "next_exdividend_date"
     t.date     "next_dividend_date"
     t.float    "next_dividend_amount",                   limit: 24
+    t.float    "estimated_year_dividend_amount",         limit: 24
   end
 
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree

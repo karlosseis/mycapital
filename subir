@@ -1,4 +1,4 @@
 git add .
-git commit -m "anys div en target "
+git commit -m "porc div en target a parrtir de los dividendos pagados"
 git push heroku master
 
