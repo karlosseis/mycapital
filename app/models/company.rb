@@ -404,14 +404,19 @@ require 'settings.rb'
   def set_next_official_dividend_values 
     # guardamos en la cabecera de la empresa datos del próximo dividendo anunciado por la empresa y el estimado para este año
 
-    res = self.company_historic_dividends.order(payment_date: :desc).limit(1) 
+    res = self.company_historic_dividends.where('payment_date >= ?',Time.now.beginning_of_day).order(payment_date: :asc).limit(1) 
+        
     div = 0  
     res.each do |p| 
-       self.next_exdividend_date = p.exdividend_date
        self.next_dividend_date = p.payment_date
-       self.next_dividend_amount = p.amount
-       
+       self.next_dividend_amount = p.amount       
+    end
 
+    res = self.company_historic_dividends.where('exdividend_date >= ?',Time.now.beginning_of_day).order(exdividend_date: :asc).limit(1) 
+        
+    div = 0  
+    res.each do |p| 
+       self.next_exdividend_date = p.exdividend_date     
     end
 
     # recuperamos los últimox X dividendos (donde X es el número de pagos anuales de la empresa)
