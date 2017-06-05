@@ -9,8 +9,8 @@
       <th style="text-align:center"><%= t(:'simple_form.labels.company.ticker') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.share_price') %></th>              
       <th style="text-align:center"><%= t(:'simple_form.labels.company.var_percent') %></th>            
+      
       <th style="text-align:right"><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></th>                    
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.perc_estimated_year_dividend_amount') %></th>                    
       <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>      
       <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th> 
       <th style="text-align:right"><%= t(:'simple_form.labels.company.payout') %></th>
@@ -39,7 +39,7 @@
               <font color="#ff0000"><%= number_to_percentage(company.var_percent, precision: 2) %></font>
           <% end %>     
        </td>          
-        <td style="text-align:right"><%= number_to_percentage(company.perc_dividend_last_result, precision: 2) %></td>          
+        
         <td style="text-align:right"><%= number_to_percentage(company.perc_estimated_year_dividend_amount, precision: 2) %></td> 
                   
            
