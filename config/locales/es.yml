@@ -32,6 +32,13 @@ es:
   menu_target: En la mira
   menu_login: "Iniciar sesión"
   menu_logout: "Cerrar sesión"  
+  menu_configuration: "Configuración"
+  menu_countries: "Países"
+  menu_currencies: Monedas
+  menu_stockexchanges: Mercados
+  menu_sectors: Sectores
+  menu_reference_webs: Webs referencia
+
   save: "Guardar"
   cancel: "Cancelar"
   edit: "Editar"

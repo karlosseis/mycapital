@@ -14,7 +14,7 @@
 
         <%= f.input :payment_date , as: :string  ,  input_html: {:title => t(:'simple_form.tooltips.company_historic_dividend.payment_date')}  %>
         <%= f.input :amount %>
-        <%= f.input :dividend_type, collection: current_user.companies.dividend_types.keys, include_blank: false %>
+        <%= f.input :dividend_type, collection: CompanyHistoricDividend.dividend_types.keys, include_blank: false %>
 
       </div>
  

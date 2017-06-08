@@ -425,11 +425,11 @@ require 'settings.rb'
     @total_amount = 0 
     @contador = 0
     @last_divs.each do |a|      
-      if a.ordinario?
+      #if a.ordinario?
         @total_amount = @total_amount + a.amount  
         @contador = @contador + 1 
-      end
-      if @contador == self.dividend_payments_quantity
+      #end
+      if @contador = self.dividend_payments_quantity
         break
       end
     end

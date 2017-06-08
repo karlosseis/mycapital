@@ -11,7 +11,7 @@
             <li><%= link_to  t("app_name"), root_path,  class: 'navbar-brand' %></li>
             <% if current_user %>
              <li><%= link_to t("menu_dashboard"), dashboard_index_path %></li>
-              <li><%= link_to t("menu_portfolio"), portfolio_path %></li>
+              
               <li><%= link_to t("menu_companies"), companies_path %></li>
               <li><%= link_to t("menu_historic_dividend"), index_historic_dividend_path %></li>
 
@@ -22,8 +22,9 @@
                  
                 <!-- <li><%= link_to t("menu_operations"), operations_path %></li>    -->
                 <li><%= link_to t("menu_balances"), balances_path %></li>  
+                
               <% end %> 
-                        
+              <li><%= link_to t("menu_configuration"), configuration_page_index_path %></li>          
             <% end %> 
            
           </ul>
@@ -38,6 +39,7 @@
 
               <% end %>   
             </ul>
+
           <% end %> 
 
             <ul class="nav navbar-nav navbar-right">

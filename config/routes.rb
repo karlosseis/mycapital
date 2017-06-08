@@ -1,7 +1,18 @@
 Rails.application.routes.draw do
 
+  get 'configuration_page/index'
+
+  get 'excel_import/index'
+
   resources :company_historic_dividends
   get 'targets/index'
+
+resources :excel_import do
+  collection do
+    post :import_historic_dividend
+  end
+end
+  
 
   resources :company_results
   resources :company_comments

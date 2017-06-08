@@ -1,0 +1,11 @@
+
+
+<h1>ExcelImport#index</h1>
+<p>Find me in app/views/excel_import/index.html.erb</p>
+
+
+<h2>Import Products</h2>
+<%= form_tag import_historic_dividend_excel_import_index_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>

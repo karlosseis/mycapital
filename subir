@@ -1,4 +1,4 @@
 git add .
-git commit -m "porc div en target a parrtir de los dividendos pagados"
+git commit -m "import excel "
 git push heroku master
 

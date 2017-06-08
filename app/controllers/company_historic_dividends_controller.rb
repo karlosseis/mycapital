@@ -3,7 +3,7 @@ class CompanyHistoricDividendsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company
   before_action :set_company_historic_dividend, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /company_historic_dividends
   # GET /company_historic_dividends.json
   def index
