@@ -85,6 +85,7 @@ es:
   graph_year_purchases: "Compras anuales"
   graph_dividend_year_com: "Dividendos año actual"
   graph_dividend_historic: "Histórico de dividendos"
+  graph_weight_dividend: Peso anual dividendos
   dashboard_title: "Posición global"
   new_company_comment: "Nuevo comentario"
   edit_company_comment: "Editar comentario"

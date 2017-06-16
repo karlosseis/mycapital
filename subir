@@ -1,4 +1,4 @@
 git add .
-git commit -m "import excel "
+git commit -m "grafico peso dividendos año  "
 git push heroku master
 

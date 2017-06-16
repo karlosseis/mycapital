@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
 
   def index
 
-    PopulateExpectedDividendsJob.perform_now()
+    #PopulateExpectedDividendsJob.perform_now()
   
     @global_value = current_user.companies.sum(:estimated_value_global_currency).round(2)
     @global_benefit = current_user.companies.sum(:estimated_benefit_global_currency).round(2) 
@@ -31,6 +31,8 @@ class DashboardController < ApplicationController
     @purchases_group_year = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).group_by_year(:operation_date, format: "%Y").sum(:amount)
 
     @real_dividends_group_year=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
+    #@expected_dividends_group_company=  current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).group(:company).sum(:net_amount)
+    @expected_dividends_group_company=   current_user.expected_dividends.group(:company).sum(:amount)
 
    
 
