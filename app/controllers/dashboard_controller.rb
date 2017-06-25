@@ -156,4 +156,43 @@ def index_expect_real_dividend_month
 
 end
 
+
+def index_estimated_movements  
+
+   #PopulateEstimatedMovementsJob.perform_now
+
+   # Movimientos previstos del mes
+
+   @ini_mes = (Time.now.year.to_s + "-" + params[:filter_month] + "-01").to_date
+
+   @estimated_movements_current_month = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).group_by_day(:movement_date, format: "%-d").sum(:amount)
+   
+   # recorro el array y lo relleno con los días que faltan para que se muestren todos en el gráfico
+    dia = 1
+    while dia <= @ini_mes.end_of_month.day do
+   
+       
+       if @estimated_movements_current_month[dia.to_s].nil? then
+           @estimated_movements_current_month[dia.to_s] = 0
+     
+       end
+       dia = dia + 1
+    end
+
+
+   # pendientes por cuenta bancaria
+   # si es el mes actual tenemos que coger sólo a partir de la fecha actual (para que no salgan los vencidos)
+   # sino, deben salir todos
+   if Time.now.month == @ini_mes.month 
+      fecha_pending = Time.now
+   else
+      fecha_pending = @ini_mes
+   end 
+   @pending_movements_current_month_by_account = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', fecha_pending, @ini_mes.end_of_month).group(:account_id).sum(:amount)
+
+   # todos los movimientos del mes
+   @pending_movements_current_month_list = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).order(:movement_date)
+
+end
+
 end

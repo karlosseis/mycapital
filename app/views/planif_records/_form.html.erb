@@ -1,0 +1,26 @@
+<%= simple_form_for(@planif_record) do |f| %>
+  <%= f.error_notification %>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :name %>
+      <%= f.input :amount %>
+      <%= f.association :subcategory %>
+      <%= f.association :account %>
+      <%= f.association :periodicity %>    
+    </div>
+   <div class="col-md-4">
+    <%= f.input :day %>
+    <%= f.input :start_month %>
+    <%= f.input :start_at, as: :date, html5: true %>
+    <%= f.input :end_at, as: :date, html5: true %>    
+    </div>    
+  </div>
+
+
+  <div class="form-actions">  
+    <input type="submit" class="btn btn-success" value=<%= t("save") %> >
+    <%= link_to  t("cancel") , planif_records_path, :class => "btn btn-info", :style=>'color:#FFFFFF;' %>   
+  </div>
+<% end %>

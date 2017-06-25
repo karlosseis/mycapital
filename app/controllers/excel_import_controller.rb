@@ -27,5 +27,81 @@ def import_historic_dividend
   redirect_to root_url, notice: 'Products imported.'
 end
 
+def import_categories
+  
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+	row = Hash[[header, spreadsheet.row(i)].transpose]   
+
+	    entity = Category.new
+		#entity = comp.company_historic_dividends.new
+	    #entity.attributes = row.to_hash #.slice(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type)
+	    entity.user_id = current_user.id
+	    entity.name = row["name"]	  
+	    entity.save!
+	end
+  
+  redirect_to root_url, notice: 'Categorías importadas.'	
+end
+
+
+def import_subcategories
+ 
+  #categ = categany.where("email = ?", "abc@xyz.com").first
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+    row = Hash[[header, spreadsheet.row(i)].transpose]   
+    categ = current_user.categories.where('name = ? ', row["category_name"]).first   
+    if categ
+	    entity = categ.subcategories.new
+	    entity.user_id = current_user.id
+	    entity.name = row["name"]	  
+	    entity.save!
+	end
+  end
+  redirect_to root_url, notice: 'Subcategorías importada.'
+end
+
+
+def import_planif_records
+  
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+	row = Hash[[header, spreadsheet.row(i)].transpose]   
+
+	    entity = PlanifRecord.new
+		#entity = comp.company_historic_dividends.new
+	    #entity.attributes = row.to_hash #.slice(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type)
+	    entity.user_id = current_user.id
+	    entity.name = row["concepto"]	
+	    entity.amount = row["importe_estimado"]
+	    entity.day = row["dia_estimado"]  
+	    entity.start_month = row["mes_inicio"]
+	    entity.start_at = row["start_at"]
+	    #entity.end_at = row["end_at"]
+
+	    subcateg = current_user.subcategories.where('name = ? ', row["subcategoria"]).first   
+	    if subcateg
+	    	entity.subcategory_id = subcateg.id
+	    end	    
+	    
+	    cuenta = current_user.accounts.where('name = ? ', row["cuenta"]).first   
+	    if cuenta
+	    	entity.account_id = cuenta.id
+	    end	  
+
+	    period = current_user.periodicities.where('name = ? ', row["tipo"]).first   
+	    if period
+	    	entity.periodicity_id = period.id
+	    end	  	    	    
+  
+	    entity.save!
+	end
+  
+  redirect_to root_url, notice: 'planificación registros importados.'	
+end
 
 end

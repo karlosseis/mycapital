@@ -13,6 +13,17 @@ class User < ActiveRecord::Base
   has_many :reference_webs
   has_many :company_comments
   has_many :company_results
+
+
+
+  has_many :locations
+  has_many :estimated_movements
+  has_many :movementtypes
+  has_many :planif_records
+  has_many :periodicities
+  has_many :subcategories
+  has_many :categories  
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

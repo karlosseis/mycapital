@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Periodicities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Num months</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @periodicities.each do |periodicity| %>
+      <tr>
+        <td><%= periodicity.name %></td>
+        <td><%= periodicity.num_months %></td>
+        <td><%= periodicity.user %></td>
+        <td><%= link_to 'Show', periodicity %></td>
+        <td><%= link_to 'Edit', edit_periodicity_path(periodicity) %></td>
+        <td><%= link_to 'Destroy', periodicity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Periodicity', new_periodicity_path %>

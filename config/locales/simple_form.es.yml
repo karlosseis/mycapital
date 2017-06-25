@@ -101,6 +101,9 @@ es:
         expected_real_dividend_title:  "Dividendos reales y previstos de %{mes}"
         real_dividend_month: Dividendos cobrados
         expected_dividend_month: Dividendos previstos
+        pending_movements: Movimientos pendientes
+        pending_movements_by_account: Pendiente
+        movements_month: Movimientos mes
       banks:
         lista_titulo: Bancos
         titulo_editar: Editar banco
@@ -189,6 +192,25 @@ es:
         payment_date: Fecha de pago
         amount: Importe bruto
         dividend_type: Tipo
+      estimated_movement:
+        name: Nombre
+        amount: Importe
+        movement_date: Fecha
+        subcategory: Concepto
+        movementtype: Tipo mov.
+        account: Cuenta
+        month_number: Número mes
+      planification_record:
+        name: Nombre
+        amount: Importe
+        day: Día
+        start_month: Mes comienzo
+        start_at: Fecha inicio
+        end_at: Fecha fin
+        subcategory: "Subcategoría"
+        account: Cuenta
+        periodicity: Periodicidad
+
     tooltips:
       company_historic_dividend:
         exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.

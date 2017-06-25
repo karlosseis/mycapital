@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605194323) do
+ActiveRecord::Schema.define(version: 20170625145005) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20170605194323) do
   end
 
   add_index "banks", ["user_id"], name: "index_banks_on_user_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "categories", ["user_id"], name: "index_categories_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",                                   limit: 255
@@ -215,6 +224,24 @@ ActiveRecord::Schema.define(version: 20170605194323) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "estimated_movements", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.float    "amount",          limit: 24
+    t.date     "movement_date"
+    t.integer  "subcategory_id",  limit: 4
+    t.integer  "movementtype_id", limit: 4
+    t.integer  "account_id",      limit: 4
+    t.integer  "month_number",    limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "estimated_movements", ["account_id"], name: "index_estimated_movements_on_account_id", using: :btree
+  add_index "estimated_movements", ["movementtype_id"], name: "index_estimated_movements_on_movementtype_id", using: :btree
+  add_index "estimated_movements", ["subcategory_id"], name: "index_estimated_movements_on_subcategory_id", using: :btree
+  add_index "estimated_movements", ["user_id"], name: "index_estimated_movements_on_user_id", using: :btree
+
   create_table "expected_dividends", force: :cascade do |t|
     t.integer  "company_id",        limit: 4
     t.integer  "operationtype_id",  limit: 4
@@ -250,6 +277,25 @@ ActiveRecord::Schema.define(version: 20170605194323) do
 
   add_index "expert_target_prices", ["company_id"], name: "index_expert_target_prices_on_company_id", using: :btree
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "name_long",  limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
+
+  create_table "movementtypes", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "movementtypes", ["user_id"], name: "index_movementtypes_on_user_id", using: :btree
+
   create_table "operations", force: :cascade do |t|
     t.integer  "company_id",       limit: 4
     t.integer  "operationtype_id", limit: 4
@@ -283,6 +329,36 @@ ActiveRecord::Schema.define(version: 20170605194323) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "periodicities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "num_months", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "periodicities", ["user_id"], name: "index_periodicities_on_user_id", using: :btree
+
+  create_table "planif_records", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.float    "amount",         limit: 24
+    t.integer  "day",            limit: 4
+    t.integer  "start_month",    limit: 4
+    t.date     "start_at"
+    t.date     "end_at"
+    t.integer  "subcategory_id", limit: 4
+    t.integer  "account_id",     limit: 4
+    t.integer  "periodicity_id", limit: 4
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "planif_records", ["account_id"], name: "index_planif_records_on_account_id", using: :btree
+  add_index "planif_records", ["periodicity_id"], name: "index_planif_records_on_periodicity_id", using: :btree
+  add_index "planif_records", ["subcategory_id"], name: "index_planif_records_on_subcategory_id", using: :btree
+  add_index "planif_records", ["user_id"], name: "index_planif_records_on_user_id", using: :btree
+
   create_table "reference_webs", force: :cascade do |t|
     t.string   "url",        limit: 255
     t.integer  "user_id",    limit: 4
@@ -311,6 +387,17 @@ ActiveRecord::Schema.define(version: 20170605194323) do
 
   add_index "stockexchanges", ["country_id"], name: "index_stockexchanges_on_country_id", using: :btree
   add_index "stockexchanges", ["currency_id"], name: "index_stockexchanges_on_currency_id", using: :btree
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "category_id", limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+  add_index "subcategories", ["user_id"], name: "index_subcategories_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -350,6 +437,7 @@ ActiveRecord::Schema.define(version: 20170605194323) do
   add_foreign_key "balance_details", "users"
   add_foreign_key "balances", "users"
   add_foreign_key "banks", "users"
+  add_foreign_key "categories", "users"
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"
   add_foreign_key "companies", "users"
@@ -359,16 +447,29 @@ ActiveRecord::Schema.define(version: 20170605194323) do
   add_foreign_key "company_historic_dividends", "users"
   add_foreign_key "company_results", "companies"
   add_foreign_key "company_results", "users"
+  add_foreign_key "estimated_movements", "accounts"
+  add_foreign_key "estimated_movements", "movementtypes"
+  add_foreign_key "estimated_movements", "subcategories"
+  add_foreign_key "estimated_movements", "users"
   add_foreign_key "expected_dividends", "companies"
   add_foreign_key "expected_dividends", "currencies"
   add_foreign_key "expected_dividends", "operationtypes"
   add_foreign_key "expected_dividends", "users"
   add_foreign_key "expert_target_prices", "companies"
+  add_foreign_key "locations", "users"
+  add_foreign_key "movementtypes", "users"
   add_foreign_key "operations", "companies"
   add_foreign_key "operations", "currencies"
   add_foreign_key "operations", "operationtypes"
   add_foreign_key "operations", "users"
+  add_foreign_key "periodicities", "users"
+  add_foreign_key "planif_records", "accounts"
+  add_foreign_key "planif_records", "periodicities"
+  add_foreign_key "planif_records", "subcategories"
+  add_foreign_key "planif_records", "users"
   add_foreign_key "reference_webs", "users"
   add_foreign_key "stockexchanges", "countries"
   add_foreign_key "stockexchanges", "currencies"
+  add_foreign_key "subcategories", "categories"
+  add_foreign_key "subcategories", "users"
 end

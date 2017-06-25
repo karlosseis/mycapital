@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Estimated Movements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Movement date</th>
+      <th>Subcategory</th>
+      <th>Movementtype</th>
+      <th>Account</th>
+      <th>Month number</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estimated_movements.each do |estimated_movement| %>
+      <tr>
+        <td><%= estimated_movement.name %></td>
+        <td><%= estimated_movement.amount %></td>
+        <td><%= estimated_movement.movement_date %></td>
+        <td><%= estimated_movement.subcategory %></td>
+        <td><%= estimated_movement.movementtype %></td>
+        <td><%= estimated_movement.account %></td>
+        <td><%= estimated_movement.month_number %></td>
+        <td><%= estimated_movement.user %></td>
+        <td><%= link_to 'Show', estimated_movement %></td>
+        <td><%= link_to 'Edit', edit_estimated_movement_path(estimated_movement) %></td>
+        <td><%= link_to 'Destroy', estimated_movement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Estimated movement', new_estimated_movement_path %>

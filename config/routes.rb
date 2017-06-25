@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :locations
+  resources :estimated_movements
+  resources :movementtypes
+  resources :planif_records
+  resources :periodicities
+  resources :subcategories
+  resources :categories
   get 'configuration_page/index'
 
   get 'excel_import/index'
@@ -10,6 +17,9 @@ Rails.application.routes.draw do
 resources :excel_import do
   collection do
     post :import_historic_dividend
+    post :import_categories
+    post :import_subcategories
+    post :import_planif_records
   end
 end
   
@@ -54,6 +64,7 @@ end
   get 'portfolio', to: 'companies#portfolio'
   get 'index_historic_dividend', to: 'dashboard#index_historic_dividend'
   get 'index_expect_real_dividend_month', to: 'dashboard#index_expect_real_dividend_month'
+  get 'index_estimated_movements', to: 'dashboard#index_estimated_movements'
 
   get 'welcome/index'
 

@@ -1,0 +1,1 @@
+json.partial! "estimated_movements/estimated_movement", estimated_movement: @estimated_movement

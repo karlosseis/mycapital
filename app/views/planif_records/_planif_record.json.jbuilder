@@ -1,0 +1,2 @@
+json.extract! planif_record, :id, :name, :amount, :day, :start_month, :start_at, :end_at, :subcategory_id, :account_id, :periodicity_id, :user_id, :created_at, :updated_at
+json.url planif_record_url(planif_record, format: :json)

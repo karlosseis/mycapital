@@ -5,7 +5,6 @@
 
   
   
-<%= link_to  "Importar excel" , excel_import_index_path ,  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>   <br>    
 
 
 <%= link_to  t(:'menu_countries'), :controller => "countries" %><br>
@@ -13,4 +12,41 @@
 <%= link_to  t(:'menu_stockexchanges'), :controller => "stockexchanges" %><br>
 <%= link_to  t(:'menu_sectors'), :controller => "sectors" %><br>
 <%= link_to  t(:'menu_reference_webs'), :controller => "reference_webs" %><br>
+
+<h3>Balance</h3>
+<%= link_to "Planification Records", :controller => "planif_records" %><br>
+<%= link_to "Estimated Movements", :controller => "estimated_movements" %><br>
+
+
+
+<h3>Balance</h3>
+<%= link_to "Accounts", :controller => "accounts" %><br>
+<%= link_to "Banks", :controller => "banks" %><br>
+
+<%= link_to "Categories", :controller => "categories" %><br>
+<%= link_to "Subcategories", :controller => "subcategories" %><br>
+<%= link_to "Periodicities", :controller => "periodicities" %><br>
+<%= link_to "Movement Types", :controller => "movementtypes" %><br>
+<%= link_to "Locations", :controller => "locations" %><br>
+
+<h3>Importación de datos</h3>
+<%= link_to  "Importar excel" , excel_import_index_path ,  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>   <br>    
+
+<h2>Categorías</h2>
+<%= form_tag import_categories_excel_import_index_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<h2>Subcategorías</h2>
+<%= form_tag import_subcategories_excel_import_index_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<h2>Planificación</h2>
+<%= form_tag import_planif_records_excel_import_index_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
 

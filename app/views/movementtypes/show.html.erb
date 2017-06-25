@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @movementtype.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @movementtype.user %>
+</p>
+
+<%= link_to 'Edit', edit_movementtype_path(@movementtype) %> |
+<%= link_to 'Back', movementtypes_path %>

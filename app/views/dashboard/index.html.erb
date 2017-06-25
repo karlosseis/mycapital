@@ -52,7 +52,8 @@
 
   <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
     <div class="card-block">
-      <h4 class="card-title text-center"><%= t(:'dividends_year') %></h4>
+      <h4 class="card-title text-center"><%= link_to t('dividends_year'), index_historic_dividend_path %></h4>
+      
       <h1 class="card-text text-center"><%= number_to_currency(@dividends_current_year) %></h1>
       <h4 class="card-text text-center"><%= number_to_currency(@expected_dividends_current_year) %></h4>
       

@@ -1,0 +1,1 @@
+json.array! @estimated_movements, partial: 'estimated_movements/estimated_movement', as: :estimated_movement

@@ -1,0 +1,1 @@
+json.partial! "planif_records/planif_record", planif_record: @planif_record

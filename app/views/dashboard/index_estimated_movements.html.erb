@@ -1,0 +1,100 @@
+    
+
+<div class="row">    
+    <div class="col-md-10" >
+      <h2 class = "page-header">
+        <%= (I18n.t("date.month_names")[@ini_mes.month]).titleize    %>
+      </h2>        
+
+    </div>
+     <div class="col-md-1 text-right form-actions" >  
+         <br> <br>      
+         <%= link_to  "<" , index_estimated_movements_path( :filter_month => (@ini_mes - 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+    </div>      
+     <div class="col-md-1 text-right form-actions" >  
+         <br> <br>      
+         <%= link_to  ">" , index_estimated_movements_path( :filter_month => (@ini_mes+ 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+    </div>    
+</div>
+
+<div class="row">    
+    <div class="col-md-3" >
+
+       <table id="myTable"  class="table  table-striped cell-border compact hover order-column">
+
+          <% total = 0 %>
+          <tbody>
+            <% @pending_movements_current_month_by_account.each do |p| %>
+              <tr>
+                <td style="text-align:left"><%=  Account.find(p[0]).name %></td>                
+                <td style="text-align:right"><%= number_to_currency(p[1])  %></td> 
+                <% total = total + p[1] %>             
+              </tr>
+            <% end %>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td  style="text-align:right" > <strong> <%=  number_to_currency(total) %></strong></td>
+            </tr>
+          </tfoot>
+
+        </table>    
+    </div>
+
+    <div class="col-md-9" >
+
+        
+         <%= column_chart @estimated_movements_current_month %>
+
+      
+    </div>
+
+</div>
+<div class="row">    
+  
+
+    <div class="col-md-12" >
+
+      
+       <h3><%= t(:'simple_form.labels.dashboard.movements_month') %></h3>
+       <table id="myTable2"  class="table  table-striped cell-border compact hover order-column">
+          <thead>
+            <tr>
+              <th style="text-align:center"><%= t(:'simple_form.labels.estimated_movement.movement_date') %></th>             
+              <th style="text-align:left"><%= t(:'simple_form.labels.estimated_movement.subcategory') %></th>      
+              <th style="text-align:right"><%= t(:'simple_form.labels.estimated_movement.amount') %></th>        
+              <th style="text-align:left"><%= t(:'simple_form.labels.estimated_movement.account') %></th>             
+            </tr>
+          </thead>
+
+          <tbody>
+            <% total = 0 %>
+            <% @pending_movements_current_month_list.each do |p| %>
+              <tr>
+                <td style="text-align:center"><%= format_date(p.movement_date) %></td>
+                <td style="text-align:left"><%=  p.subcategory %></td>                
+                <td style="text-align:right"><%= number_to_currency(p.amount)  %></td>    
+                <td style="text-align:left"><%=  p.account %></td>   
+
+                <% total = total + p.amount %>                  
+              </tr>
+            <% end %>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td  style="text-align:right" > <strong> <%=  number_to_currency(total) %></strong></td>
+              <td></td>
+            </tr>
+          </tfoot>
+
+
+        </table>    
+    </div>
+
+</div>
+

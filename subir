@@ -1,4 +1,4 @@
 git add .
-git commit -m "grafico peso dividendos año  "
+git commit -m "planificacion estimada gastos meses"
 git push heroku master
 

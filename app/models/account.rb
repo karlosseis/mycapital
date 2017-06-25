@@ -4,7 +4,9 @@ class Account < ActiveRecord::Base
   validates :name,
             presence: true
 
-  has_many :balance_details  
+  has_many :balance_details 
+  has_many :planif_records 
+
   enum account_type_id: {efectivo: 1, cartera: 2, prestamo: 3, otros: 0}
   def to_s
     name
