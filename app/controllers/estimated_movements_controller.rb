@@ -69,6 +69,6 @@ class EstimatedMovementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def estimated_movement_params
-      params.require(:estimated_movement).permit(:name, :amount, :movement_date, :subcategory_id, :movementtype_id, :account_id, :month_number, :user_id)
+      params.require(:estimated_movement).permit(:name, :amount, :movement_date, :subcategory_id, :movementtype_id, :account_id, :month_number, :user_id, :account_name)
     end
 end

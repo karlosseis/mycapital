@@ -165,19 +165,21 @@ def index_estimated_movements
 
    @ini_mes = (Time.now.year.to_s + "-" + params[:filter_month] + "-01").to_date
 
-   @estimated_movements_current_month = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).group_by_day(:movement_date, format: "%-d").sum(:amount)
    
-   # recorro el array y lo relleno con los días que faltan para que se muestren todos en el gráfico
-    dia = 1
-    while dia <= @ini_mes.end_of_month.day do
+   @estimated_movements_current_month =current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?',  @ini_mes, @ini_mes.end_of_month).group(:account_name).group_by_day(:movement_date, format: "%-d").sum(:amount)
+ 
+   # @estimated_movements_current_month = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).group_by_day(:movement_date, format: "%-d").sum(:amount)
+   # # recorro el array y lo relleno con los días que faltan para que se muestren todos en el gráfico
+   #  dia = 1
+   #  while dia <= @ini_mes.end_of_month.day do
    
        
-       if @estimated_movements_current_month[dia.to_s].nil? then
-           @estimated_movements_current_month[dia.to_s] = 0
+   #     if @estimated_movements_current_month[dia.to_s].nil? then
+   #         @estimated_movements_current_month[dia.to_s] = 0
      
-       end
-       dia = dia + 1
-    end
+   #     end
+   #     dia = dia + 1
+   #  end
 
 
    # pendientes por cuenta bancaria

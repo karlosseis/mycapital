@@ -1,6 +1,6 @@
 class PopulateEstimatedMovementsJob < ActiveJob::Base
 
-	# PopulateEstimatedMovementsJob.perform_now
+  # PopulateEstimatedMovementsJob.perform_now
   queue_as :default
 
   def perform(*args)
@@ -22,7 +22,8 @@ class PopulateEstimatedMovementsJob < ActiveJob::Base
 										:subcategory_id => plan.subcategory_id,										
 										:account_id => plan.account_id,
 										:month_number => mes.to_s,
-										:user_id => plan.user_id)
+										:user_id => plan.user_id,
+										:account_name => Account.find(plan.account_id))
 
 				#:movementtype_id => plan.movementtype_id,
 				mes = mes + plan.periodicity.num_months

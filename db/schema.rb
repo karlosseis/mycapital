@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625145005) do
+ActiveRecord::Schema.define(version: 20170625235534) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(version: 20170625145005) do
     t.integer  "user_id",         limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "account_name",    limit: 255
   end
 
   add_index "estimated_movements", ["account_id"], name: "index_estimated_movements_on_account_id", using: :btree
