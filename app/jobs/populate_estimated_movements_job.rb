@@ -7,7 +7,7 @@ class PopulateEstimatedMovementsJob < ActiveJob::Base
 		EstimatedMovement.delete_all
 
 		
-    	 PlanifRecord.where('start_at >= ?', (Time.now).beginning_of_day).find_each do |plan|
+    	 PlanifRecord.where('start_at <= ?', (Time.now).beginning_of_day).find_each do |plan|
 
 			mes = plan.start_month
 
@@ -24,7 +24,7 @@ class PopulateEstimatedMovementsJob < ActiveJob::Base
 										:month_number => mes.to_s,
 										:user_id => plan.user_id,
 										:account_name => Account.find(plan.account_id))
-
+				#account_name => Account.find(plan.account_id).name
 				#:movementtype_id => plan.movementtype_id,
 				mes = mes + plan.periodicity.num_months
 
