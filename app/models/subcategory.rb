@@ -7,6 +7,7 @@ class Subcategory < ActiveRecord::Base
             presence: true
               
   has_many :planif_records, dependent: :destroy
+  has_many :movements
   #has_many :records, dependent: :destroy
   #has_many :estimated_records, dependent: :destroy
   

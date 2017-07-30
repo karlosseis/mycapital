@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :periodicities
   has_many :subcategories
   has_many :categories  
-  
+  has_many :movements
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

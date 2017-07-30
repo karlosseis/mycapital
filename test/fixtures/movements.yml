@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  amount: 1.5
+  movement_date: 2017-07-30
+  subcategory_id: 
+  movementtype_id: 
+  account_id: 
+  location_id: 
+  user_id: 
+
+two:
+  name: MyString
+  amount: 1.5
+  movement_date: 2017-07-30
+  subcategory_id: 
+  movementtype_id: 
+  account_id: 
+  location_id: 
+  user_id: 

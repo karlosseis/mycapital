@@ -65,6 +65,26 @@ def import_subcategories
 end
 
 
+def import_locations
+  
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+	row = Hash[[header, spreadsheet.row(i)].transpose]   
+
+	    entity = Location.new
+		#entity = comp.company_historic_dividends.new
+	    #entity.attributes = row.to_hash #.slice(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type)
+	    entity.user_id = current_user.id
+	    entity.name = row["name"]
+	    entity.name_long = row["name_long"]	  		  
+	    entity.save!
+	end
+  
+  redirect_to root_url, notice: 'ubicaciones importadas.'	
+end
+
+
 def import_planif_records
   
   spreadsheet = Roo::Spreadsheet.open(params[:file].path)

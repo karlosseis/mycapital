@@ -1,4 +1,4 @@
 git add .
-git commit -m "planificacion estimada gastos meses"
+git commit -m "movimientos"
 git push heroku master
 

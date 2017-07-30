@@ -210,7 +210,17 @@ es:
         subcategory: "Subcategoría"
         account: Cuenta
         periodicity: Periodicidad
-
+      movement:
+        lista_titulo: Movimientos
+        titulo_editar: Editar movimiento
+        titulo_nuevo: Nuevo movimiento           
+        name: Concepto
+        amount: Importe
+        movement_date: Fecha
+        subcategory: Subcategoría
+        movementtype: Tipo
+        account: Cuenta
+        location: Ubicación        
     tooltips:
       company_historic_dividend:
         exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.

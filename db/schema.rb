@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625235534) do
+ActiveRecord::Schema.define(version: 20170730221047) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -288,6 +288,25 @@ ActiveRecord::Schema.define(version: 20170625235534) do
 
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
 
+  create_table "movements", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.float    "amount",          limit: 24
+    t.date     "movement_date"
+    t.integer  "subcategory_id",  limit: 4
+    t.integer  "movementtype_id", limit: 4
+    t.integer  "account_id",      limit: 4
+    t.integer  "location_id",     limit: 4
+    t.integer  "user_id",         limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "movements", ["account_id"], name: "index_movements_on_account_id", using: :btree
+  add_index "movements", ["location_id"], name: "index_movements_on_location_id", using: :btree
+  add_index "movements", ["movementtype_id"], name: "index_movements_on_movementtype_id", using: :btree
+  add_index "movements", ["subcategory_id"], name: "index_movements_on_subcategory_id", using: :btree
+  add_index "movements", ["user_id"], name: "index_movements_on_user_id", using: :btree
+
   create_table "movementtypes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "user_id",    limit: 4
@@ -458,6 +477,11 @@ ActiveRecord::Schema.define(version: 20170625235534) do
   add_foreign_key "expected_dividends", "users"
   add_foreign_key "expert_target_prices", "companies"
   add_foreign_key "locations", "users"
+  add_foreign_key "movements", "accounts"
+  add_foreign_key "movements", "locations"
+  add_foreign_key "movements", "movementtypes"
+  add_foreign_key "movements", "subcategories"
+  add_foreign_key "movements", "users"
   add_foreign_key "movementtypes", "users"
   add_foreign_key "operations", "companies"
   add_foreign_key "operations", "currencies"

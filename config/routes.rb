@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :movements
   resources :locations
   resources :estimated_movements
   resources :movementtypes
@@ -20,6 +21,7 @@ resources :excel_import do
     post :import_categories
     post :import_subcategories
     post :import_planif_records
+    post :import_locations
   end
 end
   
