@@ -22,9 +22,9 @@ $(document).ready(function(){
 
 
     <div class="row">    
-        <div class="col-md-10" >
+        <div class="col-md-8" >
     <h2 class = "page-header">
-      <%= t(:'simple_form.labels.movimientos.lista_titulo') %>
+      <%= t(:'simple_form.labels.movement.lista_titulo') %>
     </h2>  
        
         </div>
@@ -32,7 +32,17 @@ $(document).ready(function(){
              <br> <br>      
              <%= link_to  "Nuevo movimiento" , new_movement_path ,  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>       
                  
-        </div>    
+        </div>   
+
+         <div class="col-md-2 text-right form-actions" >  
+          <br> <br>
+          <%= form_tag import_movements_excel_import_index_path, multipart: true do %>  
+            <%= file_field_tag :file %>          
+            <%= submit_tag "Import" %>
+          <% end %>    
+                 
+        </div>   
+
     </div>
 
 <table  id="myTable" class="table  table-striped">

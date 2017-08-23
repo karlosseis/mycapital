@@ -1,0 +1,1 @@
+json.partial! "mapconcepts/mapconcept", mapconcept: @mapconcept

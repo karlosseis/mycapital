@@ -85,6 +85,26 @@ def import_locations
 end
 
 
+
+def import_mapconcepts
+ 
+  #categ = categany.where("email = ?", "abc@xyz.com").first
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+    row = Hash[[header, spreadsheet.row(i)].transpose]   
+	    entity = Mapconcept.new
+	    subcateg = current_user.subcategories.where('name = ? ', row["subcategoria"]).first   
+	    if subcateg
+	    	entity.subcategory_id = subcateg.id
+	    end	 
+	    entity.user_id = current_user.id
+	    entity.name = row["name"]	  
+	    entity.save!
+  end
+  redirect_to root_url, notice: 'mapeo conceptos y subcategorías importadas.'
+end
+
 def import_planif_records
   
   spreadsheet = Roo::Spreadsheet.open(params[:file].path)
@@ -122,6 +142,57 @@ def import_planif_records
 	end
   
   redirect_to root_url, notice: 'planificación registros importados.'	
+end
+
+
+def import_movements
+  
+  spreadsheet = Roo::Spreadsheet.open(params[:file].path)
+  header = spreadsheet.row(1)
+  (2..spreadsheet.last_row).each do |i|
+	row = Hash[[header, spreadsheet.row(i)].transpose]   
+
+	    entity = Movement.new
+		#entity = comp.company_historic_dividends.new
+	    #entity.attributes = row.to_hash #.slice(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type)
+	    entity.user_id = current_user.id
+	    entity.name = row["concepto"]	
+	    entity.amount = row["importe"]
+	    entity.movement_date = row["fecha"]
+                    
+        # si la subcategoria no viene informada buscamos la que le corespondería según el concepto
+	    if row["subcategoria"].nil? or row["subcategoria"] == "" then	    	
+	    	map  = current_user.mapconcepts.search(row["concepto"]	)
+	    	unless map.count == 0
+				entity.subcategory_id = map[0].subcategory_id
+	    	end
+	    else # sino le asignamos la que tiene
+		    subcateg = current_user.subcategories.where('name = ? ', row["subcategoria"]).first   
+		    if subcateg
+		    	entity.subcategory_id = subcateg.id
+		    end	    	    	
+	    end
+
+	    movementtype = current_user.movementtypes.where('name = ? ', row["tipo"]).first   
+	    if movementtype
+	    	entity.smovementtype_id = movementtype.id
+	    end	 
+
+
+	    
+	    location = current_user.locations.where('name = ? ', row["ubicacion"]).first   
+	    if location
+	    	entity.location_id = location.id
+	    end	  	    	    
+  
+  	    cuenta = current_user.accounts.where('name = ? ', row["cuenta"]).first   
+	    if cuenta
+	    	entity.account_id = cuenta.id
+	    end	  
+	    entity.save!
+	end
+  
+  redirect_to root_url, notice: 'movimientos importados.'	
 end
 
 end

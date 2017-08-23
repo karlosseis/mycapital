@@ -1,0 +1,1 @@
+json.array! @mapconcepts, partial: 'mapconcepts/mapconcept', as: :mapconcept

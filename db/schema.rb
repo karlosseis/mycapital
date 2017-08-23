@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730221047) do
+ActiveRecord::Schema.define(version: 20170730230248) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -288,6 +288,17 @@ ActiveRecord::Schema.define(version: 20170730221047) do
 
   add_index "locations", ["user_id"], name: "index_locations_on_user_id", using: :btree
 
+  create_table "mapconcepts", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "subcategory_id", limit: 4
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "mapconcepts", ["subcategory_id"], name: "index_mapconcepts_on_subcategory_id", using: :btree
+  add_index "mapconcepts", ["user_id"], name: "index_mapconcepts_on_user_id", using: :btree
+
   create_table "movements", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.float    "amount",          limit: 24
@@ -477,6 +488,8 @@ ActiveRecord::Schema.define(version: 20170730221047) do
   add_foreign_key "expected_dividends", "users"
   add_foreign_key "expert_target_prices", "companies"
   add_foreign_key "locations", "users"
+  add_foreign_key "mapconcepts", "subcategories"
+  add_foreign_key "mapconcepts", "users"
   add_foreign_key "movements", "accounts"
   add_foreign_key "movements", "locations"
   add_foreign_key "movements", "movementtypes"

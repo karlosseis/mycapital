@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :subcategories
   has_many :categories  
   has_many :movements
+  has_many :mapconcepts
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

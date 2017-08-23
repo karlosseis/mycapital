@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Mapconcepts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Subcategory</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mapconcepts.each do |mapconcept| %>
+      <tr>
+        <td><%= mapconcept.name %></td>
+        <td><%= mapconcept.subcategory %></td>
+        <td><%= mapconcept.user %></td>
+        <td><%= link_to 'Show', mapconcept %></td>
+        <td><%= link_to 'Edit', edit_mapconcept_path(mapconcept) %></td>
+        <td><%= link_to 'Destroy', mapconcept, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mapconcept', new_mapconcept_path %>

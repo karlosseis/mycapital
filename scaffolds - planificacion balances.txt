@@ -11,9 +11,17 @@ rails generate scaffold Movementtype name:string user:references
 rails generate scaffold EstimatedMovement name:string amount:float movement_date:date subcategory:references movementtype:references account:references month_number:integer user:references
 
 
-
+rails g migration add_account_name_to_estimated_movements account_name:string
 
 rails generate scaffold Location name:string name_long:string user:references
 
 
+rails generate scaffold Movement name:string amount:float movement_date:date subcategory:references movementtype:references account:references location:references user:references
 
+rails generate scaffold Mapconcept name:string subcategory:references user:references
+
+
+EstimatedMovement.where('movement_date >= ? and movement_date <= ?', Time.now.beginning_of_month,Time.now.end_of_month).group_by_day(:movement_date, format: "%d").sum(:amount)
+
+
+EstimatedMovement.where('movement_date >= ? and movement_date <= ?', Time.now.beginning_of_month,Time.now.end_of_month).group(:account)
