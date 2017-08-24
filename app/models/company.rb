@@ -8,7 +8,7 @@ require 'settings.rb'
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
-  has_many :expert_target_prices
+  #has_many :expert_target_prices
   has_many :company_comments
   has_many :company_results
   has_many :company_historic_dividends
@@ -523,7 +523,8 @@ require 'settings.rb'
 
   def set_stock_price_google
    
-        
+        # k = Company.find(34)
+        # k.set_stock_price_google
         uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
         rs = Net::HTTP.get(uri)

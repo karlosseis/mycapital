@@ -157,8 +157,7 @@
     <li><a data-toggle="tab" href="#menu1"><%= t(:'dividends') %></a></li>
     <li><a data-toggle="tab" href="#menu2"><%= t(:'purchases') %></a></li>
     <li><a data-toggle="tab" href="#menu3"><%= t(:'sales') %></a></li>
-    <li><a data-toggle="tab" href="#menu4"><%= t(:'ampliations') %></a></li>
-    <li><a data-toggle="tab" href="#menu5"><%= t(:'tab_expert_prices') %></a></li>
+    <li><a data-toggle="tab" href="#menu4"><%= t(:'ampliations') %></a></li>    
     <li><a data-toggle="tab" href="#menu6"><%= t(:'tab_comments') %></a></li>
     <li><a data-toggle="tab" href="#menu7"><%= t(:'tab_results') %></a></li>
     <li><a data-toggle="tab" href="#menu8"><%= t(:'tab_historic_dividends') %></a></li>
@@ -183,9 +182,6 @@
     <div id="menu4" class="tab-pane fade">      
       <%= render :partial => 'operations/index_common', locals: {operationtype_id: Mycapital::OP_AMPLIATION}  %>
     </div>  
-    <div id="menu5" class="tab-pane fade">      
-      <%= render :partial => 'expert_target_prices/index_company' %>
-    </div> 
     <div id="menu6" class="tab-pane fade">      
       <%= render :partial => 'company_comments/index_company' %>
     </div> 

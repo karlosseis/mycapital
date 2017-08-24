@@ -23,8 +23,8 @@ class Operation < ActiveRecord::Base
 
   validates :price, :numericality => { :greater_than => 0}, if: :is_purchase?  
   validates :amount, :numericality => { :greater_than => 0}, if: :is_purchase?
-  #validates :commission, :numericality => { :greater_than => 0}, if: :is_purchase? 
-  validates :fee, :numericality => { :greater_than => 0}, if: :is_purchase? 
+  validates :commission, numericality: true, if: :is_purchase? 
+  validates :fee, numericality: true, if: :is_purchase? 
   validates :origin_price, :numericality => { :greater_than => 0}, if: :is_purchase? 
 
   

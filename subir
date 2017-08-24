@@ -1,4 +1,4 @@
 git add .
-git commit -m "corrección set_stock_price_google"
+git commit -m "tres tontadas"
 git push heroku master
 
