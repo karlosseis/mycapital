@@ -1,4 +1,4 @@
 git add .
-git commit -m "tres tontadas"
+git commit -m "pagina inicial con resumen de cosas"
 git push heroku master
 

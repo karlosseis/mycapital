@@ -5,6 +5,8 @@
       <%= line_chart [
         {name: "Previsto", data: @expected_dividends_group_month},
         {name: "Real", data: @real_dividends_group_month}
+        #,{name: "Past", data: @last_year_real_dividends_group_month}
+        
       ] , title: t(:'graph_dividend_year_com') %>
        </div>
 

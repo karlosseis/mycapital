@@ -176,6 +176,10 @@ require 'settings.rb'
     self.stock_price - self.target_price_1
   end
 
+  def dif_target_sell_price 
+    self.stock_price - self.target_sell_price
+  end
+
   def target_price_1_formatted
     number_to_currency(self.target_price_1, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
 
@@ -192,6 +196,14 @@ require 'settings.rb'
   end
 
   
+
+  def porc_dif_target_sell_price    
+    perc_result = 0 
+    unless self.dif_target_sell_price >= 0
+      perc_result = (self.dif_target_sell_price * 100) / self.stock_price
+    end
+    perc_result    
+  end
 
   def porc_dif_target_price    
     perc_result = 0 
