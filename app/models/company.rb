@@ -598,7 +598,11 @@ require 'settings.rb'
   end
 
   def market_cap
-    self.shares_quantity * self.stock_price
+    total = self.shares_quantity * self.stock_price
+    if self.stockexchange.currency.name == 'GBP' then
+          total = total / 100
+    end
+    total
   end
 
 end
