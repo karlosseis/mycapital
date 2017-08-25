@@ -55,8 +55,13 @@ $(document).ready(function(){
         <font color="#009933"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
     <% else %>
         <font color="#ff0000"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
-    <% end %>      </td>   
-        <td style="text-align:right"><%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %></td>   
+    <% end %>      
+        <br>  <%= number_to_currency(company.estimated_benefit_global_currency_now) %>
+        </td>   
+        <td style="text-align:right">
+          <%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %> <br> 
+          <%= number_to_percentage(company.perc_estimated_benefit_global_currency_now, precision: 2) %>
+        </td>   
         <td style="text-align:right"><%= company.average_price_origin_currency_formatted %></td>  
         <td style="text-align:right"><%= number_to_percentage(company.expected_yoc, precision: 2) %></td>  
            
