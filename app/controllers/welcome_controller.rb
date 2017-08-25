@@ -9,15 +9,16 @@ class WelcomeController < ApplicationController
      @por_revisar_div = {}
 
      current_user.companies.all.each do |company| 
-
-      if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
-        @stars[company.id] = company      
+      unless company.porc_dif_target_price.nil? or target_price_1.nil?
+	      if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
+	        @stars[company.id] = company      
+	      end      	
       end
-  
-      if company.porc_dif_target_sell_price.to_f <= 5 and company.target_sell_price > 0
-        @to_sell[company.id] = company      
-      end
-
+  	  unless company.porc_dif_target_sell_price.nil? or target_sell_price.nil?	
+	      if company.porc_dif_target_sell_price.to_f <= 5 and company.target_sell_price > 0
+	        @to_sell[company.id] = company      
+	      end
+	  end
 
       if company.var_percent.to_f > 4 
         @max_subidas[company.id] = company      
