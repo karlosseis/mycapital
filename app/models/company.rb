@@ -177,7 +177,11 @@ require 'settings.rb'
   end
 
   def dif_target_sell_price 
-    self.stock_price - self.target_sell_price
+    ret = 99
+    unless self.target_sell_price.nil?
+      ret = self.stock_price - self.target_sell_price
+    end
+    ret
   end
 
   def target_price_1_formatted
