@@ -272,10 +272,14 @@ require 'settings.rb'
      self.set_estimated_benefit_global_currency()
    end
 
+   def estimated_value_global_currency_now
+     share_price_global_currency.to_f * shares_sum
+   end
+
    def estimated_benefit_global_currency_now
     # beneficio estimado tomando el precio actual de google finance y no el guardado en bdd
 
-    total = (share_price_global_currency.to_f * shares_sum) - invested_sum.to_f
+    total = estimated_value_global_currency_now - invested_sum.to_f
     total.round(2)
     #self.set_perc_estimated_benefit_global_currency()
 

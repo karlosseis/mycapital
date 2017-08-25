@@ -51,16 +51,16 @@ $(document).ready(function(){
         
         <td style="text-align:right"><%= number_to_currency(company.estimated_value_global_currency) %></td>    
         <td style="text-align:right"><%= number_to_currency(company.invested_sum) %></td>   
-        <td style="text-align:right">    <% if company.estimated_benefit_global_currency.to_f >= 0 %>
-        <font color="#009933"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
-    <% else %>
-        <font color="#ff0000"><%= number_to_currency(company.estimated_benefit_global_currency) %></font>
-    <% end %>      
-        <br>  <%= number_to_currency(company.estimated_benefit_global_currency_now) %>
+        <td style="text-align:right">    <% if company.estimated_benefit_global_currency_now.to_f >= 0 %>
+        <font color="#009933"><%= number_to_currency(company.estimated_benefit_global_currency_now) %></font>
+        <% else %>
+            <font color="#ff0000"><%= number_to_currency(company.estimated_benefit_global_currency_now) %></font>
+        <% end %>      
+        
         </td>   
         <td style="text-align:right">
-          <%= number_to_percentage(company.perc_estimated_benefit_global_currency, precision: 2) %> <br> 
-          <%= number_to_percentage(company.perc_estimated_benefit_global_currency_now, precision: 2) %>
+          <%= number_to_percentage(company.perc_estimated_benefit_global_currency_now, precision: 2) %> <br> 
+          
         </td>   
         <td style="text-align:right"><%= company.average_price_origin_currency_formatted %></td>  
         <td style="text-align:right"><%= number_to_percentage(company.expected_yoc, precision: 2) %></td>  

@@ -12,21 +12,21 @@
         <div class="row">
          <div class="col-md-6 text-right"> <%= t(:'simple_form.labels.company.estimated_benefit_global_currency') %>:</div>
          <div class="col-md-6 text-right"><strong>
-            <% if @company.estimated_benefit_global_currency.to_f  >= 0 %>
-              <font color="#009933"><%=  number_to_currency(@company.estimated_benefit_global_currency)  %></font>
+            <% if @company.estimated_benefit_global_currency_now.to_f  >= 0 %>
+              <font color="#009933"><%=  number_to_currency(@company.estimated_benefit_global_currency_now)  %></font>
           <% else %>
-              <font color="#ff0000"><%=  number_to_currency(@company.estimated_benefit_global_currency)  %></font>
+              <font color="#ff0000"><%=  number_to_currency(@company.estimated_benefit_global_currency_now)  %></font>
           <% end %>      
           </strong>
-          <%= number_to_currency(@company.estimated_benefit_global_currency_now) %>
+          
           </div>      
       
         </div>
 
         <div class="row">
           <div class="col-md-6 text-right"></div>
-          <div class="col-md-6 text-right"><strong><small>(<%=  number_to_percentage(@company.perc_estimated_benefit_global_currency, precision: 2)  %>)</small></strong></div>     
-              <%=  number_to_percentage(@company.perc_estimated_benefit_global_currency_now, precision: 2)  %>
+          <div class="col-md-6 text-right"><strong><small>(<%=  number_to_percentage(@company.perc_estimated_benefit_global_currency_now, precision: 2)  %>)</small></strong></div>     
+
 
         </div>
 
