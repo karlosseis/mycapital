@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
      @max_subidas  = {}
      @max_bajadas  = {}
      @por_revisar_div = {}
+     @prox_record_date = {}
 
      current_user.companies.all.each do |company| 
       unless company.porc_dif_target_price.nil? or company.target_price_1.nil?

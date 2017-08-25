@@ -177,7 +177,7 @@ require 'settings.rb'
   end
 
   def dif_target_sell_price 
-    ret = 99
+    ret = 99999
     unless self.target_sell_price.nil?
       ret = self.stock_price - self.target_sell_price
     end
@@ -271,6 +271,26 @@ require 'settings.rb'
      self.estimated_value_global_currency= total.round(2)
      self.set_estimated_benefit_global_currency()
    end
+
+   def estimated_benefit_global_currency_now
+    # beneficio estimado tomando el precio actual de google finance y no el guardado en bdd
+
+    total = (share_price_global_currency.to_f * shares_sum) - invested_sum.to_f
+    total.round(2)
+    #self.set_perc_estimated_benefit_global_currency()
+
+   end
+
+  def perc_estimated_benefit_global_currency_now  
+    # porcentaje de beneficio en base al valor estimado actual en la moneda de la aplicación (EUROS)
+   
+    total = 0
+    unless invested_sum == 0 then
+        total = estimated_benefit_global_currency_now.to_f * 100 / invested_sum.to_f
+    end
+    total.round(2)
+  end
+
 
   def set_average_price 
     # precio medio de la acción en base a las compras realizadas (moneda de la aplicación, EUROS)
