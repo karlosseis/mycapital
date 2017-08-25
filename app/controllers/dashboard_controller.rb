@@ -5,20 +5,20 @@ class DashboardController < ApplicationController
 
     #PopulateExpectedDividendsJob.perform_now()
   
-    #@global_value = current_user.companies.sum(:estimated_value_global_currency).round(2)
-    #@global_benefit = current_user.companies.sum(:estimated_benefit_global_currency).round(2) 
-    @global_invested = current_user.companies.sum(:invested_sum).round(2)
+    @global_value = current_user.companies.sum(:estimated_value_global_currency).round(2)
+    @global_benefit = current_user.companies.sum(:estimated_benefit_global_currency).round(2) 
+    # @global_invested = current_user.companies.sum(:invested_sum).round(2)
 
-    @global_value = 0
-    @global_benefit = 0
+    # @global_value = 0
+    # @global_benefit = 0
     
-    current_user.companies.all.each do |comp|
-      @global_value = @global_value + comp.estimated_value_global_currency_now
-      @global_benefit  = @global_benefit + comp.estimated_benefit_global_currency_now
-    end
+    # current_user.companies.all.each do |comp|
+    #   @global_value = @global_value + comp.estimated_value_global_currency_now
+    #   @global_benefit  = @global_benefit + comp.estimated_benefit_global_currency_now
+    # end
 
-    @global_value=  @global_value.round(2)
-    @global_benefit=  @global_benefit.round(2)
+    # @global_value=  @global_value.round(2)
+    # @global_benefit=  @global_benefit.round(2)
 
 
     @global_perc_benefit = 0
