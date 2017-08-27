@@ -8,10 +8,12 @@
       <%= f.input :destination_tax  %>
       <%= f.input :gross_amount  %>
       <%= f.input :quantity , as: :integer %>
+
     </div>
    <div class="col-md-4">
       <%= f.input :operation_date, as: :date, html5: true %>
-      
+      <%= f.association :currency %> 
+      <%= f.association :broker  %>
       <%= f.input :comments  %>
     </div>    
   </div>

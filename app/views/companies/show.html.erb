@@ -50,10 +50,7 @@
           <%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_AMPLIATION) , class: "btn btn-secondary" , title: t("new_ampliation"), style:"color:#373a3c;" do %>
             <i class="glyphicon glyphicon-expand"></i>
           <% end %>
-
-          <%= link_to  new_company_expert_target_price_path(@company) , class: "btn btn-secondary" , title: t("new_expert_price"), style:"color:#373a3c;" do %>
-            <i class="glyphicon glyphicon-info-sign"></i>
-          <% end %>
+        
 
           <%= link_to new_company_company_comment_path(@company) , class: "btn btn-secondary" , title: t("new_comment"), style:"color:#373a3c;" do %>
             <i class="glyphicon glyphicon-comment"></i>

@@ -82,6 +82,7 @@ es:
         price: "Precio"
         quantity: "Número de títulos"
         withholding_tax: "Retención en origen"
+        broker: Broker
       yahoo_ticker:
         seleccionar_empresa: "Seleccionar empresa"
         search: "Filtrar"
@@ -210,6 +211,9 @@ es:
         subcategory: "Subcategoría"
         account: Cuenta
         periodicity: Periodicidad
+      broker:
+        name: Broker
+        next_buy_date: Límite compra
       movement:
         lista_titulo: Movimientos
         titulo_editar: Editar movimiento

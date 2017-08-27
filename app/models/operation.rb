@@ -4,6 +4,8 @@ class Operation < ActiveRecord::Base
   belongs_to :operationtype
   belongs_to :currency
   belongs_to :user
+  belongs_to :broker
+
   
   before_validation :update_origin_price
   after_save :update_company
@@ -88,8 +90,9 @@ class Operation < ActiveRecord::Base
      # Es decir, si la empresa es española, el precio origen será el mismo en el que compramos (euros)
 
      # grabo la moneda de la empresa porque aunque la grabo en el new, si no muestro el campo en pantalla no me hace caso.
-    self.currency_id = self.company.stockexchange.currency_id
-     if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s)
+     # 27/08/2017 - lo comento porque ahora se muestra la moneda en pantalla 
+    #self.currency_id = self.company.stockexchange.currency_id
+    if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s)
         self.origin_price = self.price
         self.exchange_rate = 1
      end

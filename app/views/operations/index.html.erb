@@ -57,7 +57,7 @@ $(document).ready(function(){
       <th><%= t(:'simple_form.labels.operation.gross_amount') %></th>
       <th><%= t(:'simple_form.labels.operation.withholding_tax') %></th>        
       <th><%= t(:'simple_form.labels.operation.destination_tax') %></th>
-
+      <th><%= t(:'simple_form.labels.operation.broker') %></th>
 
       <th></th>  
       <th></th>       
@@ -100,6 +100,7 @@ $(document).ready(function(){
         <td align="right"><%= operation.gross_amount %></td>
         <td align="right"><%= operation.withholding_tax %></td>
         <td align="right"><%= operation.destination_tax %></td>
+        <td align="right"><%= operation.broker %></td>
         <td><%= link_to 'Edit', edit_operation_path(operation), :class => 'btn btn-sm btn-primary' %></td>
         <td><%= link_to 'Destroy', operation, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger' %></td>
 

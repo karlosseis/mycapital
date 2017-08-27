@@ -41,9 +41,17 @@
             Bajada de más de un 4%
           <%= render :partial => 'targets/list_mini' , locals: {companies_mostrar: @max_bajadas}%> 
           </div>
-          
+
+         <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">
+            Límite próximas compras
+          <%= render :partial => 'brokers/list_brokers_last_buy'%> 
+          </div>          
         
         </div>
+
+
+
+      
 
       </div>
 

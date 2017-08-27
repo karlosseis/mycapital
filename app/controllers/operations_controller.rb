@@ -27,7 +27,8 @@ class OperationsController < ApplicationController
      @operation = parent.operations.new(
             operationtype_id: params[:operationtype_id],
             quantity: parent.shares_sum,
-            operation_date: Time.now.strftime('%d-%m-%Y')
+            operation_date: Time.now.strftime('%d-%m-%Y'),
+            currency_id: parent.stockexchange.currency_id
             
           )
     else
@@ -109,6 +110,6 @@ class OperationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def operation_params
-      params.require(:operation).permit(:company_id, :operationtype_id, :amount, :comments, :commission, :currency_id, :destination_tax, :exchange_rate, :fee, :gross_amount, :net_amount, :operation_date, :origin_price, :price, :quantity, :withholding_tax, :user_id)
+      params.require(:operation).permit(:company_id, :operationtype_id, :amount, :comments, :commission, :currency_id, :destination_tax, :exchange_rate, :fee, :gross_amount, :net_amount, :operation_date, :origin_price, :price, :quantity, :withholding_tax, :user_id, :broker_id)
     end
 end
