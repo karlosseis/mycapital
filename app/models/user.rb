@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :reference_webs
   has_many :company_comments
   has_many :company_results
-
+  has_many :brokers
 
 
   has_many :locations

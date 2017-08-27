@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730230248) do
+ActiveRecord::Schema.define(version: 20170827155133) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 20170730230248) do
   end
 
   add_index "banks", ["user_id"], name: "index_banks_on_user_id", using: :btree
+
+  create_table "brokers", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.integer  "buy_frequency", limit: 4
+    t.integer  "user_id",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "brokers", ["user_id"], name: "index_brokers_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -468,6 +478,7 @@ ActiveRecord::Schema.define(version: 20170730230248) do
   add_foreign_key "balance_details", "users"
   add_foreign_key "balances", "users"
   add_foreign_key "banks", "users"
+  add_foreign_key "brokers", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"

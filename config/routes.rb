@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :brokers
   resources :mapconcepts
   resources :movements
   resources :locations

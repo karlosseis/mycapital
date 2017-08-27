@@ -1,4 +1,4 @@
 git add .
-git commit -m "pagina inicial con resumen de cosas"
+git commit -m "brokers"
 git push heroku master
 
