@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827155133) do
+ActiveRecord::Schema.define(version: 20170827161116) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -355,10 +355,12 @@ ActiveRecord::Schema.define(version: 20170827155133) do
     t.integer  "quantity",         limit: 4
     t.float    "withholding_tax",  limit: 24
     t.integer  "user_id",          limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "broker_id",        limit: 4,     default: 1
   end
 
+  add_index "operations", ["broker_id"], name: "index_operations_on_broker_id", using: :btree
   add_index "operations", ["company_id"], name: "index_operations_on_company_id", using: :btree
   add_index "operations", ["currency_id"], name: "index_operations_on_currency_id", using: :btree
   add_index "operations", ["operationtype_id"], name: "index_operations_on_operationtype_id", using: :btree
@@ -507,6 +509,7 @@ ActiveRecord::Schema.define(version: 20170827155133) do
   add_foreign_key "movements", "subcategories"
   add_foreign_key "movements", "users"
   add_foreign_key "movementtypes", "users"
+  add_foreign_key "operations", "brokers"
   add_foreign_key "operations", "companies"
   add_foreign_key "operations", "currencies"
   add_foreign_key "operations", "operationtypes"
