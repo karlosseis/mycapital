@@ -81,9 +81,11 @@ es:
   price: "Precio"
   global_invested: "Invertido"
   dividends_month: "Dividendos mes"
+  dividends_expected_year: "Div. Previstos"
   dividends_year: "Dividendos año"
   graph_year_purchases: "Compras anuales"
   graph_dividend_year_com: "Dividendos año actual"
+  graph_dividend_year_com_currency: "Dividendos %{curr}"
   graph_dividend_historic: "Histórico de dividendos"
   graph_weight_dividend: Peso anual dividendos
   dashboard_title: "Posición global"

@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!
 
   def index
@@ -31,13 +32,47 @@ class DashboardController < ApplicationController
   
     @last_purchases = current_user.operations.where(operationtype_id: Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(3)    
     @next_dividends= current_user.expected_dividends.where('operationtype_id = ? and operation_date >= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_day).order(operation_date: :asc).limit(3)    
+    
     @purchases_current_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_PURCHASE, Time.now.beginning_of_year,Time.now.end_of_year).sum(:amount)
-    @dividends_current_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).sum(:net_amount)
-    @dividends_current_month= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_month,Time.now.end_of_month).sum(:net_amount)
-    @expected_dividends_current_year= current_user.expected_dividends.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).sum(:amount)
+    
+
+
+
+    @dividends_current_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).group(:currency_id).sum(:net_amount)
+    @dividends_current_month= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_month,Time.now.end_of_month).group(:currency_id).sum(:net_amount)
+    @expected_dividends_current_year= current_user.expected_dividends.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).group(:currency_id).sum(:amount)
+
+    # calculamos el total de dividendos en euro. Es decir, convertimos el total de cada moneda a euro
+    @dividends_current_year_eur = 0
+    @dividends_current_year.each  do |key, value|        
+        @dividends_current_year_eur = @dividends_current_year_eur + convert_to_eur(value, Currency.find(key).name) 
+    end 
+
+    @dividends_current_month_eur = 0
+    @dividends_current_month.each  do |key, value|        
+        @dividends_current_month_eur = @dividends_current_month_eur + convert_to_eur(value, Currency.find(key).name) 
+    end 
+
+    @expected_dividends_current_year_eur = 0
+    @expected_dividends_current_year.each  do |key, value|        
+        @expected_dividends_current_year_eur = @expected_dividends_current_year_eur + convert_to_eur(value, Currency.find(key).name) 
+    end 
+
+
+
+    # Para gráficos
+
+    @expected_dividends_group_month_array = {}
+    @real_dividends_group_month_array = {}
+    Currency.all.each do |curr|
+      @expected_dividends_group_month_array[curr.id] = current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => curr.id).group_by_month(:operation_date).sum(:amount)
+      @real_dividends_group_month_array[curr.id] = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, curr.id).group_by_month(:operation_date).sum(:net_amount)
+    end
 
     @expected_dividends_group_month = current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_month(:operation_date).sum(:amount)
     @real_dividends_group_month = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year).group_by_month(:operation_date).sum(:net_amount)
+    
+
     @purchases_group_year = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).group_by_year(:operation_date, format: "%Y").sum(:amount)
 
     @real_dividends_group_year=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
