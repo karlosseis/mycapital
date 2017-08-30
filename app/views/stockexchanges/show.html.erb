@@ -15,5 +15,17 @@
   <%= @stockexchange.currency %>
 </p>
 
+
+<p>
+  <strong>open_time:</strong>
+  <%= @stockexchange.open_time %>
+</p>
+
+<p>
+  <strong>close_time:</strong>
+  <%= @stockexchange.close_time %>
+</p>
+
+
 <%= link_to 'Edit', edit_stockexchange_path(@stockexchange) %> |
 <%= link_to 'Back', stockexchanges_path %>
