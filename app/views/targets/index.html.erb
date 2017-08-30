@@ -60,30 +60,22 @@ $(document).ready(function(){
 
 
 
-<div class="row">    
-    <div class="col-md-10" >
-		 <h2 class = "page-header">
-		  <%= t(:'list_targets') %>
-		</h2>      
-       
-     
-    </div>
+<h6 class = "page-header">
+   
  
-</div>
+  <%= form_tag({:controller => "targets", :action => "index"}, :method => :get) do %>  
 
+      <!-- <div class="col-md-8 "> -->
+        <%= radio_button_tag(:only_open, "Y", checked: params[:only_open].eql?("Y")) %>
+        <%= label_tag(:age_child, "Sólo mercados abiertos") %>
+        <%= radio_button_tag(:only_open, "N", params[:only_open].eql?("N")) %>
+        <%= label_tag(:age_adult, "Todos los mercados") %>
+     
+        <%= submit_tag "Buscar", :name => nil,  :class =>"btn btn-primary" %>
+     
 
-<%= form_tag({:controller => "targets", :action => "index"}, :method => :get) do %>
-
-    <%= text_field_tag "searchbox_target", params[:searchbox_target] %>
-
-    <%= radio_button_tag(:only_open, "Y", params[:only_open].eql?("Y")) %>
-    <%= label_tag(:age_child, "Sólo mercados abiertos") %>
-    <%= radio_button_tag(:only_open, "N", params[:only_open].eql?("N")) %>
-    <%= label_tag(:age_adult, "Todos los mercados") %>
-
-    <%= submit_tag "Buscar", :name => nil %>
-
-<% end %>
+  <% end %>
+ </h6>
 
 
 
