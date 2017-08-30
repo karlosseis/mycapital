@@ -72,6 +72,18 @@ $(document).ready(function(){
 </div>
 
 
+<%= form_tag({:controller => "targets", :action => "index"}, :method => :get) do %>
+
+    <%= text_field_tag "searchbox_target", params[:searchbox_target] %>
+
+    <%= radio_button_tag(:only_open, "Y", params[:only_open].eql?("Y")) %>
+    <%= label_tag(:age_child, "Sólo mercados abiertos") %>
+    <%= radio_button_tag(:only_open, "N", params[:only_open].eql?("N")) %>
+    <%= label_tag(:age_adult, "Todos los mercados") %>
+
+    <%= submit_tag "Buscar", :name => nil %>
+
+<% end %>
 
 
 
