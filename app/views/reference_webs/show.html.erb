@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reference_web.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @reference_web.url %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reference_web.user %>
+</p>
+
+<%= link_to 'Edit', edit_reference_web_path(@reference_web) %> |
+<%= link_to 'Back', reference_webs_path %>

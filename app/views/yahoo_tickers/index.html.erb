@@ -1,0 +1,49 @@
+
+<h2 class = "page-header">
+  <%= t(:'simple_form.labels.yahoo_ticker.seleccionar_empresa') %>
+</h2>      
+
+<% if current_user.permission_level == 0 %>
+  <%= link_to 'New Yahoo ticker', new_yahoo_ticker_path %>            
+<% end %>          
+
+
+
+<%= simple_form_for :search,  url: yahoo_tickers_path , :method => :get, id: "search-form" do |f| %>
+    <%= f.input :search, :autofocus => true ,:label => t(:'simple_form.labels.yahoo_ticker.search') %>
+    <%= f.submit t(:'simple_form.labels.yahoo_ticker.search_btn'),  :class =>"btn btn-primary" %>
+<% end %>
+
+
+
+     <%= paginate(@yahoo_tickers) %>
+<table id="myTable2" class="table  table-striped">  
+  <thead>
+    <tr>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.ticker') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.name') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.exchange') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.name_country') %></th>
+      <th><%= t(:'simple_form.labels.yahoo_ticker.sector') %></th>
+      <th></th>     
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @yahoo_tickers.each do |yahoo_ticker| %>
+      <tr>
+        <td><%= yahoo_ticker.ticker %></td>
+        <td><%= yahoo_ticker.name %></td>
+        <td><%= yahoo_ticker.exchange %></td>
+        <td><%= yahoo_ticker.name_country %></td>
+        <td><%= yahoo_ticker.category %></td>
+        <td><%= link_to t(:'simple_form.labels.yahoo_ticker.crear_empresa'), background_actions_create_company_path(yahoo_name: yahoo_ticker.name, yahoo_ticker:yahoo_ticker.ticker, yahoo_exchange: yahoo_ticker.exchange), :class => 'btn btn-primary btn-sm', :style=>'color:#FFFFFF;' %></td>       
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+<%= paginate(@yahoo_tickers) %>
+<br>
+

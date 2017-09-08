@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date target price:</strong>
+  <%= @expert_target_price.date_target_price %>
+</p>
+
+<p>
+  <strong>Target price 1:</strong>
+  <%= @expert_target_price.target_price_1 %>
+</p>
+
+<p>
+  <strong>Target price 2:</strong>
+  <%= @expert_target_price.target_price_2 %>
+</p>
+
+<p>
+  <strong>Web name:</strong>
+  <%= @expert_target_price.reference_web %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @expert_target_price.url %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @expert_target_price.company %>
+</p>
+
+<%= link_to 'Edit', edit_expert_target_price_path(@expert_target_price) %> |
+<%= link_to 'Back', expert_target_prices_path %>

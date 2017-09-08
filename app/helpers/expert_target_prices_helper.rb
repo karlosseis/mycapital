@@ -1,0 +1,2 @@
+module ExpertTargetPricesHelper
+end

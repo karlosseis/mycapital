@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_target_price: 2017-03-22
+  target_price_1: 1.5
+  target_price_2: 1.5
+  web_name_id: 1
+  url: MyString
+  company_id: 
+
+two:
+  date_target_price: 2017-03-22
+  target_price_1: 1.5
+  target_price_2: 1.5
+  web_name_id: 1
+  url: MyString
+  company_id: 

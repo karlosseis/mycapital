@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @expected_dividend.company %>
+</p>
+
+<p>
+  <strong>Operationtype:</strong>
+  <%= @expected_dividend.operationtype %>
+</p>
+
+<p>
+  <strong>Operation date:</strong>
+  <%= @expected_dividend.operation_date %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @expected_dividend.quantity %>
+</p>
+
+<p>
+  <strong>Price unit:</strong>
+  <%= @expected_dividend.price_unit %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @expected_dividend.amount %>
+</p>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @expected_dividend.currency %>
+</p>
+
+<p>
+  <strong>Origin price:</strong>
+  <%= @expected_dividend.origin_price %>
+</p>
+
+<p>
+  <strong>Origin price unit:</strong>
+  <%= @expected_dividend.origin_price_unit %>
+</p>
+
+<p>
+  <strong>Origin amount:</strong>
+  <%= @expected_dividend.origin_amount %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @expected_dividend.user %>
+</p>
+
+<%= link_to 'Edit', edit_expected_dividend_path(@expected_dividend) %> |
+<%= link_to 'Back', expected_dividends_path %>

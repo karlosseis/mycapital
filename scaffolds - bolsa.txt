@@ -1,0 +1,21 @@
+
+
+
+
+rails generate scaffold Country name:string
+
+rails generate scaffold Currency name:string
+rails generate scaffold Operationtype name:string
+
+
+rails generate scaffold Sector name:string
+rails generate scaffold Stockexchange name:string country:references currency:references
+
+rails generate scaffold Company name:string symbol:string stockexchange:references sector:references share_price:float search_symbol:string date_share_price:date dividend_sum:float puchased_sum:float sold_sum:float ampliated_sum:float quantity_puchased:float quantity_sold:float quantity_ampliated:float shares_sum:float invested_sum:float average_price:float share_price_global_currency:float estimated_value_global_currency:float estimated_benefit_global_currency:float perc_estimated_benefit_global_currency:float average_price_origin_currency:float user:references
+
+rails generate scaffold Operation company:references operationtype:references amount:float comments:text commission:float currency:references destination_tax:float exchange_rate:float fee:float gross_amount:float net_amount:float operation_date:date origin_price:float price:float quantity:integer withholding_tax:float user:references
+
+
+
+
+rails generate scaffold ExpectedDividend company:references operationtype:references operation_date:date quantity:integer price_unit:float amount:float currency:references origin_price:float origin_price_unit:float origin_amount:float user:references

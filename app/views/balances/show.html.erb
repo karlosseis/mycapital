@@ -1,0 +1,56 @@
+ <h2 class = "page-header">
+  <%= @balance.name %> <small><%= link_to t("edit"), edit_balance_path(@balance) %></small>
+</h2>
+ 
+<p>
+  <strong><%= t(:'simple_form.labels.balances.balance_date') %></strong>
+  <%= I18n.l(@balance.balance_date) %>
+</p>
+
+
+<p>
+  <strong><%= t(:'simple_form.labels.balances.details') %></strong>
+  <%= @balance.details %>
+</p>
+
+<p>
+  <strong><%= t(:'simple_form.labels.balances.total_sum') %></strong>
+  <%= number_to_currency(@balance.total_sum) %>
+</p>
+
+<p>
+  <strong><%= t(:'simple_form.labels.balances.cash_sum') %></strong>
+  <%= number_to_currency(@balance.cash_sum) %>
+</p>
+<p>
+  <strong><%= t(:'simple_form.labels.balances.loan_sum') %></strong>
+  <%= number_to_currency(@balance.loan_sum) %>
+</p>
+<p>
+  <strong><%= t(:'simple_form.labels.balances.portfolio_sum') %></strong>
+  <%= number_to_currency(@balance.portfolio_sum) %>
+</p>
+<table class="table  table-striped">
+  <thead>
+    <tr>             
+      <th><%= t(:'simple_form.labels.balance_details.account') %></th>    
+      <th style="text-align:right"><%= t(:'simple_form.labels.balance_details.amount') %></th> 
+      <th><%= t(:'simple_form.labels.balance_details.name') %></th>     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @balance.balance_details.each do |balance_detail| %>
+      <tr>                   
+        <td><%= balance_detail.account %></td>        
+        <td style="text-align:right"><%= number_to_currency(balance_detail.amount) %></td>     
+        <td><%= balance_detail.name %></td>
+        <td><%= link_to t("edit"), edit_balance_detail_path(balance_detail), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>
+        <td><%= link_to t("destroy"), balance_detail, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>   
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,46 @@
+<%= simple_form_for(@balance) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :balance_date, as: :date, html5: true %>
+    <%= f.input :details %>
+    
+  </div>
+
+  <div class="row">    
+      <div class="col-md-10 form-actions" >
+
+            <input type="submit" class="btn btn-success"   value=<%= t("save") %> >
+            <%= link_to t("cancel"), @balance, :class => "btn btn-info", :style=>'color:#FFFFFF;' %>            
+      </div>
+    <div class="col-md-2 text-right form-actions" >        
+            <%= link_to t("destroy"), @balance,  :class => "btn btn-danger", :style=>'color:#FFFFFF;' , method: :delete, data: { confirm: t("are_you_sure") } %>    
+      </div>   
+  </div>
+
+  <br>
+
+  <h3><%= t(:'simple_form.labels.balance_details.lista_titulo') %></h3>
+  <table class="table  table-striped">
+    <thead>
+      <tr>              
+        <th><%= t(:'simple_form.labels.balance_details.account') %></th>    
+        <th style="text-align:right"><%= t(:'simple_form.labels.balance_details.amount') %></th>  
+        <th><%= t(:'simple_form.labels.balance_details.name') %></th>      
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :balance_details do |detail| %>
+      <tr>    
+          <td><%= detail.collection_select :account_id, current_user.accounts.all, :id, :name %></td>
+          <td style="text-align:right"><%= detail.number_field :amount, class: :text_field, step: :any %></td>                   
+          <td><%= detail.text_field :name %></td>        
+      </tr>
+      <% end %> 
+    </tbody>
+  </table>
+
+
+<% end %>

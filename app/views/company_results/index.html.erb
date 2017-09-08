@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Company Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Año resultado</th>
+      <th>Fecha resultado</th>
+      <th>Es oficial</th>
+      <th>Cotizacion</th>
+      <th>Cotiz max</th>
+      <th>Cotiz min</th>
+      <th>Patrimonio neto</th>
+      <th>Gastos generales</th>
+      <th>Gastos desarrollo</th>
+      <th>Ventas</th>
+      <th>Ebitda</th>
+      <th>Ebit</th>
+      <th>Beneficio neto ordinario</th>
+      <th>Beneficion neto total</th>
+      <th>Deuda largo plazo</th>
+      <th>Deuda corto plazo</th>
+      <th>Deuda neta</th>
+      <th>Cf explotacion</th>
+      <th>Cf inversion</th>
+      <th>Cf financiacion</th>
+      <th>Cf neto</th>
+      <th>Dividendo ordinario</th>
+      <th>Dividendo extraordinario</th>
+      <th>Dividendo total</th>
+      <th>Num acciones</th>
+      <th>Bpa</th>
+      <th>Payout</th>
+      <th>Pago dividendos</th>
+      <th>Per max</th>
+      <th>Per med</th>
+      <th>Per min</th>
+      <th>Company</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.company_results.each do |company_result| %>
+      <tr>
+        <td><%= company_result.year_result %></td>
+        <td><%= company_result.fecha_resultado %></td>
+        <td><%= company_result.es_oficial %></td>
+        <td><%= company_result.cotizacion %></td>
+        <td><%= company_result.cotiz_max %></td>
+        <td><%= company_result.cotiz_min %></td>
+        <td><%= company_result.patrimonio_neto %></td>
+        <td><%= company_result.gastos_generales %></td>
+        <td><%= company_result.gastos_desarrollo %></td>
+        <td><%= company_result.ventas %></td>
+        <td><%= company_result.ebitda %></td>
+        <td><%= company_result.ebit %></td>
+        <td><%= company_result.beneficio_neto_ordinario %></td>
+        <td><%= company_result.beneficion_neto_total %></td>
+        <td><%= company_result.deuda_largo_plazo %></td>
+        <td><%= company_result.deuda_corto_plazo %></td>
+        <td><%= company_result.deuda_neta %></td>
+        <td><%= company_result.cf_explotacion %></td>
+        <td><%= company_result.cf_inversion %></td>
+        <td><%= company_result.cf_financiacion %></td>
+        <td><%= company_result.cf_neto %></td>
+        <td><%= company_result.dividendo_ordinario %></td>
+        <td><%= company_result.dividendo_extraordinario %></td>
+        <td><%= company_result.dividendo_total %></td>
+        <td><%= company_result.num_acciones %></td>
+        <td><%= company_result.bpa %></td>
+        <td><%= company_result.payout %></td>
+        <td><%= company_result.pago_dividendos %></td>
+        <td><%= company_result.per_max %></td>
+        <td><%= company_result.per_med %></td>
+        <td><%= company_result.per_min %></td>
+        <td><%= company_result.company %></td>
+        <td><%= company_result.user %></td>
+        <td><%= link_to 'Show', company_result %></td>
+        <td><%= link_to 'Edit', edit_company_result_path(company_result) %></td>
+        <td><%= link_to 'Destroy', company_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company result', new_company_result_path %>

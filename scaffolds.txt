@@ -1,0 +1,113 @@
+Using username "bitnami".
+bitnami@192.168.43.245's password:
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.13.0-101-generic x86_64)
+       ___ _ _                   _
+      | _ |_) |_ _ _  __ _ _ __ (_)
+      | _ \ |  _| ' \/ _` | '  \| |
+      |___/_|\__|_|_|\__,_|_|_|_|_|
+
+  *** Welcome to the Bitnami Ruby 2.3.3-0 ***
+  *** Documentation:  https://docs.bitnami.com/virtual-machine/infrastructure/ruby/ ***
+  ***                 https://docs.bitnami.com/virtual-machine/ ***
+  *** Bitnami Forums: https://community.bitnami.com/ ***
+Last login: Thu Feb 16 01:11:06 2017
+bitnami@ubuntu:~$ rails s
+^C
+bitnami@ubuntu:~$ sudo su
+[sudo] password for bitnami:
+cd /mediaSorry, try again.
+[sudo] password for bitnami:
+Sorry, try again.
+[sudo] password for bitnami:
+root@ubuntu:/home/bitnami# cd /media
+root@ubuntu:/media# cd *uby
+root@ubuntu:/media/sf_AppRuby# cd mycap*
+root@ubuntu:/media/sf_AppRuby/mycapital# gem install schema_to_scaffold
+Fetching: schema_to_scaffold-0.8.0.gem (100%)
+Successfully installed schema_to_scaffold-0.8.0
+Parsing documentation for schema_to_scaffold-0.8.0
+Installing ri documentation for schema_to_scaffold-0.8.0
+Done installing documentation for schema_to_scaffold after 6 seconds
+1 gem installed
+root@ubuntu:/media/sf_AppRuby/mycapital# cd ..
+root@ubuntu:/media/sf_AppRuby# cd micap*
+root@ubuntu:/media/sf_AppRuby/micapital# scaffold
+
+Looking for schema.rb in /media/sf_AppRuby/micapital
+0. /media/sf_AppRuby/micapital/db/schema.rb
+
+Select a path to the target schema: aqui
+
+Loaded tables:
+0. accounts
+1. balance_details
+2. balances
+3. banks
+4. categories
+5. companies
+6. concept_types
+7. concepts
+8. countries
+9. currencies
+10. delayed_jobs
+11. locations
+12. operations
+13. operationtypes
+14. periodicities
+15. planif_records
+16. recordtypes
+17. sectors
+18. stockexchanges
+19. subcategories
+20. users
+
+Options are:
+4 for table 4; (4..6) for table 4 to 6; [4,6] for tables 4 and 6; * for all Tables
+
+Select a table: *
+
+Script for scaffold:
+
+rails generate scaffold Account name:string bank:references concept:references --no-migration
+
+rails generate scaffold BalanceDetail name:string amount:float balance_date:date balance:references account:references --no-migration
+
+rails generate scaffold Balance name:string balance_date:date --no-migration
+
+rails generate scaffold Bank name:string --no-migration
+
+rails generate scaffold Category name:string --no-migration
+
+rails generate scaffold Company name:string symbol:string stockexchange:references sector:references share_price:float search_symbol:string date_share_price:date dividend_sum:float puchased_sum:float sold_sum:float ampliated_sum:float quantity_puchased:float quantity_sold:float quantity_ampliated:float shares_sum:float invested_sum:float average_price:float share_price_global_currency:float estimated_value_global_currency:float estimated_benefit_global_currency:float perc_estimated_benefit_global_currency:float average_price_origin_currency:float user:references --no-migration
+
+rails generate scaffold ConceptType name:string seq_num:integer --no-migration
+
+rails generate scaffold Concept name:string seq_num:integer concepttype:references --no-migration
+
+rails generate scaffold Country name:string --no-migration
+
+rails generate scaffold Currency name:string --no-migration
+
+rails generate scaffold DelayedJob priority:integer attempts:integer handler:text last_error:text run_at:datetime locked_at:datetime failed_at:datetime locked_by:string queue:string --no-migration
+
+rails generate scaffold Location name:string name_long:string --no-migration
+
+rails generate scaffold Operation company:references operationtype:references amount:float comments:text commission:float currency:references destination_tax:float exchange_rate:float fee:float gross_amount:float net_amount:float operation_date:date origin_price:float price:float quantity:integer withholding_tax:float user:references --no-migration
+
+rails generate scaffold Operationtype name:string --no-migration
+
+rails generate scaffold Periodicity name:string num_months:integer --no-migration
+
+rails generate scaffold PlanifRecord name:string amount:float day:integer start_month:integer start_at:date end_at:date subcategory:references account:references periodicity:references --no-migration
+
+rails generate scaffold Recordtype name:string --no-migration
+
+rails generate scaffold Sector name:string --no-migration
+
+rails generate scaffold Stockexchange name:string country:references currency:references --no-migration
+
+rails generate scaffold Subcategory name:string category:references --no-migration
+
+rails generate scaffold User email:string encrypted_password:string reset_password_token:string reset_password_sent_at:datetime remember_created_at:datetime sign_in_count:integer current_sign_in_at:datetime last_sign_in_at:datetime current_sign_in_ip:string last_sign_in_ip:string name:string permission_level:string --no-migration
+
+root@ubuntu:/media/sf_AppRuby/micapital#

@@ -1,0 +1,36 @@
+
+<div class="row">    
+    <div class="col-md-10" >
+    <h2 class = "page-header">
+      <%= t(:'simple_form.labels.banks.lista_titulo') %>
+    </h2>  
+                  
+    </div>
+     <div class="col-md-2 text-right form-actions" >  
+         <br> <br>      
+         <%= link_to  t(:'simple_form.labels.banks.titulo_nuevo') , new_bank_path ,  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>       
+             
+    </div>    
+</div>
+
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th> <%= t(:'simple_form.labels.banks.name') %></th>     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @banks.each do |bank| %>
+      <tr>
+        <td style="text-align:left"><%= link_to bank.name, bank %></td>                
+        <td><%= link_to t("edit"), edit_bank_path(bank), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>
+        <td><%= link_to t("destroy"), bank, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

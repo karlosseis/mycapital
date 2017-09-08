@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mapconcept.name %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @mapconcept.subcategory %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @mapconcept.user %>
+</p>
+
+<%= link_to 'Edit', edit_mapconcept_path(@mapconcept) %> |
+<%= link_to 'Back', mapconcepts_path %>

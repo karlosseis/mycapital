@@ -1,0 +1,1 @@
+json.array! @movementtypes, partial: 'movementtypes/movementtype', as: :movementtype

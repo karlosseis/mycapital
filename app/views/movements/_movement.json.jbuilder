@@ -1,0 +1,2 @@
+json.extract! movement, :id, :name, :amount, :movement_date, :subcategory_id, :movementtype_id, :account_id, :location_id, :user_id, :created_at, :updated_at
+json.url movement_url(movement, format: :json)

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reference Webs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reference_webs.each do |reference_web| %>
+      <tr>
+        <td><%= reference_web.name %></td>
+        <td><%= reference_web.url %></td>
+        <td><%= reference_web.user %></td>
+        <td><%= link_to 'Show', reference_web %></td>
+        <td><%= link_to 'Edit', edit_reference_web_path(reference_web) %></td>
+        <td><%= link_to 'Destroy', reference_web, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reference web', new_reference_web_path %>

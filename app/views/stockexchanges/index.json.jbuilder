@@ -1,0 +1,1 @@
+json.array! @stockexchanges, partial: 'stockexchanges/stockexchange', as: :stockexchange

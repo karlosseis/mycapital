@@ -1,0 +1,1 @@
+json.array! @planif_records, partial: 'planif_records/planif_record', as: :planif_record

@@ -1,0 +1,147 @@
+
+    <div class="row">    
+        <div class="col-md-10" >
+    <h2 class = "page-header">
+      <%= t(:'simple_form.labels.balances.lista_titulo') %>
+    </h2>  
+      
+           
+         
+        </div>
+         <div class="col-md-2 text-right form-actions" >  
+             <br> <br>      
+             <%= link_to  "Nuevo balance" , new_balance_path ,  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>       
+                 
+        </div>    
+    </div>
+
+    <div class="container"> 
+
+       <div class="col-md-4">
+        <%= line_chart @graph_cash_data, colors: ["green", "#999"], title: t(:'simple_form.labels.balances.graph_cash') %>
+       </div>
+
+       <div class="col-md-4">
+        <%= line_chart @graph_portfolio_data, colors: ["orange", "#999"], title: t(:'simple_form.labels.balances.graph_portfolio') %>
+       </div>
+
+       <div class="col-md-4">
+        <%= line_chart @graph_equity_data, title: t(:'simple_form.labels.balances.graph_equity') %>
+       </div>
+    </div>
+<br>
+<br>
+<br>
+    <div class="container">
+
+ 
+
+      <% dif_cash = 0
+         dif_tot = 0 
+
+         ant_cash = 0 
+         ant_tot = 0 
+
+         primera_vez = 1 %>
+
+      <% current_user.balances.where('balance_date >= ?', (Time.now - 8.month).beginning_of_day).order('balance_date ASC').each do |balance| %>
+
+        
+          <% if primera_vez == 1 then %>
+
+              <div class="col-md-2">
+                <div class="row" style="text-align:left"><br></div>
+                <% current_user.accounts.each do |acc| %>
+                  <div class="row" style="text-align:left"><strong><%= acc.name %></strong></div>
+                <% end %> 
+                <div class="row" style="text-align:left"><br></div>               
+                <div class="row" style="text-align:left"><strong>Efectivo</strong></div>
+                <div class="row" style="text-align:left"><strong>Patrimonio neto</strong></div>
+                <div class="row" style="text-align:left"><strong>Dif ahorrado</strong></div>
+                <div class="row" style="text-align:left"><strong>Dif patrimonio neto</strong></div>
+                <div class="row" style="text-align:left"><strong>Meses PN = 0 </strong></div>
+              </div>
+
+               <% primera_vez = 0 %>
+          <% end %>
+
+           
+
+          <div class="col-md-1">
+
+            <div class="row" style="text-align:right"><strong><%= I18n.l(balance.balance_date, format: :month_year) %></strong></div>
+
+            <% current_user.accounts.each do |acc| %>
+              <% det = balance.balance_details.find_by account_id: acc.id %>
+             
+              <% if det.nil? then %>
+               <div class="row" style="text-align:right"><%= number_to_currency(0, :precision => 0) %></div>
+              <% else %>
+               <div class="row" style="text-align:right"><%= number_to_currency(det.amount, :precision => 0) %></div>
+              <% end %>
+            <% end %> 
+            <div class="row" style="text-align:left"><br></div>
+            <div class="row" style="text-align:right"><%= number_to_currency(balance.cash_sum, :precision => 0) %></div>
+            <div class="row" style="text-align:right"><%= number_to_currency(balance.total_sum, :precision => 0) %></div>
+            <% 
+              if ant_cash != 0 then
+                dif_cash = balance.cash_sum - ant_cash
+                dif_tot = balance.total_sum - ant_tot
+              end
+            %>  
+            <div class="row" style="text-align:right"><%= number_to_currency(dif_cash, :precision => 0) %></div>
+            <div class="row" style="text-align:right"><%= number_to_currency(dif_tot, :precision => 0) %></div>
+
+            <%  meses_pn_0= 0
+               unless dif_tot ==0
+                 meses_pn_0 = balance.total_sum / dif_tot
+            end %>
+            <div class="row" style="text-align:right"><%= number_with_delimiter(meses_pn_0.round(2)) %></div>
+       
+          <% 
+           ant_cash =  balance.cash_sum 
+           ant_tot = balance.total_sum 
+           %>
+
+          </div>
+           
+      <% end %>
+    </div>
+<div class="row"><br></div>
+
+<div class="container">
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:'simple_form.labels.balances.name') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.balances.balance_date') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.balances.total_sum') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.balances.cash_sum') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.balances.portfolio_sum') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.balances.loan_sum') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.balances.details') %></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @balances.each do |balance| %>
+      <tr>
+        <td style="text-align:left"><%= link_to balance.name, balance %></td>   
+        <td style="text-align:center"><%= I18n.l(balance.balance_date) %></td> 
+        <td style="text-align:right"><%= number_to_currency(balance.total_sum) %></td>   
+        <td style="text-align:right"><%= number_to_currency(balance.cash_sum) %></td>   
+        <td style="text-align:right"><%= number_to_currency(balance.portfolio_sum) %></td> 
+        <td style="text-align:right"><%= number_to_currency(balance.loan_sum) %></td> 
+        <td style="text-align:center"><%= balance.details %></td> 
+        <td><%= link_to t("destroy"), balance, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>          
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+
+
+<%= link_to "Accounts", :controller => "accounts" %><br>
+<%= link_to "Banks", :controller => "banks" %><br>

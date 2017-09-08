@@ -1,0 +1,41 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th style="text-align:left"><%= t(:'simple_form.labels.company.company') %></th>   
+      <!-- <th style="text-align:right"><%= t(:'simple_form.labels.company.next_dividend_date') %></th>               -->
+                                                 
+ 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% companies_mostrar.each  do |key, value| %>
+      
+          <tr>            
+            <td style="text-align:left"><%= link_to value.name, value %></td>
+
+            <!-- <td style="text-align:right"><%= value.next_dividend_date %></td>                             -->
+                             
+                                                     
+          </tr>
+      
+        
+
+
+     
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+<br>
+
+
+
+

@@ -1,0 +1,62 @@
+rails g migration add_target_sell_price_to_companies target_sell_price:float
+
+
+
+rails generate scaffold ExpertTargetPrice date_target_price:date target_price_1:float target_price_2:float web_name_id:integer url:string company:references
+
+
+
+rails g migration add_user_id_to_expert_target_prices user_id:integer
+
+rails g migration RemoveWebNameIdFromExpertTargetPrice web_name_id:integer
+
+rails generate scaffold ReferenceWeb name:text url:string user:references
+
+
+rails g migration RemoveReferenceWebFromExpertTargetPrice reference_web:integer
+rails g migration add_reference_web_id2_to_expert_target_prices reference_web_id:integer
+
+rails generate scaffold Comment comment:text url:string company:references user:references
+
+rails g migration RemoveNameFromReferenceWeb name:text
+rails g migration add_name_to_reference_webs name:string
+
+rails generate scaffold CompanyComment comment:text url:string company:references user:references
+
+- añadir realción con usuarios en ExpertTargetPrice
+
+rails generate scaffold CompanyResult fecha_resultado:date es_oficial:boolean cotizacion:float cotiz_max:float cotiz_min:float patrimonio_neto:float gastos_generales:float gastos_desarrollo:float ventas:float ebitda:float ebit:float beneficio_neto_ordinario:float beneficion_neto_total:float deuda_largo_plazo:float deuda_corto_plazo:float deuda_neta:float cf_explotacion:float cf_inversion:float cf_financiacion:float cf_neto:float dividendo_ordinario:float dividendo_extraordinario:float dividendo_total:float num_acciones:float bpa:float payout:float pago_dividendos:float per_max:float per_med:float per_min:float company:references user:references
+
+
+rails g migration add_year_result_to_company_results year_result:date
+rails g migration add_comment_to_company_results comment:text
+
+
+
+
+rails g migration add_googleyahoo_to_stock_exchanges google_prefix:string yahoo_suffix:string
+
+
+
+rails g migration add_aristocrat_activity_desc_to_companies dividend_aristocrat:boolean activity_description:text
+
+
+rails g migration add_dividend_last_result_to_companies dividend_last_result:float
+
+
+
+rails g migration add_more_fields_to_companies shares_quantity:float payout:float dividend_payments_quantity:integer historic_dividend_url:string
+rails generate scaffold CompanyHistoricDividend exdividend_date:date record_date:date announce_date:date payment_Date:date amount: float:date dividend_type:integer company:references user:references
+
+
+rails g migration RemoveVariousFromCompanyHistoricDividend payment_Date:date amount: float:date
+rails g migration add_VariousFromCompanyHistoricDividend payment_date:date amount:float
+
+3.98
+
+shares_quantity 
+payout
+dividend_payments_quantity
+historic_dividend_url
+
+set_last_result_values

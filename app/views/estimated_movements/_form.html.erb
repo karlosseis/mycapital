@@ -1,0 +1,18 @@
+<%= simple_form_for(@estimated_movement) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :amount %>
+    <%= f.input :movement_date %>
+    <%= f.association :subcategory %>
+    <%= f.association :movementtype %>
+    <%= f.association :account %>
+    <%= f.input :month_number %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

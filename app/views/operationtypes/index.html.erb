@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Operationtypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @operationtypes.each do |operationtype| %>
+      <tr>
+        <td><%= operationtype.name %></td>
+        <td><%= link_to 'Show', operationtype %></td>
+        <td><%= link_to 'Edit', edit_operationtype_path(operationtype) %></td>
+        <td><%= link_to 'Destroy', operationtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Operationtype', new_operationtype_path %>

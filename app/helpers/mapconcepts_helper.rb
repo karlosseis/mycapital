@@ -1,0 +1,2 @@
+module MapconceptsHelper
+end

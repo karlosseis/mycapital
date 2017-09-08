@@ -1,0 +1,2 @@
+json.extract! operation, :id, :company_id, :operationtype_id, :amount, :comments, :commission, :currency_id, :destination_tax, :exchange_rate, :fee, :gross_amount, :net_amount, :operation_date, :origin_price, :price, :quantity, :withholding_tax, :created_at, :updated_at
+json.url operation_url(operation, format: :json)

@@ -1,0 +1,30 @@
+<%= simple_form_for(@movement) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :name %>
+        <%= f.input :amount %>
+        <%= f.input :movement_date, as: :date, html5: true %>
+        <%= f.association :subcategory %>
+      </div>
+      <div class="col-md-4">
+        <%= f.association :movementtype %>
+        <%= f.association :account %>
+        <%= f.association :location %>
+      </div>    
+    </div>    
+  </div>
+
+ <div class="row">    
+      <div class="col-md-10 form-actions" >
+
+            <input type="submit" class="btn btn-success"   value=<%= t("save") %> >
+            <%= link_to t("cancel"), movements_url, :class => "btn btn-info", :style=>'color:#FFFFFF;' %>            
+      </div>
+    <div class="col-md-2 text-right form-actions" >        
+            <%= link_to t("destroy"), movements_url,  :class => "btn btn-danger", :style=>'color:#FFFFFF;' , method: :delete, data: { confirm: t("are_you_sure") } %>    
+      </div>   
+  </div>
+<% end %>

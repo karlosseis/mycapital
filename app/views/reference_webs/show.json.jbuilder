@@ -1,0 +1,1 @@
+json.partial! "reference_webs/reference_web", reference_web: @reference_web

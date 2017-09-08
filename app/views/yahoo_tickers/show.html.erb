@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticker:</strong>
+  <%= @yahoo_ticker.ticker %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @yahoo_ticker.name %>
+</p>
+
+<p>
+  <strong>Exchange:</strong>
+  <%= @yahoo_ticker.exchange %>
+</p>
+
+<p>
+  <strong>Name country:</strong>
+  <%= @yahoo_ticker.name_country %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @yahoo_ticker.category %>
+</p>
+
+<%= link_to 'Edit', edit_yahoo_ticker_path(@yahoo_ticker) %> |
+<%= link_to 'Back', yahoo_tickers_path %>

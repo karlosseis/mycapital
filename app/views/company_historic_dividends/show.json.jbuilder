@@ -1,0 +1,1 @@
+json.partial! "company_historic_dividends/company_historic_dividend", company_historic_dividend: @company_historic_dividend

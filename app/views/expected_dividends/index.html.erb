@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Expected Dividends</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Operationtype</th>
+      <th>Operation date</th>
+      <th>Quantity</th>
+      <th>Price unit</th>
+      <th>Amount</th>
+      <th>Currency</th>
+      <th>Origin price</th>
+      <th>Origin price unit</th>
+      <th>Origin amount</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expected_dividends.each do |expected_dividend| %>
+      <tr>
+        <td><%= expected_dividend.company %></td>
+        <td><%= expected_dividend.operationtype %></td>
+        <td><%= expected_dividend.operation_date %></td>
+        <td><%= expected_dividend.quantity %></td>
+        <td><%= expected_dividend.price_unit %></td>
+        <td><%= expected_dividend.amount %></td>
+        <td><%= expected_dividend.currency %></td>
+        <td><%= expected_dividend.origin_price %></td>
+        <td><%= expected_dividend.origin_price_unit %></td>
+        <td><%= expected_dividend.origin_amount %></td>
+        <td><%= expected_dividend.user %></td>
+        <td><%= link_to 'Show', expected_dividend %></td>
+        <td><%= link_to 'Edit', edit_expected_dividend_path(expected_dividend) %></td>
+        <td><%= link_to 'Destroy', expected_dividend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Expected dividend', new_expected_dividend_path %>

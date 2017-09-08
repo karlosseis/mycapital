@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @planif_record.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @planif_record.amount %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @planif_record.day %>
+</p>
+
+<p>
+  <strong>Start month:</strong>
+  <%= @planif_record.start_month %>
+</p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @planif_record.start_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @planif_record.end_at %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @planif_record.subcategory %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @planif_record.account %>
+</p>
+
+<p>
+  <strong>Periodicity:</strong>
+  <%= @planif_record.periodicity %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @planif_record.user %>
+</p>
+
+<%= link_to 'Edit', edit_planif_record_path(@planif_record) %> |
+<%= link_to 'Back', planif_records_path %>

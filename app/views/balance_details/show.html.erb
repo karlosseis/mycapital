@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @balance_detail.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @balance_detail.amount %>
+</p>
+
+<p>
+  <strong>Balance date:</strong>
+  <%= @balance_detail.balance_date %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @balance_detail.balance %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @balance_detail.account %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @balance_detail.user %>
+</p>
+
+<%= link_to 'Edit', edit_balance_detail_path(@balance_detail) %> |
+<%= link_to 'Back', balance_details_path %>

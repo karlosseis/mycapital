@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @estimated_movement.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @estimated_movement.amount %>
+</p>
+
+<p>
+  <strong>Movement date:</strong>
+  <%= @estimated_movement.movement_date %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @estimated_movement.subcategory %>
+</p>
+
+<p>
+  <strong>Movementtype:</strong>
+  <%= @estimated_movement.movementtype %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @estimated_movement.account %>
+</p>
+
+<p>
+  <strong>Month number:</strong>
+  <%= @estimated_movement.month_number %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @estimated_movement.user %>
+</p>
+
+<%= link_to 'Edit', edit_estimated_movement_path(@estimated_movement) %> |
+<%= link_to 'Back', estimated_movements_path %>

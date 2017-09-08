@@ -1,0 +1,32 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company_historic_dividend.exdividend_date') %></th>     
+      <th style="text-align:center"><%= t(:'simple_form.labels.company_historic_dividend.record_date') %></th> 
+      <th style="text-align:center"><%= t(:'simple_form.labels.company_historic_dividend.announce_date') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company_historic_dividend.payment_date') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_historic_dividend.amount') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_historic_dividend.dividend_type') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @company.company_historic_dividends.order('payment_Date DESC').each do |company_historic_dividend| %>
+      <tr>        
+        <td style="text-align:center"><%= format_date(company_historic_dividend.exdividend_date) %></td>
+        <td style="text-align:center"><%= format_date(company_historic_dividend.record_date) %></td>
+        <td style="text-align:center"><%= format_date(company_historic_dividend.announce_date) %></td>
+        <td style="text-align:center"><%= format_date(company_historic_dividend.payment_date) %></td>
+        <td style="text-align:right"><%= number_with_delimiter(company_historic_dividend.amount) %></td> 
+   		  <td><%= company_historic_dividend.dividend_type %></td>
+       <td><%= link_to t("edit"), edit_company_company_historic_dividend_path(@company,company_historic_dividend), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_historic_dividend, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @periodicity.name %>
+</p>
+
+<p>
+  <strong>Num months:</strong>
+  <%= @periodicity.num_months %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @periodicity.user %>
+</p>
+
+<%= link_to 'Edit', edit_periodicity_path(@periodicity) %> |
+<%= link_to 'Back', periodicities_path %>

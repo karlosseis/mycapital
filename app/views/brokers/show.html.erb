@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @broker.name %>
+</p>
+
+<p>
+  <strong>Buy frequency:</strong>
+  <%= @broker.buy_frequency %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @broker.user %>
+</p>
+
+<%= link_to 'Edit', edit_broker_path(@broker) %> |
+<%= link_to 'Back', brokers_path %>

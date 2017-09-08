@@ -1,0 +1,48 @@
+<table  class="table  table-striped">
+  <thead>
+    <tr>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.year_result') %></th>     
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.beneficion_neto_total') %></th> 
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.patrimonio_neto') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.gastos_generales') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.gastos_desarrollo') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.ventas') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.ebitda') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.ebit') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.beneficio_neto_ordinario') %></th>      
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.deuda_largo_plazo') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.deuda_corto_plazo') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company_result.deuda_neta') %></th>
+      <th style="text-align:center"><%= t(:'simple_form.labels.company_result.es_oficial') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.company_results.order('year_result DESC').each do |company_result| %>
+      <tr>        
+        <td style="text-align:right"><%= I18n.l(company_result.year_result, :format => :only_year) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.beneficion_neto_total, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.patrimonio_neto, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.gastos_generales, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.gastos_desarrollo, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.ventas, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.ebitda, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.ebit, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.beneficio_neto_ordinario, precision: 11) %></td>
+        
+        <td style="text-align:right"><%= number_to_human(company_result.deuda_largo_plazo, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.deuda_corto_plazo, precision: 11) %></td>
+        <td style="text-align:right"><%= number_to_human(company_result.deuda_neta, precision: 11) %></td>
+        <td style="text-align:center">          <% if company_result.es_oficial %>            
+            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
+          <% end %>  </td>        
+       <td><%= link_to t("edit"), edit_company_company_result_path(@company,company_result), :class => 'btn btn-sm btn-primary', :style=>'color:#FFFFFF;'  %> </td>            
+        <td><%= link_to t("destroy"), company_result, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

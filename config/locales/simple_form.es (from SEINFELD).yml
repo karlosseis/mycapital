@@ -1,0 +1,302 @@
+es:
+  simple_form:
+    "yes": 'Sí'
+    "no": 'No'
+    labels:
+      user:
+        current_password: Contraseña actual
+        email: Correo electrónico
+        password: Contraseña
+        password_confirmation: Confirmar contraseña
+        remember_me: Recordarme    
+        first_name: Nombre
+        last_name: Apellido
+
+      company:
+        name:  "Nombre"
+        company: "Empresa"
+        symbol: "Símbolo"
+        ticker: "T"
+        stockexchange: "Mercado"
+        sector: "Sector"
+        share_price: "Precio acción"
+        currency: "Moneda"
+        search_symbol: "Símbolo de búsqueda en yahoo"
+        date_share_price: "Fecha precio"
+        dividend_sum: "Dividendos"
+        puchased_sum: "Comprado"
+        sold_sum: "Vendido"
+        ampliated_sum: "Ampliado"
+        quantity_puchased: "Cantidad comprada"
+        quantity_sold: "Cantidad vendida"
+        quantity_ampliated: "Cantidad ampliada"
+        shares_sum: "Total de acciones"
+        invested_sum: "Total invertido"
+        average_price: "Precio medio"
+        average_price_real: "Precio medio real"
+        share_price_global_currency: "Precio actual"
+        estimated_value_global_currency: "Precio estimado"
+        estimated_benefit_global_currency: "Beneficio estimado"
+        perc_estimated_benefit_global_currency: "% Beneficio estimado"
+        average_price_origin_currency: "Precio medio"
+        yoc: "YoC"
+        target_price_1: Objetivo 1
+        target_price_2: Objetivo 2
+        target_sell_price: Precio objetivo venta
+        traffic_light_id: Semáforo
+        investors_url: Web accionistas
+        dif_target_price: Dif. Precio Objetivo
+        porc_dif_target_price: "% Dif"
+        dividend_last_result: "Último Div. Anual"
+        perc_dividend_last_result: "% Div"
+        var_percent: "% Var"
+        activity_description: Actividad de la empresa
+        dividend_aristocrat: Aristócrata
+        first_uninterrupted_year_div: Año inicio dividendos ininterrumpidos e incrementados
+        years_with_dividend: Años Div
+        is_aristocrat: Aristócrata
+        market_cap: Capitalización
+        dividend_payments_quantity: Nº dividendos por año
+        historic_dividend_url: URL histórico dividendos empresa
+        next_exdividend_date: Ex-dividendo
+        next_dividend_date: Próx. Dividendo
+        next_dividend_amount: Dividendo
+
+      operation:
+        company: "Empresa"
+        titulo_editar: "Editar %{operacion} para %{empresa}" 
+        titulo_nueva: "%{operacion} para %{empresa}"                
+        company: "Empresa"
+        operationtype: "Tipo"
+        amount: "Importe Neto"
+        comments: "Comentarios"
+        commission: "Corretaje"
+        currency: "Moneda"
+        destination_tax: "Retención en destino"
+        exchange_rate: "Tipo de cambio"
+        fee: "Gastos bolsa"
+        gross_amount: "Importe bruto"
+        net_amount: "Importe neto"
+        operation_date: "Fecha operación"
+        origin_price: "Precio origen"
+        price: "Precio"
+        quantity: "Número de títulos"
+        withholding_tax: "Retención en origen"
+        broker: Broker
+      yahoo_ticker:
+        seleccionar_empresa: "Seleccionar empresa"
+        search: "Filtrar"
+        name:  "Nombre"
+        ticker: "Símbolo"
+        exchange: "Mercado de valores"
+        sector: "Sector"
+        name_country: "País"  
+        crear_empresa: "Crear empresa"   
+        search_btn: "Buscar" 
+      dashboard: 
+        company_name: "Empresa"
+        month_name: "Mes"
+        dividend_historic_title: "Histórico de dividendos"
+        total_mes:  "Total %{mes}:" 
+        total_anual: "Total año"
+        expected_real_dividend_title:  "Dividendos reales y previstos de %{mes}"
+        real_dividend_month: Dividendos cobrados
+        expected_dividend_month: Dividendos previstos
+        pending_movements: Movimientos pendientes
+        pending_movements_by_account: Pendiente
+        movements_month: Movimientos mes
+      banks:
+        lista_titulo: Bancos
+        titulo_editar: Editar banco
+        titulo_nuevo: Nuevo banco        
+        name: Nombre
+      accounts:
+        lista_titulo: Cuentas
+        titulo_editar: Editar cuenta
+        titulo_nuevo: Nueva cuenta
+        account_type_id: Tipo
+        name: Nombre
+        bank: Banco
+        user: Usuario
+      balances:
+        lista_titulo: Balances
+        titulo_editar: Editar balance
+        titulo_nuevo: Nuevo balance      
+        name: Descripcion
+        balance_date: Fecha
+        user: Usuario
+        total_sum: Total
+        cash_sum: Efectivo
+        portfolio_sum: Cartera
+        loan_sum: Préstamo
+        details: Detalles
+        graph_cash: Efectivo
+        graph_portfolio: Cartera
+        graph_equity: Patrimonio neto
+      balance_details:
+        lista_titulo: Detalles
+        titulo_editar: Editar detalle
+        titulo_nuevo: Nuevo detalle
+        name: Descripcion
+        amount: Saldo
+        balance_date: Fecha
+        balance: Balance
+        account: Cuenta
+        user: Usuario
+      company_comment:
+        comment: Comentario
+        url: Web
+        date_comment: Fecha
+      expert_target_price:
+        date_target_price: Fecha
+        target_price_1: Precio objetivo 1
+        target_price_2: Precio objetivo 2
+        reference_web: Web referencia
+        url: URL
+      company_result:
+        year_result: Año Resultado
+        es_oficial: Datos extraidos de la web oficial
+        cotizacion: "Cotización media"
+        cotiz_max: Cotización máxima
+        cotiz_min: Cotización mínima
+        patrimonio_neto: Patrimonio Neto
+        gastos_generales: Gastos generales
+        gastos_desarrollo: Gastos de desarrollo
+        ventas: Ventas
+        ebitda: EBITDA
+        ebit: EBIT
+        beneficio_neto_ordinario: Beneficio neto ordinario
+        beneficion_neto_total: Beneficio neto total
+        deuda_largo_plazo: Deuda a largo plazo
+        deuda_corto_plazo: Deuda a corto plazo
+        deuda_neta: Deuda neta
+        cf_explotacion: Cash flow explotación
+        cf_inversion: Cash flow inversión
+        cf_financiacion: Cash flow financiación
+        cf_neto: Cash flow neto
+        dividendo_ordinario: Dividendo ordinario
+        dividendo_extraordinario: Dividendo extraordinario
+        dividendo_total: Dividendo total
+        num_acciones: Nº acciones
+        bpa: BPA    
+        payout: Payout
+        pago_dividendos: Dividendos pagados
+        per_max: PER máximo
+        per_med: PER medio
+        per_min: PER mínimo
+        fecha_resultado: Fecha publicación resultados
+        comment: Comentarios  
+      company_historic_dividend:
+        exdividend_date: Fecha Ex-Dividendo
+        record_date: Fecha de registro
+        announce_date: Fecha de declaración
+        payment_date: Fecha de pago
+        amount: Importe bruto
+        dividend_type: Tipo
+      estimated_movement:
+        name: Nombre
+        amount: Importe
+        movement_date: Fecha
+        subcategory: Concepto
+        movementtype: Tipo mov.
+        account: Cuenta
+        month_number: Número mes
+      planification_record:
+        name: Nombre
+        amount: Importe
+        day: Día
+        start_month: Mes comienzo
+        start_at: Fecha inicio
+        end_at: Fecha fin
+        subcategory: "Subcategoría"
+        account: Cuenta
+        periodicity: Periodicidad
+      broker:
+        name: Broker
+        next_buy_date: Límite compra
+      movement:
+        lista_titulo: Movimientos
+        titulo_editar: Editar movimiento
+        titulo_nuevo: Nuevo movimiento           
+        name: Concepto
+        amount: Importe
+        movement_date: Fecha
+        subcategory: Subcategoría
+        movementtype: Tipo
+        account: Cuenta
+        location: Ubicación        
+    tooltips:
+      company_historic_dividend:
+        exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.
+        record_date: Día que se relacionan o listan (registran) los accionistas con derecho a recibir el dividendo.
+        announce_date: Cuando se comunica la aprobación del reparto de dividendos señalando la fecha ex dividendo
+        payment_date: Cuando se materializa el pago del dividendo y lógicamente es la última de las fechas.
+      company:
+        target_price_1: Precio objetivo de compra en la moneda del mercado
+        target_price_2: Precio objetivo de compra FUERTE en la moneda del mercado
+        first_uninterrupted_year_div: Año a partir del cuál la empresa siempre ha incrementado o mantenido el dividendo
+      company_results:
+        cotizacion: Cotización media del año
+        cotiz_max: Cotización máxima del año
+        cotiz_min: Cotización mínima del año
+        patrimonio_neto: Total activo - Total pasivo
+        gastos_generales: General expenses
+        gastos_desarrollo: Development expenses
+        ventas: Operating revenues
+        ebitda: EBITDA
+        ebit: EBIT
+        beneficio_neto_ordinario: Beneficio neto ordinario
+        beneficion_neto_total: Beneficio neto total
+        deuda_largo_plazo: Deuda a largo plazo
+        deuda_corto_plazo: Deuda a corto plazo
+        deuda_neta: Deuda neta
+        cf_explotacion: Cash flow explotación
+        cf_inversion: Cash flow inversión
+        cf_financiacion: Cash flow financiación
+        cf_neto: Cash flow neto
+        dividendo_ordinario: Dividendo neto
+        dividendo_extraordinario: Dividendo extraordinario
+        dividendo_total: Dividendo total
+        num_acciones: Nº acciones
+        bpa: BPA o EPS
+        payout: Payout
+        pago_dividendos: Importe total destinado a pagar dividendos
+        per_max: PER (price-to-earnings ratio) máximo. PER = Cotización / BPA
+        per_med: PER (price-to-earnings ratio) medio. PER = Cotización / BPA
+        per_min: PER (price-to-earnings ratio) mínimo. PER = Cotización / BPA
+        fecha_resultado: Año al que pertenecen los resultados
+        comment: Comentarios            
+    hints:
+      company:
+        name: ""
+    placeholders:
+      company:
+        search_symbol: "Identificador en yahoo para recuperar la cotización del valor. Por ejemplo, ABE.MC, SAN.MC, GSK.."
+
+    required:
+      text: 'requerido'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Por favor, revisa los siguientes problemas:"
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

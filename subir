@@ -1,0 +1,4 @@
+git add .
+git commit -m "recuperacion despues de desaparecer carpeta git"
+git push heroku master
+

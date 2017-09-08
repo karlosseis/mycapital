@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Exdividend date:</strong>
+  <%= @company_historic_dividend.exdividend_date %>
+</p>
+
+<p>
+  <strong>Record date:</strong>
+  <%= @company_historic_dividend.record_date %>
+</p>
+
+<p>
+  <strong>Announce date:</strong>
+  <%= @company_historic_dividend.announce_date %>
+</p>
+
+<p>
+  <strong>Payment date:</strong>
+  <%= @company_historic_dividend.payment_Date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @company_historic_dividend.amount %>
+</p>
+
+<p>
+  <strong>Float:</strong>
+  <%= @company_historic_dividend.float %>
+</p>
+
+<p>
+  <strong>Dividend type:</strong>
+  <%= @company_historic_dividend.dividend_type %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @company_historic_dividend.company %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @company_historic_dividend.user %>
+</p>
+
+<%= link_to 'Edit', edit_company_historic_dividend_path(@company_historic_dividend) %> |
+<%= link_to 'Back', company_historic_dividends_path %>

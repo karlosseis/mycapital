@@ -1,0 +1,129 @@
+
+  <div class="row">
+      <div class="col-md-4">  
+
+        <div class="row">
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.shares_sum') %>:</div>
+          <div class="col-md-6 text-right"><strong><%= number_with_delimiter(@company.shares_sum.round(0)) %></strong></div>    
+
+        </div>
+     
+
+        <div class="row">
+         <div class="col-md-6 text-right"> <%= t(:'simple_form.labels.company.estimated_benefit_global_currency') %>:</div>
+         <div class="col-md-6 text-right"><strong>
+            <% if @company.estimated_benefit_global_currency_now.to_f  >= 0 %>
+              <font color="#009933"><%=  number_to_currency(@company.estimated_benefit_global_currency_now)  %></font>
+          <% else %>
+              <font color="#ff0000"><%=  number_to_currency(@company.estimated_benefit_global_currency_now)  %></font>
+          <% end %>      
+          </strong>
+          
+          </div>      
+      
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 text-right"></div>
+          <div class="col-md-6 text-right"><strong><small>(<%=  number_to_percentage(@company.perc_estimated_benefit_global_currency_now, precision: 2)  %>)</small></strong></div>     
+
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 text-right"> <%= t(:'simple_form.labels.company.invested_sum') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  number_to_currency(@company.invested_sum)  %></strong></div>        
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-md-6 text-right"> <%= t(:'simple_form.labels.company.estimated_value_global_currency') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  number_to_currency(@company.estimated_value_global_currency)  %></strong></div>    
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <div class="row">
+         <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.dividend_sum') %>:</div>
+         <div class="col-md-6 text-right"><strong><%=  number_to_currency(@company.dividend_sum)  %></strong></div>      
+
+        </div>
+
+        <div class="row">
+
+         <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.ampliated_sum') %>:</div>
+         <div class="col-md-6 text-right"><strong><%=  number_to_currency(@company.ampliated_sum) %></strong></div>    
+      
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.sold_sum') %>:</div>
+          <div class="col-md-6 text-right"><strong><%= number_to_currency(@company.sold_sum)  %></strong></div>         
+        </div>
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <div class="row">
+ 
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.puchased_sum') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  number_to_currency(@company.puchased_sum)  %></strong></div>      
+
+        </div>
+
+   
+      </div>
+
+
+
+
+
+  </div>   
+
+
+
+    <br>
+
+
+
+       <div class="row">
+          
+        
+       
+
+  
+
+        <div class="col-md-2 text-right">
+                <br>
+                <%= t(:'simple_form.labels.company.average_price') %>:<br>
+                <%= t(:'simple_form.labels.company.average_price_real') %>:<br>
+                <%= t(:'simple_form.labels.company.share_price_global_currency') %>:<br>
+        </div>
+
+
+        <div class="col-md-1 text-right">
+            <% unless @company.stockexchange.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s %>        
+              <%= @company.stockexchange.currency.symbol%><br>
+              <strong><%= number_with_delimiter(@company.average_price_origin_currency) %></strong><br>
+              <strong><%= number_with_delimiter(@company.average_price_origin_currency_real) %></strong><br>
+              <strong><%= number_with_delimiter(@company.stock_price)  %></strong><br>
+            <% end %>
+        </div>
+
+        <div class="col-md-1 text-right">
+          <%= Mycapital::CURRENCY_PURCHASE_SYMBOL %><br>
+          <strong><%= number_with_delimiter(@company.average_price)  %></strong><br>
+          <strong><%= number_with_delimiter(@company.average_price_real)  %></strong><br>
+          <strong><%= number_with_delimiter(@company.share_price_global_currency)  %></strong>
+        </div>
+
+       
+
+  </div>     

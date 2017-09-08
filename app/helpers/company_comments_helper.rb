@@ -1,0 +1,2 @@
+module CompanyCommentsHelper
+end
