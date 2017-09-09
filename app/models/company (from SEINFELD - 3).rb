@@ -515,8 +515,12 @@ require 'settings.rb'
     end
   end
 
-  def get_stock_price_google
+ def get_stock_price_google
+<<<<<<< HEAD
       begin
+=======
+    
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
         uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
         rs = Net::HTTP.get(uri)
@@ -537,6 +541,7 @@ require 'settings.rb'
         
           
         end
+<<<<<<< HEAD
 
        rescue
           @stock_price = 0
@@ -545,6 +550,8 @@ require 'settings.rb'
           @var_percent= 0
           @date_price= 0
        end
+=======
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
         price
   end
 

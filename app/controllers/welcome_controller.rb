@@ -1,6 +1,9 @@
 class WelcomeController < ApplicationController
   def index
+<<<<<<< HEAD
     if current_user
+=======
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
      @todas = current_user.companies.all
      
      @stars = {}
@@ -13,11 +16,15 @@ class WelcomeController < ApplicationController
      @next_dates_to_buy  = {}  # fechas límite por boker para comprar
 
      current_user.companies.all.each do |company| 
+<<<<<<< HEAD
       unless company.porc_dif_target_price.nil? or company.target_price_1.nil?
 	      if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
 	        @stars[company.id] = company      
 	      end      	
       end
+=======
+
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
   	  unless company.porc_dif_target_sell_price.nil? or company.target_sell_price.nil?	
 	      if company.porc_dif_target_sell_price.to_f <= 5 and company.target_sell_price > 0
 	        @to_sell[company.id] = company      
@@ -33,11 +40,24 @@ class WelcomeController < ApplicationController
         @max_bajadas[company.id] = company      
       end
 
+<<<<<<< HEAD
 
       if company.next_dividend_date.nil? or company.next_dividend_date < Date.today
         @por_revisar_div[company.id] = company      
       end
 
+=======
+      unless company.rojo? # si es roja no quiero que me salga para actualziar dividendos ni para comprar
+        if company.next_dividend_date.nil? or company.next_dividend_date < Date.today
+          @por_revisar_div[company.id] = company      
+        end
+        unless company.porc_dif_target_price.nil? or company.target_price_1.nil?
+          if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
+            @stars[company.id] = company      
+          end       
+        end        
+      end
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
      end
 
      current_user.brokers.all.each do |broker|
@@ -47,6 +67,9 @@ class WelcomeController < ApplicationController
             @next_dates_to_buy[broker.name] = op[0].operation_date + broker.buy_frequency
         end
      end
+<<<<<<< HEAD
     end
+=======
+>>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
   end
 end
