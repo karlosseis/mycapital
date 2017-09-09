@@ -577,7 +577,6 @@ require 'settings.rb'
         # k = Company.find(34)
         # k.set_stock_price_google
         #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        #https://finance.google.com/finance?q=T&output=json
         uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
         rs = Net::HTTP.get(uri)

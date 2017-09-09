@@ -96,7 +96,7 @@ require 'settings.rb'
 
   def  date_share_price_formatted
     date_price = ""
-    unless @date_price.nil?
+    unless @date_price.nil? or @date_price ==0
       date_price = I18n.l(@date_price)
     end
 
@@ -517,8 +517,7 @@ require 'settings.rb'
 
   def get_stock_price_google
       begin
-        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+        uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
         rs = Net::HTTP.get(uri)
 
@@ -533,9 +532,7 @@ require 'settings.rb'
           @stock_price.sub!(',','')
           @var_price =  a[0]["c"] 
           @var_percent= a[0]["cp"] 
-          unless a[0]["lt_dts"].nil?
-            @date_price= a[0]["lt_dts"].to_date 
-          end
+          @date_price= a[0]["lt_dts"].to_date 
           
         
           
@@ -576,9 +573,7 @@ require 'settings.rb'
    
         # k = Company.find(34)
         # k.set_stock_price_google
-        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        #https://finance.google.com/finance?q=T&output=json
-        uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+        uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
         rs = Net::HTTP.get(uri)
         unless rs ==  "httpserver.cc: Response Code 400\n"
