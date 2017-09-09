@@ -1,8 +1,6 @@
 git add .
-<<<<<<< HEAD
+
 git commit -m "recuperacion despues de desaparecer carpeta git"
-=======
-git commit -m "brokers"
->>>>>>> b3dd9c1732a9b9702bffef63204beddd1cde53f7
+
 git push heroku master
 
