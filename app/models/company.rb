@@ -96,7 +96,7 @@ require 'settings.rb'
 
   def  date_share_price_formatted
     date_price = ""
-    unless @date_price.nil?
+    unless @date_price.nil? or @date_price == ""
       date_price = I18n.l(@date_price)
     end
 
