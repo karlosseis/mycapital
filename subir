@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "recuperacion despues de desaparecer carpeta git"
+git commit -m "nueva versión de google_currency, la que había dejó de funcionar"
 
 git push heroku master
 
