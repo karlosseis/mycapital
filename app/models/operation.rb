@@ -55,7 +55,8 @@ class Operation < ActiveRecord::Base
 
 
   def origin_price_formatted
-    number_to_currency(self.origin_price, unit:self.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.origin_price, "€", seperator: ",", delimiter: ".")
+    # *** number_to_currency(self.origin_price, unit:self.currency.symbol, seperator: ",", delimiter: ".")
   end
   
   def foreign_currency_field_required?
