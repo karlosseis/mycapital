@@ -3,8 +3,8 @@ include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 require 'settings.rb'  
   belongs_to :user
-  has_one :stockexchange
-  has_one :sector
+  belongs_to :stockexchange
+  belongs_to :sector
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
