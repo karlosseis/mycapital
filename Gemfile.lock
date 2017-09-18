@@ -102,6 +102,10 @@ GEM
       kaminari (>= 0.13.0)
       rails
     kaminari-core (1.0.1)
+    lol_dba (2.1.4)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      railties (>= 3.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -229,6 +233,7 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   kaminari-bootstrap
+  lol_dba
   mysql2
   pg
   pivot_table
