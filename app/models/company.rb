@@ -224,7 +224,9 @@ require 'settings.rb'
     # share prices in currency purchases (ie, all the operations are bought in euros, 
     # the currency will be euros)
     total = 0
-    if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
+    # *** if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
+    if "€" ==  Mycapital::CURRENCY_PURCHASE then
+      
        total = self.stock_price
     else
       require 'money'
@@ -232,10 +234,14 @@ require 'settings.rb'
       bank = Money::Bank::GoogleCurrency.new
       
       begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
-        total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+        total = self.stock_price * bank.get_rate("USD", Mycapital::CURRENCY_PURCHASE).to_f
+        # *** total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+
+
         # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
         # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
-        if self.stockexchange.currency.name == 'GBP' then
+        if "€" == 'GBP' then
+        # *** if self.stockexchange.currency.name == 'GBP' then
           total = total / 100
         end
       rescue  
