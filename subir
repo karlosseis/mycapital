@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "nueva versión de google_currency, la que había dejó de funcionar"
+git commit -m "cargo en settings las monedas de los stocks"
 
 git push heroku master
 

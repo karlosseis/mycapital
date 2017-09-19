@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
 
     if current_user
 
-     @todas = current_user.companies.all
+     #@todas = current_user.companies.all
      
      @stars = {}
      @to_sell = {}  # acciones cuyo precio de venta se acerca al establecido 
@@ -13,6 +13,8 @@ class WelcomeController < ApplicationController
      @prox_record_date = {}
 
      @next_dates_to_buy  = {}  # fechas límite por boker para comprar
+
+
 
      current_user.companies.all.each do |company| 
 

@@ -23,4 +23,25 @@ class Settings
 	    end 
 	    @google_prefix
 	end
+
+	def self.stockexchange_symbol
+
+		if @stockexchange_currency_symbols.nil?  
+			@stockexchange_currency_symbols = {}
+
+
+		    Stockexchange.all.each do |stockexchange| 
+		    	if stockexchange.currency.symbol.nil? then
+		    		@stockexchange_currency_symbols[stockexchange.id] = "J"
+		    	else	
+		    		@stockexchange_currency_symbols[stockexchange.id] = stockexchange.currency.symbol  
+
+		    	end
+		  
+		     end
+	    end 
+	    @stockexchange_currency_symbols
+
+
+	end
 end

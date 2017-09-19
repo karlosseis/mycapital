@@ -104,11 +104,11 @@ require 'settings.rb'
   end
 
   def share_price_formatted
-    number_to_currency(self.stock_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.stock_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
   def average_price_origin_currency_formatted
-    number_to_currency(self.average_price_origin_currency, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.average_price_origin_currency, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
   def google_symbol
@@ -185,17 +185,17 @@ require 'settings.rb'
   end
 
   def target_price_1_formatted
-    number_to_currency(self.target_price_1, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.target_price_1, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
 
   end
 
   def target_price_2_formatted
-    number_to_currency(self.target_price_2, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.target_price_2, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
 
   end
 
   def target_sell_price_formatted
-    number_to_currency(self.target_sell_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(self.target_sell_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
 
   end
 
@@ -561,11 +561,11 @@ require 'settings.rb'
   end
 
   def stock_price_formatted
-    number_to_currency(@stock_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(@stock_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
   def var_price_formatted
-    number_to_currency(@var_price, unit:self.stockexchange.currency.symbol, seperator: ",", delimiter: ".")
+    number_to_currency(@var_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end  
 
   def var_percent
@@ -618,4 +618,21 @@ require 'settings.rb'
     total
   end
 
+  def stockexchange_currency_symbol
+   
+     currency_symbol = "X"
+    
+      unless Settings.stockexchange_symbol.nil?
+          currency_symbol = Settings.stockexchange_symbol[self.stockexchange_id]
+      end
+
+    currency_symbol
+    #@stockexchange_currency_symbols[stockmarket_id]
+   
+     # if stockmarket_id == 1 
+     #   "€"
+     # else
+     #   "$"
+     # end  
+  end
 end
