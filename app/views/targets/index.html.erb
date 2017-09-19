@@ -63,9 +63,9 @@ $(document).ready(function(){
 <h6 class = "page-header">
    
  
-  <%= form_tag({:controller => "targets", :action => "index"}, :method => :get) do %>  
+<!--   <%= form_tag({:controller => "targets", :action => "index"}, :method => :get) do %>  
 
-      <!-- <div class="col-md-8 "> -->
+      
         <%= radio_button_tag(:only_open, "Y", checked: params[:only_open].eql?("Y")) %>
         <%= label_tag(:age_child, "Sólo mercados abiertos") %>
         <%= radio_button_tag(:only_open, "N", params[:only_open].eql?("N")) %>
@@ -74,7 +74,7 @@ $(document).ready(function(){
         <%= submit_tag "Buscar", :name => nil,  :class =>"btn btn-primary" %>
      
 
-  <% end %>
+  <% end %> -->
  </h6>
 
 
