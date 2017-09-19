@@ -623,16 +623,10 @@ require 'settings.rb'
      currency_symbol = "X"
     
       unless Settings.stockexchange_symbol.nil?
-          currency_symbol = Settings.stockexchange_symbol[self.stockexchange_id]
+         currency_symbol = Settings.stockexchange_symbol[self.stockexchange_id]
       end
 
     currency_symbol
-    #@stockexchange_currency_symbols[stockmarket_id]
    
-     # if stockmarket_id == 1 
-     #   "€"
-     # else
-     #   "$"
-     # end  
   end
 end

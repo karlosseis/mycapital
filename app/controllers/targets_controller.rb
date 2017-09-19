@@ -5,7 +5,7 @@ class TargetsController < ApplicationController
     if params[:only_open] == "N"
      # @yahoo_tickers = YahooTicker.search(params[:search]).page(params[:page]).per(30)
    	  # @greens = current_user.companies.where(traffic_light_id: [:verde])
-	 @greens = current_user.companies.verde
+	   @greens = current_user.companies.verde
   	 @yellows = current_user.companies.amarillo
   	 @greys = current_user.companies.gris
   	 @reds = current_user.companies.rojo
