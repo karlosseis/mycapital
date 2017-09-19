@@ -32,7 +32,7 @@ class Settings
 
 		    Stockexchange.all.each do |stockexchange| 
 		    	if stockexchange.currency.symbol.nil? then
-		    		@stockexchange_currency_symbols[stockexchange.id] = "J"
+		    		@stockexchange_currency_symbols[stockexchange.id] = ""
 		    	else	
 		    		@stockexchange_currency_symbols[stockexchange.id] = stockexchange.currency.symbol  
 
