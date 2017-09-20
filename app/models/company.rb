@@ -3,8 +3,8 @@ include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 require 'settings.rb'  
   belongs_to :user
-  #belongs_to :stockexchange
-  #belongs_to :sector
+  belongs_to :stockexchange
+  belongs_to :sector
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
@@ -218,32 +218,32 @@ require 'settings.rb'
   end
 
   def share_price_global_currency 
-    # # share prices in currency purchases (ie, all the operations are bought in euros, 
-    # # the currency will be euros)
-    # total = 0
-    # if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
-    #    total = self.stock_price
-    # else
-    #   require 'money'
-    #   require 'money/bank/google_currency'      
-    #   bank = Money::Bank::GoogleCurrency.new
+    # share prices in currency purchases (ie, all the operations are bought in euros, 
+    # the currency will be euros)
+    total = 0
+    if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
+       total = self.stock_price
+    else
+      require 'money'
+      require 'money/bank/google_currency'      
+      bank = Money::Bank::GoogleCurrency.new
       
-    #   begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
-    #     total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
-    #     # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
-    #     # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
-    #     if self.stockexchange.currency.name == 'GBP' then
-    #       total = total / 100
-    #     end
-    #   rescue  
-    #     total = 0
-    #   end
+      begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
+        total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+        # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
+        # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
+        if self.stockexchange.currency.name == 'GBP' then
+          total = total / 100
+        end
+      rescue  
+        total = 0
+      end
     
-    # end
-    # unless total.nil?
-    #     total.round(2)
-    # end
-    self.stock_price
+    end
+    unless total.nil?
+        total.round(2)
+    end
+    
   end
 
 
@@ -516,39 +516,40 @@ require 'settings.rb'
   end
 
   def get_stock_price_google
-      begin
-        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+    1
+      # begin
+      #   #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
+      #   uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
-        rs = Net::HTTP.get(uri)
+      #   rs = Net::HTTP.get(uri)
 
-        price = 0
-        unless rs ==  "httpserver.cc: Response Code 400\n"
+      #   price = 0
+      #   unless rs ==  "httpserver.cc: Response Code 400\n"
         
-          rs.delete! '//'
+      #     rs.delete! '//'
 
-          a = JSON.parse(rs) 
+      #     a = JSON.parse(rs) 
 
-          @stock_price =  a[0]["l"] 
-          @stock_price.sub!(',','')
-          @var_price =  a[0]["c"] 
-          @var_percent= a[0]["cp"] 
-          unless a[0]["lt_dts"].nil?
-            @date_price= a[0]["lt_dts"].to_date 
-          end
+      #     @stock_price =  a[0]["l"] 
+      #     @stock_price.sub!(',','')
+      #     @var_price =  a[0]["c"] 
+      #     @var_percent= a[0]["cp"] 
+      #     unless a[0]["lt_dts"].nil?
+      #       @date_price= a[0]["lt_dts"].to_date 
+      #     end
           
         
           
-        end
+      #   end
 
-       rescue
-          @stock_price = 0
+      #  rescue
+      #     @stock_price = 0
           
-          @var_price =  0
-          @var_percent= 0
-          @date_price= ''
-       end
-        price
+      #     @var_price =  0
+      #     @var_percent= 0
+      #     @date_price= ''
+      #  end
+      #  price
   end
 
 
