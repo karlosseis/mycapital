@@ -4,7 +4,7 @@ include ActionView::Helpers::DateHelper
 require 'settings.rb'  
   belongs_to :user
   belongs_to :stockexchange
-  belongs_to :sector
+  #belongs_to :sector
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
