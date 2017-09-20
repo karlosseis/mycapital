@@ -3,7 +3,7 @@ include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 require 'settings.rb'  
   belongs_to :user
-  belongs_to :stockexchange
+  #belongs_to :stockexchange
   #belongs_to :sector
   
   has_many :operations, dependent: :destroy
