@@ -516,39 +516,40 @@ require 'settings.rb'
   end
 
   def get_stock_price_google
-      begin
-        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+    1
+      # begin
+      #   #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
+      #   uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
-        rs = Net::HTTP.get(uri)
+      #   rs = Net::HTTP.get(uri)
 
-        price = 0
-        unless rs ==  "httpserver.cc: Response Code 400\n"
+      #   price = 0
+      #   unless rs ==  "httpserver.cc: Response Code 400\n"
         
-          rs.delete! '//'
+      #     rs.delete! '//'
 
-          a = JSON.parse(rs) 
+      #     a = JSON.parse(rs) 
 
-          @stock_price =  a[0]["l"] 
-          @stock_price.sub!(',','')
-          @var_price =  a[0]["c"] 
-          @var_percent= a[0]["cp"] 
-          unless a[0]["lt_dts"].nil?
-            @date_price= a[0]["lt_dts"].to_date 
-          end
+      #     @stock_price =  a[0]["l"] 
+      #     @stock_price.sub!(',','')
+      #     @var_price =  a[0]["c"] 
+      #     @var_percent= a[0]["cp"] 
+      #     unless a[0]["lt_dts"].nil?
+      #       @date_price= a[0]["lt_dts"].to_date 
+      #     end
           
         
           
-        end
+      #   end
 
-       rescue
-          @stock_price = 0
+      #  rescue
+      #     @stock_price = 0
           
-          @var_price =  0
-          @var_percent= 0
-          @date_price= ''
-       end
-        price
+      #     @var_price =  0
+      #     @var_percent= 0
+      #     @date_price= ''
+      #  end
+      #   price
   end
 
 
