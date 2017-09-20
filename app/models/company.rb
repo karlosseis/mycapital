@@ -122,10 +122,21 @@ require 'settings.rb'
     #   prefix = self.stockexchange.google_prefix
     # end
     prefix + self.symbol
-
     
   end
   
+  def yahoo_symbol
+     suffix = ""
+
+     unless Settings.yahoo_suffixes.nil?
+         suffix = Settings.yahoo_suffixes[self.stockexchange_id]
+     end
+
+
+    self.symbol + suffix
+    
+  end
+
   def url_google_finance
     "https://www.google.com/finance?q=" + self.google_symbol
   end
@@ -519,7 +530,8 @@ require 'settings.rb'
       begin
         #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
-        if self.stockexchange_id ==1
+        if Settings.yahoo_suffixes[self.stockexchange_id] == ".MC"
+          # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
 
           uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
@@ -541,15 +553,13 @@ require 'settings.rb'
             end
           end
         else
-          stocks = StockQuote::Stock.quote(self.symbol)
-          if stocks.success?
+          stocks = StockQuote::Stock.quote(self.yahoo_symbol)
+          #if stocks.success? # en el log sale que está deprecated
             @stock_price = stocks.bid
             @var_price = stocks.change           
             @var_percent = stocks.percent_change
             @date_price  = stocks.last_trade_date
-
-
-          end
+          #end
         end   
           
         
