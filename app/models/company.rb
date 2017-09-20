@@ -516,40 +516,51 @@ require 'settings.rb'
   end
 
   def get_stock_price_google
-    1
-      # begin
-      #   #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-      #   uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+      begin
+        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
 
-      #   rs = Net::HTTP.get(uri)
+        if self.stockexchange_id ==1
 
-      #   price = 0
-      #   unless rs ==  "httpserver.cc: Response Code 400\n"
-        
-      #     rs.delete! '//'
+          uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
-      #     a = JSON.parse(rs) 
+          rs = Net::HTTP.get(uri)
 
-      #     @stock_price =  a[0]["l"] 
-      #     @stock_price.sub!(',','')
-      #     @var_price =  a[0]["c"] 
-      #     @var_percent= a[0]["cp"] 
-      #     unless a[0]["lt_dts"].nil?
-      #       @date_price= a[0]["lt_dts"].to_date 
-      #     end
+          price = 0
+          unless rs ==  "httpserver.cc: Response Code 400\n"
+          
+            rs.delete! '//'
+
+            a = JSON.parse(rs) 
+
+            @stock_price =  a[0]["l"] 
+            @stock_price.sub!(',','')
+            @var_price =  a[0]["c"] 
+            @var_percent= a[0]["cp"] 
+            unless a[0]["lt_dts"].nil?
+              @date_price= a[0]["lt_dts"].to_date 
+            end
+          end
+        else
+          stocks = StockQuote::Stock.quote(self.symbol)
+          if stocks.success?
+            @stock_price = stocks.bid
+            @var_price = stocks.change           
+            @var_percent = stocks.percent_change
+            @date_price  = stocks.last_trade_date
+
+
+          end
+        end   
           
         
-          
-      #   end
 
-      #  rescue
-      #     @stock_price = 0
-          
-      #     @var_price =  0
-      #     @var_percent= 0
-      #     @date_price= ''
-      #  end
-      #  price
+       rescue
+          @stock_price = 0          
+          @var_price =  0
+          @var_percent= 0
+          @date_price= ''
+       end
+       price
   end
 
 
