@@ -555,7 +555,7 @@ require 'settings.rb'
         else
           stocks = StockQuote::Stock.quote(self.yahoo_symbol)
           #if stocks.success? # en el log sale que está deprecated
-            @stock_price = stocks.bid
+            @stock_price = stocks.last_trade_price_only
             @var_price = stocks.change           
             @var_percent = stocks.percent_change
             @date_price  = stocks.last_trade_date
