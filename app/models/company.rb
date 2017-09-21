@@ -561,7 +561,7 @@ require 'settings.rb'
             @var_percent = stocks.percent_change
             @date_price = ""
             unless stocks.last_trade_date.nil?
-              @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y').strftime("%d-%m-%Y")
+              @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
             end            
             
           #end
