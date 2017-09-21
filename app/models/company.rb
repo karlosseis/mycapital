@@ -548,6 +548,7 @@ require 'settings.rb'
             @stock_price.sub!(',','')
             @var_price =  a[0]["c"] 
             @var_percent= a[0]["cp"] 
+            @date_price = ""
             unless a[0]["lt_dts"].nil?
               @date_price= a[0]["lt_dts"].to_date 
             end
@@ -558,7 +559,11 @@ require 'settings.rb'
             @stock_price = stocks.last_trade_price_only
             @var_price = stocks.change           
             @var_percent = stocks.percent_change
-            @date_price  = stocks.last_trade_date
+            @date_price = ""
+            unless stocks.last_trade_date.nil?
+              @date_price= stocks.last_trade_date.to_date 
+            end            
+            
           #end
         end   
           
