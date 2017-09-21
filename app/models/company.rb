@@ -240,7 +240,7 @@ require 'settings.rb'
       bank = Money::Bank::GoogleCurrency.new
       
       begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
-        total = self.stock_price * bank.get_rate(selfstockexchange_currency_name, Mycapital::CURRENCY_PURCHASE).to_f
+        total = self.stock_price * bank.get_rate(self.stockexchange_currency_name, Mycapital::CURRENCY_PURCHASE).to_f
         # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
         # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
         if self.stockexchange_currency_name == 'GBP' then

@@ -4,7 +4,7 @@ class Settings
 	end
 
 	def self.load_settings
-		if @google_prefix.nil?  or @stockexchange_currency_symbols.nil?  or @yahoo_suffix.nil? or @stockexchange_currency_name.nil?
+		if @google_prefix.nil?  or @stockexchange_currency_symbols.nil?  or @yahoo_suffix.nil? or @stockexchange_currency_names.nil?
 			@google_prefix = {}
 			@yahoo_suffix = {}
 			@stockexchange_currency_symbols = {}
