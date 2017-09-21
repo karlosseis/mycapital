@@ -4,10 +4,11 @@ class Settings
 	end
 
 	def self.load_settings
-		if @google_prefix.nil?  or @stockexchange_currency_symbols.nil?  or @yahoo_suffix.nil? 
+		if @google_prefix.nil?  or @stockexchange_currency_symbols.nil?  or @yahoo_suffix.nil? or @stockexchange_currency_name.nil?
 			@google_prefix = {}
 			@yahoo_suffix = {}
 			@stockexchange_currency_symbols = {}
+			@stockexchange_currency_names = {}
 			@stocks = Stockexchange.all
 
 		    @stocks.each do |stockexchange| 
@@ -30,12 +31,21 @@ class Settings
 
 		    	end
 
+   				if stockexchange.currency.name.nil? then
+		    		@stockexchange_currency_names[stockexchange.id] = ""
+		    	else	
+		    		@stockexchange_currency_names[stockexchange.id] = stockexchange.currency.name  
+
+		    	end
+
 		     end
 
 		end
 
 
 	end
+
+
 
 	def self.google_prefixes
 		self.load_settings
@@ -48,11 +58,15 @@ class Settings
 		
 	end
 
-	def self.stockexchange_symbol
+	def self.stockexchange_currency_symbol
 		self.load_settings
 		@stockexchange_currency_symbols
 	end
 
+	def self.stockexchange_currency_name
+		self.load_settings
+		@stockexchange_currency_names	
+	end
 
 
 	# def self.google_prefixes

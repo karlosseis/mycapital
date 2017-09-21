@@ -232,7 +232,7 @@ require 'settings.rb'
     # share prices in currency purchases (ie, all the operations are bought in euros, 
     # the currency will be euros)
     total = 0
-    if self.stockexchange.currency.name ==  Mycapital::CURRENCY_PURCHASE then
+    if self.stockexchange_currency_name ==  Mycapital::CURRENCY_PURCHASE then
        total = self.stock_price
     else
       require 'money'
@@ -240,10 +240,10 @@ require 'settings.rb'
       bank = Money::Bank::GoogleCurrency.new
       
       begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
-        total = self.stock_price * bank.get_rate(self.stockexchange.currency.name, Mycapital::CURRENCY_PURCHASE).to_f
+        total = self.stock_price * bank.get_rate(selfstockexchange_currency_name, Mycapital::CURRENCY_PURCHASE).to_f
         # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
         # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
-        if self.stockexchange.currency.name == 'GBP' then
+        if self.stockexchange_currency_name == 'GBP' then
           total = total / 100
         end
       rescue  
@@ -561,7 +561,7 @@ require 'settings.rb'
             @var_percent = stocks.percent_change
             @date_price = ""
             unless stocks.last_trade_date.nil?
-              @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
+              @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y').strftime("%d-%m-%Y")
             end            
             
           #end
@@ -649,11 +649,24 @@ require 'settings.rb'
    
      currency_symbol = "X"
     
-      unless Settings.stockexchange_symbol.nil?
-         currency_symbol = Settings.stockexchange_symbol[self.stockexchange_id]
+      unless Settings.stockexchange_currency_symbol.nil?
+         currency_symbol = Settings.stockexchange_currency_symbol[self.stockexchange_id]
       end
 
     currency_symbol
    
   end
+
+  def stockexchange_currency_name
+   
+     currency_name = "Y"
+    
+      unless Settings.stockexchange_currency_name.nil?
+         currency_name = Settings.stockexchange_currency_name[self.stockexchange_id]
+      end
+
+    currency_name
+   
+  end
+
 end
