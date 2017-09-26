@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "cargo en settings las monedas de los stocks"
+git commit -m "compras segun activotrade"
 
 git push heroku master
 

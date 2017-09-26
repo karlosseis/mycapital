@@ -35,9 +35,10 @@ es:
         average_price: "Precio medio"
         average_price_real: "Precio medio real"
         share_price_global_currency: "Precio actual"
-        estimated_value_global_currency: "Precio estimado"
-        estimated_benefit_global_currency: "Beneficio estimado"
-        perc_estimated_benefit_global_currency: "% Beneficio estimado"
+        estimated_value_operations_currency: "Valor estimado"
+        estimated_value_now: "Valor estimado"
+        estimated_benefit_operations_currency: "Beneficio estimado"
+        perc_estimated_benefit_operations_currency: "% Beneficio estimado"
         average_price_origin_currency: "Precio medio"
         yoc: "YoC"
         target_price_1: Objetivo 1
@@ -73,16 +74,17 @@ es:
         commission: "Corretaje"
         currency: "Moneda"
         destination_tax: "Retención en destino"
-        exchange_rate: "Tipo de cambio"
+        exchange_rate: "Tasa de cambio a Euros"
         fee: "Gastos bolsa"
         gross_amount: "Importe bruto"
         net_amount: "Importe neto"
         operation_date: "Fecha operación"
-        origin_price: "Precio origen"
+        origin_price: "Precio"
         price: "Precio"
         quantity: "Número de títulos"
         withholding_tax: "Retención en origen"
         broker: Broker
+        currency_operation: "Moneda operación"
       yahoo_ticker:
         seleccionar_empresa: "Seleccionar empresa"
         search: "Filtrar"
@@ -226,6 +228,10 @@ es:
         account: Cuenta
         location: Ubicación        
     tooltips:
+      operation:
+        currency: Moneda empresa si ING o Euros si activo trade
+        origin_price: Precio en la moneda anterior seleccionada
+        exchange_rate: Precio USD * Tasa tiene quedar Euros. Es decir poner el resultado de dividir USD / EUR
       company_historic_dividend:
         exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.
         record_date: Día que se relacionan o listan (registran) los accionistas con derecho a recibir el dividendo.

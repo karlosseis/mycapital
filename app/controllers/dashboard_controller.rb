@@ -3,39 +3,54 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
-    #PopulateExpectedDividendsJob.perform_now()
-  
-    @global_value = current_user.companies.sum(:estimated_value_global_currency).round(2)
-    @global_benefit = current_user.companies.sum(:estimated_benefit_global_currency).round(2) 
-    # @global_invested = current_user.companies.sum(:invested_sum).round(2)
-
-    # @global_value = 0
-    # @global_benefit = 0
     
-    # current_user.companies.all.each do |comp|
-    #   @global_value = @global_value + comp.estimated_value_global_currency_now
-    #   @global_benefit  = @global_benefit + comp.estimated_benefit_global_currency_now
+    # valor estimado en las diferentes monedas de las operaciones
+    @global_value_currencies = current_user.companies.group(:currency_symbol_operations).sum(:estimated_value_operations_currency)
+    @global_benefit_currencies = current_user.companies.group(:currency_symbol_operations).sum(:estimated_benefit_operations_currency)
+
+    # valor estimado en euros (convertimos todas las monedas a euros)  
+    @global_value = 0
+    @global_benefit = 0
+
+    @global_value_currencies.each  do |key, value|  
+      c = Currency.find_by(symbol: key)      
+      unless c.nil?
+        @global_value = @global_value + convert_to_eur(value, c.name) 
+      end
+    end 
+
+    @global_benefit_currencies.each  do |key, value|  
+      c = Currency.find_by(symbol: key)      
+      unless c.nil?
+        @global_benefit = @global_benefit + convert_to_eur(value, c.name) 
+      end
+    end 
+
+    @global_value_currencies.delete(nil) # si viene alguna moneda a nulo la borro porque sino peta la búsqueda de la moneda.
+    # convierto los símbolos de moneda en el id que le corresponde para poder ordenarlas y que salgan primero EUROS
+    @global_value_currencies = @global_value_currencies.transform_keys{ |key| Currency.find_by(symbol: key.to_s).id  }
+    @global_value_currencies = @global_value_currencies.sort
+
+
+    # @global_invested = current_user.companies.sum(:invested_sum).round(2)
+    # @global_perc_benefit = 0
+    # unless @global_invested.to_f == 0 then
+    #   @global_perc_benefit = @global_benefit.to_f * 100 / @global_invested.to_f
     # end
-
-    # @global_value=  @global_value.round(2)
-    # @global_benefit=  @global_benefit.round(2)
-
-
-    @global_perc_benefit = 0
-    unless @global_invested.to_f == 0 then
-      @global_perc_benefit = @global_benefit.to_f * 100 / @global_invested.to_f
-    end
-    @global_perc_benefit.round(2)
+    # @global_perc_benefit.round(2)
   
 
   
     @last_purchases = current_user.operations.where(operationtype_id: Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(3)    
     @next_dividends= current_user.expected_dividends.where('operationtype_id = ? and operation_date >= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_day).order(operation_date: :asc).limit(3)    
     
-    @purchases_current_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_PURCHASE, Time.now.beginning_of_year,Time.now.end_of_year).sum(:amount)
+    @purchases_current_year_currencies= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_PURCHASE, Time.now.beginning_of_year,Time.now.end_of_year).group(:currency_operation_id).sum(:amount)
     
 
+    @purchases_current_year = 0
+    @purchases_current_year_currencies.each  do |key, value|              
+        @purchases_current_year = @purchases_current_year + convert_to_eur(value, Currency.find(key).name)       
+    end 
 
 
     @dividends_current_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_year,Time.now.end_of_year).group(:currency_id).sum(:net_amount)
@@ -73,11 +88,16 @@ class DashboardController < ApplicationController
     @real_dividends_group_month = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year).group_by_month(:operation_date).sum(:net_amount)
     
 
-    @purchases_group_year = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).group_by_year(:operation_date, format: "%Y").sum(:amount)
+    @purchases_group_year_eur = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE, :currency_operation_id => Currency.find_by_name("EUR")).group_by_year(:operation_date, format: "%Y").sum(:amount)
+    @purchases_group_year_usd = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE, :currency_operation_id => Currency.find_by_name("USD")).group_by_year(:operation_date, format: "%Y").sum(:amount)
+    @purchases_group_year_gbp = current_user.operations.where(:operationtype_id => Mycapital::OP_PURCHASE, :currency_operation_id => Currency.find_by_name("GBP")).group_by_year(:operation_date, format: "%Y").sum(:amount)
 
-    @real_dividends_group_year=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
-    #@expected_dividends_group_company=  current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).group(:company).sum(:net_amount)
-    @expected_dividends_group_company=   current_user.expected_dividends.group(:company).sum(:amount)
+    @real_dividends_group_year_eur=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("EUR")).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
+    @real_dividends_group_year_usd=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("USD")).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
+    @real_dividends_group_year_gbp=  current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("GBP")).group_by_year(:operation_date, format: "%Y").sum(:net_amount)
+
+    
+    #@expected_dividends_group_company=   current_user.expected_dividends.group(:company).sum(:amount)
 
    
 
@@ -89,6 +109,8 @@ class DashboardController < ApplicationController
   
 
   def index_historic_dividend
+
+    # 25.09.2017 - No actualizado para tener en cuenta dividendos en moneda extranjera. Se incluirá en PowerBI
 
     # Buscamos todos los dividendos
     opers = current_user.operations.select(:company_id, :operation_date, :net_amount).where(:operationtype_id => Mycapital::OP_DIVIDEND).order('operation_date').group_by { |u| u.operation_date.beginning_of_month }

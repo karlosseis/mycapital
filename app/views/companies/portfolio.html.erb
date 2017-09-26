@@ -32,7 +32,7 @@ $(document).ready(function(){
       <th style="text-align:right"><%= t(:'simple_form.labels.company.share_price') %></th>
         
      
-      <th style="text-align:right"><%= t(:'simple_form.labels.company.estimated_value_global_currency') %></th>
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.estimated_value_operations_currency') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.invested_sum') %></th>
       <th style="text-align:right">Beneficio <br> estimado</th>
       <th style="text-align:right">%</th>
@@ -49,20 +49,20 @@ $(document).ready(function(){
         <td style="text-align:left"><%= link_to company.name, company %></td>              
         <td style="text-align:right"><%= company.share_price_formatted %></td>              
         
-        <td style="text-align:right"><%= number_to_currency(company.estimated_value_global_currency) %></td>    
-        <td style="text-align:right"><%= number_to_currency(company.invested_sum) %></td>   
-        <td style="text-align:right">    <% if company.estimated_benefit_global_currency_now.to_f >= 0 %>
-        <font color="#009933"><%= number_to_currency(company.estimated_benefit_global_currency_now) %></font>
+        <td style="text-align:right"><%= company.number_currency_operations(company.estimated_value_operations_currency) %></td>    
+        <td style="text-align:right"><%= company.number_currency_operations(company.invested_sum) %></td>   
+        <td style="text-align:right">    <% if company.estimated_benefit_now.to_f >= 0 %>
+        <font color="#009933"><%= company.number_currency_operations(company.estimated_benefit_now) %></font>
         <% else %>
-            <font color="#ff0000"><%= number_to_currency(company.estimated_benefit_global_currency_now) %></font>
+            <font color="#ff0000"><%= company.number_currency_operations(company.estimated_benefit_now) %></font>
         <% end %>      
         
         </td>   
         <td style="text-align:right">
-          <%= number_to_percentage(company.perc_estimated_benefit_global_currency_now, precision: 2) %> <br> 
+          <%= number_to_percentage(company.perc_estimated_benefit_now, precision: 2) %> <br> 
           
         </td>   
-        <td style="text-align:right"><%= company.average_price_origin_currency_formatted %></td>  
+        <td style="text-align:right"><%= company.number_currency_operations(company.average_price_origin_currency) %></td>  
         <td style="text-align:right"><%= number_to_percentage(company.expected_yoc, precision: 2) %></td>  
            
       </tr>

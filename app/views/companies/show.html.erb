@@ -91,7 +91,17 @@
           
         </div>
         <div class="col-md-4" >
-            <h2 class="text-center"><%=@company.share_price_formatted %></h2>
+
+            <h2 class="text-center">
+               <% if @company.target_price_1.to_f >= @company.share_price.to_f %>
+                <font color="#009933"><%=@company.share_price_formatted %></font>
+              <% else %>
+                <%=@company.share_price_formatted %>
+              <% end %>   
+            
+              
+
+            </h2>
          <h6 class="text-center">   
          <% if @company.var_percent.to_f >= 0 %>
             <font color="#009933"><%= number_to_percentage(@company.var_percent, precision: 2) %></font>
@@ -103,16 +113,19 @@
             <!-- <h6 class="text-muted text-center"><%=@company.date_share_price_formatted%></h6>    -->       
         </div>
       </div>
-    </div>     
+    </div>      
    
     <div class="col-md-7">
       <div class="row">
         <div class="col-md-4" >    
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.invested_sum') %></h6>
-            <h5 class="text-center"><%= number_to_currency(@company.invested_sum)  %></h5>
+            <h5 class="text-center"><%= @company.number_currency_operations(@company.invested_sum)  %></h5>
 
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.average_price_origin_currency') %></h6>
-            <h5 class="text-center"><%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %></h5>
+            <h5 class="text-center">
+
+              <%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %>
+            </h5>
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.yoc') %></h6>            
             <h5 class="text-center"><%=number_to_percentage(@company.expected_yoc, precision: 2) %></h5>            
         </div>

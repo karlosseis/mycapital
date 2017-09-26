@@ -68,7 +68,7 @@ end
   resources :dashboards
 
   get 'portfolio', to: 'companies#portfolio'
-  get 'index_historic_dividend', to: 'dashboard#index_historic_dividend'
+  #get 'index_historic_dividend', to: 'dashboard#index_historic_dividend'
   get 'index_expect_real_dividend_month', to: 'dashboard#index_expect_real_dividend_month'
   get 'index_estimated_movements', to: 'dashboard#index_estimated_movements'
 

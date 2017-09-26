@@ -30,7 +30,7 @@ require 'settings.rb'
   @var_percent = 0
   @date_price = ''
 
-  after_find :get_stock_price_google
+  after_find :get_stock_price
 
   def self.search(search)
 
@@ -51,14 +51,12 @@ require 'settings.rb'
   end
 
 
+  # def get_google_finance_data
+  #   get_stock_price
+  # end
 
 
-  def get_google_finance_data
-    get_stock_price_google
-  end
-
-
-  def to_s
+  def to_s  
     name
   end  
 
@@ -68,8 +66,8 @@ require 'settings.rb'
 
 
 
-
-  def perc_dividend_last_result
+  
+  def perc_dividend_last_result   
     perc_expected = 0
     unless self.stock_price==0 or self.stock_price.nil? or self.dividend_last_result ==0 or self.dividend_last_result.nil?
       perc_expected = (self.dividend_last_result * 100) / self.stock_price
@@ -103,7 +101,7 @@ require 'settings.rb'
     date_price
   end
 
-  def share_price_formatted
+  def share_price_formatted  # REVISADO. NADA QUE REVISAR
     number_to_currency(self.stock_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
@@ -111,7 +109,7 @@ require 'settings.rb'
     number_to_currency(self.average_price_origin_currency, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
-  def google_symbol
+  def google_symbol # REVISADO. NADA QUE REVISAR
      prefix = ""
 
      unless Settings.google_prefixes.nil?
@@ -125,7 +123,7 @@ require 'settings.rb'
     
   end
   
-  def yahoo_symbol
+  def yahoo_symbol # REVISADO. NADA QUE REVISAR
      suffix = ""
 
      unless Settings.yahoo_suffixes.nil?
@@ -145,12 +143,18 @@ require 'settings.rb'
       op = self.operations.where(operationtype_id: Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(1) 
       price = ""
       date_purchase = ""
-      #currency_symbol = ""
+ 
 
       op.each do |p| 
-          price =   number_to_currency(p.origin_price, unit:p.currency.symbol, seperator: ",", delimiter: ".")
+          if self.currency_symbol_operations.to_s == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s   then 
+            # si la compra es en euros, hay que coger el precio origen       
+            price =   number_to_currency(p.origin_price, unit:p.currency.symbol, seperator: ",", delimiter: ".")
+          else
+            # sino, el precio de compra normal
+            price =   number_currency_operations(p.price)
+          end
           date_purchase = I18n.l(p.operation_date)
-          #currency_symbol  = p.currency.symbol 
+         
       end
       ret = { a: price, b: date_purchase}   
      
@@ -164,7 +168,7 @@ require 'settings.rb'
     date_dividend = ""
 
       div.each do |p| 
-          amount = number_to_currency(p.amount)
+          amount = number_currency_operations(p.amount)
           date_dividend = I18n.l(p.operation_date)
       end
       ret = { a: amount, b: date_dividend}   
@@ -228,9 +232,8 @@ require 'settings.rb'
     perc_result    
   end
 
-  def share_price_global_currency 
-    # share prices in currency purchases (ie, all the operations are bought in euros, 
-    # the currency will be euros)
+  def share_price_global_currency  # REVISADO OK
+    # precio de la acción en la moneda global de compra (EUROS)
     total = 0
     if self.stockexchange_currency_name ==  Mycapital::CURRENCY_PURCHASE then
        total = self.stock_price
@@ -241,11 +244,6 @@ require 'settings.rb'
       
       begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
         total = self.stock_price * bank.get_rate(self.stockexchange_currency_name, Mycapital::CURRENCY_PURCHASE).to_f
-        # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
-        # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
-        if self.stockexchange_currency_name == 'GBP' then
-          total = total / 100
-        end
       rescue  
         total = 0
       end
@@ -256,58 +254,66 @@ require 'settings.rb'
     end
     
   end
+ 
 
+   def set_estimated_values  # REVISADO NUEVO
+     # valor, beneficio y porcenteje de beneficio en la moneda de las operaciones de la empresa
+     # 25.09.2017 - antes llamada set_estimated_value_global_currency
+     # valor estimado de las acciones en compania en la moneda de las operaciones de la empresa. 
 
+     self.estimated_value_operations_currency = estimated_value_now
+     self.estimated_benefit_operations_currency = estimated_benefit_now
+     self.perc_estimated_benefit_operations_currency = perc_estimated_benefit_now
 
-  def set_perc_estimated_benefit_global_currency  
-    # porcentaje de beneficio en base al valor estimado actual en la moneda de la aplicación (EUROS)
-   
-    total = 0
-    unless invested_sum == 0 then
-        total = estimated_benefit_global_currency.to_f * 100 / invested_sum.to_f
-    end
-    self.perc_estimated_benefit_global_currency = total.round(2)
-  end
-
-  def set_estimated_benefit_global_currency 
-    # beneficio estimado en la moneda de la aplicación (EUROS)
-    total = estimated_value_global_currency.to_f - invested_sum.to_f
-    self.estimated_benefit_global_currency = total.round(2)
-    self.set_perc_estimated_benefit_global_currency()
-  end
-
-   def set_estimated_value_global_currency
-    # valor estimado de las acciones en compania en la moneda de la aplicación (EUROS)
-     total = share_price_global_currency.to_f * shares_sum
-     self.estimated_value_global_currency= total.round(2)
-     self.set_estimated_benefit_global_currency()
    end
 
    def estimated_value_global_currency_now
      share_price_global_currency.to_f * shares_sum
    end
 
-   def estimated_benefit_global_currency_now
-    # beneficio estimado tomando el precio actual de google finance y no el guardado en bdd
+   def estimated_value_now # nueva
+    # valor actual del total de acciones de la empresa en la moneda de COMPRA de la empresa    
+    total = 0
+    if self.currency_symbol_operations == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s then
+      total = share_price_global_currency.to_f * shares_sum
+    else      
+      total = self.stock_price * shares_sum 
 
-    total = estimated_value_global_currency_now - invested_sum.to_f
-    total.round(2)
-    #self.set_perc_estimated_benefit_global_currency()
-
+    end
+    total
    end
 
-  def perc_estimated_benefit_global_currency_now  
-    # porcentaje de beneficio en base al valor estimado actual en la moneda de la aplicación (EUROS)
+  def perc_estimated_benefit_now  # NUEVA
+    # porcentaje de beneficio en base al valor estimado actual en la moneda de compra de la empresa
    
     total = 0
     unless invested_sum == 0 then
-        total = estimated_benefit_global_currency_now.to_f * 100 / invested_sum.to_f
+        total = estimated_benefit_now.to_f * 100 / invested_sum.to_f
     end
     total.round(2)
   end
 
 
-  def set_average_price 
+   def estimated_benefit_now  # NUEVA Y REVISADA  
+     # beneficio estimado tomando el precio actual en la moneda de compras de la empresa
+
+    # si la empresa trabaja en la misma moneda que se compran las operaciones, no hay que convertir el precio de la acción a euros
+    # Corresponde a las empresas españolas (euros) y a las extranjeras compradas con activotrade (si se compra en USD, el beneficio es en USD)
+    if self.stockexchange_currency_symbol ==  self.currency_symbol_operations then
+       total = estimated_value_now - invested_sum.to_f        
+    else
+       # la empresa es en moneda extranjera pero la compramos en euros (extranjera comprada en ING). Hay que convertir el 
+       # valor total de las acciones de la empresa en moneda extranjera (USD, p.ej) hay que convertirlo a euros y 
+       #  de ahí restarle el total invertido, que será en euros.
+       total = estimated_value_global_currency_now - invested_sum.to_f    
+    end
+    total.round(2)
+   end
+
+
+
+
+  def set_average_price # AQUÍ TAMBIÉN HAY FOLLÓN
     # precio medio de la acción en base a las compras realizadas (moneda de la aplicación, EUROS)
       total = 0
       total_real = 0        
@@ -336,36 +342,45 @@ require 'settings.rb'
       # hay que tener en cuenta las ventas y también las ampliaciones
   end
 
-  def set_shares_sum
+  def set_shares_sum     # REVISADO 
     # total de acciones
     self.shares_sum = (quantity_puchased.to_i - quantity_sold.to_i + quantity_ampliated.to_i).round(0)
-    self.set_estimated_value_global_currency()
+    self.set_estimated_values()
   end
 
 
-  def set_invested_sum 
+  def set_invested_sum      # REVISADO 
     # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros) + las ampliaciones, que también pueden costar dinero
     # hace cambiar el precio medio de la acción y el beneficio estimado
      self.invested_sum = puchased_sum.to_f - sold_sum.to_f + ampliated_sum.to_f
      self.set_average_price()
-     self.set_estimated_benefit_global_currency()
+     self.set_estimated_values()
   end 
 
 
-  def set_dividend_sum   
+  def set_dividend_sum        # REVISADO 
     total = self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:net_amount)
     self.dividend_sum   = total.round(2)
   end
 
-  def set_puchased_sum 
+  def set_purchased_sum      # REVISADO 
     total = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:amount)
     self.puchased_sum = total.round(2)
     self.quantity_puchased = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:quantity)
+
+    # grabamos en la cabecera la moneda de una de las operaciones y esta servirá para compras, div, ventas...
+    # Se utilizará para mostrarla en el summary, donde la cantidad comprada, ampliada... así com el próximo dividendo
+    res = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).limit(1)        
+    res.each do |p| 
+       self.currency_symbol_operations = Currency.find(p.currency_operation_id).symbol
+    end
+    
+
     self.set_shares_sum()
     self.set_invested_sum()
   end
 
-  def set_sold_sum  
+  def set_sold_sum       # REVISADO 
       total = self.operations.where(:operationtype_id => Mycapital::OP_SALE).sum(:amount)
       self.sold_sum  = total.round(2)
       self.quantity_sold = self.operations.where(:operationtype_id => Mycapital::OP_SALE).sum(:quantity)
@@ -373,17 +388,20 @@ require 'settings.rb'
       self.set_invested_sum()
   end
 
-  def set_ampliated_sum  
+  def set_ampliated_sum       # REVISADO 
       total = self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:amount)
       self.ampliated_sum  = total.round(2)
       self.quantity_ampliated = self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:quantity)
       self.set_shares_sum()
   end
 
-  # Por acabar
-  def set_average_price_origin_currency
-      total = 0  
-      total_real = 0       
+  
+  def set_average_price_origin_currency   # POR ACABAR (ANTES DE REVISIÓN 22.09.2017)
+    # precio medio en la moneda de la empresa, es decir, independientemente de si he comprado en euros o no
+      total = 0  # total sin comisiones
+      total_real = 0      # total con comisiones
+   
+      
       self.operations.where.not(:operationtype_id => Mycapital::OP_DIVIDEND).each do |op| 
         unless op.origin_price.nil? || op.quantity.nil?
           exchange_to_origin_price = 0  
@@ -391,17 +409,30 @@ require 'settings.rb'
              # calculamos la tasa a aplicar para convertir de EUR a USD porque la que tenemos guardada es de USD a EUR
              exchange_to_origin_price = 1 / op.exchange_rate
           end
+
+          if self.currency_symbol_operations.to_s == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s   then 
+            # si la compra es en euros, hay que coger el precio origen y multiplicar por la tasa. 
+             total_precio_origen = op.origin_price *  op.quantity
+             total_precio_origen_venta =  op.amount *  exchange_to_origin_price    
+          else
+            # si no, basta con coger el precio de compra porque ya está en la moneda 'extranjera'
+            total_precio_origen = op.price  *  op.quantity
+            total_precio_origen_venta = op.amount
+          end
+        
+
           if op.operationtype_id == Mycapital::OP_SALE 
             # si es una venta tenemos que restarle el valor del importe
-            total = total - (op.origin_price *  op.quantity)
-            total_real = total_real - (op.amount *  exchange_to_origin_price)
+            total = total - total_precio_origen
+            total_real = total_real - total_precio_origen_venta
           else
-            total = total + (op.origin_price *  op.quantity)
-            total_real = total_real + (op.amount *  exchange_to_origin_price)
+            total = total + total_precio_origen
+            total_real = total_real + total_precio_origen_venta
           end
         end
         
       end    
+      
       unless self.shares_sum == 0 
         total = total / self.shares_sum   
         total_real = total_real / self.shares_sum   
@@ -414,31 +445,31 @@ require 'settings.rb'
       # hay que tener en cuenta las ventas y también las ampliaciones
   end
 
-  def set_update_summary ()
+  def set_update_summary ()  # REVISADO
     #operationtype_id
     # updateamos todas los campos del resumen: total invertido, dividendos, beneficios estimados...
 
     # case :operationtype_id
     # when Mycapital::OP_DIVIDEND then self.set_dividend_sum()
-    # when Mycapital::OP_PURCHASE then self.set_puchased_sum()
+    # when Mycapital::OP_PURCHASE then self.set_purchased_sum()
     # when Mycapital::OP_SALE then  self.set_sold_sum()
     # when Mycapital::OP_AMPLIATION then  self.set_ampliated_sum()
     # end
 
-    self.set_dividend_sum()
-    self.set_puchased_sum()
-    self.set_sold_sum()
-    self.set_ampliated_sum()
+    self.set_dividend_sum()   # 
+    self.set_purchased_sum()   # OK
+    self.set_sold_sum()       #
+    self.set_ampliated_sum()  #
 
 
-    self.set_average_price_origin_currency()    
+    self.set_average_price_origin_currency()  #
 
     
     #total.round(2)
 
   end
 
-  def set_last_result_values 
+  def set_last_result_values      # REVISADO 
     # guardamos en la cabecera de la empresa datos del último resultado: payout, número acciones...
 
     res = self.company_results.order(year_result: :desc).limit(1) 
@@ -452,7 +483,7 @@ require 'settings.rb'
   
   end
 
-  def set_next_official_dividend_values 
+  def set_next_official_dividend_values      # REVISADO 
     # guardamos en la cabecera de la empresa datos del próximo dividendo anunciado por la empresa y el estimado para este año
 
     res = self.company_historic_dividends.where('payment_date >= ?',Time.now.beginning_of_day).order(payment_date: :asc).limit(1) 
@@ -489,47 +520,14 @@ require 'settings.rb'
   
   end
 
-  def set_stock_price
-      
-      date_last_week = Time.new
-      date_last_week = date_last_week - 7.days
-      date_today = Time.new
-      
-      # recuperamos la cotización del día anterior (yahoo no ofrece la del día actual para empresas españolas)
-      # chapuza mode ON. Fuerzo a que siempre devuelva algo pidiendo las cotizaciones de la última semana.
-      # Esto es porque no hay manera de saber si no devuelve nada, ya que cuando no devuelve se debe hacer con 
-          # @stock.failure?
-
-          # pero cuando devuelve datos el método da error.
-      # 08.03.2017 - Aun así, si la empresa no cotiza desde hace mucho, el history no recupera nada y peta (ej. GOWEX). Pongo control de errores
-    begin
-    @stock = StockQuote::Stock.history(self.search_symbol, date_last_week.strftime("%Y-%m-%d"),  date_today.strftime("%Y-%m-%d"))
-   
-        
-      @stock.each do  |x| 
-        unless x.nil?
-         self.share_price =  x.high.round(2)
-         self.date_share_price = x.date         
-        end
-
-        break   # como el primer dato es la fecha mayor (la que quiero), salgo la primera vez que entro.
-      end
-        # chapuza mode OFF
 
 
-        # hay que guardar también la fecha
-        # montar un proceso que lea todas las empresas y guardar fecha y precio 
-        self.set_update_summary
-        #self.save
-    rescue
-
-    end
-  end
-
-  def get_stock_price_google
+  def get_stock_price    # REVISADO 
+      # Recupera el precio, variación y % de variación de la acción de google finance (empresas españolas) o yahoo finance 
+      # Graba los resultados en variables 
       begin
         #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-
+        @stock_price = 0
         if Settings.yahoo_suffixes[self.stockexchange_id] == ".MC"
           # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
 
@@ -537,7 +535,7 @@ require 'settings.rb'
 
           rs = Net::HTTP.get(uri)
 
-          price = 0
+          
           unless rs ==  "httpserver.cc: Response Code 400\n"
           
             rs.delete! '//'
@@ -566,8 +564,10 @@ require 'settings.rb'
             
           #end
         end   
-          
-        
+        # si es UK la cotizacion viene en peniques. Dividimos por 100 para pasarla a libras.
+        if self.stockexchange_currency_name == 'GBP' then
+           @stock_price = @stock_price / 100
+        end                  
 
        rescue
           @stock_price = 0          
@@ -575,56 +575,40 @@ require 'settings.rb'
           @var_percent= 0
           @date_price= ''
        end
-       price
+       @stock_price
   end
 
 
-  def stock_price
+  def stock_price    # REVISADO 
+    # Valor actual de la acción recuperada de google o yahoo. 
     @stock_price.to_f
   end
 
-  def var_price
+  def var_price    # REVISADO 
      @var_price.to_f
   end
 
-  def stock_price_formatted
+  def stock_price_formatted    # REVISADO 
+    # Precio acción con formato. Se muestra, p.ej, en la mira.
     number_to_currency(@stock_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
-  def var_price_formatted
+  def var_price_formatted     # REVISADO 
     number_to_currency(@var_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end  
 
-  def var_percent
+  def var_percent     # REVISADO 
     @var_percent.to_f
   end
 
-  def set_stock_price_google
-   
-        # k = Company.find(34)
-        # k.set_stock_price_google
-        #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
-        #https://finance.google.com/finance?q=T&output=json
-        uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
-
-        rs = Net::HTTP.get(uri)
-        unless rs ==  "httpserver.cc: Response Code 400\n"
-        
-          rs.delete! '//'
-
-          a = JSON.parse(rs) 
-
-          price = a[0]["l"]
-          price.sub!(',','')  #le quito el . porque precios mayores de 1000 dan error (ej: 1,002.1)
-          self.share_price =  price.to_f 
-          #self.date_share_price = a[0]["lt_dts"].to_f
-          self.set_update_summary
-        end
-
-    
+  def set_stock_price_google     # REVISADO 
+    # graba el precio recuperado de google
+    self.share_price =  get_stock_price          
+    self.set_update_summary
+            
   end
 
-  def years_with_dividend
+  def years_with_dividend     # REVISADO 
     ret = 0
     unless self.first_uninterrupted_year_div.nil? or self.first_uninterrupted_year_div == 0 
       ret = Date.today.year - self.first_uninterrupted_year_div
@@ -633,19 +617,16 @@ require 'settings.rb'
   end
 
 
-  def is_aristocrat
+  def is_aristocrat     # REVISADO 
     self.years_with_dividend  > 25
   end
 
-  def market_cap
-    total = self.shares_quantity * self.stock_price
-    if self.stockexchange_currency_symbol == 'p' then
-          total = total / 100
-    end
-    total
+  def market_cap     # REVISADO 
+    self.shares_quantity * self.stock_price
+    
   end
 
-  def stockexchange_currency_symbol
+  def stockexchange_currency_symbol     # REVISADO 
    
      currency_symbol = "X"
     
@@ -657,7 +638,7 @@ require 'settings.rb'
    
   end
 
-  def stockexchange_currency_name
+  def stockexchange_currency_name     # REVISADO 
    
      currency_name = "Y"
     
@@ -667,6 +648,11 @@ require 'settings.rb'
 
     currency_name
    
+  end
+
+  def number_currency_operations(value)  # NUEVA
+     # formatea el valor en la moneda de las operaciones
+    number_to_currency(value, unit:self.currency_symbol_operations.to_s, seperator: ",", delimiter: ".") 
   end
 
 end

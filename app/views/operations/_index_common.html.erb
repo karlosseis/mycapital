@@ -18,11 +18,11 @@
         <tr>          
 
           <td style="text-align:center"><%= I18n.l(operation.operation_date) %></td>         
-          <td style="text-align:right"><%= number_to_currency(operation.amount) %></td>        
+          <td style="text-align:right"><%= @company.number_currency_operations(operation.amount) %></td>        
           <td style="text-align:right"><%= number_with_delimiter(operation.quantity) %></td>
-          <td style="text-align:right"><%= number_to_currency(operation.price) %></td>   
-          <td style="text-align:right"><%= number_to_currency(operation.commission) %></td>   
-          <td style="text-align:right"><%= number_to_currency(operation.fee) %></td>   
+          <td style="text-align:right"><%= @company.number_currency_operations(operation.price) %></td>   
+          <td style="text-align:right"><%= @company.number_currency_operations(operation.commission) %></td>   
+          <td style="text-align:right"><%= @company.number_currency_operations(operation.fee) %></td>   
           <td style="text-align:right"><%= operation.origin_price_formatted %></td>                            
           <td style="text-align:right"><%= number_with_delimiter(operation.exchange_rate) %></td>
           <td style="text-align:right"><%= operation.broker %></td> 
