@@ -5,6 +5,7 @@ require 'settings.rb'
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
+  belongs_to :broker
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends
@@ -369,10 +370,12 @@ require 'settings.rb'
     self.quantity_puchased = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:quantity)
 
     # grabamos en la cabecera la moneda de una de las operaciones y esta servirá para compras, div, ventas...
+    # también grabamos el broker para poder poner las monedas que correspondan al crear una nueva operación.
     # Se utilizará para mostrarla en el summary, donde la cantidad comprada, ampliada... así com el próximo dividendo
     res = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).limit(1)        
     res.each do |p| 
        self.currency_symbol_operations = Currency.find(p.currency_operation_id).symbol
+       self.broker_id = p.broker_id
     end
     
 
@@ -528,6 +531,9 @@ require 'settings.rb'
       begin
         #uri =URI.parse('http://finance.google.com/finance/info?q=' + self.google_symbol)
         @stock_price = 0
+        @market_capitalization = 0
+        @year_low = 0
+        @year_high = 0
         if Settings.yahoo_suffixes[self.stockexchange_id] == ".MC"
           # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
 
@@ -557,6 +563,9 @@ require 'settings.rb'
             @stock_price = stocks.last_trade_price_only
             @var_price = stocks.change           
             @var_percent = stocks.percent_change
+            @market_capitalization = stocks.market_capitalization
+            @year_low = stocks.year_low
+            @year_high = stocks.year_high
             @date_price = ""
             unless stocks.last_trade_date.nil?
               @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
@@ -622,9 +631,21 @@ require 'settings.rb'
   end
 
   def market_cap     # REVISADO 
-    self.shares_quantity * self.stock_price
-    
+    #self.shares_quantity * self.stock_price
+    @market_capitalization
   end
+
+ def year_low     # REVISADO 
+    
+    @year_low
+  end
+
+ def year_high     # REVISADO 
+    
+    @year_high
+  end  
+    
+
 
   def stockexchange_currency_symbol     # REVISADO 
    
@@ -649,6 +670,8 @@ require 'settings.rb'
     currency_name
    
   end
+
+ 
 
   def number_currency_operations(value)  # NUEVA
      # formatea el valor en la moneda de las operaciones

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925142412) do
+ActiveRecord::Schema.define(version: 20170927192058) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -68,8 +68,9 @@ ActiveRecord::Schema.define(version: 20170925142412) do
     t.string   "name",          limit: 255
     t.integer  "buy_frequency", limit: 4
     t.integer  "user_id",       limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "only_euros",                default: true
   end
 
   add_index "brokers", ["user_id"], name: "index_brokers_on_user_id", using: :btree
@@ -129,8 +130,10 @@ ActiveRecord::Schema.define(version: 20170925142412) do
     t.float    "estimated_value_operations_currency",        limit: 24
     t.float    "estimated_benefit_operations_currency",      limit: 24
     t.float    "perc_estimated_benefit_operations_currency", limit: 24,    default: 0.0
+    t.integer  "broker_id",                                  limit: 4
   end
 
+  add_index "companies", ["broker_id"], name: "index_companies_on_broker_id", using: :btree
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree
   add_index "companies", ["stockexchange_id"], name: "index_companies_on_stockexchange_id", using: :btree
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
@@ -486,6 +489,7 @@ ActiveRecord::Schema.define(version: 20170925142412) do
   add_foreign_key "banks", "users"
   add_foreign_key "brokers", "users"
   add_foreign_key "categories", "users"
+  add_foreign_key "companies", "brokers"
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"
   add_foreign_key "companies", "users"

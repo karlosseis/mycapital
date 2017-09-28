@@ -84,7 +84,20 @@
           <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.target_price_1)  %></strong></div>      
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.target_sell_price') %>:</div>
-          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.target_sell_price)  %></strong></div>      
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.target_sell_price)  %></strong></div>
+
+          <br>
+
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.market_capitalization') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.market_cap)  %></strong></div>
+
+
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.year_low') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.year_low)  %></strong></div>
+
+          <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.year_high') %>:</div>
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.year_high)  %></strong></div>
+             
 
 
         </div>
@@ -111,29 +124,29 @@
 
   
 
-        <div class="col-md-2 text-right">
-                <br>
-                <%= t(:'simple_form.labels.company.average_price') %>:<br>
-                <%= t(:'simple_form.labels.company.average_price_real') %>:<br>
+          <div class="col-md-2 text-right">
+                  <br>
+                  <%= t(:'simple_form.labels.company.average_price') %>:<br>
+                  <%= t(:'simple_form.labels.company.average_price_real') %>:<br>
+                  
+          </div>
+
+
+          <div class="col-md-1 text-right">
+              <% if @company.currency_symbol_operations.to_s == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s %>        
+                <%= @company.stockexchange.currency.symbol %><br>
+                <strong><%= number_with_delimiter(@company.average_price_origin_currency) %></strong><br>
+                <strong><%= number_with_delimiter(@company.average_price_origin_currency_real) %></strong><br>
                 
-        </div>
+              <% end %>
+          </div>
 
-
-        <div class="col-md-1 text-right">
-            <% if @company.currency_symbol_operations.to_s == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s %>        
-              <%= @company.stockexchange.currency.symbol %><br>
-              <strong><%= number_with_delimiter(@company.average_price_origin_currency) %></strong><br>
-              <strong><%= number_with_delimiter(@company.average_price_origin_currency_real) %></strong><br>
-              
-            <% end %>
-        </div>
-
-        <div class="col-md-1 text-right">             
-            <%= @company.currency_symbol_operations.to_s %><br>
-          <strong><%= number_with_delimiter(@company.average_price)  %></strong><br>
-          <strong><%= number_with_delimiter(@company.average_price_real)  %></strong><br>         
-        </div>
+          <div class="col-md-1 text-right">             
+              <%= @company.currency_symbol_operations.to_s %><br>
+            <strong><%= number_with_delimiter(@company.average_price)  %></strong><br>
+            <strong><%= number_with_delimiter(@company.average_price_real)  %></strong><br>         
+          </div>
 
        
 
-  </div>     
+      </div>     

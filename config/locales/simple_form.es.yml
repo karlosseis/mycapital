@@ -56,7 +56,9 @@ es:
         first_uninterrupted_year_div: Año inicio dividendos ininterrumpidos e incrementados
         years_with_dividend: Años Div
         is_aristocrat: Aristócrata
-        market_cap: Capitalización
+        market_cap: Cap.
+        year_low: "Mín año"
+        year_high: "Máx año"
         dividend_payments_quantity: Nº dividendos por año
         historic_dividend_url: URL histórico dividendos empresa
         next_exdividend_date: Ex-dividendo

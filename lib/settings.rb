@@ -9,9 +9,13 @@ class Settings
 			@yahoo_suffix = {}
 			@stockexchange_currency_symbols = {}
 			@stockexchange_currency_names = {}
+			@stockexchange_currency_ids = {} ## guardo en la clave el símbolo y en el valor el id de la moneda
 			@stocks = Stockexchange.all
 
 		    @stocks.each do |stockexchange| 
+
+		    	@stockexchange_currency_ids[stockexchange.currency.symbol]  = stockexchange.currency.id
+
 		    	if stockexchange.google_prefix.nil? then
 		    		@google_prefix[stockexchange.id] = ""
 		    	else	
@@ -28,7 +32,6 @@ class Settings
 		    		@stockexchange_currency_symbols[stockexchange.id] = ""
 		    	else	
 		    		@stockexchange_currency_symbols[stockexchange.id] = stockexchange.currency.symbol  
-
 		    	end
 
    				if stockexchange.currency.name.nil? then
@@ -45,6 +48,10 @@ class Settings
 
 	end
 
+	def self.stockexchange_currency_id
+		self.load_settings
+		@stockexchange_currency_ids
+	end
 
 
 	def self.google_prefixes

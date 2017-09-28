@@ -70,6 +70,6 @@ class BrokersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def broker_params
-      params.require(:broker).permit(:name, :buy_frequency, :user_id)
+      params.require(:broker).permit(:name, :buy_frequency, :user_id, :only_euros)
     end
 end

@@ -95,10 +95,10 @@ class Operation < ActiveRecord::Base
     #if is_purchase?
     #   self.currency_id = self.company.stockexchange.currency_id
     #end
-    #if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s)        
-    #    self.origin_price = self.price
-    #    self.exchange_rate = 1
-    # end
+    if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s && self.currency_operation.to_s == Mycapital::CURRENCY_PURCHASE.to_s)        
+        self.origin_price = self.price
+        self.exchange_rate = 1
+    end
   end
 
   def dividend_per_share

@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Buy frequency</th>
       <th>User</th>
+      <th>Trabaja en euros?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,9 @@
         <td><%= broker.name %></td>
         <td><%= broker.buy_frequency %></td>
         <td><%= broker.user %></td>
+        <td style="text-align:center">          <% if broker.only_euros %>            
+            <span class="glyphicon glyphicon-ok-circle" style="color:black" aria-hidden="true"></span>
+          <% end %>  </td>         
         <td><%= link_to 'Show', broker %></td>
         <td><%= link_to 'Edit', edit_broker_path(broker) %></td>
         <td><%= link_to 'Destroy', broker, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-md-4">            
       <%= f.input :operation_date, as: :date, html5: true %>
-      <%= f.association :broker  %>
-      <%= f.association :currency_operation %> 
+      <%= f.association :broker , :readonly => !(@operation.broker.nil?) %>
+      <%= f.association :currency_operation, :readonly => !(@operation.currency_operation.nil?) %> 
       <%= f.input :quantity, as: :integer %>
       <%= f.input :price  %>
       
@@ -18,14 +18,11 @@
     </div>    
     <div class="col-md-4">
 
-      <!-- sólo lo mostramos cuando las dos monedas de la operación sean diferente de euros. Es decir, siempre que las empresas no sean españolas  -->
-      <% unless @operation.currency.to_s == @operation.currency_operation.to_s %> 
+
  
-             <%= f.association :currency, :disabled => false,  input_html: {:title => t(:'simple_form.tooltips.operation.currency')}  %>
+             <%= f.association :currency, :readonly => !(@operation.currency.nil?),  input_html: {:title => t(:'simple_form.tooltips.operation.currency')}  %>
              <%= f.input :origin_price  , html5: true       ,  input_html: {:title => t(:'simple_form.tooltips.operation.origin_price')}  %>
              <%= f.input :exchange_rate   ,  input_html: {:title => t(:'simple_form.tooltips.operation.exchange_rate')}  %>
-             
-       <% end %>
   
     </div>
     

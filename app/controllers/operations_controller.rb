@@ -22,20 +22,38 @@ class OperationsController < ApplicationController
     # @operation = parent.operations.create
     # @operation.operationtype_id = params[:operationtype_id]
     #@operation = parent.operations.new(operationtype_id: params[:operationtype_id], operation_date: Time.now)
-   
+
+    # Si el broker sólo trabaja en euros (ing), la moneda de la operación será EUROS y la origen (o a la que se quiere convertir)
+    #   será la moneda de la empresa (dólares, euros, etc)
+    unless parent.broker.nil?
+      if parent.broker.only_euros    
+        currency_operation_id =  Settings.stockexchange_currency_id["€"]
+        currency_id = parent.stockexchange.currency_id
+      else
+        # sino, la moneda de la operación será la de la empresa (es en lo que cobramos/pagamos) y queremos convertir a euros.
+        currency_operation_id =  parent.stockexchange.currency_id
+        currency_id = Settings.stockexchange_currency_id["€"]
+
+      end
+    end
+
    if params[:operationtype_id].to_s == Mycapital::OP_DIVIDEND.to_s
      @operation = parent.operations.new(
             operationtype_id: params[:operationtype_id],
             quantity: parent.shares_sum,
             operation_date: Time.now.strftime('%d-%m-%Y'),
-            currency_id: parent.stockexchange.currency_id
+            currency_id: currency_id,
+            broker_id: parent.broker_id
             
           )
     else
+
       @operation = parent.operations.new(
             operationtype_id: params[:operationtype_id],            
             operation_date: Time.now.strftime('%d-%m-%Y'),
-            currency_id: parent.stockexchange.currency_id
+            currency_operation_id: currency_operation_id,
+            currency_id: currency_id,
+            broker_id: parent.broker_id
           )
   
 
