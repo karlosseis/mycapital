@@ -20,13 +20,28 @@ $(document).ready(function(){
 });
 </script>
 
+    <div class="row">    
+        <div class="col-md-10" > 
+          <h2 class = "page-header">
+            <%= (I18n.t("date.month_names")[@ini_mes.month]).titleize    %>
+          </h2>        
+
+        </div>
+         <div class="col-md-1 text-right form-actions" >  
+             <br> <br>      
+             <%= link_to  "<" , movements_path( :filter_month => (@ini_mes - 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+        </div>      
+         <div class="col-md-1 text-right form-actions" >  
+             <br> <br>      
+             <%= link_to  ">" , movements_path( :filter_month => (@ini_mes+ 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+        </div>    
+    </div>
 
     <div class="row">    
         <div class="col-md-8" >
-    <h2 class = "page-header">
-      <%= t(:'simple_form.labels.movement.lista_titulo') %>
-    </h2>  
-       
+          <h2 class = "page-header">
+            <%= t(:'simple_form.labels.movement.lista_titulo') %>
+          </h2>         
         </div>
          <div class="col-md-2 text-right form-actions" >  
              <br> <br>      

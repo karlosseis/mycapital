@@ -19,7 +19,7 @@ class WelcomeController < ApplicationController
      current_user.companies.all.each do |company| 
 
       unless company.porc_dif_target_price.nil? or company.target_price_1.nil?
-	      if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
+	      if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0 and !company.rojo?
 	        @stars[company.id] = company      
 	      end      	
       end

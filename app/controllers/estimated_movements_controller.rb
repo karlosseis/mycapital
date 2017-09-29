@@ -5,7 +5,7 @@ class EstimatedMovementsController < ApplicationController
   # GET /estimated_movements.json
   def index
     @estimated_movements = current_user.estimated_movements.all
-  end
+  end 
 
   # GET /estimated_movements/1
   # GET /estimated_movements/1.json

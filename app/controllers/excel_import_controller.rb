@@ -175,7 +175,7 @@ def import_movements
 
 	    movementtype = current_user.movementtypes.where('name = ? ', row["tipo"]).first   
 	    if movementtype
-	    	entity.smovementtype_id = movementtype.id
+	    	entity.movementtype_id = movementtype.id
 	    end	 
 
 

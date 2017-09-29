@@ -7,7 +7,9 @@
         <%= f.input :name %>
         <%= f.input :amount %>
         <%= f.input :movement_date, as: :date, html5: true %>
-        <%= f.association :subcategory %>
+        <%= f.input :subcategory_id do %>
+        <%= f.select :subcategory_id, grouped_options_for_select(current_user.categories.all.map {|category| [category.name,category.subcategories.map {|subcategory| [subcategory.name,subcategory.id]}]} , @movement.subcategory_id) , {}, { :class => 'form-control select optional' } %>
+        <% end %>
       </div>
       <div class="col-md-4">
         <%= f.association :movementtype %>

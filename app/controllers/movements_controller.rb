@@ -4,9 +4,26 @@ class MovementsController < ApplicationController
   # GET /movements
   # GET /movements.json
   def index
-    @movements = current_user.movements.all
+    #@movements = current_user.movements.all
+    if params[:filter_month]   
+      @ini_mes = (Time.now.year.to_s + "-" + params[:filter_month] + "-01").to_date
+    else
+      @ini_mes = (Time.now.year.to_s + "-" + Time.now.month.to_s + "-01").to_date
+    end
+  
+    # todos los movimientos del mes
+    @movements = current_user.movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).order(:movement_date)
+
   end
 
+  def index_month
+   
+
+   # Movimientos del mes
+
+ 
+end
+ 
   # GET /movements/1
   # GET /movements/1.json
   def show
