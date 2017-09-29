@@ -176,6 +176,34 @@ require 'settings.rb'
      
       ret
 
+  end
+
+  def pendiente_incluir_dividendo_previsto?
+
+      resultado = false
+      hay_datos = false
+      if self.next_dividend_date.nil? or self.next_dividend_date < Date.today
+        # buscamos si el año pasado se anunció el dividendo en estas fechas. Para ello busco historico menor al año pasado
+        div = self.company_historic_dividends.where('announce_date <= ?', (Time.now).beginning_of_day - 12.month).order(announce_date: :desc).limit(5)       
+        div.each do |p|     
+            # si encuentra, miro que se anunciara como muy tarde un mes antes
+            # P.ej, estamos a 20.09.2017. Si el dividendo se anunció el
+            #     30.08.2016 - debe salir
+            #     30.07.2016 - no debe salir pq considero que ya se ha cobrado uno después
+            #                 
+            if  p.announce_date  >=     (Time.now).beginning_of_day - 13.month  
+              resultado = true
+            end
+            hay_datos = true
+        end
+        if !hay_datos
+          # si no hay datos de historico de dividendos es que no los he puesto nunca y debo revisarlos
+            resultado = true
+        end
+      
+      end
+        
+      resultado
 
   end
 
