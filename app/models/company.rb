@@ -610,7 +610,7 @@ require 'settings.rb'
                 
 
        rescue
-         
+          @date_price = ""
        end
        # si es UK la cotizacion viene en peniques. Dividimos por 100 para pasarla a libras.
        if self.stockexchange_currency_name == 'GBP' then
