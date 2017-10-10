@@ -562,7 +562,6 @@ require 'settings.rb'
         @market_capitalization = 0
         @year_low = 0
         @year_high = 0
-
           
         @var_price =  0
         @var_percent= 0
@@ -607,15 +606,15 @@ require 'settings.rb'
             
           #end
         end   
-                
+         if self.stockexchange_currency_name == 'GBP' then
+          @stock_price = @stock_price / 100
+         end               
 
        rescue
           @date_price = ""
        end
        # si es UK la cotizacion viene en peniques. Dividimos por 100 para pasarla a libras.
-       if self.stockexchange_currency_name == 'GBP' then
-          @stock_price = @stock_price / 100
-       end         
+        
        @stock_price
   end
 
