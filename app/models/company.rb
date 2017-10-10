@@ -564,9 +564,9 @@ require 'settings.rb'
         @year_high = 0
 
           
-          @var_price =  0
-          @var_percent= 0
-          @date_price= ''
+        @var_price =  0
+        @var_percent= 0
+
 
         if Settings.yahoo_suffixes[self.stockexchange_id] == ".MC"
           # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
