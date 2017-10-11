@@ -600,9 +600,9 @@ require 'settings.rb'
             @year_low = stocks.year_low
             @year_high = stocks.year_high
             @date_price = ""
-            unless stocks.last_trade_date.nil?
-              @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
-            end            
+            #unless stocks.last_trade_date.nil?
+            #  @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
+            #end            
           if self.stockexchange_currency_name == 'GBP' then
               @stock_price = @stock_price / 100
            end              
