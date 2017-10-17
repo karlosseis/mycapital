@@ -70,6 +70,6 @@ class StockexchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stockexchange_params
-      params.require(:stockexchange).permit(:name, :country_id, :currency_id, :google_prefix, :yahoo_suffix)
+      params.require(:stockexchange).permit(:name, :country_id, :currency_id, :google_prefix, :yahoo_suffix, :open_time, :close_time)
     end
 end
