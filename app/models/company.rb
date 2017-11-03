@@ -567,7 +567,7 @@ require 'settings.rb'
         @var_percent= 0
 
 
-        if Settings.yahoo_suffixes[self.stockexchange_id] == ".MC"
+        if Settings.yahoo_suffixes[self.stockexchange_id] != ""  
           # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
 
           uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
