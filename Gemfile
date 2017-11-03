@@ -54,6 +54,7 @@ gem 'kaminari-bootstrap'
 gem 'pivot_table'
 gem "lol_dba"
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
