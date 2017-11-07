@@ -216,8 +216,6 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-    yahoo-finance (1.2.1)
-      json
 
 PLATFORMS
   ruby
@@ -251,7 +249,6 @@ DEPENDENCIES
   stock_quote
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-  yahoo-finance
 
 BUNDLED WITH
    1.14.4
