@@ -589,6 +589,9 @@ require 'settings.rb'
             unless a[0]["lt_dts"].nil?
               @date_price= a[0]["lt_dts"].to_date 
             end
+            if self.stockexchange_currency_name == 'GBP' then
+              @stock_price = @stock_price / 100
+            end              
           end
         else
           stocks = StockQuote::Stock.quote(self.yahoo_symbol)
@@ -603,9 +606,9 @@ require 'settings.rb'
             #unless stocks.last_trade_date.nil?
             #  @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
             #end            
-          if self.stockexchange_currency_name == 'GBP' then
+            if self.stockexchange_currency_name == 'GBP' then
               @stock_price = @stock_price / 100
-           end              
+            end              
           #end
         end   
                    
