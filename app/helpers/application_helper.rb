@@ -9,7 +9,7 @@ module ApplicationHelper
 
 
   
-   def convert_to_eur(amount, currency_origin) 
+   def convert_to_eur(amount, currency_origin)      
       # share prices in currency purchases (ie, all the operations are bought in euros, 
       # the currency will be euros)
       unless currency_origin =="EUR"

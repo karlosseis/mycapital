@@ -6,14 +6,36 @@
 #
 
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
   reconnect: false
   database: mycapital_dev
   pool: 5
-  username: root
-  password: ruby
-  host: 192.168.43.101
+  username: postgres
+  password: bitnami
+  host: 192.168.43.113
+
+# bitnami MYSQL
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   reconnect: false
+#   database: mycapital_dev
+#   pool: 5
+#   username: root
+#   password: bitnami
+#   host: 192.168.43.113
+
+
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   reconnect: false
+#   database: mycapital_dev
+#   pool: 5
+#   username: root
+#   password: ruby
+#   host: 192.168.43.112
 
 development:
   <<: *default

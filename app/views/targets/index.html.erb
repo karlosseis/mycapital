@@ -70,7 +70,11 @@ $(document).ready(function(){
         <%= label_tag(:age_child, "Sólo mercados abiertos") %>
         <%= radio_button_tag(:only_open, "N", params[:only_open].eql?("N")) %>
         <%= label_tag(:age_adult, "Todos los mercados") %>
-     
+        
+
+<!--         <%= label_tag(:exclude_red, "Excluir rojo") %>
+        <%= radio_button_tag(:exclude_red, "N", checked: params[:exclude_red].eql?("N")) %> -->
+       
         <%= submit_tag "Buscar", :name => nil,  :class =>"btn btn-primary" %>
      
 

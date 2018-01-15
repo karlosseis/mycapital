@@ -137,7 +137,9 @@ require 'settings.rb'
   end
 
   def url_google_finance
-    "https://www.google.com/finance?q=" + self.google_symbol
+    # "https://www.google.com/finance?q=" + self.google_symbol
+    "https://finance.google.com/finance?q=" + self.google_symbol
+    
   end
 
   def last_purchase
@@ -386,9 +388,17 @@ require 'settings.rb'
      self.set_estimated_values()
   end 
 
-
+  def get_dividends
+    # retorna el total de dividendos agrupados por moneda
+    self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group(:currency_id).sum(:net_amount)
+  end
   def set_dividend_sum        # REVISADO 
-    total = self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:net_amount)
+    # sumamos los dividendos de las diferentes monedas, convirtiendo a euros los que no lo son
+    total = 0 
+    self.get_dividends.each do |key, value|                  
+        total = total + convert_to_eur(value, Currency.find(key).name)                
+    end 
+    #total = self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:net_amount)
     self.dividend_sum   = total.round(2)
   end
 
@@ -711,4 +721,33 @@ require 'settings.rb'
     number_to_currency(value, unit:self.currency_symbol_operations.to_s, seperator: ",", delimiter: ".") 
   end
 
+
+   def convert_to_eur(amount, currency_origin) 
+      # share prices in currency purchases (ie, all the operations are bought in euros, 
+      # the currency will be euros)
+      unless currency_origin =="EUR"
+     
+        require 'money'
+        require 'money/bank/google_currency'      
+        bank = Money::Bank::GoogleCurrency.new
+        #if currency_origin = 'p'
+        # currency_origin = 'GBP'       
+        #end
+        
+        begin ## ESTE BEGIN DEBERÍA IR AL PRINCIPIO, PARA CUANDO NO TENGO INTERNET
+          amount = amount * bank.get_rate(currency_origin, Mycapital::CURRENCY_PURCHASE).to_f
+          # la cotización de las acciones UK vienen en peniques y google currency  no tiene el tipo de cambio
+          # por tanto, recuperamos la cotización en libras y dividimos por 100, que es lo mismo. 
+       
+        rescue  
+          amount = 0
+        end
+        
+      end
+      
+      unless amount.nil?
+          amount.round(2)
+      end
+      
+    end 
 end
