@@ -16,7 +16,7 @@ class Stockexchange < ActiveRecord::Base
   validates :name,
             presence: true
 
-  has_many :companies, dependent: :destroy            
+  #has_many :companies, dependent: :destroy            
   def to_s
     name
   end
