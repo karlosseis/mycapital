@@ -135,6 +135,9 @@
             <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>          
             <h6 class="text-muted text-center">Última compra</h6>
             <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
+            <h6 class="text-muted text-center">Total comprado (€)</h6>
+            <h5 class="text-center"><%= @company.puchased_sum_euros %> </h5>
+
         </div>
 
         <div class="col-md-4" >            

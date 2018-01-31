@@ -123,7 +123,7 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :search_symbol, :user_id, :target_price_1,:target_price_2, :traffic_light_id, :investors_url, :target_sell_price, :dividend_aristocrat, :activity_description, :first_uninterrupted_year_div, :shares_quantity, :payout, :dividend_payments_quantity, :historic_dividend_url, :dividend_last_result, :next_exdividend_date, :next_dividend_date, :estimated_year_dividend_amount, :currency_symbol_operations, :estimated_value_operations_currency,:estimated_benefit_operations_currency, :perc_estimated_benefit_operations_currency)
+      params.require(:company).permit(:name, :symbol, :stockexchange_id, :sector_id, :search_symbol, :user_id, :target_price_1,:target_price_2, :traffic_light_id, :investors_url, :target_sell_price, :dividend_aristocrat, :activity_description, :first_uninterrupted_year_div, :shares_quantity, :payout, :dividend_payments_quantity, :historic_dividend_url, :dividend_last_result, :next_exdividend_date, :next_dividend_date, :estimated_year_dividend_amount, :currency_symbol_operations, :estimated_value_operations_currency,:estimated_benefit_operations_currency, :perc_estimated_benefit_operations_currency, :puchased_sum_euros)
       
     end
   

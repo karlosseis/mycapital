@@ -36,12 +36,12 @@ require 'settings.rb'
   def self.search(search)
 
    if search 
-    
-      if Rails.env.production?
+      # 21.01.2018 - comento porque ahora en local también tengo postgres
+      #if Rails.env.production?
        where('name ILIKE ?', "%#{search}%")
-      else
-        where('name LIKE ?', "%#{search}%")
-      end
+      #else
+      #  where('name LIKE ?', "%#{search}%")
+      #end
 
     else
 
@@ -404,7 +404,10 @@ require 'settings.rb'
 
   def set_purchased_sum      # REVISADO 
     total = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:amount)
+    puchased_sum_euros = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:puchased_sum_euros)
+
     self.puchased_sum = total.round(2)
+    self.puchased_sum_euros = puchased_sum_euros.round(2)
     self.quantity_puchased = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:quantity)
 
     # grabamos en la cabecera la moneda de una de las operaciones y esta servirá para compras, div, ventas...

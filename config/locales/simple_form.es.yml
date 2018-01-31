@@ -64,6 +64,7 @@ es:
         next_exdividend_date: Ex-dividendo
         next_dividend_date: Próx. Dividendo
         next_dividend_amount: Dividendo
+        puchased_sum_euros: "Total comprado (€)"    
 
       operation:
         company: "Empresa"
@@ -87,6 +88,7 @@ es:
         withholding_tax: "Retención en origen"
         broker: Broker
         currency_operation: "Moneda operación"
+        puchased_sum_euros: "Total comprado (€)"
       yahoo_ticker:
         seleccionar_empresa: "Seleccionar empresa"
         search: "Filtrar"
