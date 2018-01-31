@@ -41,7 +41,7 @@ gem 'google_currency', '~> 3.4'
 
 gem 'delayed_job_active_record'
 
-#gem 'mysql2'
+gem 'mysql2'
 gem 'seed_dump'
 
 gem "chartkick"
