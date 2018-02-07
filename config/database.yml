@@ -3,53 +3,15 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
-#   d
-
+#
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  reconnect: false
-  database: mycapital_dev
+  adapter: sqlite3
   pool: 5
-  username: postgres
-  password: bitnami
-  host: 192.168.43.113
-
-# bitnami MYSQL
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   reconnect: false
-#   database: mycapital_dev
-#   pool: 5
-#   username: root
-#   password: bitnami
-#   host: 192.168.43.113
-
-
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   reconnect: false
-#   database: mycapital_dev
-#   pool: 5
-#   username: root
-#   password: ruby
-#   host: 192.168.43.112
+  timeout: 5000
 
 development:
   <<: *default
-  database: mycapital_dev #db/development.sqlite3
-
-
-# default: &default
-#   adapter: sqlite3
-#   pool: 5
-#   timeout: 5000
-
-# development:
-#   <<: *default
-#   database: db/development.sqlite3
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
