@@ -21,9 +21,11 @@ test:
   database: db/test.sqlite3
 
 production:  
-  adapter: postgresql
-  url: <%= ENV["DATABASE_URL"] %>
-  username: digitaloceantesting
-  password: joderconelpostgres
-  host: localhost
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: mycapital_prod
+  pool: 5
+  username: root
+  password: joder
+  host: localhost
