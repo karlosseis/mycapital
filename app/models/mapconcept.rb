@@ -7,11 +7,12 @@ class Mapconcept < ActiveRecord::Base
 
    if search 
     
-      if Rails.env.production?
-       where('name ILIKE ?', "%#{search}%")
-      else
-        where('name LIKE ?', "%#{search}%")
-      end
+      # if Rails.env.production?
+      #  where('name ILIKE ?', "%#{search}%")
+      # else
+      #   where('name LIKE ?', "%#{search}%")
+      # end
+      where('name LIKE ?', "%#{search}%")
 
     else
 

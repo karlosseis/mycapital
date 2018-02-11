@@ -38,10 +38,13 @@ require 'settings.rb'
    if search 
       # 21.01.2018 - comento porque ahora en local también tengo postgres
       #if Rails.env.production?
-       where('name ILIKE ?', "%#{search}%")
+      # where('name ILIKE ?', "%#{search}%")
       #else
       #  where('name LIKE ?', "%#{search}%")
       #end
+      # 11.02.2018 todo mysql
+      where('name LIKE ?', "%#{search}%")
+
 
     else
 

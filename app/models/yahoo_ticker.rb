@@ -6,7 +6,7 @@ class YahooTicker < ActiveRecord::Base
 
 	  buscar = search["search"].to_s
 	  if Rails.env.production?
-	  	where("name ILIKE ?", "%" + buscar + "%") 
+	  	where("name LIKE ?", "%" + buscar + "%") 
 	  else
 	  	where("name LIKE ?", "%" + buscar + "%") 
 	  end

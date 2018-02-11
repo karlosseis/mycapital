@@ -1,6 +1,6 @@
 git add .
 
-git commit -m "compras segun activotrade"
+git commit -m "activotrade"
 
-git push heroku master
+git push -u origin master
 
