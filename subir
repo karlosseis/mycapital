@@ -1,6 +1,6 @@
-git add .
+sudo git add .
 
-git commit -m "activotrade"
+sudo git commit -m "nuevos scripts"
 
-git push -u origin master
+sudo git push -u origin master
 
