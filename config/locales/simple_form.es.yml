@@ -38,7 +38,8 @@ es:
         estimated_value_operations_currency: "Valor estimado"
         estimated_value_now: "Valor estimado"
         estimated_benefit_operations_currency: "Beneficio estimado"
-        perc_estimated_benefit_operations_currency: "% Beneficio estimado"
+        estimated_benefit_operations_currency_euros: "Beneficio estimado €"
+        perc_estimated_benefit_operations_currency_euros: "% Beneficio estimado €"
         average_price_origin_currency: "Precio medio"
         yoc: "YoC"
         target_price_1: Objetivo 1

@@ -50,10 +50,10 @@ class WelcomeController < ApplicationController
 
       unless company.rojo? # si es roja no quiero que me salga para actualziar dividendos ni para comprar
         #if company.next_dividend_date.nil? or company.next_dividend_date < Date.today
-        if  company.pendiente_incluir_dividendo_previsto?
-            @por_revisar_div[company.id] = company      
+        # if  company.pendiente_incluir_dividendo_previsto?
+        #     @por_revisar_div[company.id] = company      
 
-        end
+        # end
         unless company.porc_dif_target_price.nil? or company.target_price_1.nil?
           if company.porc_dif_target_price.to_f <= 1 and company.target_price_1 > 0
             @stars[company.id] = company      

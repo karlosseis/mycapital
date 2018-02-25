@@ -36,6 +36,11 @@ $(document).ready(function(){
       <th style="text-align:right"><%= t(:'simple_form.labels.company.invested_sum') %></th>
       <th style="text-align:right">Beneficio <br> estimado</th>
       <th style="text-align:right">%</th>
+      
+      <th style="text-align:right"><%= t(:'simple_form.labels.company.estimated_benefit_operations_currency_euros') %></th>
+      <th style="text-align:right">%</th>
+
+
       <th style="text-align:right"><%= t(:'simple_form.labels.company.average_price') %></th>
       <th style="text-align:right"><%= t(:'simple_form.labels.company.yoc') %></th>
       
@@ -62,6 +67,23 @@ $(document).ready(function(){
           <%= number_to_percentage(company.perc_estimated_benefit_now, precision: 2) %> <br> 
           
         </td>   
+
+        <td style="text-align:right">    
+          <% if company.currency_symbol_operations.to_s != Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s %>
+            <% if company.estimated_benefit_operations_currency_euros.to_f >= 0 %>
+            <font color="#009933"><%= format_currency(company.estimated_benefit_operations_currency_euros, '€') %></font>
+            <% else %>
+                <font color="#ff0000"><%= format_currency(company.estimated_benefit_operations_currency_euros, '€') %></font>
+            <% end %>      
+          <% end %>  
+        </td>   
+        <td style="text-align:right">
+          <% if company.currency_symbol_operations.to_s != Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s %>
+            <%= number_to_percentage(company.perc_estimated_benefit_operations_currency_euros, precision: 2) %> <br> 
+          <% end %>  
+        </td>   
+
+
         <td style="text-align:right"><%= company.number_currency_operations(company.average_price_origin_currency) %></td>  
         <td style="text-align:right"><%= number_to_percentage(company.expected_yoc, precision: 2) %></td>  
            

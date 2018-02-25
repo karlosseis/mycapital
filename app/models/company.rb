@@ -299,6 +299,10 @@ require 'settings.rb'
      self.estimated_benefit_operations_currency = estimated_benefit_now
      self.perc_estimated_benefit_operations_currency = perc_estimated_benefit_now
 
+
+     self.estimated_benefit_operations_currency_euros = estimated_benefit_euros_now
+     self.perc_estimated_benefit_operations_currency_euros = perc_estimated_benefit_euros_now
+
    end
 
    def estimated_value_global_currency_now
@@ -316,6 +320,26 @@ require 'settings.rb'
     end
     total
    end
+
+ def estimated_benefit_euros_now  
+    # calculamos el beneficio estimado en euros a partir de lo que nos costó en euros y lo que valdría ahora
+    # si cambiáramos el valor estimado total a euros (sólo si tenemos acciones, claro)
+    unless shares_sum == 0
+      total = estimated_value_global_currency_now - puchased_sum_euros
+      total.round(2)
+    end
+  end
+
+  def perc_estimated_benefit_euros_now  # NUEVA
+    # porcentaje de beneficio en base al valor estimado actual en la moneda de compra de la empresa
+   
+    total = 0
+    unless invested_sum == 0 then
+        total = estimated_benefit_euros_now.to_f * 100 / puchased_sum_euros.to_f
+    end
+    total.round(2)
+  end
+
 
   def perc_estimated_benefit_now  # NUEVA
     # porcentaje de beneficio en base al valor estimado actual en la moneda de compra de la empresa
@@ -382,6 +406,15 @@ require 'settings.rb'
     self.set_estimated_values()
   end
 
+  def get_shares_sum_at_date(fecha)
+    # devuelve el número de acciones que teníamos a la fecha recibida. Útil para calcular el dividendo previsto. 
+    total = 0
+    total = self.operations.where('(operationtype_id = ? or operationtype_id = ? ) and operation_date <= ?', Mycapital::OP_PURCHASE, Mycapital::OP_AMPLIATION, fecha).sum(:quantity)
+    total = total - self.operations.where('operationtype_id = ?  and operation_date <= ?', Mycapital::OP_SALE, fecha).sum(:quantity)
+
+    total
+  end
+
 
   def set_invested_sum      # REVISADO 
     # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros) + las ampliaciones, que también pueden costar dinero
@@ -391,12 +424,14 @@ require 'settings.rb'
      self.set_estimated_values()
   end 
 
+
   def get_dividends
     # retorna el total de dividendos agrupados por moneda
     self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).group(:currency_id).sum(:net_amount)
   end
-  def set_dividend_sum        # REVISADO 
+  def set_dividend_sum         
     # sumamos los dividendos de las diferentes monedas, convirtiendo a euros los que no lo son
+    # es decir, el campo pasa a guardarse siempre en euros
     total = 0 
     self.get_dividends.each do |key, value|                  
         total = total + convert_to_eur(value, Currency.find(key).name)                
@@ -407,7 +442,9 @@ require 'settings.rb'
 
   def set_purchased_sum      # REVISADO 
     total = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:amount)
-    puchased_sum_euros = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:puchased_sum_euros)
+
+    # comprado y ampliado para que guardar todo lo comprado. 
+    puchased_sum_euros = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:puchased_sum_euros) + self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:puchased_sum_euros)
 
     self.puchased_sum = total.round(2)
     self.puchased_sum_euros = puchased_sum_euros.round(2)

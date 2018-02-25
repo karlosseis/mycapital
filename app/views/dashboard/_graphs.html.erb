@@ -27,18 +27,29 @@
       ] , title: t(:'graph_dividend_year_com') %>
        </div> -->
 
-
+ 
        <div class="col-md-4">
          <%= column_chart [
-          {name: "€", data: @purchases_group_year_eur},
           {name: "$", data: @purchases_group_year_usd},
+          {name: "€", data: @purchases_group_year_eur},          
           {name: "£", data: @purchases_group_year_gbp}
-           
-
 
           ], title: t(:'graph_year_purchases') %>
 
        </div>
+
+       <div class="col-md-4">
+         <%= column_chart [
+          {name: "Compras", data: @all_purchases_group_year_eur},
+          {name: "Ventas €", data: @all_sales_group_year_eur},
+          {name: "Ventas $", data: @all_sales_group_year_usd},
+          {name: "Ventas £", data: @all_sales_group_year_gbp},
+
+          ], title: 'compras_y_ventas_eur' %>
+
+       </div>
+
+
        <div class="col-md-4">  
            
          <%= line_chart [

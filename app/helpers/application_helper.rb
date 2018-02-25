@@ -7,6 +7,9 @@ module ApplicationHelper
 
 	end
 
+  def format_currency(value, symbol)
+    number_to_currency(value, unit:symbol, seperator: ",", delimiter: ".")
+  end
 
   
    def convert_to_eur(amount, currency_origin)      

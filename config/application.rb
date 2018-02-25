@@ -32,6 +32,7 @@ module Mycapital
     OP_AMPLIATION = 4  
     CURRENCY_PURCHASE = "EUR"    # moneda en que se hacen las compras
     CURRENCY_PURCHASE_SYMBOL = "€"
+    ID_PAIS = 1
 
 
  
