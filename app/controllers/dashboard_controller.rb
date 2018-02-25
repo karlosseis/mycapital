@@ -37,6 +37,7 @@ class DashboardController < ApplicationController
 
 
     @global_value_currencies.delete(nil) # si viene alguna moneda a nulo la borro porque sino peta la búsqueda de la moneda.
+    @global_value_currencies.delete('') # si viene alguna moneda a nulo la borro porque sino peta la búsqueda de la moneda.
     # convierto los símbolos de moneda en el id que le corresponde para poder ordenarlas y que salgan primero EUROS
     @global_value_currencies = @global_value_currencies.transform_keys{ |key| Currency.find_by(symbol: key.to_s).id  }
     @global_value_currencies = @global_value_currencies.sort

@@ -1,6 +1,6 @@
 sudo git add .
 
-sudo git commit -m "traspasos a activotrade"
+sudo git commit -m "borrar blancos en dashboard"
 
 sudo git push -u origin master
 
