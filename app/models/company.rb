@@ -586,7 +586,7 @@ require 'settings.rb'
 
     # si no hay fecha de próximo dividendo, buscamos la fecha más cercana en que se anunció el año pasado
     if self.next_dividend_date.nil?
-      res = self.company_historic_dividends.where('announce_date <= ?',Time.now.beginning_of_day - 12.month).order(announce_date: :desc).limit(1)             
+      res = self.company_historic_dividends.where('announce_date <= ? and announce_date >= ?',Time.now.beginning_of_day - 12.month, Time.now.beginning_of_year - 12.month).order(announce_date: :desc).limit(1)
       res.each do |p| 
          self.nearest_announce_date = p.announce_date + 12.month
       end   
