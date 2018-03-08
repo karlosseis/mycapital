@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223161858) do
+ActiveRecord::Schema.define(version: 20180307155219) do
 
   create_table "accounts", force: :cascade do |t|
     t.text     "name",            limit: 4294967295
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20180223161858) do
     t.float    "puchased_sum_euros",                               limit: 24,         default: 0.0
     t.float    "estimated_benefit_operations_currency_euros",      limit: 24,         default: 0.0
     t.float    "perc_estimated_benefit_operations_currency_euros", limit: 24,         default: 0.0
+    t.date     "nearest_announce_date"
   end
 
   add_index "companies", ["broker_id"], name: "index_companies_on_broker_id", using: :btree
@@ -368,6 +369,7 @@ ActiveRecord::Schema.define(version: 20180223161858) do
     t.integer  "broker_id",             limit: 4,          default: 1
     t.integer  "currency_operation_id", limit: 4,          default: 1
     t.float    "puchased_sum_euros",    limit: 24,         default: 0.0
+    t.float    "tax_rate_auto",         limit: 24,         default: 0.0
   end
 
   add_index "operations", ["broker_id"], name: "index_operations_on_broker_id", using: :btree

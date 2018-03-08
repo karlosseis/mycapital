@@ -54,6 +54,10 @@ gem 'kaminari-bootstrap'
 
 gem 'pivot_table'
 gem "lol_dba"
+
+gem 'open_exchange_rates'
+
+
 #gem 'yahoo-finance'
 
 # Use ActiveModel has_secure_password

@@ -7,7 +7,7 @@ class Operation < ActiveRecord::Base
   belongs_to :broker
   belongs_to :currency_operation, class_name: 'Currency'
   
-  before_validation :update_origin_price
+  before_validation :update_origin_price, :update_tax_rate_auto
   after_save :update_company
   after_destroy :update_company 
  
@@ -106,5 +106,25 @@ class Operation < ActiveRecord::Base
       self.net_amount / self.quantity
     end
   end
+
+  def update_tax_rate_auto
+    # si la moneda del dividendo es EURO, la tasa de cambio es 1 
+    # sino, recuperamos la tasa de cambio de la moneda origen 
+    # Se podría llamar siempre, pero tenemos un máximo de 1000 llamadas por mes. 
+    if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s) 
+      self.tax_rate_auto = 1
+    else
+      self.tax_rate_auto = get_tax_rate_auto
+    end
+  end
+
+  def get_tax_rate_auto
+    # recupera la tasa de cambio en la fecha de la operación
+    
+    fx = OpenExchangeRates::Rates.new
+    fx.convert(1, :from => self.currency.to_s, :to => "EUR", :on => self.operation_date) 
+    
+  end
+
 
 end

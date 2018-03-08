@@ -1,6 +1,6 @@
 sudo git add .
 
-sudo git commit -m "borrar blancos en dashboard"
+sudo git commit -m "calculo next dividend y tasa de cambio"
 
 sudo git push -u origin master
 
