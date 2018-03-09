@@ -584,13 +584,31 @@ require 'settings.rb'
        self.next_dividend_amount = p.amount              
     end
 
-    # si no hay fecha de próximo dividendo, buscamos la fecha más cercana en que se anunció el año pasado
-    if self.next_dividend_date.nil?
-      res = self.company_historic_dividends.where('announce_date <= ? and announce_date >= ?',Time.now.beginning_of_day - 12.month, Time.now.beginning_of_year - 12.month).order(announce_date: :desc).limit(1)
-      res.each do |p| 
-         self.nearest_announce_date = p.announce_date + 12.month
-      end   
-  end
+    # # si no hay fecha de próximo dividendo, buscamos la fecha más cercana en que se anunció el año pasado
+    # if self.next_dividend_date.nil?
+    #   res = self.company_historic_dividends.where('announce_date <= ? and announce_date >= ?',Time.now.beginning_of_day - 12.month, Time.now.beginning_of_year - 12.month).order(announce_date: :desc).limit(1)
+    #   res.each do |p| 
+    #      self.nearest_announce_date = p.announce_date + 12.month
+    #   end   
+    # end
+
+   
+      # si no tengo próximo dividendo, buscamos si el año pasado se anunció el dividendo en estas fechas. 
+      # Para ello busco historico menor al año pasado
+      div = self.company_historic_dividends.where('announce_date <= ?', (Time.now).beginning_of_day - 12.month).order(announce_date: :desc).limit(self.dividend_payments_quantity + 1)       
+      div.each do |p|     
+          # si encuentra, miro que se anunciara como muy tarde un mes antes
+          # P.ej, estamos a 20.09.2017. Si el dividendo se anunció el
+          #     30.08.2016 - debe salir
+          #     30.07.2016 - no debe salir pq considero que ya se ha cobrado uno después
+          #                 
+          if  p.announce_date  >=     (Time.now).beginning_of_day - 13.month  
+            self.nearest_announce_date = p.announce_date + 12.month
+          end
+       
+      end
+  
+
 
     res = self.company_historic_dividends.where('exdividend_date >= ?',Time.now.beginning_of_day).order(exdividend_date: :asc).limit(1)             
     res.each do |p| 
