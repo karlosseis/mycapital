@@ -576,7 +576,7 @@ require 'settings.rb'
     # primero borramos el valor que tenga
     self.next_dividend_date = nil
     self.next_dividend_amount = nil
-  self.nearest_announce_date = nil
+    self.nearest_announce_date = nil
 
     res = self.company_historic_dividends.where('payment_date >= ?',Time.now.beginning_of_day).order(payment_date: :asc).limit(1)   
     res.each do |p| 
@@ -584,30 +584,40 @@ require 'settings.rb'
        self.next_dividend_amount = p.amount              
     end
 
-    # # si no hay fecha de próximo dividendo, buscamos la fecha más cercana en que se anunció el año pasado
-    # if self.next_dividend_date.nil?
-    #   res = self.company_historic_dividends.where('announce_date <= ? and announce_date >= ?',Time.now.beginning_of_day - 12.month, Time.now.beginning_of_year - 12.month).order(announce_date: :desc).limit(1)
-    #   res.each do |p| 
-    #      self.nearest_announce_date = p.announce_date + 12.month
-    #   end   
-    # end
-
-   
-      # si no tengo próximo dividendo, buscamos si el año pasado se anunció el dividendo en estas fechas. 
-      # Para ello busco historico menor al año pasado
-      div = self.company_historic_dividends.where('announce_date <= ?', (Time.now).beginning_of_day - 12.month).order(announce_date: :desc).limit(self.dividend_payments_quantity + 1)       
-      div.each do |p|     
-          # si encuentra, miro que se anunciara como muy tarde un mes antes
-          # P.ej, estamos a 20.09.2017. Si el dividendo se anunció el
-          #     30.08.2016 - debe salir
-          #     30.07.2016 - no debe salir pq considero que ya se ha cobrado uno después
-          #                 
-          if  p.announce_date  >=     (Time.now).beginning_of_day - 13.month  
-            self.nearest_announce_date = p.announce_date + 12.month
-          end
-       
-      end
+    # Buscamos si ya se debería haber anunciado el siguiente dividendo y no lo tenemos puesto
+    # la idea es buscar si el año pasado se anunció el dividendo por estas fechas (hasta un mes antes)
   
+      # Buscamos los dividendos del AÑO ACTUAL para saber de cuantos tenemos fecha de pago prevista
+      div = self.company_historic_dividends.where('payment_date >= ? and payment_date <= ?', Time.now.beginning_of_year, Time.now.end_of_year).order(payment_date: :asc)   
+      num_divs_current_year = div.count
+      if num_divs_current_year == self.dividend_payments_quantity
+         # si ya hemos puesto todos los dividendos que se cobran este año (según están establecidos a nivel de empresa)
+         # tenemos que buscar si el primero si el primero del año siguiente ya tocaría anunciarlo en estas fechas.
+         # P.ej, red electrica paga el último en julio y anuncia el primero del año siguiente en noviembre
+         # Si estamos en agosto no debería salir, pero si estamos en diciembre, sí. 
+
+         sig_div  = div.first
+      
+
+      else
+       # buscamos los divendos del AÑO PASADO
+       div = self.company_historic_dividends.where('payment_date >= ? and payment_date <= ?', Time.now.beginning_of_year-1, Time.now.end_of_year-1).order(payment_date: :asc)   
+       cont = 1        
+       # de todos los dividendos del año pasado, tenemos que coger el siguiente que toca. 
+       # es decir, si tenemos 3 dividendos puestos este año, del año pasado tendríamos que coger el número 4
+       div.each do |p|     
+            
+            if cont =  num_divs_current_year + 1
+              sig_div = p
+            end
+         
+       end      
+      end
+
+      if sig_div.announce_date + 1.year   <=   (Time.now).beginning_of_day  - 30.day  
+        self.nearest_announce_date = sig_div.announce_date + 1.year
+      end
+
 
 
     res = self.company_historic_dividends.where('exdividend_date >= ?',Time.now.beginning_of_day).order(exdividend_date: :asc).limit(1)             
