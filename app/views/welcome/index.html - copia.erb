@@ -17,13 +17,13 @@
 
         <div class="row">
           
-          <div class="col-md-5" style="padding-left: 15px;  padding-right: 10px;">        
+          <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">        
             En compra
                <%= render :partial => 'targets/list_mini' , locals: {companies_mostrar: @stars}%> 
           </div>
 
 
-          <div class="col-md-5" style="padding-left: 15px;  padding-right: 10px;">
+          <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">
             En venta
           <%= render :partial => 'targets/list_mini' , locals: {companies_mostrar: @to_sell}%> 
           </div>
@@ -33,18 +33,18 @@
 
         <div class="row">
           
-          <div class="col-md-5" style="padding-left: 15px;  padding-right: 10px;">        
+          <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">        
             Subida de más de un 4%
                <%= render :partial => 'targets/list_mini' , locals: {companies_mostrar: @max_subidas}%> 
           </div>
 
 
-          <div class="col-md-5" style="padding-left: 15px;  padding-right: 10px;">
+          <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">
             Bajada de más de un 4%
           <%= render :partial => 'targets/list_mini' , locals: {companies_mostrar: @max_bajadas}%> 
           </div>
 
-         <div class="col-md-2" style="padding-left: 15px;  padding-right: 10px;">
+         <div class="col-md-4" style="padding-left: 15px;  padding-right: 10px;">
             Límite próximas compras
           <%= render :partial => 'brokers/list_brokers_last_buy'%> 
           </div>          
@@ -60,7 +60,7 @@
 
       <div class="col-md-2">    
          <div class="row">
-          <!-- Sin próx div -->
+         	<!-- Sin próx div -->
             <%= render :partial => 'targets/list_sin_div' , locals: {companies_mostrar: @por_revisar_div}%> 
           
         </div>      
