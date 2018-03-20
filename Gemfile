@@ -56,7 +56,7 @@ gem 'pivot_table'
 gem "lol_dba"
 
 gem 'open_exchange_rates'
-
+gem 'httparty'
 
 #gem 'yahoo-finance'
 

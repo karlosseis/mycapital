@@ -141,7 +141,7 @@
           <br>
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.market_capitalization') %>:</div>
-          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.market_cap)  %></strong></div>
+          <div class="col-md-6 text-right"><strong><%=  number_to_human(@company.market_cap, precision: 3)  %></strong></div>
 
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.year_low') %>:</div>

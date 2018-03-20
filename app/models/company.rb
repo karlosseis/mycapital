@@ -659,10 +659,28 @@ require 'settings.rb'
         @var_price =  0
         @var_percent= 0
 
+        # Si es mercado americano usamos el IEX
+        if Settings.yahoo_suffixes[self.stockexchange_id] == ""  
+          
+          iex = Iex.new(self.yahoo_symbol)
+          quote = iex.quote
+          @stock_price =  quote['latestPrice']
+          #@stock_price.sub!(',','')
+          @stock_price = @stock_price.to_f
+          @var_price =  quote['change'].to_f
+          @var_percent= quote['changePercent'].to_f * 100
+          #@date_price = "99"
+          @market_capitalization = quote['marketCap'].to_f
+          @year_low = quote['week52High'].to_f
+          @year_high = quote['week52Low'].to_f
 
-        if Settings.yahoo_suffixes[self.stockexchange_id] != "dddd"  
-          # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
 
+          # if self.stockexchange_currency_name == 'GBP' then
+          #    @stock_price = @stock_price / 100
+          # end 
+        else
+          # Sino seguimos usando google hasta que pete del todo. 
+       
           uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
 
           rs = Net::HTTP.get(uri)
@@ -683,30 +701,61 @@ require 'settings.rb'
             unless a[0]["lt_dts"].nil?
               @date_price= a[0]["lt_dts"].to_date 
             end
+           if self.stockexchange_currency_name == 'GBP' then
+              @stock_price = @stock_price / 100
+           end                      
+          end          
+        end
+
+        # if Settings.yahoo_suffixes[self.stockexchange_id] != "dddd"  
+        #   # si es el mercado continuo buscamos por google pq yahoo sólo tiene datos históricos
+
+        #   uri =URI.parse('http://finance.google.com/finance?q=' + self.google_symbol + '&output=json')
+
+        #   rs = Net::HTTP.get(uri)
+
+          
+        #   unless rs ==  "httpserver.cc: Response Code 400\n"
+          
+        #     rs.delete! '//'
+
+        #     a = JSON.parse(rs) 
+
+        #     @stock_price =  a[0]["l"] 
+        #     @stock_price.sub!(',','')
+        #     @stock_price = @stock_price.to_f
+        #     @var_price =  a[0]["c"] 
+        #     @var_percent= a[0]["cp"] 
+        #     @date_price = ""
+        #     unless a[0]["lt_dts"].nil?
+        #       @date_price= a[0]["lt_dts"].to_date 
+        #     end
                      
-          end
-        else
-          stocks = StockQuote::Stock.quote(self.yahoo_symbol)
-          #if stocks.success? # en el log sale que está deprecated
-            @stock_price = stocks.last_trade_price_only
-            @var_price = stocks.change           
-            @var_percent = stocks.percent_change
-            @market_capitalization = stocks.market_capitalization
-            @year_low = stocks.year_low
-            @year_high = stocks.year_high
-            @date_price = ""
-            #unless stocks.last_trade_date.nil?
-            #  @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
-            #end            
+        #   end
+        # else
+        #   stocks = StockQuote::Stock.quote(self.yahoo_symbol)
+        #   #if stocks.success? # en el log sale que está deprecated
+        #     @stock_price = stocks.last_trade_price_only
+        #     @var_price = stocks.change           
+        #     @var_percent = stocks.percent_change
+        #     @market_capitalization = stocks.market_capitalization
+        #     @year_low = stocks.year_low
+        #     @year_high = stocks.year_high
+        #     @date_price = ""
+        #     #unless stocks.last_trade_date.nil?
+        #     #  @date_price= DateTime.strptime(stocks.last_trade_date, '%m/%d/%Y')
+        #     #end            
              
-          #end
-        end   
-        if self.stockexchange_currency_name == 'GBP' then
-           @stock_price = @stock_price / 100
-        end                
+        #   #end
+        # end   
+        # if self.stockexchange_currency_name == 'GBP' then
+        #    @stock_price = @stock_price / 100
+        # end                
 
        rescue
-          @date_price = ""
+        #@var_price =  9
+        #var_percent= 8          
+        @date_price = ""
        end
        # si es UK la cotizacion viene en peniques. Dividimos por 100 para pasarla a libras.
         

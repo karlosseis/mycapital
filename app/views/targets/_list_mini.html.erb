@@ -5,23 +5,20 @@
         <% companies_mostrar.each  do |key, value| %>  
        
           <div class="row">
-            <div class="col-md-6" style="padding-left: 15px;  padding-right: 10px;">
+            <div class="col-md-8" style="padding-left: 15px;  padding-right: 10px;">
                 <%= link_to value.name.titleize, value %>
             </div>
-            <div class="col-md-3" style="text-align: right;">
-                <%= value.stock_price_formatted %>   
-                                              
-            </div>    
-           <div class="col-md-3" style="text-align: right;">
-                 
+            <div class="col-md-4" style="text-align: right;">
+                <%= value.stock_price_formatted %>   <br>    
                 <small>
                 <% if value.var_percent.to_f >= 0 %>
                   <font color="#009933"><%= number_to_percentage(value.var_percent, precision: 2) %></font>
                 <% else %>
                     <font color="#ff0000"><%= number_to_percentage(value.var_percent, precision: 2) %></font>
                 <% end %>  
-                </small>                                   
-            </div>                              
+                </small>                                               
+            </div>    
+           
           </div>
          <% end %> 
         
