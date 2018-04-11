@@ -1,4 +1,5 @@
 
+
   <div class="row">
       <div class="col-md-4">  
 
@@ -23,8 +24,8 @@
       
         </div>
 
-        <div class="row">
-          <div class="col-md-6 text-right"></div>
+        <div class="row" >
+          <div class="col-md-6 text-right" style="border: thin solid black"></div>
           <div class="col-md-6 text-right"><strong><small>(<%=  number_to_percentage(@company.perc_estimated_benefit_now, precision: 2)  %>)</small></strong></div>     
 
 
@@ -141,14 +142,14 @@
           <br>
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.market_capitalization') %>:</div>
-          <div class="col-md-6 text-right"><strong><%=  number_to_human(@company.market_cap, precision: 3)  %></strong></div>
+          <div class="col-md-6 text-right"><strong><%=  number_to_human(@company.quote('marketCap'), precision: 3)  %> </strong></div>
 
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.year_low') %>:</div>
-          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.year_low)  %></strong></div>
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.quote('week52Low'))  %></strong></div>
 
           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.year_high') %>:</div>
-          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.year_high)  %></strong></div>
+          <div class="col-md-6 text-right"><strong><%=  @company.number_currency_operations(@company.quote('week52High'))  %></strong></div>
              
 
 
@@ -202,3 +203,40 @@
        
 
       </div>     
+
+<div class="row">
+  <div class="col-md-6">
+    <table  class="table table-light">
+     <tbody>
+        <tr class="table-hover">
+          <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.market_capitalization') %></td>
+          <td class="right-align" style="padding-right: 0px;"><strong><%=  number_to_human(@company.quote('marketCap'), precision: 3)  %></strong></td>
+        </tr>      
+        <tr class="table-hover">    
+            <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.year_low') %></td>
+            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.number_currency_operations(@company.quote('week52Low'))  %></strong></td>
+        </tr>      
+        <tr class="table-hover">
+            <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.year_high') %></td>
+            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.number_currency_operations(@company.quote('week52High'))  %></td>
+        </tr> 
+
+         <% ['latestEPS','latestEPSDate','returnOnEquity','consensusEPS','EBITDA','revenue','grossProfit','cash','debt','revenuePerShare','peRatioHigh','peRatioLow','returnOnAssets','returnOnCapital','profitMargin','priceToBook','priceToSales'].each do |magnitud| %>
+
+        <tr class="table-hover">
+            <td style="padding-left: 0px;"><%=  magnitud  %></td>
+            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.stats(magnitud)  %></td>
+        </tr> 
+        <% end %> 
+ 
+        </tr>
+
+
+
+
+
+    </tbody>
+    </table>
+
+  </div>
+</div>

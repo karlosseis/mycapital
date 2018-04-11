@@ -1,6 +1,7 @@
 class SetTaxAuto < ActiveJob::Base
   queue_as :default
   # establece la tasa de cambio del día para todas las operaciones
+  # 09.04.2018 - fue de un solo uso
 # SetTaxAuto.perform_now
   def perform(*args)
     # Do something later

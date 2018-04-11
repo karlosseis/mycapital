@@ -1,5 +1,8 @@
 class ChangeCurrDividOperationJob < ActiveJob::Base
   queue_as :default
+
+# 09.04.2018 - fue de un solo uso
+
 # ChangeCurrDividOperationJob.perform_now
   def perform(*args)
     # Do something later

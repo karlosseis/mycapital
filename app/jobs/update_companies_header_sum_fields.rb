@@ -7,6 +7,7 @@ class UpdateCompaniesHeaderSumFields < ActiveJob::Base
 		Company.find_each do |q|
 
 			begin
+				q.set_update_summary
   		  		q.set_next_official_dividend_values
   		  		q.set_last_result_values
   		  		q.save

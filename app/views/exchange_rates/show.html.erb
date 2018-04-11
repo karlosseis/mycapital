@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date exchange:</strong>
+  <%= @exchange_rate.date_exchange %>
+</p>
+
+<p>
+  <strong>Pair:</strong>
+  <%= @exchange_rate.pair %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @exchange_rate.rate %>
+</p>
+
+<%= link_to 'Edit', edit_exchange_rate_path(@exchange_rate) %> |
+<%= link_to 'Back', exchange_rates_path %>

@@ -72,8 +72,10 @@ class CompaniesController < ApplicationController
     @company =  current_user.companies.new(company_params)
 
     respond_to do |format|
-      @company.set_update_summary
-      @company.set_stock_price_google
+      # 05.04.2018 - comento estos updates porque ahora la actualización de los precios se hará en background. A malas, se podría modificar para
+      #              que recuperara también de la hoja de cálculo
+      # @company.set_update_summary
+      # @company.set_stock_price_google
       if  @company.save        
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
@@ -89,7 +91,7 @@ class CompaniesController < ApplicationController
   def update
     #byebug
     respond_to do |format|
-      @company.set_stock_price_google
+      # @company.set_stock_price_google
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }

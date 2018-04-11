@@ -17,7 +17,7 @@ development:
    pool: 5
    username: root
    password: bitnami
-   host: 192.168.43.111
+   host: 192.168.43.107
 
 
 # Warning: The database defined as "test" will be erased and

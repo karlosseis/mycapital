@@ -32,12 +32,12 @@ class WelcomeController < ApplicationController
 	      end
 	    end
 
-      if company.var_percent.to_f > 4 
+      if company.share_price_change_perc > 4 
         @max_subidas[company.id] = company      
       end
 
 
-      if company.var_percent.to_f <= -4 
+      if company.share_price_change_perc <= -4 
         @max_bajadas[company.id] = company      
       end
 

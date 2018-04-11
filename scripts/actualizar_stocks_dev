@@ -1,0 +1,1 @@
+rails runner "SharePricesUpdateJob.perform_now"

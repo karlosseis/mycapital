@@ -41,7 +41,7 @@ gem 'google_currency', '~> 3.4'
 
 gem 'delayed_job_active_record'
 
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 gem 'seed_dump'
 
 gem "chartkick"
@@ -57,6 +57,8 @@ gem "lol_dba"
 
 gem 'open_exchange_rates'
 gem 'httparty'
+
+gem "google_drive"
 
 #gem 'yahoo-finance'
 

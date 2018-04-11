@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   #before_action :set_stockexchange_prefixsymbols
  
 
+      def saluda
+          'hola'
+        end
+
+
     protected
 
         def configure_permitted_parameters
@@ -14,17 +19,18 @@ class ApplicationController < ActionController::Base
             devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :permission_level,:email, :password, :current_password, :is_female, :date_of_birth) }
         end
 
+  
 
   #   private
   #   def set_stockexchange_prefixsymbols
-		# @google_prefix = {}
+    # @google_prefix = {}
 
-		# @stocks = Stockexchange.all
+    # @stocks = Stockexchange.all
 
-	 #    @stocks.each do |stockexchange| 
-	 #    	@google_prefix[stockexchange.id] = stockexchange.google_prefix
-	  
-	 #     end 
+   #    @stocks.each do |stockexchange| 
+   #      @google_prefix[stockexchange.id] = stockexchange.google_prefix
+    
+   #     end 
 
   #   end
 end
