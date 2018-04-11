@@ -36,8 +36,8 @@ gem 'simple_form'
 
 gem 'devise'
 
-gem 'stock_quote', '~> 1.2', '>= 1.2.3'
-gem 'google_currency', '~> 3.4'
+#gem 'stock_quote', '~> 1.2', '>= 1.2.3'
+#gem 'google_currency', '~> 3.4'
 
 gem 'delayed_job_active_record'
 
