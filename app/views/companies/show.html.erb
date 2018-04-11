@@ -103,10 +103,10 @@
 
             </h2>
          <h6 class="text-center">   
-         <% if @company.var_percent.to_f >= 0 %>
-            <font color="#009933"><%= number_to_percentage(@company.var_percent, precision: 2) %></font>
+         <% if @company.share_price_change_perc >= 0 %>
+            <font color="#009933"><%= number_to_percentage(@company.share_price_change_perc, precision: 2) %></font>
           <% else %>
-              <font color="#ff0000"><%= number_to_percentage(@company.var_percent, precision: 2) %></font>
+              <font color="#ff0000"><%= number_to_percentage(@company.share_price_change_perc, precision: 2) %></font>
           <% end %>   
           </h6>  
 

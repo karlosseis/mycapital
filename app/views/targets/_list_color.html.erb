@@ -12,10 +12,7 @@
         
         <th style="text-align:right"><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></th>                    
         <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>      
-        <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th> 
-        <th style="text-align:right"><%= t(:'simple_form.labels.company.payout') %></th>
-        <th style="text-align:center"><%= t(:'simple_form.labels.company.next_exdividend_date') %></th>
-        <th style="text-align:right"><%= t(:'simple_form.labels.company.market_cap') %></th>      
+        <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th>    
         <th style="text-align:center"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>      
       </tr>
     </thead>
@@ -32,12 +29,12 @@
               <a href=<%= company.url_google_finance %>  target = "_blank"><%= company.google_symbol %></a>
               
             </td>
-            <td style="text-align:right"><%= company.stock_price_formatted %></td>                            
+            <td style="text-align:right"><%= company.share_price_formatted %></td>                            
             <td style="text-align:center">    
-              <% if company.var_percent.to_f >= 0 %>
-                <font color="#009933"><%= number_to_percentage(company.var_percent, precision: 2) %></font>
+              <% if company.share_price_change_perc >= 0 %>
+                <font color="#009933"><%= number_to_percentage(company.share_price_change_perc, precision: 2) %></font>
               <% else %>
-                  <font color="#ff0000"><%= number_to_percentage(company.var_percent, precision: 2) %></font>
+                  <font color="#ff0000"><%= number_to_percentage(company.share_price_change_perc, precision: 2) %></font>
               <% end %>     
            </td>          
             
@@ -52,10 +49,6 @@
               
               <%= number_to_percentage(company.porc_dif_target_price, precision: 2) %>
             </td>          
-            <td style="text-align:right"><%= number_to_percentage(company.payout, precision: 0) %></td> 
-            <td style="text-align:center"><%= format_date(company.next_exdividend_date) %></td> 
-            <td style="text-align:right"><%= number_to_human(company.market_cap, precision: 3) %></td>  
-
 
             <td style="text-align:center">          
               <%= company.years_with_dividend %>

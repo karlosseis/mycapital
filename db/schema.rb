@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307155219) do
+ActiveRecord::Schema.define(version: 20180411215810) do
 
   create_table "accounts", force: :cascade do |t|
     t.text     "name",            limit: 4294967295
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180307155219) do
     t.integer  "sector_id",                                        limit: 4
     t.float    "share_price",                                      limit: 24,         default: 0.0
     t.string   "search_symbol",                                    limit: 255
-    t.date     "date_share_price"
+    t.datetime "date_share_price"
     t.float    "dividend_sum",                                     limit: 24,         default: 0.0
     t.float    "puchased_sum",                                     limit: 24,         default: 0.0
     t.float    "sold_sum",                                         limit: 24,         default: 0.0
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 20180307155219) do
     t.float    "estimated_benefit_operations_currency_euros",      limit: 24,         default: 0.0
     t.float    "perc_estimated_benefit_operations_currency_euros", limit: 24,         default: 0.0
     t.date     "nearest_announce_date"
+    t.float    "share_price_change_perc",                          limit: 24,         default: 0.0
+    t.float    "share_price_change",                               limit: 24,         default: 0.0
   end
 
   add_index "companies", ["broker_id"], name: "index_companies_on_broker_id", using: :btree
@@ -261,6 +263,14 @@ ActiveRecord::Schema.define(version: 20180307155219) do
   add_index "estimated_movements", ["movementtype_id"], name: "index_estimated_movements_on_movementtype_id", using: :btree
   add_index "estimated_movements", ["subcategory_id"], name: "index_estimated_movements_on_subcategory_id", using: :btree
   add_index "estimated_movements", ["user_id"], name: "index_estimated_movements_on_user_id", using: :btree
+
+  create_table "exchange_rates", force: :cascade do |t|
+    t.date     "date_exchange"
+    t.string   "pair",          limit: 255
+    t.float    "rate",          limit: 24
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "expected_dividends", force: :cascade do |t|
     t.integer  "company_id",        limit: 4

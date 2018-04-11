@@ -17,7 +17,7 @@
           <tr>            
             <td style="text-align:left"><%= link_to value.name, value %></td>
 
-            <td style="text-align:right"><%= value.stock_price_formatted %></td>                            
+            <td style="text-align:right"><%= value.share_price_formatted %></td>                            
             <td style="text-align:center">    
               <% if value.var_percent.to_f >= 0 %>
                 <font color="#009933"><%= number_to_percentage(value.var_percent, precision: 2) %></font>

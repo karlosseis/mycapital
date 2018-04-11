@@ -43,8 +43,54 @@ class Settings
 
 		     end
 
+
+
 		end
 
+		if @rates.nil?
+
+
+			if ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_day).count==0
+
+				fx = OpenExchangeRates::Rates.new
+				@usd2eur = fx.convert(1, :from => "USD", :to => "EUR")
+				@gbp2eur = fx.convert(1, :from => "GBP", :to => "EUR")
+				@eur2usd = fx.convert(1, :from => "EUR", :to => "USD")
+				@eur2gbp = fx.convert(1, :from => "EUR", :to => "GBP")
+
+				a = []
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "USDEUR", rate: @usd2eur)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "GBPEUR", rate: @gbp2eur)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURUSD", rate: @eur2usd)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURGBP", rate: @eur2gbp)
+
+				a.each(&:save)
+
+			end
+
+			@rates = {}
+			ex = ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_day)
+
+			ex.each do |x| 
+				@rates[x.pair] = x.rate
+
+			end
+
+			
+		end
+
+
+
+	end
+
+	def self.convert_currency (orig, dest)
+
+		if orig == dest
+			1		
+		else
+			pair = orig + dest
+			@rates[pair]
+		end
 
 	end
 

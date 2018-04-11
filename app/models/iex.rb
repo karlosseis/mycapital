@@ -34,7 +34,9 @@ class Iex
   def price
     self.class.get("/stock/%s/price" % @symbol).parsed_response
   end
-
+  def stats
+    self.class.get("/stock/%s/stats" % @symbol).parsed_response
+  end
 
 
 end

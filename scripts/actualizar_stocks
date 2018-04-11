@@ -1,1 +1,1 @@
-heroku run rails runner "SharePricesUpdateJob.perform_now"
+RAILS_ENV=production rails runner "SharePricesUpdateJob.perform_now"

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :exchange_rates
   resources :brokers
   resources :mapconcepts
   resources :movements
