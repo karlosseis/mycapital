@@ -264,7 +264,7 @@ require 'settings.rb'
     unless self.dif_target_sell_price >= 0
       perc_result = (self.dif_target_sell_price * 100) / self.share_price
     end
-    perc_result    
+    perc_result    * -1
   end
 
   def porc_dif_target_price    
