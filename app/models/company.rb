@@ -30,8 +30,7 @@ require 'settings.rb'
 
 
   @iex_stats = nil
-  @iex_quote = nil
-
+  @iex_quote = nil  
 
 
   def self.search(search)
@@ -141,6 +140,16 @@ require 'settings.rb'
     "https://finance.google.com/finance?q=" + self.google_symbol
     
   end
+
+  def url_morningstar_ratios    
+    "http://financials.morningstar.com/ratios/r.html?t=" + self.symbol
+  end
+
+  def url_morningstar_incomes
+    "http://financials.morningstar.com/income-statement/is.html?t=" + self.symbol
+  end
+
+
 
   def last_purchase
       op = self.operations.where(operationtype_id: Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(1) 
@@ -578,20 +587,20 @@ require 'settings.rb'
 
       else
        # buscamos los divendos del AÑO PASADO
-       div = self.company_historic_dividends.where('payment_date >= ? and payment_date <= ?', Time.now.beginning_of_year-1, Time.now.end_of_year-1).order(payment_date: :asc)   
+       div = self.company_historic_dividends.where('payment_date >= ? and payment_date <= ?', Time.now.beginning_of_year - 1.year, Time.now.end_of_year - 1.year).order(payment_date: :asc)   
        cont = 1        
        # de todos los dividendos del año pasado, tenemos que coger el siguiente que toca. 
        # es decir, si tenemos 3 dividendos puestos este año, del año pasado tendríamos que coger el número 4
        div.each do |p|     
             
-            if cont =  num_divs_current_year + 1
+            if cont ==  num_divs_current_year + 1
               sig_div = p
             end
          
        end      
       end
       unless sig_div.nil?
-        if sig_div.announce_date + 1.year   <=   (Time.now).beginning_of_day  - 30.day  
+        if sig_div.announce_date + 1.year   >=   (Time.now).beginning_of_day  - 30.day  
           self.nearest_announce_date = sig_div.announce_date + 1.year
         end        
       end
@@ -663,6 +672,12 @@ require 'settings.rb'
     end    
   end
 
+  def img_logo
+      'https://storage.googleapis.com/iex/api/logos/' + self.symbol + '.png'
+#      iex = Iex.new(self.yahoo_symbol)
+#      logo = iex.logo    
+#      logo['url']
+  end
 
   def set_stock_price_IEX    
     # graba el precio recuperado de IEX
