@@ -18,7 +18,7 @@ class SharePricesUpdateJob < ActiveJob::Base
 		# Print out the first 6 columns of each row
 
 		Company.find_each do |q|
-		#q = Company.find(127)
+		#q = Company.find(131)
 			begin
 				# si es mercado americano lo pillamos de google
 				if Settings.yahoo_suffixes[q.stockexchange_id] == ""  
@@ -43,12 +43,15 @@ class SharePricesUpdateJob < ActiveJob::Base
 							q.share_price_change_perc =  share_price_change_perc.to_f
 							q.share_price_change =  share_price_change.to_f     							  
 							#q.set_update_summary
+	
+					         if Settings.stockexchange_currency_name[q.stockexchange_id] == 'GBP' then
+					            q.share_price = share_price.to_f  / 100
+					         end    
+	
 	  		  			end
 
 
-				         if Settings.stockexchange_currency_name[q.stockexchange_id] == 'GBP' then
-				            q.share_price = share_price.to_f  / 100
-				         end      
+  
 
 	  		  		}	
 

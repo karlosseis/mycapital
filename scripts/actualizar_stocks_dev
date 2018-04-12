@@ -1,1 +1,2 @@
+cd /home/bitnami/projects/mycapital
 rails runner "SharePricesUpdateJob.perform_now"

@@ -1,1 +1,2 @@
+cd /home/rails/mycapital
 RAILS_ENV=production rails runner "SharePricesUpdateJob.perform_now"
