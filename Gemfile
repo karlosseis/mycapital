@@ -60,6 +60,8 @@ gem 'httparty'
 
 gem "google_drive"
 
+gem 'whenever', require: false
+
 #gem 'yahoo-finance'
 
 # Use ActiveModel has_secure_password
