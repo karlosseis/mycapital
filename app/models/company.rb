@@ -86,8 +86,8 @@ require 'settings.rb'
 
   def  date_share_price_time_ago
     date_price = ""
-    unless @date_price.nil?
-      date_price = "Hace " + time_ago_in_words(date_share_price)
+    unless self.date_share_price.nil? or self.date_share_price == ""
+      date_price = "Hace " + time_ago_in_words(self.date_share_price)
     end
 
     date_price
@@ -95,8 +95,8 @@ require 'settings.rb'
 
   def  date_share_price_formatted
     date_price = ""
-    unless @date_price.nil? or @date_price == ""
-      date_price = I18n.l(@date_price)
+    unless self.date_share_price.nil? or self.date_share_price == ""
+      date_price = I18n.l(self.date_share_price)
     end
 
     date_price
