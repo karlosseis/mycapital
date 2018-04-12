@@ -1,3 +1,4 @@
-rails runner "SharePriceUpdateFromgooglefinanceJob.perform_now"
+cd /home/bitnami/projects/mycapital
+rails runner "UpdateCompaniesHeaderSumFields.perform_now"
 rails runner "PopulateExpectedDividendsJob.perform_now"
 rails runner "PopulateEstimatedMovementsJob.perform_now"
