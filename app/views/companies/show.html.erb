@@ -4,7 +4,7 @@
 
 </head>
 
- <h2 class = "page-header">
+ <h3 class = "page-header">
 
     <div class="row">
       <div class="col-md-5" >
@@ -63,7 +63,7 @@
         </div> 
      </div>
   </div>
-</h2>
+</h3>
 
 
 
@@ -94,6 +94,13 @@
                         <img class="img-responsive hidden-xs" src="../gfinance.jpg" width="16" height="16" alt=""/></img>
                       </a>               
                     </div>     
+
+                    <% unless Settings.yahoo_suffixes[@company.stockexchange_id] == ""  %>
+                      <a href=<%= @company.investors_url %>  target = "_blank">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                      </a>  
+                    <% end %>  
+
                     <div class="col-md-2" >    
                       <a href=<%= @company.historic_dividend_url %>  target = "_blank">
                         <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>

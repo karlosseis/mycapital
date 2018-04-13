@@ -673,10 +673,10 @@ require 'settings.rb'
   end
 
   def img_logo
-      'https://storage.googleapis.com/iex/api/logos/' + self.symbol + '.png'
-#      iex = Iex.new(self.yahoo_symbol)
-#      logo = iex.logo    
-#      logo['url']
+
+      iex = Iex.new(self.yahoo_symbol)
+      iex.image_logo    
+
   end
 
   def set_stock_price_IEX    
