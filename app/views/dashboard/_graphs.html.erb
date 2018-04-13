@@ -66,13 +66,15 @@
        </div>
     </div>   
 
+ 
 
+  <div class="row">
 
-<!--  <div class="row">
+      <% Currency.all.each do |curr|%>
+
        <div class="col-md-4">
-          <%= pie_chart @expected_dividends_group_company , donut: true, legend: false, title: t(:'graph_weight_dividend') %>
-       </div>
+          <%= pie_chart ExpectedDividend.joins(company: :sector).where('currency_id=%s' % curr.id).group('sectors.name').sum(:amount) , donut: true, legend: false, title: t(:'graph_weight_dividend_sector',  curr: curr.name) %>
+        </div> 
 
-
-       
-    </div>  -->
+       <% end %>
+  </div> 

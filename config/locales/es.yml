@@ -88,6 +88,7 @@ es:
   graph_dividend_year_com_currency: "Dividendos %{curr}"
   graph_dividend_historic: "Histórico de dividendos"
   graph_weight_dividend: Peso anual dividendos
+  graph_weight_dividend_sector: "Div. por sector %{curr}"
   dashboard_title: "Posición global"
   new_company_comment: "Nuevo comentario"
   edit_company_comment: "Editar comentario"

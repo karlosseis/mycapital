@@ -19,8 +19,39 @@ class Iex
     self.class.get("/stock/%s/news" % @symbol).parsed_response
   end
 
-  def charts
-    self.class.get("/stock/%s/chart/1m" % @symbol).parsed_response
+ def earnings
+    self.class.get("/stock/%s/earnings" % @symbol).parsed_response
+  end
+
+
+  def charts(range)
+
+# /stock/aapl/chart
+# /stock/aapl/chart/5y
+# /stock/aapl/chart/2y
+# /stock/aapl/chart/1y
+# /stock/aapl/chart/ytd
+# /stock/aapl/chart/6m
+# /stock/aapl/chart/3m
+# /stock/aapl/chart/1m
+# /stock/aapl/chart/1d
+    # A LO MEJOR PETA EL DOBLE %
+    self.class.get("/stock/%s/chart/" % @symbol + range).parsed_response
+  end
+
+  def dividends(range)
+
+# /stock/aapl/chart
+# /stock/aapl/chart/5y
+# /stock/aapl/chart/2y
+# /stock/aapl/chart/1y
+# /stock/aapl/chart/ytd
+# /stock/aapl/chart/6m
+# /stock/aapl/chart/3m
+# /stock/aapl/chart/1m
+# /stock/aapl/chart/1d
+    # A LO MEJOR PETA EL DOBLE %
+    self.class.get("/stock/%s/dividends/" % @symbol + range).parsed_response
   end
 
   def financials
@@ -37,6 +68,9 @@ class Iex
   def stats
     self.class.get("/stock/%s/stats" % @symbol).parsed_response
   end
-
+  def image_logo
+    logo_json = self.class.get("/stock/%s/logo" % @symbol).parsed_response
+    logo_json['url']
+  end
 
 end
