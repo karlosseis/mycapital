@@ -80,7 +80,7 @@
             
 
 
-            <% if Settings.yahoo_suffixes[@company.stockexchange_id] == ""  %>
+            <% if @company.IEX_avaliable  %>
               <%= link_to image_tag(@company.img_logo), @company.investors_url , target: :_blank %> 
             <% end %>  
            </div> 
@@ -95,7 +95,7 @@
                       </a>               
                     </div>     
 
-                    <% unless Settings.yahoo_suffixes[@company.stockexchange_id] == ""  %>
+                    <% unless @company.IEX_avaliable  %>
                       <a href=<%= @company.investors_url %>  target = "_blank">
                         <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
                       </a>  
@@ -106,7 +106,7 @@
                         <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                       </a>                    
                     </div>     
-                    <% if Settings.yahoo_suffixes[@company.stockexchange_id] == ""  %>
+                    <% if @company.IEX_avaliable  %>
                     <div class="col-md-2" >  
                         <a href=<%= @company.url_morningstar_ratios %>  target = "_blank">
                             <img class="img-responsive hidden-xs" src="../morning1.jpg" width="16" height="16" alt=""/></img>
@@ -126,7 +126,7 @@
         </div>
         <div class="col-md-4" >
 
-            <h2 class="text-center">
+            <h3 class="text-center">
                <% if @company.target_price_1.to_f >= @company.share_price.to_f %>
                 <font color="#009933"><%=@company.share_price_formatted %></font>
               <% else %>
@@ -135,7 +135,7 @@
             
               
 
-            </h2>
+            </h3>
          <h6 class="text-center">   
          <% if @company.share_price_change_perc >= 0 %>
             <font color="#009933"><%= number_to_percentage(@company.share_price_change_perc, precision: 2) %></font>
