@@ -422,7 +422,7 @@ require 'settings.rb'
     # es decir, el campo pasa a guardarse siempre en euros
     total = 0 
     self.get_dividends.each do |key, value|                  
-        total = total + Settings.convert_currency(Currency.find(key).name, Mycapital::CURRENCY_PURCHASE)        
+        total = total + (value * Settings.convert_currency(Currency.find(key).name, Mycapital::CURRENCY_PURCHASE))
 
     end 
     #total = self.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND).sum(:net_amount)
@@ -632,7 +632,7 @@ require 'settings.rb'
   end
 
   def stats(field)
-    if Settings.yahoo_suffixes[self.stockexchange_id] == ""  
+    if self.IEX_avaliable 
       # significa que podemos recuperar la data de IEX 
 
       if @iex_stats.nil?
@@ -654,7 +654,7 @@ require 'settings.rb'
   def quote(field)
 
 
-    if Settings.yahoo_suffixes[self.stockexchange_id] == ""  
+    if self.IEX_avaliable
       # significa que podemos recuperar la data de IEX 
 
       if @iex_quote.nil?
@@ -677,6 +677,11 @@ require 'settings.rb'
       iex = Iex.new(self.yahoo_symbol)
       iex.image_logo    
 
+  end
+
+  def IEX_avaliable  
+    # Si es el mercado americano (en yahoo no tiene sufijo), podremos recuperar la data de IEX
+    Settings.yahoo_suffixes[self.stockexchange_id] == ""
   end
 
   def set_stock_price_IEX    

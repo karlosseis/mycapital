@@ -47,6 +47,13 @@ class Settings
 
 		end
 
+		self.load_rates
+
+
+
+	end
+
+	def self.load_rates
 		if @rates.nil?
 
 
@@ -78,9 +85,6 @@ class Settings
 
 			
 		end
-
-
-
 	end
 
 	def self.convert_currency (orig, dest)
@@ -88,8 +92,10 @@ class Settings
 		if orig == dest
 			1		
 		else
+			self.load_rates
 			pair = orig + dest
 			@rates[pair]
+			
 		end
 
 	end

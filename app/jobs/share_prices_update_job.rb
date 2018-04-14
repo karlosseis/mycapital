@@ -21,7 +21,7 @@ class SharePricesUpdateJob < ActiveJob::Base
 		#q = Company.find(131)
 			begin
 				# si es mercado americano lo pillamos de google
-				if Settings.yahoo_suffixes[q.stockexchange_id] == ""  
+				if q.IEX_avaliable
 
 	  		  		q.set_stock_price_IEX
 	  		  		
