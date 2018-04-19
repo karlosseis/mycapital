@@ -1,5 +1,12 @@
 <%= line_chart [        
-        {name: "Dividendos", data: @company.company_historic_dividends.group_by_year(:payment_date).sum(:amount)}        
+        {name: "Dividendos", data: @company.company_historic_dividends.group_by_month(:payment_date, series: false).sum(:amount)}        
         
       ] %>
+
+
+<%= line_chart [        
+        {name: "Dividendos", data: @company.company_historic_dividends.group_by_year(:payment_date, format: "%Y").sum(:amount)}        
+        
+      ] %>
+
        
