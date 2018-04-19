@@ -673,11 +673,19 @@ require 'settings.rb'
   end
 
   def img_logo
-
+    if self.IEX_avaliable
       iex = Iex.new(self.yahoo_symbol)
       iex.image_logo    
-
+    end
   end
+
+  def dividends(range)
+    if self.IEX_avaliable
+      iex = Iex.new(self.yahoo_symbol)
+      iex.dividends(range)
+    end
+  end
+
 
   def IEX_avaliable  
     # Si es el mercado americano (en yahoo no tiene sufijo), podremos recuperar la data de IEX
@@ -743,6 +751,26 @@ require 'settings.rb'
   def number_currency_operations(value)  # NUEVA
      # formatea el valor en la moneda de las operaciones
     number_to_currency(value, unit:self.currency_symbol_operations.to_s, seperator: ",", delimiter: ".") 
+  end
+
+
+  def retrieve_IEX_dividends
+    # recuperamos los dividendos de IEX y los grabamos físicamente como histórico de dividendos
+    div = self.dividends('5y').each
+    div.each do |p| 
+      if self.company_historic_dividends.where('payment_date = ?', p["paymentDate"]).count == 0
+        histdiv = self.company_historic_dividends.new(            
+          exdividend_date: p["exDate"],
+          record_date: p["recordDate"],
+          announce_date: p["declaredDate"],
+          dividend_type: 0,
+          payment_date: p["paymentDate"],
+          amount: p["amount"],      
+          retrieved_auto: true)   
+        histdiv.save
+      end
+
+    end
   end
 
 end
