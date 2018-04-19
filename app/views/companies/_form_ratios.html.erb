@@ -1,36 +1,86 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <table  class="table table-light">
      <tbody>
         <tr class="table-hover">
-          <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.market_capitalization') %></td>
-          <td class="right-align" style="padding-right: 0px;"><strong><%=  number_to_human(@company.quote('marketCap'), precision: 3)  %></strong></td>
-        </tr>      
-        <tr class="table-hover">    
-            <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.year_low') %></td>
-            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.number_currency_operations(@company.quote('week52Low'))  %></strong></td>
-        </tr>      
-        <tr class="table-hover">
-            <td style="padding-left: 0px;"><%= t(:'simple_form.labels.company.year_high') %></td>
-            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.number_currency_operations(@company.quote('week52High'))  %></td>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.latestEPS') %></td>
+            <td style="text-align:right"><strong><%= @company.stats('latestEPS') %> (<%=  format_date(@company.stats('latestEPSDate').to_date) %>)</strong></td> 
         </tr> 
 
-         <% ['latestEPS','latestEPSDate','returnOnEquity','consensusEPS','EBITDA','revenue','grossProfit','cash','debt','revenuePerShare','peRatioHigh','peRatioLow','returnOnAssets','returnOnCapital','profitMargin','priceToBook','priceToSales'].each do |magnitud| %>
-
-        <tr class="table-hover">
-            <td style="padding-left: 0px;"><%=  magnitud  %></td>
-            <td class="right-align" style="padding-right: 0px;"><strong><%=  @company.stats(magnitud)  %></td>
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.consensusEPS') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('consensusEPS')) %></strong></td> 
         </tr> 
-        <% end %> 
- 
-        </tr>
-
-
-
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.returnOnEquity') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnEquity')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.revenue') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('revenue'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.grossProfit') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('grossProfit'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.EBITDA') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('EBITDA'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.cash') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('cash'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.debt') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('debt'), precision: 5) %></strong></td> 
+        </tr>  
 
 
     </tbody>
     </table>
 
   </div>
+
+
+  <div class="col-md-4">
+    <table  class="table table-light">
+     <tbody>
+
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.revenuePerShare') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('revenuePerShare')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.returnOnAssets') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnAssets')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.returnOnCapital') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnCapital')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.profitMargin') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('profitMargin')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.priceToBook') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToBook')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.priceToSales') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToSales')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.day200MovingAvg') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('day200MovingAvg')) %></strong></td> 
+        </tr>  
+
+
+    </tbody>
+    </table>
+
+  </div>
+
+
 </div>
