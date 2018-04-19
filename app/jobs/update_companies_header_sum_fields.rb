@@ -8,6 +8,7 @@ class UpdateCompaniesHeaderSumFields < ActiveJob::Base
 
 			begin
 				q.set_update_summary
+				q.retrieve_IEX_dividends
   		  		q.set_next_official_dividend_values
   		  		q.set_last_result_values
   		  		q.save

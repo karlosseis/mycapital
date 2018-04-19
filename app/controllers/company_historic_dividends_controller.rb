@@ -81,6 +81,6 @@ class CompanyHistoricDividendsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_historic_dividend_params
-      params.require(:company_historic_dividend).permit(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type, :company_id, :user_id)
+      params.require(:company_historic_dividend).permit(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type, :company_id, :user_id, :retrieved_auto)
     end
 end
