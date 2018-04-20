@@ -1,10 +1,12 @@
+<% if @company.IEX_avaliable  %>
+
 <div class="row">
   <div class="col-md-4">
     <table  class="table table-light">
      <tbody>
         <tr class="table-hover">
             <td style="text-align:left"><%= t(:'simple_form.labels.company_historic_dividend.latestEPS') %></td>
-            <td style="text-align:right"><strong><%= @company.stats('latestEPS') %> (<%=  format_date(@company.stats('latestEPSDate').to_date) %>)</strong></td> 
+            <td style="text-align:right"><strong><%=  number_with_delimiter(@company.stats('latestEPS')) %> (<%=  format_date(@company.stats('latestEPSDate').to_date) %>)</strong></td> 
         </tr> 
 
         <tr>
@@ -84,3 +86,5 @@
 
 
 </div>
+
+<% end  %>
