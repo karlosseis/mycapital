@@ -156,18 +156,18 @@ def import_movements
 		#entity = comp.company_historic_dividends.new
 	    #entity.attributes = row.to_hash #.slice(:exdividend_date, :record_date, :announce_date, :payment_date, :amount, :dividend_type)
 	    entity.user_id = current_user.id
-	    entity.name = row["concepto"]	
+	    entity.name = row["concepto"].strip
 	    entity.amount = row["importe"]
 	    entity.movement_date = row["fecha"]
                     
         # si la subcategoria no viene informada buscamos la que le corespondería según el concepto
 	    if row["subcategoria"].nil? or row["subcategoria"] == "" then	    	
-	    	map  = current_user.mapconcepts.search(row["concepto"]	)
+	    	map  = current_user.mapconcepts.search(row["concepto"].strip	)
 	    	unless map.count == 0
-				entity.subcategory_id = map[0].subcategory_id
+				entity.subcategory_id =  map[0].subcategory_id
 	    	end
 	    else # sino le asignamos la que tiene
-		    subcateg = current_user.subcategories.where('name = ? ', row["subcategoria"]).first   
+		    subcateg = current_user.subcategories.where('name = ? ', row["subcategoria"]).first   		
 		    if subcateg
 		    	entity.subcategory_id = subcateg.id
 		    end	    	    	

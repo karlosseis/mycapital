@@ -12,7 +12,7 @@ class Mapconcept < ActiveRecord::Base
       # else
       #   where('name LIKE ?', "%#{search}%")
       # end
-      where('name LIKE ?', "%#{search}%")
+      where('lower(name) LIKE lower(?)', "%#{search}%")
 
     else
 

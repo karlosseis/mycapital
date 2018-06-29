@@ -200,6 +200,22 @@ es:
         payment_date: Fecha de pago
         amount: Importe bruto
         dividend_type: Tipo
+      ratios:
+        latestEPS: EPS
+        returnOnEquity: ROE 
+        consensusEPS: EPS consenso
+        EBITDA: EBITDA
+        revenue: Ventas
+        grossProfit: Beneficio bruto
+        cash: Caja
+        debt: Deuda
+        revenuePerShare: Ventas por acción 
+        returnOnAssets: ROA 
+        returnOnCapital: ROC (retorno capital)
+        profitMargin: Margen de beneficios
+        priceToBook: Valor en libros
+        priceToSales: Valor en ventas (P/S)
+        day200MovingAvg: Media movil 200        
       estimated_movement:
         name: Nombre
         amount: Importe
