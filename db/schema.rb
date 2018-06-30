@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416221903) do
+ActiveRecord::Schema.define(version: 20180630075508) do
 
   create_table "accounts", force: :cascade do |t|
     t.text     "name",            limit: 4294967295
@@ -137,9 +137,11 @@ ActiveRecord::Schema.define(version: 20180416221903) do
     t.date     "nearest_announce_date"
     t.float    "share_price_change_perc",                          limit: 24,         default: 0.0
     t.float    "share_price_change",                               limit: 24,         default: 0.0
+    t.integer  "country_id",                                       limit: 4
   end
 
   add_index "companies", ["broker_id"], name: "index_companies_on_broker_id", using: :btree
+  add_index "companies", ["country_id"], name: "index_companies_on_country_id", using: :btree
   add_index "companies", ["sector_id"], name: "index_companies_on_sector_id", using: :btree
   add_index "companies", ["stockexchange_id"], name: "index_companies_on_stockexchange_id", using: :btree
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
@@ -508,6 +510,7 @@ ActiveRecord::Schema.define(version: 20180416221903) do
   add_foreign_key "brokers", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "companies", "brokers"
+  add_foreign_key "companies", "countries"
   add_foreign_key "companies", "sectors"
   add_foreign_key "companies", "stockexchanges"
   add_foreign_key "companies", "users"

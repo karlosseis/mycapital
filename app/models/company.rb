@@ -6,6 +6,7 @@ require 'settings.rb'
   belongs_to :stockexchange
   belongs_to :sector
   belongs_to :broker
+  belongs_to :country
   
   has_many :operations, dependent: :destroy
   has_many :expected_dividends

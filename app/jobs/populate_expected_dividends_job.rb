@@ -24,9 +24,9 @@ class PopulateExpectedDividendsJob < ActiveJob::Base
 				amount = hist.amount 
 				amont_minus_tax_origin = 0
 				
-				unless hist.company.stockexchange.country.perc_tax == 0	 or hist.company.stockexchange.country_id ==  Mycapital::ID_PAIS
+				unless hist.company.country.perc_tax == 0	 or hist.company.stockexchange.country_id ==  Mycapital::ID_PAIS
 					# si el país no es españa y tiene retención en origen, se la restamos. 
-					amount = amount - (amount * hist.company.stockexchange.country.perc_tax) / 100
+					amount = amount - (amount * hist.company.country.perc_tax) / 100
 				end
 
 				amont_minus_tax_origin = amount
