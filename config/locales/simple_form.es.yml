@@ -65,7 +65,8 @@ es:
         next_exdividend_date: Ex-dividendo
         next_dividend_date: Próx. Dividendo
         next_dividend_amount: Dividendo
-        puchased_sum_euros: "Total comprado (€)"    
+        puchased_sum_euros: "Total comprado (€)" 
+        country: "País"     
 
       operation:
         company: "Empresa"

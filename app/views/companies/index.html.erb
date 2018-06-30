@@ -45,6 +45,7 @@ $(document).ready(function(){
       <th style="text-align:right"><%= t(:'simple_form.labels.company.share_price') %></th>      
       <th style="text-align:right"><%= t(:'simple_form.labels.company.date_share_price') %></th>      
       <th style="text-align:left"><%= t(:'simple_form.labels.company.stockexchange') %></th>
+      <th style="text-align:left"><%= t(:'simple_form.labels.company.country') %></th>
       <th style="text-align:left"><%= t(:'simple_form.labels.company.sector') %></th>      
     </tr>
   </thead>
@@ -57,6 +58,7 @@ $(document).ready(function(){
         <td style="text-align:right"><%= company.share_price_formatted %></td>   
         <td style="text-align:right"><%= company.date_share_price_formatted %></td>
         <td style="text-align:left"><%= company.stockexchange %></td>
+        <td style="text-align:left"><%= company.country %></td>  
         <td style="text-align:left"><%= company.sector %></td>          
       </tr>
     <% end %>
