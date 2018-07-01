@@ -251,9 +251,11 @@ es:
         location: Ubicación        
     tooltips:
       operation:
+        net_amount: Se calculará automáticamente junto con la retención en destino si se dejan en blanco y se informan el total bruto y la retención en origen.
         currency: Moneda empresa si ING o Euros si activo trade
-        origin_price: Precio en la moneda anterior seleccionada
+        origin_price: Precio en la moneda anterior seleccionada. Calculado automáticamente si está en blanco y se ha informado la tasa de cambio 
         exchange_rate: Precio USD * Tasa tiene quedar Euros. Es decir poner el resultado de dividir USD / EUR
+        puchased_sum_euros: Calculado automáticamente si está en blanco y se ha informado la tasa de cambio 
       company_historic_dividend:
         exdividend_date: Fecha de corte. Fecha a partir de la cual el poseedor de acción no obtendrá derechos si compra acciones nuevas.
         record_date: Día que se relacionan o listan (registran) los accionistas con derecho a recibir el dividendo.

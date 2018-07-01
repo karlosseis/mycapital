@@ -2,8 +2,8 @@
  <%= f.error_notification %>
  <%= f.hidden_field  :operationtype_id, html5: true %> 
   <div class="row">
-    <div class="col-md-4">      
-      <%= f.input :net_amount  %>
+    <div class="col-md-4">       
+      <%= f.input :net_amount ,  input_html: {:title => t(:'simple_form.tooltips.operation.net_amount')}  %>
       <%= f.input :withholding_tax  %>
       <%= f.input :destination_tax  %>
       <%= f.input :gross_amount  %>
