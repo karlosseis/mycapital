@@ -1,6 +1,6 @@
 sudo git add .
 
-sudo git commit -m "perc_tax en pais"
+sudo git commit -m "calculos automaticos al crear dividendo y compra"
 
 sudo git push -u origin master
 

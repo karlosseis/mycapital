@@ -23,7 +23,7 @@
              <%= f.association :currency, :readonly => !(@operation.currency.nil?),  input_html: {:title => t(:'simple_form.tooltips.operation.currency')}  %>
              <%= f.input :origin_price  , html5: true       ,  input_html: {:title => t(:'simple_form.tooltips.operation.origin_price')}  %>
              <%= f.input :exchange_rate   ,  input_html: {:title => t(:'simple_form.tooltips.operation.exchange_rate')}  %>
-             <%= f.input :puchased_sum_euros  %>
+             <%= f.input :puchased_sum_euros  ,  input_html: {:title => t(:'simple_form.tooltips.operation.puchased_sum_euros')}  %>
 
              
   

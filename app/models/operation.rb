@@ -4,10 +4,10 @@ class Operation < ActiveRecord::Base
   belongs_to :operationtype
   belongs_to :currency
   belongs_to :user
-  belongs_to :broker
+  belongs_to :broker 
   belongs_to :currency_operation, class_name: 'Currency'
   
-  before_validation :update_origin_price, :update_tax_rate_auto
+  before_validation  :update_tax_rate_auto   #:update_origin_price,
   after_save :update_company
   after_destroy :update_company 
  
@@ -85,21 +85,26 @@ class Operation < ActiveRecord::Base
   
   end
 
-  def update_origin_price
-     # si la moneda de la empresa es la moneda del sistema, el precio en origen será el mismo que Price. 
-     # Es decir, si la empresa es española, el precio origen será el mismo en el que compramos (euros)
+  # def update_origin_price
+  #    # 01/07/2017 - lo comento todo (y la llamada) porque es un lío. Que el usuario ponga lo que quiera. 
 
-     # grabo la moneda de la empresa porque aunque la grabo en el new, si no muestro el campo en pantalla no me hace caso.
-     # 27/08/2017 - lo comento porque ahora se muestra la moneda en pantalla 
+  #    # si la moneda de la empresa es la moneda del sistema, el precio en origen será el mismo que Price. 
+  #    # Es decir, si la empresa es española, el precio origen será el mismo en el que compramos (euros)
+
+  #    # grabo la moneda de la empresa porque aunque la grabo en el new, si no muestro el campo en pantalla no me hace caso.
+  #    # 27/08/2017 - lo comento porque ahora se muestra la moneda en pantalla 
      
-    #if is_purchase?
-    #   self.currency_id = self.company.stockexchange.currency_id
-    #end
-    if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s && self.currency_operation.to_s == Mycapital::CURRENCY_PURCHASE.to_s)        
-        self.origin_price = self.price
-        self.exchange_rate = 1
-    end
-  end
+  #   #if is_purchase?
+  #   #   self.currency_id = self.company.stockexchange.currency_id
+  #   #end
+
+
+
+  #   if (self.currency.to_s == Mycapital::CURRENCY_PURCHASE.to_s && self.currency_operation.to_s == Mycapital::CURRENCY_PURCHASE.to_s)        
+  #       self.origin_price = self.price
+  #       self.exchange_rate = 1
+  #   end
+  # end
 
   def dividend_per_share
     unless self.quantity.nil? or self.quantity == 0 

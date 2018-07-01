@@ -74,6 +74,35 @@ class OperationsController < ApplicationController
     @operation = Operation.new(operation_params)
     @operation.company = @company
     @operation.user_id = current_user.id
+    # 01.07.2018 - Si es un dividendo y sólo informan el total bruto y la retención en origen, 
+    #              el sistema calculará automáticamente la retención en destino y el total neto. 
+    #              Útil para dividendos de activo trade
+
+    if @operation.operationtype_id == Mycapital::OP_DIVIDEND
+
+        if @operation.net_amount.nil? and @operation.destination_tax.nil? and !@operation.gross_amount.nil? and !@operation.withholding_tax.nil?
+
+          @operation.destination_tax = ((@operation.gross_amount - @operation.withholding_tax) * Country.find(Mycapital::ID_PAIS).perc_tax ) / 100
+          @operation.net_amount = @operation.gross_amount - @operation.withholding_tax - @operation.destination_tax
+
+        end
+
+    end
+
+  # 01.07.2018 - Si es una compra y no han informado el total en euros y el precio en euros de la acción 
+  #              se calculan automáticamente si el usuario ha puesto la tasa de cambio
+
+    if @operation.operationtype_id == Mycapital::OP_PURCHASE
+
+        if @operation.origin_price.nil? and (@operation.puchased_sum_euros.nil? or @operation.puchased_sum_euros == 0) and !@operation.exchange_rate.nil?
+
+          @operation.origin_price = @operation.price * @operation.exchange_rate 
+          @operation.puchased_sum_euros = @operation.amount * @operation.exchange_rate 
+
+        end
+
+    end   
+    
     respond_to do |format|
       if @operation.save
         format.html { redirect_to @operation.company, notice: 'Operation was successfully created.' }
