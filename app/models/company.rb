@@ -2,6 +2,16 @@ class Company < ActiveRecord::Base
 include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 require 'settings.rb'  
+
+
+# 19/08/2018 - columnas dejadas de utilizar
+# puchased_sum 
+# invested_sum
+# ampliated_sum
+# sold_sum
+# average_price_origin_currency 
+# average_price_origin_currency_real
+
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
@@ -397,7 +407,12 @@ require 'settings.rb'
 
     arr = []   # array con las compras y ampliaciones de las acciones que tenemos acutalmente. Es decir, aquellas que no hemos vendido. 
 
+    hay_venta = 0
+    total_benefit = 0 # ganancias o pérdidas de las operaciones de compraventa  
+    total_benefit_euros = 0 # ganancias o pérdidas de las operaciones de compraventa  
 
+
+    temp_total_benefit = 0
     # deb = []
     
     res = self.operations.where('operationtype_id = ? or operationtype_id = ? or operationtype_id = ?', Mycapital::OP_PURCHASE, Mycapital::OP_AMPLIATION, Mycapital::OP_SALE).order(operation_date: :asc).all
@@ -406,6 +421,8 @@ require 'settings.rb'
               # Si es una compra o ampliación, la guardamos en la matriz
               arr.push  [ p.quantity, p.puchased_sum_euros /  p.quantity, p.amount /  p.quantity , p.price]
                         # cantidad, precio unidad segun el total comprado en euros, precio unidad en moneda de la compra, precio de la accion (sin tasas) , precio de la accion sin tasas en euros
+
+              temp_total_benefit = temp_total_benefit - p.amount
            else 
               # Si es una venta, borramos la o las compras que hemos vendido (las que van antes cronológicamente)
              quant_pend =  p.quantity
@@ -425,6 +442,13 @@ require 'settings.rb'
                 end
                
              end
+             hay_venta = 1  # marcamos que hay una venta para que tenga sentido un total de beneficios (si no hay venta, todo son compras y no puede haber ganancia o pérdida)
+             total_benefit = temp_total_benefit + p.amount
+             temp_total_benefit = 0
+
+             # 19.08.2018 - Aquí quería guardar el beneficio o pérdida de la venta, pero se cuelga.
+             # p.earnings_sum = total_benefit
+             # p.save
 
              arr = arr.drop(items_a_borrar)
 
@@ -464,6 +488,13 @@ require 'settings.rb'
 
     end 
     
+    if hay_venta == 1
+      self.earnings_sum = total_benefit
+      self.earnings_sum_euros = 0
+    else
+      self.earnings_sum = 0
+      self.earnings_sum_euros = 0 
+    end
 
 
     # grabamos en la cabecera la moneda de una de las operaciones y esta servirá para compras, div, ventas...
