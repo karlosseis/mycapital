@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630075508) do
+ActiveRecord::Schema.define(version: 20180818094558) do
 
   create_table "accounts", force: :cascade do |t|
     t.text     "name",            limit: 4294967295
@@ -138,6 +138,9 @@ ActiveRecord::Schema.define(version: 20180630075508) do
     t.float    "share_price_change_perc",                          limit: 24,         default: 0.0
     t.float    "share_price_change",                               limit: 24,         default: 0.0
     t.integer  "country_id",                                       limit: 4
+    t.float    "invested_sum_euros",                               limit: 24,         default: 0.0
+    t.float    "earnings_sum",                                     limit: 24,         default: 0.0
+    t.float    "earnings_sum_euros",                               limit: 24,         default: 0.0
   end
 
   add_index "companies", ["broker_id"], name: "index_companies_on_broker_id", using: :btree

@@ -106,9 +106,6 @@ require 'settings.rb'
     number_to_currency(self.share_price, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
   end
 
-  def average_price_origin_currency_formatted
-    number_to_currency(self.average_price_origin_currency, unit:self.stockexchange_currency_symbol, seperator: ",", delimiter: ".")
-  end
 
   def google_symbol # REVISADO. NADA QUE REVISAR
      prefix = ""
@@ -279,20 +276,7 @@ require 'settings.rb'
 
  
 
-   def set_estimated_values  # REVISADO NUEVO
-     # valor, beneficio y porcenteje de beneficio en la moneda de las operaciones de la empresa
-     # 25.09.2017 - antes llamada set_estimated_value_global_currency
-     # valor estimado de las acciones en compania en la moneda de las operaciones de la empresa. 
 
-     self.estimated_value_operations_currency = estimated_value_now
-     self.estimated_benefit_operations_currency = estimated_benefit_now
-     self.perc_estimated_benefit_operations_currency = perc_estimated_benefit_now
-
-
-     self.estimated_benefit_operations_currency_euros = estimated_benefit_euros_now
-     self.perc_estimated_benefit_operations_currency_euros = perc_estimated_benefit_euros_now
-
-   end
 
    def estimated_value_global_currency_now
      share_price_global_currency.to_f * shares_sum
@@ -314,7 +298,7 @@ require 'settings.rb'
     # calculamos el beneficio estimado en euros a partir de lo que nos costó en euros y lo que valdría ahora
     # si cambiáramos el valor estimado total a euros (sólo si tenemos acciones, claro)
     unless shares_sum == 0
-      total = estimated_value_global_currency_now - puchased_sum_euros
+      total = estimated_value_global_currency_now - invested_sum_euros
       total.round(2)
     end
   end
@@ -324,7 +308,7 @@ require 'settings.rb'
    
     total = 0
     unless invested_sum == 0 then
-        total = estimated_benefit_euros_now.to_f * 100 / puchased_sum_euros.to_f
+        total = estimated_benefit_euros_now.to_f * 100 / invested_sum_euros.to_f
     end
     total.round(2)
   end
@@ -360,40 +344,6 @@ require 'settings.rb'
 
 
 
-  def set_average_price # AQUÍ TAMBIÉN HAY FOLLÓN
-    # precio medio de la acción en base a las compras realizadas (moneda de la aplicación, EUROS)
-      total = 0
-      total_real = 0        
-      self.operations.where.not(:operationtype_id => Mycapital::OP_DIVIDEND).each do |op| 
-        unless op.price.nil? || op.quantity.nil?
-
-          if op.operationtype_id == Mycapital::OP_SALE 
-            # si es una venta tenemos que restarle el valor del importe
-            total = total - (op.price *  op.quantity)
-            total_real = total_real - op.amount
-          else
-            total = total + (op.price *  op.quantity)
-            total_real = total_real + op.amount
-          end
-        end
-        
-      end    
-      unless self.shares_sum == 0 
-        total = total / self.shares_sum   
-        total_real = total_real / self.shares_sum   
-      end 
-      self.average_price = total.round(2)
-      self.average_price_real = total_real.round(2)
-
-      # (# compra 1 * precio 1) + (# compra 2*precio 2) + (# venta 1*precio1) + (# ampliacion 1*precio1)/ (#compra1 + #compra2 + # venta 1 +  # ampliacion 1)
-      # hay que tener en cuenta las ventas y también las ampliaciones
-  end
-
-  def set_shares_sum     # REVISADO 
-    # total de acciones
-    self.shares_sum = (quantity_puchased.to_i - quantity_sold.to_i + quantity_ampliated.to_i).round(0)
-    self.set_estimated_values()
-  end
 
   def get_shares_sum_at_date(fecha)
     # devuelve el número de acciones que teníamos a la fecha recibida. Útil para calcular el dividendo previsto. 
@@ -405,13 +355,7 @@ require 'settings.rb'
   end
 
 
-  def set_invested_sum      # REVISADO 
-    # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros) + las ampliaciones, que también pueden costar dinero
-    # hace cambiar el precio medio de la acción y el beneficio estimado
-     self.invested_sum = puchased_sum.to_f - sold_sum.to_f + ampliated_sum.to_f
-     self.set_average_price()
-     self.set_estimated_values()
-  end 
+
 
 
   def get_dividends
@@ -430,15 +374,97 @@ require 'settings.rb'
     self.dividend_sum   = total.round(2)
   end
 
-  def set_purchased_sum      # REVISADO 
-    total = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:amount)
 
-    # comprado y ampliado para que guardar todo lo comprado. 
-    puchased_sum_euros = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:puchased_sum_euros) + self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:puchased_sum_euros)
+   def set_estimated_values  # REVISADO NUEVO
+     # valor, beneficio y porcenteje de beneficio en la moneda de las operaciones de la empresa
+     # 25.09.2017 - antes llamada set_estimated_value_global_currency
+     # valor estimado de las acciones en compania en la moneda de las operaciones de la empresa. 
 
-    self.puchased_sum = total.round(2)
-    self.puchased_sum_euros = puchased_sum_euros.round(2)
-    self.quantity_puchased = self.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).sum(:quantity)
+     self.estimated_value_operations_currency = estimated_value_now
+     self.estimated_benefit_operations_currency = estimated_benefit_now
+     self.perc_estimated_benefit_operations_currency = perc_estimated_benefit_now
+
+     self.estimated_benefit_operations_currency_euros = estimated_benefit_euros_now
+     self.perc_estimated_benefit_operations_currency_euros = perc_estimated_benefit_euros_now
+
+   end
+
+
+  def set_invested_sum      # REVISADO 
+    # total invertido actualmente, es decir, compras menos ventas en lamoneda de la aplicación (euros) + las ampliaciones, que también pueden costar dinero
+    # hace cambiar el precio medio de la acción y el beneficio estimado
+
+
+    arr = []   # array con las compras y ampliaciones de las acciones que tenemos acutalmente. Es decir, aquellas que no hemos vendido. 
+
+
+    # deb = []
+    
+    res = self.operations.where('operationtype_id = ? or operationtype_id = ? or operationtype_id = ?', Mycapital::OP_PURCHASE, Mycapital::OP_AMPLIATION, Mycapital::OP_SALE).order(operation_date: :asc).all
+    res.each do |p| 
+           if p.operationtype_id != Mycapital::OP_SALE
+              # Si es una compra o ampliación, la guardamos en la matriz
+              arr.push  [ p.quantity, p.puchased_sum_euros /  p.quantity, p.amount /  p.quantity , p.price]
+                        # cantidad, precio unidad segun el total comprado en euros, precio unidad en moneda de la compra, precio de la accion (sin tasas) , precio de la accion sin tasas en euros
+           else 
+              # Si es una venta, borramos la o las compras que hemos vendido (las que van antes cronológicamente)
+             quant_pend =  p.quantity
+             items_a_borrar = 0 
+             arr.each  do |a| 
+
+                #deb.push "antes if  a[0]: " + a[0].to_s + "   quant_pend: "  + quant_pend.to_s
+                if a[0] <= quant_pend       # si con la compra no hay suficiente para igualar la cantidad de venta, lo borramos porque significa que 'se ha vendido'
+                  quant_pend =  quant_pend - a[0]
+                                    
+                  items_a_borrar = items_a_borrar + 1
+                else
+                   # Sino, es que hasta aquí se ha vendido. 
+                   # deb.push "entra en break, a[0]:" + a[0].to_s  + "   quant_pend:  " + quant_pend.to_s + "   resultado a[0]  - quant_pend :" + (a[0]  - quant_pend).to_s
+                   a[0] =  a[0]  - quant_pend                                     
+                   break
+                end
+               
+             end
+
+             arr = arr.drop(items_a_borrar)
+
+           end              
+    end    
+
+    #deb.push arr
+
+    self.shares_sum = 0
+    self.invested_sum_euros= 0    
+    self.invested_sum = 0
+    temp_average_price = 0
+
+
+    self.average_price = 0
+    self.average_price_real = 0
+
+    arr.each  do |a| 
+
+          self.shares_sum =  self.shares_sum +  a[0]
+          
+          self.invested_sum_euros =  self.invested_sum_euros +  (a[0] *  a[1])  # Total en euros
+          
+
+          self.invested_sum =  self.invested_sum +  (a[0] *  a[2])   # Total en moneda de compra
+
+
+          temp_average_price = temp_average_price + (a[0] *  a[3])
+
+     end
+
+    unless shares_sum == 0
+      
+      self.average_price = (temp_average_price / self.shares_sum).round(2)
+      self.average_price_real = (self.invested_sum / self.shares_sum).round(2)
+
+
+    end 
+    
+
 
     # grabamos en la cabecera la moneda de una de las operaciones y esta servirá para compras, div, ventas...
     # también grabamos el broker para poder poner las monedas que correspondan al crear una nueva operación.
@@ -448,95 +474,24 @@ require 'settings.rb'
        self.currency_symbol_operations = Currency.find(p.currency_operation_id).symbol
        self.broker_id = p.broker_id
     end
-    
 
-    self.set_shares_sum()
-    self.set_invested_sum()
-  end
 
-  def set_sold_sum       # REVISADO 
-      total = self.operations.where(:operationtype_id => Mycapital::OP_SALE).sum(:amount)
-      self.sold_sum  = total.round(2)
-      self.quantity_sold = self.operations.where(:operationtype_id => Mycapital::OP_SALE).sum(:quantity)
-      self.set_shares_sum()
-      self.set_invested_sum()
-  end
 
-  def set_ampliated_sum       # REVISADO 
-      total = self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:amount)
-      self.ampliated_sum  = total.round(2)
-      self.quantity_ampliated = self.operations.where(:operationtype_id => Mycapital::OP_AMPLIATION).sum(:quantity)
-      self.set_shares_sum()
-  end
+    self.set_estimated_values()
+
+
+    #deb
+  end 
+
 
   
-  def set_average_price_origin_currency   # POR ACABAR (ANTES DE REVISIÓN 22.09.2017)
-    # precio medio en la moneda de la empresa, es decir, independientemente de si he comprado en euros o no
-      total = 0  # total sin comisiones
-      total_real = 0      # total con comisiones
-   
-      
-      self.operations.where.not(:operationtype_id => Mycapital::OP_DIVIDEND).each do |op| 
-        unless op.origin_price.nil? || op.quantity.nil?
-          exchange_to_origin_price = 0  
-          unless op.exchange_rate ==0   
-             # calculamos la tasa a aplicar para convertir de EUR a USD porque la que tenemos guardada es de USD a EUR
-             exchange_to_origin_price = 1 / op.exchange_rate
-          end
-
-          if self.currency_symbol_operations.to_s == Mycapital::CURRENCY_PURCHASE_SYMBOL.to_s   then 
-            # si la compra es en euros, hay que coger el precio origen y multiplicar por la tasa. 
-             total_precio_origen = op.origin_price *  op.quantity
-             total_precio_origen_venta =  op.amount *  exchange_to_origin_price    
-          else
-            # si no, basta con coger el precio de compra porque ya está en la moneda 'extranjera'
-            total_precio_origen = op.price  *  op.quantity
-            total_precio_origen_venta = op.amount
-          end
-        
-
-          if op.operationtype_id == Mycapital::OP_SALE 
-            # si es una venta tenemos que restarle el valor del importe
-            total = total - total_precio_origen
-            total_real = total_real - total_precio_origen_venta
-          else
-            total = total + total_precio_origen
-            total_real = total_real + total_precio_origen_venta
-          end
-        end
-        
-      end    
-      
-      unless self.shares_sum == 0 
-        total = total / self.shares_sum   
-        total_real = total_real / self.shares_sum   
-      end 
-      self.average_price_origin_currency = total.round(2)
-      self.average_price_origin_currency_real = total_real.round(2)
-
-
-      # (# compra 1 * precio 1) + (# compra 2*precio 2) + (# venta 1*precio1) + (# ampliacion 1*precio1)/ (#compra1 + #compra2 + # venta 1 +  # ampliacion 1)
-      # hay que tener en cuenta las ventas y también las ampliaciones
-  end
+    
 
   def set_update_summary ()  # REVISADO
-    #operationtype_id
-    # updateamos todas los campos del resumen: total invertido, dividendos, beneficios estimados...
-
-    # case :operationtype_id
-    # when Mycapital::OP_DIVIDEND then self.set_dividend_sum()
-    # when Mycapital::OP_PURCHASE then self.set_purchased_sum()
-    # when Mycapital::OP_SALE then  self.set_sold_sum()
-    # when Mycapital::OP_AMPLIATION then  self.set_ampliated_sum()
-    # end
 
     self.set_dividend_sum()   # 
-    self.set_purchased_sum()   # OK
-    self.set_sold_sum()       #
-    self.set_ampliated_sum()  #
-
-
-    self.set_average_price_origin_currency()  #
+    self.set_invested_sum()   # OK
+    
 
     
     #total.round(2)
@@ -757,21 +712,23 @@ require 'settings.rb'
 
   def retrieve_IEX_dividends
     # recuperamos los dividendos de IEX y los grabamos físicamente como histórico de dividendos
-    div = self.dividends('5y').each
-    div.each do |p| 
-      if self.company_historic_dividends.where('payment_date = ?', p["paymentDate"]).count == 0
-        histdiv = self.company_historic_dividends.new(            
-          exdividend_date: p["exDate"],
-          record_date: p["recordDate"],
-          announce_date: p["declaredDate"],
-          dividend_type: 0,
-          payment_date: p["paymentDate"],
-          amount: p["amount"],      
-          retrieved_auto: true)   
-        histdiv.save
-      end
+    if self.IEX_avaliable 
+      div = self.dividends('5y')
+      div.each do |p| 
+        if self.company_historic_dividends.where('payment_date = ?', p["paymentDate"]).count == 0
+          histdiv = self.company_historic_dividends.new(            
+            exdividend_date: p["exDate"],
+            record_date: p["recordDate"],
+            announce_date: p["declaredDate"],
+            dividend_type: 0,
+            payment_date: p["paymentDate"],
+            amount: p["amount"],      
+            retrieved_auto: true)   
+          histdiv.save
+        end
 
-    end
+      end
+    end  
   end
 
 end

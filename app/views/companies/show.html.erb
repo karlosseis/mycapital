@@ -158,7 +158,7 @@
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.average_price_origin_currency') %></h6>
             <h5 class="text-center">
 
-              <%= number_to_currency(@company.average_price_origin_currency, :unit => @company.stockexchange.currency.symbol)  %>
+              <%= number_to_currency(@company.average_price, :unit => @company.stockexchange.currency.symbol)  %>
             </h5>
             <h6 class="text-muted text-center"><%= t(:'simple_form.labels.company.yoc') %></h6>            
             <h5 class="text-center"><%=number_to_percentage(@company.expected_yoc, precision: 2) %></h5>            
@@ -169,8 +169,8 @@
             <h5 class="text-center"><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></h5>          
             <h6 class="text-muted text-center">Última compra</h6>
             <h5 class="text-center"><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></h5>
-            <h6 class="text-muted text-center">Total comprado (€)</h6>
-            <h5 class="text-center"><%= number_to_currency(@company.puchased_sum_euros, unit:'€', seperator: ",", delimiter: ".") %> </h5>
+            <h6 class="text-muted text-center">Total invertido (€)</h6>
+            <h5 class="text-center"><%= number_to_currency(@company.invested_sum_euros, unit:'€', seperator: ",", delimiter: ".") %> </h5>
 
         </div>
 

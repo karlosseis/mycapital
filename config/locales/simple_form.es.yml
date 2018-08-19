@@ -245,6 +245,7 @@ es:
         name: Concepto
         amount: Importe
         movement_date: Fecha
+        category: Categoría
         subcategory: Subcategoría
         movementtype: Tipo
         account: Cuenta
