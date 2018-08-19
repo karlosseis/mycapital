@@ -65,7 +65,8 @@ $(document).ready(function(){
     <tr>
       <th style="text-align:center"><%= t(:'simple_form.labels.movement.movement_date') %></th>  
       <th style="text-align:left"><%= t(:'simple_form.labels.movement.name') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.movement.amount') %></th>                      
+      <th style="text-align:right"><%= t(:'simple_form.labels.movement.amount') %></th>     
+      <th style="text-align:right"><%= t(:'simple_form.labels.movement.category') %></th>                 
       <th style="text-align:left"><%= t(:'simple_form.labels.movement.subcategory') %></th>
       <th style="text-align:left"><%= t(:'simple_form.labels.movement.movementtype') %></th>     
       <th style="text-align:left"><%= t(:'simple_form.labels.movement.account') %></th>    
@@ -75,12 +76,29 @@ $(document).ready(function(){
   </thead>
 
   <tbody>
+
+
+       <div class="col-md-4">
+          <%= pie_chart @movements.group(:movementtype).sum(:amount) , donut: true, legend: false, title: t(:'graph_weight_dividend_sector') %>
+        </div> 
+  
+        <div class="col-md-4">
+         <%= column_chart [
+          {name: "Ingresos/Ahorro/Gastos", data:@movements.group(:movementtype).sum(:amount)}
+
+          ], title: 'compras_y_ventas_eur' %>
+
+       </div>
+
+   
+
     <% @movements.each do |movement| %>
       <tr>
 
       <td style="text-align:center"><%= I18n.l(movement.movement_date) %></td>  
       <td style="text-align:left"><%= link_to movement.name, edit_movement_path(movement) %></td> 
-      <td style="text-align:right"><%= movement.amount %></td>                      
+      <td style="text-align:right"><%= format_currency(movement.amount, "€")  %></td>    
+      <td style="text-align:left"><%= movement.subcategory.category %></td>                  
       <td style="text-align:left"><%= movement.subcategory %></td>
       <td style="text-align:left"><%= movement.movementtype %></td>     
       <td style="text-align:left"><%= movement.account %></td>    
