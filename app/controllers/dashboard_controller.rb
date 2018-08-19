@@ -84,7 +84,7 @@ class DashboardController < ApplicationController
         @expected_dividends_current_year_eur = @expected_dividends_current_year_eur + convert_to_eur(value, Currency.find(key).name) 
     end 
 
-
+ 
 
     # Para gráficos
 
@@ -119,8 +119,45 @@ class DashboardController < ApplicationController
     
     #@expected_dividends_group_company=   current_user.expected_dividends.group(:company).sum(:amount)
 
-   
+   @operations_benefit_euros = current_user.companies.where(:currency_symbol_operations => "€").sum(:earnings_sum).round(2)
+   @operations_benefit_usd = current_user.companies.where(:currency_symbol_operations =>  "$").sum(:earnings_sum).round(2)
+   @operations_benefit_gbp = current_user.companies.where(:currency_symbol_operations =>  "£").sum(:earnings_sum).round(2)
 
+
+    @gross_dividend_group_year_eur = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("EUR")).sum(:gross_amount)
+    @gross_dividend_group_year_usd = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("USD")).sum(:gross_amount)
+    @gross_dividend_group_year_gbp = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("GBP")).sum(:gross_amount)
+
+
+
+
+    @withholding_tax_dividend_group_year_eur = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("EUR")).sum(:withholding_tax)
+    @withholding_tax_dividend_group_year_usd = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("USD")).sum(:withholding_tax)
+    @withholding_tax_dividend_group_year_gbp = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("GBP")).sum(:withholding_tax)
+
+
+    @destination_tax_dividend_group_year_eur = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("EUR")).sum(:destination_tax)
+    @destination_tax_dividend_group_year_usd = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("USD")).sum(:destination_tax)
+    @destination_tax_dividend_group_year_gbp = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, Currency.find_by_name("GBP")).sum(:destination_tax)
+
+
+    # Esto serviría si queremos mostrar todos los años, quedaría así:
+    #{"2012"=>1.7699999809265137, "2013"=>10.370000123977661, "2014"=>357.51000225543976, "2015"=>978.3099985122681, "2016"=>1940.312987267971, "2017"=>2600.1099882125854, "2018"=>1268.3200149536133} € 
+    #{"2017"=>136.44999980926514, "2018"=>900.3999934196472} $ 
+    #{"2017"=>97.5, "2018"=>194.28000259399414} £ 
+
+    # @gross_dividend_group_year_eur = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("EUR")).group_by_year(:operation_date, format: "%Y").sum(:gross_amount)
+    # @gross_dividend_group_year_usd = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("USD")).group_by_year(:operation_date, format: "%Y").sum(:gross_amount)
+    # @gross_dividend_group_year_gbp = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("GBP")).group_by_year(:operation_date, format: "%Y").sum(:gross_amount)
+
+    # @withholding_tax_dividend_group_year_eur = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("EUR")).group_by_year(:operation_date, format: "%Y").sum(:withholding_tax)
+    # @withholding_tax_dividend_group_year_usd = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("USD")).group_by_year(:operation_date, format: "%Y").sum(:withholding_tax)
+    # @withholding_tax_dividend_group_year_gbp = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("GBP")).group_by_year(:operation_date, format: "%Y").sum(:withholding_tax)
+
+
+    # @destination_tax_dividend_group_year_eur = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("EUR")).group_by_year(:operation_date, format: "%Y").sum(:destination_tax)
+    # @destination_tax_dividend_group_year_usd = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("USD")).group_by_year(:operation_date, format: "%Y").sum(:destination_tax)
+    # @destination_tax_dividend_group_year_gbp = current_user.operations.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => Currency.find_by_name("GBP")).group_by_year(:operation_date, format: "%Y").sum(:destination_tax)
 
 
 

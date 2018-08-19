@@ -106,7 +106,10 @@
 
            <% end %>    
         </div>
-        
+        <div class="row">
+           <div class="col-md-6 text-right"><%= t(:'simple_form.labels.company.earnings_sum') %>:</div>
+           <div class="col-md-6 text-right"><strong><%= @company.number_currency_operations(@company.earnings_sum)  %></strong></div>  
+        </div>      
  
 
       </div>
