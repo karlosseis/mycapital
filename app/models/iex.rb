@@ -3,24 +3,30 @@
 class Iex
   include HTTParty
 
-  base_uri "https://api.iextrading.com/1.0"
+  #base_uri "https://api.iextrading.com/1.0"
+  base_uri "https://cloud.iexapis.com/beta"
+  
+
+  #https://api.iextrading.com/1.0/stock/t/dividends/1y
 
   format :json
 
   def initialize(symbol)
     @symbol = symbol
+    @secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
   end
 
   def info
-    self.class.get("/stock/%s/company" % @symbol).parsed_response
+    self.class.get("/stock/%s/company" % @symbol + "?token=" + @secret_token).parsed_response
+    #self.class.get("/stock/%s/company" % @symbol + "?token=" + @secret_token).parsed_response
   end
 
   def news
-    self.class.get("/stock/%s/news" % @symbol).parsed_response
+    self.class.get("/stock/%s/news" % @symbol + "?token=" + @secret_token).parsed_response
   end
 
  def earnings
-    self.class.get("/stock/%s/earnings" % @symbol).parsed_response
+    self.class.get("/stock/%s/earnings" % @symbol + "?token=" + @secret_token).parsed_response
   end
 
 
@@ -36,7 +42,7 @@ class Iex
 # /stock/aapl/chart/1m
 # /stock/aapl/chart/1d
     # A LO MEJOR PETA EL DOBLE %
-    self.class.get("/stock/%s/chart/" % @symbol + range).parsed_response
+    self.class.get("/stock/%s/chart/" % @symbol + range + "?token=" + @secret_token).parsed_response
   end
 
   def dividends(range)
@@ -51,25 +57,25 @@ class Iex
 # /stock/aapl/chart/1m
 # /stock/aapl/chart/1d
     # A LO MEJOR PETA EL DOBLE %
-    self.class.get("/stock/%s/dividends/" % @symbol + range).parsed_response
+    self.class.get("/stock/%s/dividends/" % @symbol + range  + "?token=" + @secret_token).parsed_response
   end
 
   def financials
-    self.class.get("/stock/%s/financials" % @symbol).parsed_response
+    self.class.get("/stock/%s/financials" % @symbol + "?token=" + @secret_token).parsed_response
   end
 
   def quote
-    self.class.get("/stock/%s/quote" % @symbol).parsed_response
+    self.class.get("/stock/%s/quote" % @symbol + "?token=" + @secret_token).parsed_response
   end
 
   def price
-    self.class.get("/stock/%s/price" % @symbol).parsed_response
+    self.class.get("/stock/%s/price" % @symbol + "?token=" + @secret_token).parsed_response
   end
   def stats
-    self.class.get("/stock/%s/stats" % @symbol).parsed_response
+    self.class.get("/stock/%s/stats" % @symbol + "?token=" + @secret_token).parsed_response
   end
   def image_logo
-    logo_json = self.class.get("/stock/%s/logo" % @symbol).parsed_response
+    logo_json = self.class.get("/stock/%s/logo" % @symbol + "?token=" + @secret_token).parsed_response
     logo_json['url']
   end
 

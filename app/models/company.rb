@@ -357,10 +357,18 @@ require 'settings.rb'
 
   def get_shares_sum_at_date(fecha)
     # devuelve el número de acciones que teníamos a la fecha recibida. Útil para calcular el dividendo previsto. 
-    total = 0
-    total = self.operations.where('(operationtype_id = ? or operationtype_id = ? ) and operation_date <= ?', Mycapital::OP_PURCHASE, Mycapital::OP_AMPLIATION, fecha).sum(:quantity)
-    total = total - self.operations.where('operationtype_id = ?  and operation_date <= ?', Mycapital::OP_SALE, fecha).sum(:quantity)
 
+    total = 0
+    
+    #logger.debug "Company " + self.name
+    
+   
+
+    total = self.operations.where('(operationtype_id = ? or operationtype_id = ? ) and operation_date <= ?', Mycapital::OP_PURCHASE, Mycapital::OP_AMPLIATION, fecha).sum(:quantity)
+    #logger.info "Total 1: %s " % total
+    total = total - self.operations.where('operationtype_id = ?  and operation_date <= ?', Mycapital::OP_SALE, fecha).sum(:quantity)
+    #logger.info "Total 2: %s " % total
+   
     total
   end
 
@@ -673,6 +681,12 @@ require 'settings.rb'
     end
   end
 
+  def news
+    if self.IEX_avaliable
+      iex = Iex.new(self.yahoo_symbol)
+      iex.news
+    end
+  end
 
   def IEX_avaliable  
     # Si es el mercado americano (en yahoo no tiene sufijo), podremos recuperar la data de IEX
@@ -754,7 +768,9 @@ require 'settings.rb'
             dividend_type: 0,
             payment_date: p["paymentDate"],
             amount: p["amount"],      
-            retrieved_auto: true)   
+            retrieved_auto: true,
+            user_id: self.user_id)   
+
           histdiv.save
         end
 
