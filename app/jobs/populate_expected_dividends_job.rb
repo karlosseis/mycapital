@@ -14,11 +14,13 @@ class PopulateExpectedDividendsJob < ActiveJob::Base
     	CompanyHistoricDividend.where('payment_date >= ? and payment_date <= ?',  (Time.now - 1.year).beginning_of_year,(Time.now - 1.year).end_of_year)
 .find_each do |hist|
 			amount = 0
+			#logger.debug "Company " + hist.company.name
 
 			# Tomamos el número de acciones que teníamos al record date  
 			# (le sumamos un año porque en el recordset tenemos los dividendos hasta la fecha actual, es decir, el año pasado)
 			shares_number = hist.company.get_shares_sum_at_date(hist.record_date + 1.year)
 			
+			#logger.info "Total shares: %s " % shares_number
 			unless hist.amount.nil?  or shares_number == 0
 
 				amount = hist.amount 
@@ -47,6 +49,7 @@ class PopulateExpectedDividendsJob < ActiveJob::Base
 
 
 			end
+			#logger.info "despus nombre"
 	
 		end
   end
