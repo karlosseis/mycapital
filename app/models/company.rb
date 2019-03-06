@@ -694,17 +694,22 @@ require 'settings.rb'
   end
 
   def set_stock_price_IEX    
-    # graba el precio recuperado de IEX
+    # graba el precio recuperado de IEX 
+    # 06.03.2019 - solo si el mercado está abierto, para minimizar las llamadas a la api
 
-      iex = Iex.new(self.yahoo_symbol)
-      quote = iex.quote
-      @iex_stats = iex.stats
+      if self.stockexchange.open_time <= Time.now and self.stockexchange.close_time >= Time.now
+
+
+        iex = Iex.new(self.yahoo_symbol)
+        quote = iex.quote
+        #@iex_stats = iex.stats
+        
       
-    
-      self.share_price =   quote['latestPrice'].to_f
-      self.share_price_change =  quote['change'].to_f
-      self.share_price_change_perc = quote['changePercent'].to_f * 100
-
+        self.share_price =   quote['latestPrice'].to_f
+        self.share_price_change =  quote['change'].to_f
+        self.share_price_change_perc = quote['changePercent'].to_f * 100
+        self.date_share_price = Time.now
+      end
             
   end
 
