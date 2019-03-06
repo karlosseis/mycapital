@@ -54,10 +54,11 @@ class SharePricesUpdateJob < ActiveJob::Base
   
 
 	  		  		}	
+	  		  		q.date_share_price = Time.now
 
 	  		  	end
 	  		  	q.share_price_global_currency = q.share_price * Settings.convert_currency(q.stockexchange_currency_name, Mycapital::CURRENCY_PURCHASE)
-	  		  	q.date_share_price = Time.now
+	  		  	
 	  		  	q.save
 			rescue => ex
 			  logger.error ex.message
