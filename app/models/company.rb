@@ -697,7 +697,7 @@ require 'settings.rb'
     # graba el precio recuperado de IEX 
     # 06.03.2019 - solo si el mercado está abierto, para minimizar las llamadas a la api
 
-      if self.stockexchange.open_time <= Time.now and self.stockexchange.close_time >= Time.now
+      if self.stockexchange.open_time.hour <= Time.now.hour and self.stockexchange.close_time.hour >= Time.now.hour
 
 
         iex = Iex.new(self.yahoo_symbol)
