@@ -13,8 +13,8 @@ class Iex
 
   def initialize(symbol)
     @symbol = symbol
-    @secret_token = "sk_a869f8d2eba140728de5380d3b971899"
-    #@secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
+    #@secret_token = "sk_a869f8d2eba140728de5380d3b971899"
+    @secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
     
   end
 
