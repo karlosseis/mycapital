@@ -6,9 +6,10 @@ class MovementsController < ApplicationController
   def index
     #@movements = current_user.movements.all
     if params[:filter_month]   
-      @ini_mes = (Time.now.year.to_s + "-" + params[:filter_month] + "-01").to_date
+      
+      @ini_mes = (params[:filter_year].to_s + "-" + params[:filter_month] + "-01").to_date
     else
-      @ini_mes = (Time.now.year.to_s + "-" + Time.now.month.to_s + "-01").to_date
+      @ini_mes = (params[:filter_year].to_s + "-" + Time.now.month.to_s + "-01").to_date
     end
   
     # todos los movimientos del mes

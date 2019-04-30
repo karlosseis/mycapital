@@ -29,11 +29,11 @@ $(document).ready(function(){
         </div>
          <div class="col-md-1 text-right form-actions" >  
              <br> <br>      
-             <%= link_to  "<" , movements_path( :filter_month => (@ini_mes - 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+             <%= link_to  "<" , movements_path( :filter_month => (@ini_mes - 1.month).month, :filter_year => (@ini_mes - 1.month).year ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
         </div>      
          <div class="col-md-1 text-right form-actions" >  
              <br> <br>      
-             <%= link_to  ">" , movements_path( :filter_month => (@ini_mes+ 1.month).month ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
+             <%= link_to  ">" , movements_path( :filter_month => (@ini_mes+ 1.month).month, :filter_year => (@ini_mes + 1.month).year ),  :class => "btn btn-primary", :style=>'color:#FFFFFF;' %>                           
         </div>    
     </div>
 
@@ -98,7 +98,13 @@ $(document).ready(function(){
       <td style="text-align:center"><%= I18n.l(movement.movement_date) %></td>  
       <td style="text-align:left"><%= link_to movement.name, edit_movement_path(movement) %></td> 
       <td style="text-align:right"><%= format_currency(movement.amount, "€")  %></td>    
-      <td style="text-align:left"><%= movement.subcategory.category %></td>                  
+      <%if movement.subcategory.nil?%>
+        <td style="text-align:left"></td>     
+      <% else %>             
+        <td style="text-align:left"><%= movement.subcategory.category %></td>     
+
+
+      <% end %>             
       <td style="text-align:left"><%= movement.subcategory %></td>
       <td style="text-align:left"><%= movement.movementtype %></td>     
       <td style="text-align:left"><%= movement.account %></td>    
