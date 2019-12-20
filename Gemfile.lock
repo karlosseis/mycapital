@@ -162,7 +162,7 @@ GEM
     pg (1.0.0)
     pivot_table (1.0.0)
     public_suffix (3.0.2)
-    rack (1.6.9)
+    rack (1.6.12)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5.1)
