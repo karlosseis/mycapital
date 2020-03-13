@@ -1,4 +1,4 @@
-class Company < ActiveRecord::Base
+class Company < ActiveRecord::Base 
 include ActionView::Helpers::NumberHelper
 include ActionView::Helpers::DateHelper
 require 'settings.rb'  
@@ -681,6 +681,14 @@ require 'settings.rb'
     end
   end
 
+  def dividends_batch()
+    if self.IEX_avaliable
+      iex = Iex.new(self.yahoo_symbol)
+      iex.dividends_batch()
+    end
+  end
+  
+
   def news
     if self.IEX_avaliable
       iex = Iex.new(self.yahoo_symbol)
@@ -779,6 +787,36 @@ require 'settings.rb'
           histdiv.save
         end
 
+      end
+    end  
+  end
+
+  def retrieve_IEX_dividends_batch
+    # recuperamos los dividendos de IEX y los grabamos físicamente como histórico de dividendos
+    # 13/03/2020 - usando el servico batch, porque el otro ha dejado de ir bien
+
+    # [{"exDate":"2015-05-18","paymentDate":"2015-06-10","recordDate":"2015-05-20","declaredDate":"2015-03-11","amount":"0.520000000","flag":"Cash","currency":"USD","description":"Ordinary Shares","frequency":"quarterly","date":"2020-03-13"}]
+    # {"TGT":{"dividends":[{"exDate":"2020-02-18","paymentDate":"2020-03-10","recordDate":"2020-02-19","declaredDate":"2020-01-08","amount":"0.66","flag":"Cash","currency":"USD","description":"Ordinary Shares","frequency":"quarterly","date":"2020-03-13"}]}}
+    if self.IEX_avaliable 
+      div_completo = self.dividends_batch()
+      unless div_completo.nil?
+        div = div_completo[self.symbol]["dividends"]
+        div.each do |p| 
+          if self.company_historic_dividends.where('payment_date = ?', p["paymentDate"]).count == 0
+            histdiv = self.company_historic_dividends.new(            
+              exdividend_date: p["exDate"],
+              record_date: p["recordDate"],
+              announce_date: p["declaredDate"],
+              dividend_type: 0,
+              payment_date: p["paymentDate"],
+              amount: p["amount"],      
+              retrieved_auto: true,
+              user_id: self.user_id)   
+
+            histdiv.save
+          end
+
+        end
       end
     end  
   end

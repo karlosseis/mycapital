@@ -67,6 +67,11 @@ class Iex
     self.class.get("/stock/%s/dividends/" % @symbol + range  + "?token=" + @secret_token).parsed_response
   end
 
+def dividends_batch()
+
+    self.class.get("/stock/market/batch?symbols=%s" % @symbol  + "&types=dividends&token=" + @secret_token).parsed_response
+  end
+
   def financials
     self.class.get("/stock/%s/financials" % @symbol + "?token=" + @secret_token).parsed_response
   end

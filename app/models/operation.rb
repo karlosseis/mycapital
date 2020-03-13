@@ -1,6 +1,6 @@
 class Operation < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
-  belongs_to :company
+  belongs_to :company 
   belongs_to :operationtype
   belongs_to :currency
   belongs_to :user
