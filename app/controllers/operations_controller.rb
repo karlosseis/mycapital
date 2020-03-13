@@ -1,4 +1,4 @@
-class OperationsController < ApplicationController
+class OperationsController < ApplicationController 
   before_action :authenticate_user!
   before_action :set_operation, only: [:show, :edit, :update, :destroy]
   before_action :set_company
