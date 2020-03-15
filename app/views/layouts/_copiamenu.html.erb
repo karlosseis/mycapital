@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  
+         
+          <ul class="nav navbar-nav">
+            <li><%= link_to  t("app_name"), root_path,  class: 'navbar-brand' %></li>
+
+
+            
+            <% if current_user %>
+
+
+
+             <li><%= link_to t("menu_dashboard"), dashboard_index_path %></li>
+              
+              <li><%= link_to t("menu_companies"), companies_path %></li>
+              <li><%= link_to "Movimientos", index_estimated_movements_path( :filter_month => Time.now.month) %></li>
+
+              <!-- <li><%= link_to "Yahoo Tickers", yahoo_tickers_path %></li>
+ -->
+              <li><%= link_to t("menu_target"), targets_index_path %></li>
+              <% if current_user.permission_level == 0 %>
+                 
+                <!-- <li><%= link_to t("menu_operations"), operations_path %></li>    -->
+                <li><%= link_to t("menu_balances"), balances_path %></li>  
+                
+              <% end %> 
+              <li><%= link_to t("menu_configuration"), configuration_page_index_path %></li>          
+            <% end %> 
+           
+          </ul>
+
+      
+
+</div>
+  </div>
+</nav>
+
