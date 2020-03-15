@@ -1,0 +1,47 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th style="text-align:left"><%= t(:'simple_form.labels.company.company') %></th>   
+      <!-- <th style="text-align:right"><%= t(:'simple_form.labels.company.next_dividend_date') %></th>               -->
+                                                 
+ 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.companies.all.each do |company| %>
+      
+   <% unless company.rojo? and company.shares_sum == 0 
+        # si es roja y no tengo acciones, no quiero que me salga para actualziar dividendos ni para comprar
+        #if company.next_dividend_date.nil? or company.next_dividend_date < Date.today
+         if  company.pendiente_incluir_dividendo_previsto? %>
+ 			<tr>            
+            <td style="text-align:left"><%= link_to company.name, company %></td>
+
+            
+                             
+                                                     
+          </tr>
+      
+
+       <% end         %>
+   <%    end %>
+
+         
+        
+
+
+     
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+<br>
+
+

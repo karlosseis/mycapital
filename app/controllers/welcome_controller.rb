@@ -26,8 +26,8 @@ class WelcomeController < ApplicationController
 
 
 
-  	  unless company.porc_dif_target_sell_price.nil? or company.target_sell_price.nil?	
-	      if company.porc_dif_target_sell_price.to_f <= 5 and company.target_sell_price > 0
+  	  unless (company.porc_dif_target_sell_price.nil? or company.target_sell_price.nil?)	 
+	      if company.porc_dif_target_sell_price.to_f <= 5 and company.target_sell_price > 0 and company.shares_sum > 0
 	        @to_sell[company.id] = company      
 	      end
 	    end
