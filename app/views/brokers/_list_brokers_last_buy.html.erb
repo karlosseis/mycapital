@@ -1,15 +1,6 @@
 
-
 <table class="table">
-  <thead>
-    <tr>
-      
-      <th style="text-align:left"><%= t(:'simple_form.labels.broker.name') %></th>   
-      <th style="text-align:right"><%= t(:'simple_form.labels.broker.next_buy_date') %></th>              
-                                             
- 
-    </tr>
-  </thead>
+  
 
   <tbody>
     <% @next_dates_to_buy.each  do |key, value| %>
@@ -18,10 +9,11 @@
             <td style="text-align:left"><%= key %></td>                    
             <td style="text-align:center">    
               <% if value >= Time.new + 10.day %>
-                <%= value %>
+                
+
 
               <% else %>
-                  <font color="#ff0000"><%= value %></font>
+                  <font color="#ff0000"><%= format_date(value)  %></font>
               <% end %>     
            </td>                              
                                                      

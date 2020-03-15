@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :company_historic_dividends
   get 'targets/index'
+  get 'welcome/sindiv'
+
 
 resources :excel_import do
   collection do
