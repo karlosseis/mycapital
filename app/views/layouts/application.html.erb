@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Balancepad</title>
+    <title>CameCap</title>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+ 
   </head>
   <body>
+
+
     <%= render "layouts/menu" %>
-    <div class="container">
-      
+
       <%= yield %>
     </div>
   </body>
