@@ -1,8 +1,33 @@
 
+<table class="table">
+  
+
+  <tbody>
+
+      <tr>            
+        <td style="text-align:left"><%= link_to "EUR -> USD", "https://www.google.com/search?q=EURUSD" , target: :_blank %></td>                    
+        <td style="text-align:center"> <%= Settings.convert_currency("EUR", "USD") %> </td>                              
+                                                 
+      </tr>
+  
+      <tr>            
+        <td style="text-align:left"><%= link_to "EUR -> USD", "https://www.google.com/search?q=EURGBP" , target: :_blank %></td>                    
+        <td style="text-align:center"> <%= Settings.convert_currency("EUR", "GBP") %> </td>                              
+                                                 
+      </tr>
+        
+
+
+     
+
+  </tbody>
+</table>
 
 
 
 
-EUR -> USD: <%= Settings.convert_currency("EUR", "USD") %> <br>
-EUR -> GBP: <%= Settings.convert_currency("EUR", "GBP") %>
+
+<br>
+
+
 
