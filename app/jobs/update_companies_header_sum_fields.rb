@@ -11,6 +11,7 @@ class UpdateCompaniesHeaderSumFields < ActiveJob::Base
 				q.retrieve_IEX_dividends_batch
   		  		q.set_next_official_dividend_values
   		  		q.set_last_result_values
+  		  		q.set_img_logo
   		  		q.save
 			rescue => ex
 			  logger.error ex.message
