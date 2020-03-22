@@ -1,0 +1,37 @@
+<table class="uk-table uk-table-middle uk-table-divider">
+    <thead>
+        <tr>
+            <th class="uk-width-small"><%= t(:'simple_form.labels.company_comment.date_comment') %></th>
+            <th><%= t(:'simple_form.labels.company_comment.comment') %></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <% @company.company_comments.order('date_comment DESC').each do |company_comment| %>      
+        <tr>
+            <td >
+             
+              <% unless company_comment.date_comment.nil? %>
+   <a class="uk-text-middle uk-link-text" target = "_blank" href="<%= edit_company_company_comment_path(@company,company_comment) %>"><%= I18n.l(company_comment.date_comment) %></a>
+              <% end %>              
+              
+            </td>
+            
+
+
+           <td class="uk-text-left"><a class="uk-text-middle uk-link-text" target = "_blank" href="<%= company_comment.url %>"><%= company_comment.comment %></a></td>
+
+
+        
+            
+        </tr>
+
+
+        <% end %>
+    </tbody>
+</table>
+
+
+
+
+

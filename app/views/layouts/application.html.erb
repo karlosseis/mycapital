@@ -7,13 +7,21 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
- 
+   <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css" />
+
+  <!-- UIkit JS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script> 
+
   </head>
   <body>
 
-
-    <%= render "layouts/menu" %>
-    <div class="container">
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
+      <%= render "layouts/menu" %>
+    </div>
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
       <%= yield %>
     </div>
   </body>

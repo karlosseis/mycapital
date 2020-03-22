@@ -65,7 +65,8 @@ class WelcomeController < ApplicationController
 
      current_user.brokers.all.each do |broker|
 
-        op = broker.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(1)
+        #op = broker.operations.where(:operationtype_id => Mycapital::OP_PURCHASE).order(operation_date: :desc).limit(1)
+        op = broker.operations.where('operationtype_id in ( ? , ?)', Mycapital::OP_PURCHASE, Mycapital::OP_SALE).order(operation_date: :desc).limit(1)
         if op.count() == 1 
             @next_dates_to_buy[broker.name] = op[0].operation_date + broker.buy_frequency
         end
