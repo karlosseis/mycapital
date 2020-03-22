@@ -1,0 +1,31 @@
+
+  <% news = @company.news %>
+  <% contador = 0 %>
+  <% unless news.nil? %>
+      
+      <% news.each do |p|     %>     
+        
+        
+             
+        
+        
+
+
+          <div class="uk-card uk-card-small uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+              <div class="uk-card-media-left uk-cover-container">
+                  <img src="<%= p["image"]%>" alt="" uk-cover>
+                  <canvas width="200" height="100"></canvas>
+              </div>
+              <div>
+                  <div class="uk-card-body">
+                      
+                      <a class="uk-text-bold uk-link-text" href="<%= p["link"]%>"><%= p["headline"]%></a>
+
+                      <p class="uk-text-normal"><%= p["summary"][0...250]  %> </p>
+                  </div>
+              </div>
+          </div>
+          <% contador = contador + 1 %>
+          <% if (contador > 3) then break end %>
+      <% end %>
+  <% end %>

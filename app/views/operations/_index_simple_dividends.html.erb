@@ -1,33 +1,39 @@
-
-  <table  class="table  table-light table-hover">
+<table class="uk-table uk-table-middle uk-table-divider">
   <thead>
     <tr>     
-      <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date') %></th>      
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.net_amount') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.gross_amount') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.withholding_tax') %></th>        
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.destination_tax') %></th>
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.quantity') %></th>      
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.dividend_per_share') %></th>      
-      <th style="text-align:right"><%= t(:'simple_form.labels.operation.broker') %></th>  
+      <th class = "uk-text-center"><%= t(:'simple_form.labels.operation.operation_date') %></th>      
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.net_amount') %></th>
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.gross_amount') %></th>
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.withholding_tax') %></th>        
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.destination_tax') %></th>
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.quantity') %></th>      
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.dividend_per_share') %></th>      
+      <th class = "uk-text-right"><%= t(:'simple_form.labels.operation.broker') %></th>  
     </tr>
   </thead>
    <tbody>
     <% @company.operations.where("operationtype_id=" + operationtype_id.to_s).order(operation_date: :desc).each do |operation| %>
       <tr>
         
-        <td style="text-align:center"><%= I18n.l(operation.operation_date) %></td>         
-        <td style="text-align:right"><%= number_to_currency(operation.net_amount, unit:operation.currency.symbol) %></td>   
-        <td style="text-align:right"><%= number_to_currency(operation.gross_amount, unit:operation.currency.symbol) %></td>
-        <td style="text-align:right"><%=number_to_currency( operation.withholding_tax, unit:operation.currency.symbol) %></td>
-        <td style="text-align:right"><%=number_to_currency( operation.destination_tax, unit:operation.currency.symbol) %></td>          
-        <td style="text-align:right"><%= number_with_delimiter(operation.quantity) %></td>   
-        <td style="text-align:right"><%= number_to_currency(operation.dividend_per_share, unit:operation.currency.symbol) %></td>   
-        <td style="text-align:right"><%= operation.broker %></td>   
 
 
-        <td><%= link_to t("edit"), edit_company_operation_path(@company, operation), :class => 'btn btn-sm btn-primary btn-xs', :style=>'color:#FFFFFF;'  %> </td>            
-        <td><%= link_to t("destroy"), operation, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-sm btn-danger btn-xs', :style=>'color:#FFFFFF;'  %></td>    
+
+        <td class = "uk-text-center"><a class="uk-text-middle uk-link-text" target = "_blank" href="<%= edit_company_operation_path(@company, operation) %>"><%= I18n.l(operation.operation_date) %></a></td>
+
+
+
+
+
+        <td class = "uk-text-right"><%= number_to_currency(operation.net_amount, unit:operation.currency.symbol) %></td>   
+        <td class = "uk-text-right"><%= number_to_currency(operation.gross_amount, unit:operation.currency.symbol) %></td>
+        <td class = "uk-text-right"><%=number_to_currency( operation.withholding_tax, unit:operation.currency.symbol) %></td>
+        <td class = "uk-text-right"><%=number_to_currency( operation.destination_tax, unit:operation.currency.symbol) %></td>          
+        <td class = "uk-text-right"><%= number_with_delimiter(operation.quantity) %></td>   
+        <td class = "uk-text-right"><%= number_to_currency(operation.dividend_per_share, unit:operation.currency.symbol) %></td>   
+        <td class = "uk-text-right"><%= operation.broker %></td>   
+
+
+        
              
       </tr>
     <% end %>

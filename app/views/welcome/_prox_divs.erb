@@ -1,0 +1,36 @@
+
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">	
+<!------ Include the above in your HEAD tag ---------->
+
+
+	
+
+
+
+	<div class="container-fluid" style="border:1px solid #cecece;">
+
+
+		<%  @expected_dividends_current_month= current_user.expected_dividends.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, Time.now.beginning_of_month,Time.now.end_of_month).order(:operation_date, :company_id)%>
+	 			<% @expected_dividends_current_month.each do |p| %>
+
+				<div class="row row-striped" >
+					<div class="col-2 text-right">
+						<h1 class="display-4"><span class="badge badge-secondary">23</span></h1>
+						<h2>OCT</h2>
+					</div>
+					<div class="col-10">
+						<h3 class="text-uppercase"><strong><%= link_to p.company.symbol,  p.company %></strong></h3>
+						<ul class="list-inline">
+						    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <%= I18n.l(p.operation_date)  %></li>
+							<li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i><%= format_currency(p.amount, p.currency.symbol)  %> </li>
+							
+						</ul>
+						
+					</div>
+				</div>
+		 <% end %>
+	</div>
+	

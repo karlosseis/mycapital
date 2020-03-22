@@ -96,6 +96,8 @@ GEM
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
+    flag-icons-rails (3.4.6.1)
+      sass-rails
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     google-api-client (0.36.4)
@@ -305,6 +307,7 @@ DEPENDENCIES
   coffee-rails (>= 4.1.0)
   delayed_job_active_record
   devise
+  flag-icons-rails
   google_drive
   groupdate
   httparty

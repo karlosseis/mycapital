@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
-  app_name: "Mi capital"
+  app_name: "Came Cap"
   menu_dashboard: "Dashboard"
   menu_saludo: "Hola %{name}"
   menu_portfolio: "Cartera"

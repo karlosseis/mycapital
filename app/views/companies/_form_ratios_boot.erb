@@ -1,0 +1,90 @@
+<% if @company.IEX_avaliable  %>
+
+<div class="row">
+  <div class="col-md-4">
+    <table  class="table table-light">
+     <tbody>
+        <tr class="table-hover">
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.latestEPS') %></td>
+            <td style="text-align:right"><strong><%=  number_with_delimiter(@company.stats('latestEPS')) %> (<%=  format_date(@company.stats('latestEPSDate').to_date) %>)</strong></td> 
+        </tr> 
+
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.consensusEPS') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('consensusEPS')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnEquity') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnEquity')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.revenue') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('revenue'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.grossProfit') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('grossProfit'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.EBITDA') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('EBITDA'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.cash') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('cash'), precision: 5) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.debt') %></td>
+            <td style="text-align:right"><strong><%= number_to_human(@company.stats('debt'), precision: 5) %></strong></td> 
+        </tr>  
+
+
+    </tbody>
+    </table>
+
+  </div>
+
+
+  <div class="col-md-4">
+    <table  class="table table-light">
+     <tbody>
+
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.revenuePerShare') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('revenuePerShare')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnAssets') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnAssets')) %></strong></td> 
+        </tr> 
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnCapital') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnCapital')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.profitMargin') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('profitMargin')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.priceToBook') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToBook')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.priceToSales') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToSales')) %></strong></td> 
+        </tr>         
+        <tr>
+            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.day200MovingAvg') %></td>
+            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('day200MovingAvg')) %></strong></td> 
+        </tr>  
+
+
+    </tbody>
+    </table>
+
+  </div>
+
+
+</div>
+
+<% end  %>

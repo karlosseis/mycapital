@@ -1,0 +1,38 @@
+
+<table class="table">
+  
+
+  <tbody>
+    <% @next_dates_to_buy.each  do |key, value| %>
+      
+          <tr>            
+            <td style="text-align:left"><%= key %></td>                    
+            <td style="text-align:center">    
+              <% if value >= Time.new + 10.day %>
+                
+
+
+              <% else %>
+                  <font color="#ff0000"><%= format_date(value)  %></font>
+              <% end %>     
+           </td>                              
+                                                     
+          </tr>
+      
+        
+
+
+     
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+<br>
+
+
+
+

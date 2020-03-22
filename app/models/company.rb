@@ -12,6 +12,9 @@ require 'settings.rb'
 # average_price_origin_currency 
 # average_price_origin_currency_real
 
+
+
+  before_create :set_img_logo, :set_stock_price_IEX ,:set_update_summary ,:retrieve_IEX_dividends_batch ,:set_next_official_dividend_values
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
@@ -29,6 +32,7 @@ require 'settings.rb'
   validates :name, presence: true
   validates :symbol, presence: true
   validates :stockexchange, presence: true
+
   #validates :sector, presence: true
   validates :search_symbol, presence: true
   
@@ -155,6 +159,10 @@ require 'settings.rb'
 
   def url_morningstar_incomes
     "http://financials.morningstar.com/income-statement/is.html?t=" + self.symbol
+  end
+
+  def url_IEX
+    "https://iextrading.com/apps/stocks/" + self.symbol
   end
 
 
@@ -674,6 +682,14 @@ require 'settings.rb'
     end
   end
 
+
+  def set_img_logo
+    if self.IEX_avaliable and self.logo_url = ''
+        self.logo_url = self.img_logo 
+    end
+  end
+
+
   def dividends(range)
     if self.IEX_avaliable
       iex = Iex.new(self.yahoo_symbol)
@@ -696,6 +712,25 @@ require 'settings.rb'
     end
   end
 
+
+  def get_news
+    
+    news = self.news
+    unless news.nil?
+      
+      news.each do |p|         
+        p["headline"]
+        p["url"]
+        p["summary"]        
+        p["image"]
+        p["datetime"]
+      end
+    end  
+  end
+
+
+
+
   def IEX_avaliable  
     # Si es el mercado americano (en yahoo no tiene sufijo), podremos recuperar la data de IEX
     Settings.yahoo_suffixes[self.stockexchange_id] == ""
@@ -705,6 +740,7 @@ require 'settings.rb'
     # graba el precio recuperado de IEX 
     # 06.03.2019 - solo si el mercado está abierto, para minimizar las llamadas a la api
 
+    if self.IEX_avaliable
       if self.stockexchange.open_time.hour <= Time.now.hour and self.stockexchange.close_time.hour >= Time.now.hour
 
 
@@ -718,7 +754,7 @@ require 'settings.rb'
         self.share_price_change_perc = quote['changePercent'].to_f * 100
         self.date_share_price = Time.now
       end
-            
+    end
   end
 
   def years_with_dividend     # REVISADO 
@@ -789,6 +825,37 @@ require 'settings.rb'
 
       end
     end  
+  end
+
+  def country_flag_icon    
+
+    case self.country.name
+
+      when 'España' 
+      return 'flag-icon-es'
+      when 'USA'
+        return 'flag-icon-us'
+      when 'Holanda'
+        return 'flag-icon-aw'
+      when 'Gran Bretaña'
+        return 'flag-icon-gb'
+      when 'Alemania'
+        return 'flag-icon-de'
+      when 'Francia'
+        return 'flag-icon-fromCharCode'
+      when 'Noruega'
+        return 'flag-icon-no'
+      when 'Canadá'
+        return 'flag-icon-ca'
+
+
+
+        else
+          return ''
+        end
+
+
+
   end
 
   def retrieve_IEX_dividends_batch

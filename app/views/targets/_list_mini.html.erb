@@ -3,28 +3,18 @@
 
        
         <% companies_mostrar.each  do |key, value| %>  
+
+              <dl class="uk-description-list">
+                  <dt><%= link_to value.name.titleize[0...12], value %></dt>
+                  <dd><%= value.share_price_formatted %>                
+                      <% if value.share_price_change_perc >= 0 %>
+                        <font color="#009933"><%= number_to_percentage(value.share_price_change_perc, precision: 2) %></font>
+                      <% else %>
+                          <font color="#ff0000"><%= number_to_percentage(value.share_price_change_perc, precision: 2) %></font>
+                      <% end %>  
+                  </dd>
+              </dl>
+
        
-          <div class="row">
-            <div class="col-md-5" style="padding-left: 15px;  padding-right: 10px;">
-                <%= link_to value.name.titleize, value %>
-            </div>
-            <div class="col-md-4" style="text-align: right;">
-                <%= value.share_price_formatted %>   <br>    
-                <small>
-                <% if value.share_price_change_perc >= 0 %>
-                  <font color="#009933"><%= number_to_percentage(value.share_price_change_perc, precision: 2) %></font>
-                <% else %>
-                    <font color="#ff0000"><%= number_to_percentage(value.share_price_change_perc, precision: 2) %></font>
-                <% end %>  
-                </small>                                               
-            </div>    
-           
-          </div>
          <% end %> 
         
-
-
-
-
-<br>
-

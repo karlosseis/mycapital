@@ -1,90 +1,61 @@
-<% if @company.IEX_avaliable  %>
+        <dl class="uk-description-list"> 
+       
 
-<div class="row">
-  <div class="col-md-4">
-    <table  class="table table-light">
-     <tbody>
-        <tr class="table-hover">
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.latestEPS') %></td>
-            <td style="text-align:right"><strong><%=  number_with_delimiter(@company.stats('latestEPS')) %> (<%=  format_date(@company.stats('latestEPSDate').to_date) %>)</strong></td> 
-        </tr> 
+                <dt><%= t(:'simple_form.labels.company.week52change') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('week52change'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.ttmEPS') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('ttmEPS'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.ttmDividendRate') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('ttmDividendRate')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.dividendYield') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('dividendYield')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.peRatio') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('peRatio'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.beta') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('beta'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.day200MovingAvg') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('day200MovingAvg'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.day50MovingAvg') %></dt>
+                <dd><%=  @company.number_currency_operations(@company.stats('day50MovingAvg'))  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.maxChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('maxChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.year5ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year5ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.year2ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year2ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.year1ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year1ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.ytdChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('ytdChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.month6ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month6ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.month3ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month3ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.month1ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month1ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.day30ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('day30ChangePercent')), precision: 2)  %></dd>
+                
+                <dt><%= t(:'simple_form.labels.company.day5ChangePercent') %></dt>
+                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('day5ChangePercent')), precision: 2)  %></dd>
 
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.consensusEPS') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('consensusEPS')) %></strong></td> 
-        </tr> 
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnEquity') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnEquity')) %></strong></td> 
-        </tr> 
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.revenue') %></td>
-            <td style="text-align:right"><strong><%= number_to_human(@company.stats('revenue'), precision: 5) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.grossProfit') %></td>
-            <td style="text-align:right"><strong><%= number_to_human(@company.stats('grossProfit'), precision: 5) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.EBITDA') %></td>
-            <td style="text-align:right"><strong><%= number_to_human(@company.stats('EBITDA'), precision: 5) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.cash') %></td>
-            <td style="text-align:right"><strong><%= number_to_human(@company.stats('cash'), precision: 5) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.debt') %></td>
-            <td style="text-align:right"><strong><%= number_to_human(@company.stats('debt'), precision: 5) %></strong></td> 
-        </tr>  
-
-
-    </tbody>
-    </table>
-
-  </div>
-
-
-  <div class="col-md-4">
-    <table  class="table table-light">
-     <tbody>
-
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.revenuePerShare') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('revenuePerShare')) %></strong></td> 
-        </tr> 
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnAssets') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnAssets')) %></strong></td> 
-        </tr> 
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.returnOnCapital') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('returnOnCapital')) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.profitMargin') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('profitMargin')) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.priceToBook') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToBook')) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.priceToSales') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('priceToSales')) %></strong></td> 
-        </tr>         
-        <tr>
-            <td style="text-align:left"><%= t(:'simple_form.labels.ratios.day200MovingAvg') %></td>
-            <td style="text-align:right"><strong><%= number_with_delimiter(@company.stats('day200MovingAvg')) %></strong></td> 
-        </tr>  
+             
 
 
-    </tbody>
-    </table>
-
-  </div>
-
-
-</div>
-
-<% end  %>
+        </dl>

@@ -69,6 +69,25 @@ es:
         country: "País"    
         earnings_sum: "Benef. Operaciones" 
         earnings_sum_euros: "Benef. Operaciones (€)" 
+        week52change: "% Cambio 52 semanas"
+        ttmEPS: TTM EPS
+        ttmDividendRate: TTM % Div 
+        dividendYield: "% Div"
+        peRatio: PER
+        beta: Beta
+        day200MovingAvg: Media móvil 200
+        day50MovingAvg: Media móvil 50
+        maxChangePercent: "% cambio max"
+        year5ChangePercent: "% cambio 5 años"
+        year2ChangePercent: "% cambio 2 años"
+        year1ChangePercent: "% cambio 1 año"
+        ytdChangePercent: "YTD % cambio"
+        month6ChangePercent: "% cambio 6 meses"
+        month3ChangePercent: "% cambio 3 meses"
+        month1ChangePercent: "% cambio 1 mes"
+        day30ChangePercent: "% cambio 30 días"
+        day5ChangePercent: "% cambio 5 días"
+        week52change: "% Cambio 52 semanas"
 
       operation:
         company: "Empresa"

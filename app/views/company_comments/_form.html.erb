@@ -10,5 +10,6 @@
   <div class="form-actions">  
     <input type="submit" class="btn btn-success" value=<%= t("save") %> >
     <%= link_to  t("cancel") , company_path(@company_comment.company), :class => "btn btn-info", :style=>'color:#FFFFFF;' %>   
+    <%= link_to t("destroy"), @company_comment, method: :delete, data: { confirm: 'Seguro que desear borrarlo?' }, :class => 'btn btn-danger', :style=>'color:#FFFFFF;'  %>  
   </div>
 <% end %>
