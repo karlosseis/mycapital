@@ -66,17 +66,17 @@ class Settings
 				@eur2gbp = fx.convert(1, :from => "EUR", :to => "GBP")
 
 				a = []
-				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_hour, pair: "USDEUR", rate: @usd2eur)
-				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_hour, pair: "GBPEUR", rate: @gbp2eur)
-				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_hour, pair: "EURUSD", rate: @eur2usd)
-				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_hour, pair: "EURGBP", rate: @eur2gbp)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "USDEUR", rate: @usd2eur)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "GBPEUR", rate: @gbp2eur)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURUSD", rate: @eur2usd)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURGBP", rate: @eur2gbp)
 
 				a.each(&:save)
 
 			end
 
 			@rates = {}
-			ex = ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_hour)
+			ex = ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_day)
 
 			ex.each do |x| 
 				@rates[x.pair] = x.rate
