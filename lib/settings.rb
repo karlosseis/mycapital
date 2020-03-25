@@ -57,7 +57,7 @@ class Settings
 		if @rates.nil?
 
 
-			if ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_hour).count==0
+			if ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_day).count==0
 
 				fx = OpenExchangeRates::Rates.new
 				@usd2eur = fx.convert(1, :from => "USD", :to => "EUR")
