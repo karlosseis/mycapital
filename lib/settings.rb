@@ -58,7 +58,7 @@ class Settings
 
 
 			if ExchangeRate.all.where('date_exchange = ?',  Time.now.beginning_of_day).count==0
-
+				# si lo pongo cada hora (beginning_of_hour) se disparan las llamadas y el límite son 1000 al mes
 				fx = OpenExchangeRates::Rates.new
 				@usd2eur = fx.convert(1, :from => "USD", :to => "EUR")
 				@gbp2eur = fx.convert(1, :from => "GBP", :to => "EUR")
