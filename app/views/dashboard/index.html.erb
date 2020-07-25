@@ -1,183 +1,201 @@
-<h2 class = "page-header">
-  <%= t(:'dashboard_title') %>
-</h2>      
+
+
+
+<div class="uk-child-width-1-5@m uk-grid-small uk-grid-match" uk-grid>
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title text-center"><%= link_to t('portfolio_value'), portfolio_path %></h3>
+            <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@global_value, precision:0) %></font></h2>        
+
+            <p class="card-text text-center">
+
+                          <% if @global_benefit.to_f >= 0 %>
+                            <span class="uk-label uk-label-success">+<%= number_to_currency(@global_benefit, precision:0) %></span>
+                          <% else %>
+                            <span class="uk-label uk-label-danger"><%= number_to_currency(@global_benefit, precision:0) %></span>
+                          <% end %>    
+
+                          <% if @global_benefit.to_f >= 0 %>
+                            <span class="uk-label uk-label-success">+<%= number_to_percentage(@global_perc_benefit, precision:0) %></span>
+                          <% else %>
+                            <span class="uk-label uk-label-danger"><%= number_to_percentage(@global_perc_benefit, precision:0) %></span>
+                          <% end %>           
+            </p>
+
+            <ul class="uk-list">
+
+                <% @global_value_currencies.each  do |key, value| %>
+                           <% unless key.nil? %>
+                           <li class="card-text text-center"><%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> </li>
+                           <% end %>
+                <% end %>
+
+            </ul>
 
 
 
 
+        </div>
+    </div>
 
-<div class="card-deck">
 
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= link_to t('portfolio_value'), portfolio_path %></h5>
-      <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@global_value, precision:0) %></font></h2>        
-         <div class="row">
-           <div class="col-md-6 text-left">
-              <% if @global_benefit.to_f >= 0 %>
-                <font color="#009933">+<%= number_to_currency(@global_benefit, precision:0) %></font>
-              <% else %>
-                <font color="#ff0000"><%= number_to_currency(@global_benefit, precision:0) %></font>
-              <% end %>    
-            </div>
-           <div class="col-md-6 text-right"><strong>
-              <% if @global_perc_benefit.to_f >= 0 %>
-                  <font color="#009933">+<%= number_to_percentage(@global_perc_benefit, precision: 2)   %></font>
-                <% else %>
-                  <font color="#ff0000"><%= number_to_percentage(@global_perc_benefit, precision: 2)   %></font>
-                <% end %>    
-               </strong>
-          </div>    
-          <h5 class="card-text text-center">
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title text-center"><%= t(:'purchased_year') %></h3>
+            <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@purchases_current_year, precision:0) %></font></h2>                   
             
-            <% @global_value_currencies.each  do |key, value| %>
-               <% unless key.nil? %>
-               <%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> <br>
-               <% end %>
-            <% end %>
-          </h5>             
+            <ul class="uk-list">
+
+              <% @purchases_current_year_currencies.each  do |key, value| %>
+                        
+                         <li class="card-text text-center"><%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> </li>                        
+              <% end %>
+
+          </ul>
+
+        </div>
     </div>
+
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title text-center"><%= t(:'dividends_month') %></h3>
+            <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@dividends_current_month_eur, precision:0) %></font></h2>                   
+            
+            <ul class="uk-list">
+
+              <% @dividends_current_month.each  do |key, value| %>
+                        
+                         <li class="card-text text-center"><%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> </li>                        
+              <% end %>
+
+          </ul>
+
+        </div>
     </div>
-  </div>
 
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= t(:'purchased_year') %></h5>
-      <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@purchases_current_year, precision:0) %></font></h2>  
-      <br>      
-      <h5 class="card-text text-center">
-        
-        <% @purchases_current_year_currencies.each  do |key, value| %>
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title text-center"><%= t(:'dividends_year') %></h3>
+            <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@dividends_current_year_eur, precision:0) %></font></h2>                   
+            
+            <ul class="uk-list">
 
-           <%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> <br>
-           
-        <% end %>
-      </h5>
+              <% @dividends_current_year.each  do |key, value| %>
+                        
+                         <li class="card-text text-center"><%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> </li>                        
+              <% end %>
+
+          </ul>
+
+        </div>
     </div>
-  </div>
-  
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= t(:'dividends_month') %></h5>
-      <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@dividends_current_month_eur, precision:0) %></font></h3>
-        <br>
-      <h5 class="card-text text-center">
-        
-        <% @dividends_current_month.each  do |key, value| %>
 
-           <%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> <br>
-           
-        <% end %>
-      </h5>
-      
-          
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title"><%= t(:'dividends_expected_year') %></h3>
+            <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@expected_dividends_current_year_eur, precision:0) %></font></h2>                   
+            
+            <ul class="uk-list">
+
+              <% @expected_dividends_current_year.each  do |key, value| %>
+                        
+                         <li class="card-text text-center"><%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> </li>                        
+              <% end %>
+
+          </ul>
+
+        </div>
     </div>
-  </div>
 
 
-
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center"><%=  t('dividends_year') %></h5>
-      <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@dividends_current_year_eur, precision:0) %></font></h3>
-        <br>
-      <h5 class="card-text text-center">
-        
-        <% @dividends_current_year.each  do |key, value| %>
-           <%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> <br>
-          
-        <% end %>
-      </h5>
-     
-        
-    
-
-    </div>
-  </div>
-
-
- <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= t(:'dividends_expected_year') %></h5>
-      <h2 class="card-text text-center"><font color="#2ea319"><%= number_to_currency(@expected_dividends_current_year_eur, precision:0) %></font></h3> 
-        <br>
-      <h5 class="card-text text-center">
-      
-        <% @expected_dividends_current_year.each  do |key, value| %>
-
-           <%= number_to_currency(value, unit:Currency.find(key).symbol , precision:0)  %> <br>
-           
-        <% end %>
-      </h5>
-      
-         
-    </div>
-  </div>
-
- 
 
 
 
 </div>
 
 
-<br>
-<div class="card-deck">
+<div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
 
-<div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">    
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= t(:'last_purchases') %></h5>
-        <table id="myTable" class="table  table-striped">
-          <thead>
-            <tr>
-              <th style="text-align:left"><%= t(:'simple_form.labels.company.symbol') %></th>
-              <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date')%></th>
-              <th style="text-align:right"><%= number_to_currency(t(:'price')) %></th>           
-            </tr>
-          </thead>
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+        
+            <h3 class="uk-card-title text-center"><%= t(:'last_purchases') %></h3>
 
-          <tbody>
-            <% @last_purchases.each do |p| %>
-              <tr>
-                <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
-                <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>      
-                <td style="text-align:right"><%= number_to_currency(p.price, unit:p.currency_operation.symbol , precision:2)  %></td>              
-              </tr>
-            <% end %>
-          </tbody>
-        </table>      
-      
+
+            <table class="uk-table uk-table-condensed">
+               
+                <thead>
+                    <tr>
+                          <th style="text-align:left"><%= t(:'simple_form.labels.company.symbol') %></th>
+                          <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date')%></th>
+                          <th style="text-align:right"><%= number_to_currency(t(:'price')) %></th>     
+                    </tr>
+
+
+                </thead>
+
+                <tbody>
+                      <% @last_purchases.each do |p| %>
+                      <tr>
+                        <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
+                        <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>      
+                        <td style="text-align:right"><%= number_to_currency(p.price, unit:p.currency_operation.symbol , precision:2)  %></td>              
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
     </div>
-  </div>
 
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">    
-    <div class="card-block">
-      <h5 class="card-title text-center"><%= link_to t(:'next_dividends'),index_expect_real_dividend_month_path %></h5>
-        <table id="myTable" class="table  table-striped">
-          <thead>
-            <tr>
-              <th style="text-align:left"><%= t(:'simple_form.labels.company.symbol') %></th>
-              <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date')%></th>
-              <th style="text-align:right"><%= t(:'price') %></th>           
-            </tr>
-          </thead>
 
-          <tbody>
-            <% @next_dividends.each do |p| %>
-              <tr>
-                <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
-                <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>        
-                <td style="text-align:right"><%= number_to_currency(p.amount, unit:p.currency.symbol)  %></td>              
-              </tr>
-            <% end %>
-          </tbody>
-        </table>      
-      
+    <div>
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+        
+            <h3 class="uk-card-title text-center"><%= link_to t(:'next_dividends'),index_expect_real_dividend_month_path %></h3>
+
+
+            <table class="uk-table uk-table-condensed">
+               
+                <thead>
+                    <tr>
+                      <th style="text-align:left"><%= t(:'simple_form.labels.company.symbol') %></th>
+                      <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date')%></th>
+                      <th style="text-align:right"><%= t(:'price') %></th>           
+                    </tr>
+
+
+                </thead>
+           
+                <tbody>
+                    <% @next_dividends.each do |p| %>
+                      <tr>
+                        <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
+                        <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>        
+                        <td style="text-align:right"><%= number_to_currency(p.amount, unit:p.currency.symbol)  %></td>              
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
     </div>
-  </div>
+
+
+
+
+    </div>
 
 
 </div>
+
+
+
 
 <br>
 <%= render 'dashboard/graphs' %>
