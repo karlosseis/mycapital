@@ -19,8 +19,8 @@
               <div>
                   <div class="uk-card-body">
                       
- 
 
+                      <p class="uk-text-lighter"><%= format_date(Date.strptime((p["datetime"].to_f / 1000).to_s, '%s')) %> - <%= p["source"] %> </p> 
                       <li><a href=<%= p["url"]%> target = "_blank"><%= p["headline"]%></a></li> 
  
  
