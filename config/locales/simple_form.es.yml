@@ -42,7 +42,7 @@ es:
         perc_estimated_benefit_operations_currency_euros: "% Beneficio estimado €"
         average_price_origin_currency: "Precio medio"
         yoc: "YoC"
-        target_price_1: Objetivo 1
+        target_price_1: Objetivo compra
         target_price_2: Objetivo 2
         target_sell_price: Precio objetivo venta
         traffic_light_id: Semáforo
@@ -58,7 +58,7 @@ es:
         years_with_dividend: Años Div
         is_aristocrat: Aristócrata
         market_cap: Cap.
-        year_low: "Mín año"
+        year_low: "Mín - Max"
         year_high: "Máx año"
         dividend_payments_quantity: Nº dividendos por año
         historic_dividend_url: URL histórico dividendos empresa
@@ -88,6 +88,8 @@ es:
         day30ChangePercent: "% cambio 30 días"
         day5ChangePercent: "% cambio 5 días"
         week52change: "% Cambio 52 semanas"
+        nearest_announce_date: "Anuncio próx. div."
+        div_yield: "Div / yield"
 
       operation:
         company: "Empresa"

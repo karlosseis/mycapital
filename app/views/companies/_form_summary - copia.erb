@@ -43,6 +43,10 @@
 
 
 
+        <dl class="uk-description-list"> 
+          <dt> <%= t(:'simple_form.labels.company.invested_sum') %></dt>
+          <dd><strong><%=  @company.number_currency_operations(@company.invested_sum)  %></strong></dd>        
+        </dl>
 
 
 
@@ -98,19 +102,56 @@
 
         <dl class="uk-description-list"> 
  
+          <dt><%= t(:'simple_form.labels.company.target_price_1') %></dt>
+          <dd><strong><%=  @company.number_currency_operations(@company.target_price_1)  %></strong></dd>      
 
           <dt><%= t(:'simple_form.labels.company.target_sell_price') %></dt>
           <dd><strong><%=  @company.number_currency_operations(@company.target_sell_price)  %></strong></dd>
 
-                      
+          
+
+          <dt><%= t(:'simple_form.labels.company.market_capitalization') %></dt>
+          <dd><strong><%=  number_to_human(@company.stats('marketcap'), precision: 3)  %> </strong></dd>
+
+
+          <dt><%= t(:'simple_form.labels.company.year_low') %></dt>
+          <dd><strong><%=  @company.number_currency_operations(@company.stats('week52low'))  %></strong></dd>
+
+          <dt><%= t(:'simple_form.labels.company.year_high') %></dt>
+          <dd><strong><%=  @company.number_currency_operations(@company.stats('week52high'))  %></strong></dd>
+             
+
+
+        </dl>
+
+   
+
+
+
+
+
+
 
 
     
+
+
+
+
+        
+       
+
+  
+
+          <dl class="uk-description-list"> 
                   
             <dt><%= t(:'simple_form.labels.company.average_price') %></dt>
             <dd><strong><%= number_with_delimiter(@company.average_price)  %></strong></dd>
             
-      
+                  
+          </dl>
+
+          <dl class="uk-description-list"> 
                   
                   <dt><%= t(:'simple_form.labels.company.average_price_real') %></dt>
           <dd><strong><%= number_with_delimiter(@company.average_price_real)  %></strong></dd>
