@@ -1,23 +1,32 @@
-        <dl class="uk-description-list"> 
+<div class="uk-grid-collapse uk-child-width-expand@s uk-text-left uk-margin-large-top" uk-grid>
+    <div>
+        <div class="uk-background-white">
+
+           <dl class="uk-description-list"> 
        
 
-                <dt><%= t(:'simple_form.labels.company.week52change') %></dt>
-                <dd><%=  @company.number_currency_operations(@company.stats('week52change'))  %></dd>
                 
                 <dt><%= t(:'simple_form.labels.company.ttmEPS') %></dt>
                 <dd><%=  @company.number_currency_operations(@company.stats('ttmEPS'))  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.ttmDividendRate') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('ttmDividendRate')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.dividendYield') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('dividendYield')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.peRatio') %></dt>
-                <dd><%=  @company.number_currency_operations(@company.stats('peRatio'))  %></dd>
+
+
+                <dt><%= t(:'simple_form.labels.company.div_yield') %></dt>
+                <dd><%= @company.number_currency_operations(@company.stats('ttmDividendRate'))  %> ( <%=  @company.number_to_percentage(@company.stats('dividendYield') * 100, precision: 2)  %>)</dd>
+
+
+                <dt><%= t(:'simple_form.labels.company.peRatio') %></dt>                
+                <dd><%=  number_with_precision(@company.stats('peRatio'), precision: 2)  %></dd>
                 
                 <dt><%= t(:'simple_form.labels.company.beta') %></dt>
-                <dd><%=  @company.number_currency_operations(@company.stats('beta'))  %></dd>
+                <dd><%=  number_with_precision(@company.stats('beta'), precision: 2)  %>
+                        <% if @company.stats('beta') >= 0 %>
+                               (volátil)         
+                        <% else %>
+                                (defensivo)
+                        <% end %>  
+
+                </dd>
+
                 
                 <dt><%= t(:'simple_form.labels.company.day200MovingAvg') %></dt>
                 <dd><%=  @company.number_currency_operations(@company.stats('day200MovingAvg'))  %></dd>
@@ -25,37 +34,58 @@
                 <dt><%= t(:'simple_form.labels.company.day50MovingAvg') %></dt>
                 <dd><%=  @company.number_currency_operations(@company.stats('day50MovingAvg'))  %></dd>
                 
-                <dt><%= t(:'simple_form.labels.company.maxChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('maxChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.year5ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year5ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.year2ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year2ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.year1ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('year1ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.ytdChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('ytdChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.month6ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month6ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.month3ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month3ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.month1ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('month1ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.day30ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('day30ChangePercent')), precision: 2)  %></dd>
-                
-                <dt><%= t(:'simple_form.labels.company.day5ChangePercent') %></dt>
-                <dd><%=  number_to_percentage(@company.number_currency_operations(@company.stats('day5ChangePercent')), precision: 2)  %></dd>
-
-             
 
 
-        </dl>
+             </dl>         
+
+        </div>
+    </div>
+    <div>
+        <div class="uk-background-white">
+
+               <dl class="uk-description-list"> 
+          
+                        <dt><%= t(:'simple_form.labels.company.day5ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('day5ChangePercent') * 100, precision: 2)  %></dd>
+
+                        <dt><%= t(:'simple_form.labels.company.day30ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('day30ChangePercent') * 100, precision: 2)  %></dd>
+
+                        <dt><%= t(:'simple_form.labels.company.month3ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('month3ChangePercent') * 100, precision: 2)  %></dd>
+                        
+                        <dt><%= t(:'simple_form.labels.company.month6ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('month6ChangePercent') * 100, precision: 2)  %></dd>
+
+
+                </dl>    
+
+
+        </div>
+        </div>
+    <div>
+        <div class="uk-background-white">
+                <dl class="uk-description-list"> 
+                                          
+
+                     
+
+
+                        <dt><%= t(:'simple_form.labels.company.year1ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('year1ChangePercent') * 100, precision: 2)  %></dd>
+                        
+                        <dt><%= t(:'simple_form.labels.company.year2ChangePercent') %></dt>                
+                        <dd><%=  @company.number_to_percentage(@company.stats('year2ChangePercent') * 100, precision: 2)  %></dd>
+                        
+
+                        <dt><%= t(:'simple_form.labels.company.year5ChangePercent') %></dt>               
+                        <dd><%=  @company.number_to_percentage(@company.stats('year5ChangePercent') * 100, precision: 2)  %></dd>
+
+                </dl>    
+
+
+        </div>
+    </div>
+</div>
+
+

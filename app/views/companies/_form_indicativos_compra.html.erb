@@ -1,0 +1,89 @@
+<div class="uk-grid-collapse uk-child-width-expand@s uk-text-left" uk-grid>
+    <div>
+        <div class="uk-background-white">
+
+           <dl class="uk-description-list"> 
+
+        
+                  <dt><%= t(:'simple_form.labels.company.invested_sum') %></dt>
+                  <dd><%= @company.number_currency_operations(@company.invested_sum)  %> 
+                          <% if @company.invested_sum  != @company.invested_sum_euros %>
+                             (<%= number_to_currency(@company.invested_sum_euros, unit:'€', seperator: ",", delimiter: ".") %>)
+                          <% end %>   
+                  </dt>  
+
+                  <dt><%= t(:'simple_form.labels.company.average_price_origin_currency') %></dt>
+                  <dd><%= number_to_currency(@company.average_price, :unit => @company.stockexchange.currency.symbol)  %>
+
+
+                  <dt><%= t(:'simple_form.labels.company.yoc') %></dt>            
+                  <dd><%=number_to_percentage(@company.expected_yoc, precision: 2) %></dt>            
+        
+                  <dt>Próximo dividendo</dt>
+                  <dd><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></dt>          
+         
+                
+
+
+             </dl>         
+
+        </div>
+    </div>
+    <div>
+        <div class="uk-background-white">
+
+               <dl class="uk-description-list"> 
+
+                  <dt>Última compra</dt>
+                  <dd><%= @company.last_purchase[:a]%> <small> (<%= @company.last_purchase[:b]  %>)</small></dt>
+
+                  <dt><%= t(:'simple_form.labels.company.years_with_dividend') %></dt>
+                  <dd><small><%= @company.years_with_dividend %></small></dt>                                 
+
+
+               
+
+                  <dt><%= t(:'simple_form.labels.company.market_capitalization') %></dt>
+                  <dd><%=  number_to_human(@company.stats('marketcap'), precision: 3)  %> </dd>
+
+
+                  <dt><%= t(:'simple_form.labels.company.year_low') %></dt>
+                  <dd><%=  @company.number_currency_operations(@company.stats('week52low'))  %> - <%=  @company.number_currency_operations(@company.stats('week52high'))  %></dd>
+
+          
+                   
+
+                </dl>    
+
+
+        </div>
+    </div>
+    <div>
+        <div class="uk-background-white">
+                <dl class="uk-description-list"> 
+                                          
+             
+               
+                  
+          <dt><%= t(:'simple_form.labels.company.nearest_announce_date') %></dt>
+                  <dd><small><%= format_date(@company.nearest_announce_date) %></small></dt>          
+
+              
+                  <dt><%= t(:'simple_form.labels.company.target_price_1') %></dt>
+                  <dd><%=  @company.number_currency_operations(@company.target_price_1)  %></dd>      
+              
+                  <dt>Pago próx. dividendo</dt>
+                  <dd><%= number_to_currency(@company.next_dividend_amount, :unit => @company.stockexchange.currency.symbol)  %><small> (<%= format_date(@company.next_dividend_date)  %>)</small></dt>
+                  
+                  <dt><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></dt>
+                  <dd><%= number_to_percentage(@company.perc_estimated_year_dividend_amount, precision: 2) %></dt>       
+                  
+
+                </dl>    
+
+
+        </div>
+    </div>
+</div>
+
+
