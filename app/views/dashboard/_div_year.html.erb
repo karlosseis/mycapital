@@ -1,0 +1,106 @@
+
+
+
+<div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+        
+            <h3 class="uk-card-title text-center">Dividendos totales año</h3>
+
+
+            <table class="uk-table uk-table-divider uk-table-middle uk-table-small">                
+                <thead>
+                    <tr>
+                        <th align="right">Moneda</th>
+                        <th align="right">Bruto</th>
+                        <th align="right">Ret. Origen</th>
+                        <th align="right">Ret. Destino</th>
+                        <th align="right">Neto</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td><strong>EUR</strong></td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_eur , unit:"€") %> </td>
+                        <td align="right"><%= number_to_currency(@withholding_tax_dividend_group_year_eur , unit:"€") %> </td>
+                        <td align="right"><%= number_to_currency(@destination_tax_dividend_group_year_eur , unit:"€") %> </td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_eur - @withholding_tax_dividend_group_year_eur - @destination_tax_dividend_group_year_eur , unit:"€") %> </td>
+                    </tr>
+                    <tr>
+                        <td><strong>USD</strong></td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_usd ,  unit:"$") %> </td>
+                        <td align="right"><%= number_to_currency(@withholding_tax_dividend_group_year_usd ,  unit:"$") %> </td>
+                        <td align="right"><%= number_to_currency(@destination_tax_dividend_group_year_usd ,  unit:"$") %> </td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_usd - @withholding_tax_dividend_group_year_usd - @destination_tax_dividend_group_year_usd , unit:"$") %> </td>
+                    </tr>
+
+
+                    <tr>
+                        <td><strong>GBP</strong></td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_gbp ,  unit:"£") %> </td>        
+                        <td align="right"><%= number_to_currency(@withholding_tax_dividend_group_year_gbp ,  unit:"£") %> </td>
+                        <td align="right"><%= number_to_currency(@destination_tax_dividend_group_year_gbp ,  unit:"£") %> </td>
+                        <td align="right"><%= number_to_currency(@gross_dividend_group_year_gbp - @withholding_tax_dividend_group_year_gbp - @destination_tax_dividend_group_year_gbp , unit:"£") %> </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+
+    <div>
+
+    <div>
+        <div class="uk-card uk-card-default uk-card-body">
+        
+            <h3 class="uk-card-title text-center">Resultado compraventas</h3>
+
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-small">                
+                    <thead>
+                        <tr>
+                            <th align="center">Moneda</th>
+                            <th align="center">Importe</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td><strong>EUR</strong></td>
+                            <td align="center"><%= number_to_currency(@operations_benefit_euros , unit:"€") %> </td>                  
+                        </tr>
+                        <tr>
+                            <td><strong>USD</strong></td>
+                            <td align="center"><%= number_to_currency(@operations_benefit_usd , unit:"$") %> </td>                  
+                        </tr>
+
+
+                        <tr>
+                            <td><strong>GBP</strong></td>
+                            <td align="center"><%= number_to_currency(@operations_benefit_gbp , unit:"£") %> </td>                  
+
+                        </tr>
+                    </tbody>
+                </table>
+
+   
+
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+
+</div>
+
+
+                        
+                         
