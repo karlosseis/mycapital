@@ -200,66 +200,13 @@
 <br>
 <%= render 'dashboard/graphs' %>
 
+<br>
+<br>
 
 
-<div class="card-deck">
 
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center">Beneficios operaciones compraventa</h5>
-     
-      <h5 class="card-text text-center">
-        
-        <%= number_to_currency(@operations_benefit_euros, unit:"€") %> <br>
-        <%= number_to_currency(@operations_benefit_usd,  unit:"$") %> <br>
-        <%= number_to_currency(@operations_benefit_gbp,  unit:"£") %> <br>
 
-      </h5>
-    </div>
-  </div>
-
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center">Dividendos Brutos año actual</h5>
-     
-      <h5 class="card-text text-center">
-        
-        <%= number_to_currency(@gross_dividend_group_year_eur , unit:"€") %> <br>
-        <%= number_to_currency(@gross_dividend_group_year_usd ,  unit:"$") %> <br>
-        <%= number_to_currency(@gross_dividend_group_year_gbp ,  unit:"£") %> <br>
-
-      </h5>
-    </div>
-  </div>
-  
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center">Ret. origen div. año actual</h5>
-     
-      <h5 class="card-text text-center">
-        
-        <%= number_to_currency(@withholding_tax_dividend_group_year_eur , unit:"€") %> <br>
-        <%= number_to_currency(@withholding_tax_dividend_group_year_usd ,  unit:"$") %> <br>
-        <%= number_to_currency(@withholding_tax_dividend_group_year_gbp ,  unit:"£") %> <br>
-
-      </h5>
-    </div>
-  </div>
-
-  <div class="card" style="background-color: #FAFAFA; border-color: #FAFAFA;">          
-    <div class="card-block">
-      <h5 class="card-title text-center">Ret. destino div. año actual</h5>
-     
-      <h5 class="card-text text-center">
-        
-        <%= number_to_currency(@destination_tax_dividend_group_year_eur , unit:"€") %> <br>
-        <%= number_to_currency(@destination_tax_dividend_group_year_usd ,  unit:"$") %> <br>
-        <%= number_to_currency(@destination_tax_dividend_group_year_gbp ,  unit:"£") %> <br>
-
-      </h5>
-    </div>
-  </div>
-
+<%= render 'div_year' %>
 
 
 </div>
