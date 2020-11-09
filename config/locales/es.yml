@@ -76,6 +76,7 @@ es:
   global_value: "Actual"
   last_purchases: "Últimas compras"
   next_dividends: "Próximos dividendos"
+  resultado_compraventa: "Resultado compraventas"
   purchased_year: Compras año
   dif: "Dif"
   price: "Precio"

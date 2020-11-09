@@ -76,6 +76,9 @@ end
   get 'index_expect_real_dividend_month', to: 'dashboard#index_expect_real_dividend_month'
   get 'index_estimated_movements', to: 'dashboard#index_estimated_movements'
 
+
+  get 'index_sales_year', to: 'dashboard#index_sales_year'
+
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
