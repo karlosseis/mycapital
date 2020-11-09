@@ -281,6 +281,8 @@ def index_expect_real_dividend_month
 end
 
 
+
+
 def index_estimated_movements  
 
    #PopulateEstimatedMovementsJob.perform_now
@@ -320,5 +322,12 @@ def index_estimated_movements
    @pending_movements_current_month_list = current_user.estimated_movements.where('movement_date >= ? and movement_date <= ?', @ini_mes, @ini_mes.end_of_month).order(:movement_date)
 
 end
+
+def index_sales_year
+#  @sales_year= current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_SALE, Time.now.beginning_of_year,Time.now.end_of_year).order(:operation_date, :company_id)  
+  @sales_year= current_user.operations.where('operationtype_id = ? ', Mycapital::OP_SALE).order(:operation_date, :company_id).order(:operation_date)  
+end
+
+
 
 end
