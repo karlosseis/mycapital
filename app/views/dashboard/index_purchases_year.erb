@@ -1,0 +1,33 @@
+
+<h2 class = "page-header">
+  <%= t(:'lista_operaciones_compra')  %> <%=  Date.today.year() %>
+</h2>      
+<div class="row">    
+    <div class="col-md-6" >
+       
+       <table id="myTable" class="table  table-striped">
+          <thead>
+            <tr>
+              <th style="text-align:left"><%= t(:'simple_form.labels.company.symbol') %></th>
+              <th style="text-align:center"><%= t(:'simple_form.labels.operation.operation_date')%></th>
+              <th style="text-align:right"><%= number_to_currency(t(:'price')) %></th>           
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @purchases_year.each do |p| %>
+              <tr>
+                <td style="text-align:left"><%= link_to p.company.symbol,  p.company %></td>
+                <td style="text-align:center"><%= I18n.l(p.operation_date)  %></td>        
+                <td style="text-align:right"><%= format_currency(p.amount, p.currency.symbol)  %></td>              
+              </tr>
+            <% end %>
+          </tbody>
+        </table>     
+    </div>
+
+
+
+
+</div>
+

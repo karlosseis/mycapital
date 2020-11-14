@@ -78,6 +78,7 @@ end
 
 
   get 'index_sales_year', to: 'dashboard#index_sales_year'
+  get 'index_purchases_year', to: 'dashboard#index_purchases_year'
 
   get 'welcome/index'
 
