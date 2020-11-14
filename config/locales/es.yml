@@ -77,6 +77,7 @@ es:
   last_purchases: "Últimas compras"
   next_dividends: "Próximos dividendos"
   resultado_compraventa: "Resultado compraventas"
+  lista_operaciones_compra: Lista de compras
   purchased_year: Compras año
   dif: "Dif"
   price: "Precio"

@@ -122,7 +122,8 @@
     <div>
         <div class="uk-card uk-card-default uk-card-body">
         
-            <h3 class="uk-card-title text-center"><%= t(:'last_purchases') %></h3>
+            <h3 class="uk-card-title text-center"><%= link_to t(:'last_purchases'), index_purchases_year_path %></h3>
+
 
 
             <table class="uk-table uk-table-condensed">
@@ -157,7 +158,8 @@
     <div>
         <div class="uk-card uk-card-default uk-card-body">
         
-            <h3 class="uk-card-title text-center"><%= link_to t(:'next_dividends'),index_expect_real_dividend_month_path %></h3>
+            <h3 class="uk-card-title text-center"><%= link_to t(:'next_dividends'), index_expect_real_dividend_month_path %></h3>
+            
 
 
             <table class="uk-table uk-table-condensed">
