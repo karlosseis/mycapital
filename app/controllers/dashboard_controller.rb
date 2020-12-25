@@ -90,10 +90,30 @@ class DashboardController < ApplicationController
 
     @expected_dividends_group_month_array = {}
     @real_dividends_group_month_array = {}
+    @last_year_real_dividends_group_month_array = {}
     Currency.all.each do |curr|
       @expected_dividends_group_month_array[curr.id] = current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND, :currency_id => curr.id).group_by_month(:operation_date).sum(:amount)
       @real_dividends_group_month_array[curr.id] = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year, curr.id).group_by_month(:operation_date).sum(:net_amount)
+      
+
+    @last_year_real_dividends_group_month_array_temp = {}
+    @last_year_real_dividends_group_month_array_temp_2 = {}
+
+      @last_year_real_dividends_group_month_array_temp = current_user.operations.where('operationtype_id = ? and year(operation_date) = ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).year-1, curr.id).group_by_month(:operation_date).sum(:net_amount)
+      @last_year_real_dividends_group_month_array_temp.each do |key, value|    
+          @last_year_real_dividends_group_month_array_temp_2[key + 1.year] = @last_year_real_dividends_group_month_array_temp[key] 
+      end
+
+      @last_year_real_dividends_group_month_array[curr.id] = @last_year_real_dividends_group_month_array_temp_2
+      #@last_year_real_dividends_group_month_array[curr.id] = current_user.operations.where('operationtype_id = ? and year(operation_date) = ? and currency_id = ?', Mycapital::OP_DIVIDEND, (Time.now).year-1, curr.id).group_by_month(:operation_date).sum(:net_amount)
+    
+      
+      
     end
+
+
+  
+
 
     @expected_dividends_group_month = current_user.expected_dividends.where(:operationtype_id => Mycapital::OP_DIVIDEND).group_by_month(:operation_date).sum(:amount)
     @real_dividends_group_month = current_user.operations.where('operationtype_id = ? and operation_date >= ? and operation_date <= ?', Mycapital::OP_DIVIDEND, (Time.now).beginning_of_year,(Time.now).end_of_year).group_by_month(:operation_date).sum(:net_amount)

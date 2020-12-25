@@ -5,7 +5,10 @@
        <div class="col-md-4">
       <%= line_chart [
         {name: "Previsto", data: value},
-        {name: "Real", data: @real_dividends_group_month_array[key]}
+        {name: "Real", data: @real_dividends_group_month_array[key]},
+        {name: "Past", data: @last_year_real_dividends_group_month_array[key]}
+        #,        {name: "Past", data: @last_year_real_dividends_group_month_array[key]}
+        
         #,{name: "Past", data: @last_year_real_dividends_group_month}
         
       ] , title: t(:'graph_dividend_year_com_currency',  curr: Currency.find(key).name) %>
@@ -14,6 +17,7 @@
 
     
     </div>   
+
 
 
 
