@@ -76,7 +76,7 @@ class CompaniesController < ApplicationController
       #              que recuperara también de la hoja de cálculo
       # @company.set_update_summary
       # @company.set_stock_price_google
-      @company.retrieve_IEX_dividends
+      # @company.retrieve_IEX_dividends
       if  @company.save     
 
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
