@@ -14,7 +14,7 @@ require 'settings.rb'
 
 
 
-  before_create :set_img_logo #, :set_stock_price_IEX ,:set_update_summary ,:retrieve_IEX_dividends_batch ,:set_next_official_dividend_values
+  #before_create :set_img_logo #, :set_stock_price_IEX ,:set_update_summary ,:retrieve_IEX_dividends_batch ,:set_next_official_dividend_values
   belongs_to :user
   belongs_to :stockexchange
   belongs_to :sector
