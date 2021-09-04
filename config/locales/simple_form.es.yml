@@ -49,6 +49,7 @@ es:
         investors_url: Web accionistas
         dif_target_price: Dif. Precio Objetivo
         porc_dif_target_price: "% Dif"
+        porc_dif_average_stock_price: "% Dif"
         dividend_last_result: "Último Div. Anual"
         perc_dividend_last_result: "% Div"
         var_percent: "% Var"

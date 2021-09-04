@@ -36,7 +36,7 @@ require 'settings.rb'
   #validates :sector, presence: true
   validates :search_symbol, presence: true
   
-  enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0}
+  enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0, oro:4}
   
 
   accepts_nested_attributes_for :operations,reject_if: proc { |attributes| attributes['amount'].blank? }
@@ -250,6 +250,8 @@ require 'settings.rb'
     self.share_price - self.target_price_1
   end
 
+
+
   def dif_target_sell_price 
     ret = 99999
     unless self.target_sell_price.nil?
@@ -291,6 +293,26 @@ require 'settings.rb'
     perc_result    
   end
 
+
+  def dif_average_price 
+    self.share_price - self.average_price
+  end
+
+
+
+  def porc_dif_average_stock_price    
+    perc_result = 0 
+
+
+    #unless (self.dif_average_price) <= 0
+      perc_result = (self.dif_average_price * 100) / self.share_price
+    #end
+    if self.average_price > 0
+      perc_result    * -1
+    else
+       nil
+    end
+  end
 
  
 
