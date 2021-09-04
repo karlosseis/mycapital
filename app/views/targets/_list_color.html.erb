@@ -13,6 +13,9 @@
         <th style="text-align:right"><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></th>                    
         <th style="text-align:right"><%= t(:'simple_form.labels.company.target_price_1') %></th>      
         <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_target_price') %></th>    
+        <th style="text-align:right"><%= t(:'simple_form.labels.company.average_price') %></th>
+        <th style="text-align:right"><%= t(:'simple_form.labels.company.porc_dif_average_stock_price') %></th>
+        
         <th style="text-align:center"><%= t(:'simple_form.labels.company.years_with_dividend') %></th>      
       </tr>
     </thead>
@@ -20,7 +23,13 @@
     <tbody>
       
         <% companies_color.each do |company| %>
+
+          <% if row_color == 'gold' %>
+          <tr style="background-color:#FFD700">
+           <% else %>  
           <tr class=<%= row_color %>>
+          <% end %> 
+
             <td style="text-align:center">          <% if company.porc_dif_target_price.to_f <= 2 %>            
                 <span class="glyphicon glyphicon-star" style="color:black" aria-hidden="true"></span>
               <% end %>  </td>
@@ -49,6 +58,26 @@
               
               <%= number_to_percentage(company.porc_dif_target_price, precision: 2) %>
             </td>          
+
+            <td style="text-align:right">
+              <% if company.average_price > 0 %>
+                <%= number_to_currency(company.average_price, :unit => company.stockexchange.currency.symbol) %>
+              <% end %>
+              
+            </td>          
+
+            <td style="text-align:right">              
+              
+
+             <% if !company.porc_dif_average_stock_price.nil? and company.porc_dif_average_stock_price >= 0 %>
+                <font color="#009933"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
+              <% else %>
+                  <font color="#ff0000"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
+              <% end %>    
+
+            </td>          
+
+
 
             <td style="text-align:center">          
               <%= company.years_with_dividend %>
