@@ -153,6 +153,19 @@ require 'settings.rb'
     
   end
 
+  def url_earningsfly
+    # "https://www.google.com/finance?q=" + self.google_symbol
+    "https://www.earningsfly.com/stocks/" + self.symbol
+    
+  end
+
+  def url_dividendmax
+
+    'https://www.dividendmax.com/dividends/declared'
+
+  end
+
+
   def url_morningstar_ratios    
     "http://financials.morningstar.com/ratios/r.html?t=" + self.symbol
   end
