@@ -145,20 +145,27 @@
 
                <ul uk-scrollspy-nav="closest: li; scroll: true; offset: 100" class="uk-nav uk-nav-default tm-nav uk-nav-parent-icon">
                 <li class="uk-active"><a href="#inicio">Inicio</a></li>
-                <li><a href="#masinfo">Más información</a></li>                
+<!--                 <li><a href="#masinfo">Más información</a></li>                
                 <li><a href="#stats">Estadísticas</a></li>                
                 <li><a href="#noticias">Noticias</a></li>                
                 <li><a href="#comentarios">Comentarios</a></li> 
-                <li><a href="#ops">Operaciones</a></li> 
+ -->                <li><a href="#ops">Operaciones</a></li> 
+                <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_DIVIDEND) do %>Nuevo dividendo</li> <% end %>
+                <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_PURCHASE) do %>Nueva compra</li> <% end %>
+
 
                 <li class="uk-nav-divider"></li> 
             
                   <li><a href=<%= @company.url_google_finance %> target = "_blank">Google Finance</a></li> 
+                  <li><a href=<%= @company.url_earningsfly %> target = "_blank">Earnings Fly</a></li> 
                   <li><a href=<%= @company.investors_url %> target = "_blank">Investors</a></li> 
                   <li><a href=<%= @company.historic_dividend_url %> target = "_blank">Historic Div.</a></li> 
                   <li><a href=<%= @company.url_morningstar_ratios %> target = "_blank">Ratios</a></li> 
                   <li><a href=<%= @company.url_morningstar_incomes %> target = "_blank">Incomes</a></li> 
                   <li><a href=<%= @company.url_IEX %> target = "_blank">IEX</a></li> 
+                  <li><a href=<%= @company.url_dividendmax %> target = "_blank">Dividend Max</a></li> 
+                  
+                  
 
                     
                     
@@ -168,8 +175,6 @@
               <li class="uk-nav-divider"></li> 
 
                 <li><%= link_to edit_company_path(@company)   , title: t("edit"), style:"color:#373a3c ;" do %>Editar empresa</li> <% end %>
-                <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_DIVIDEND) do %>Nuevo dividendo</li> <% end %>
-                <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_PURCHASE) do %>Nueva compra</li> <% end %>
                 <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_SALE) do %>Nuevo venta</li> <% end %>
                 <li><%= link_to new_company_operation_path(@company, :operationtype_id =>  Mycapital::OP_AMPLIATION) do %>Nueva ampliación</li> <% end %>
                 <li><%= link_to new_company_company_historic_dividend_path(@company) do %>Nuevo historic div</li> <% end %>                               
