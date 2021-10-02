@@ -37,7 +37,10 @@ require 'settings.rb'
   validates :search_symbol, presence: true
   
   enum traffic_light_id: {rojo: 1, amarillo: 2, verde: 3, gris: 0, oro:4}
-  
+
+
+
+    
 
   accepts_nested_attributes_for :operations,reject_if: proc { |attributes| attributes['amount'].blank? }
   

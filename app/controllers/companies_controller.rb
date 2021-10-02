@@ -5,6 +5,8 @@ class CompaniesController < ApplicationController
   # GET /companies.json
 
 
+
+
   def index
     
     #@companies = current_user.companies.all
