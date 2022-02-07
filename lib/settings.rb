@@ -64,12 +64,16 @@ class Settings
 				@gbp2eur = fx.convert(1, :from => "GBP", :to => "EUR")
 				@eur2usd = fx.convert(1, :from => "EUR", :to => "USD")
 				@eur2gbp = fx.convert(1, :from => "EUR", :to => "GBP")
+				@eur2gbp = fx.convert(1, :from => "EUR", :to => "AUD")
+				@eur2gbp = fx.convert(1, :from => "AUD", :to => "EUR")
 
 				a = []
 				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "USDEUR", rate: @usd2eur)
 				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "GBPEUR", rate: @gbp2eur)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "AUDEUR", rate: @gbp2eur)
 				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURUSD", rate: @eur2usd)
 				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURGBP", rate: @eur2gbp)
+				a << ExchangeRate.new(date_exchange: Time.now.beginning_of_day, pair: "EURAUD", rate: @eur2gbp)
 
 				a.each(&:save)
 
