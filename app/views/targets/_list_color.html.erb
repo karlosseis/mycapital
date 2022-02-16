@@ -70,9 +70,9 @@
               
 
              <% if !company.porc_dif_average_stock_price.nil? and company.porc_dif_average_stock_price >= 0 %>
-                <font color="#009933"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
+                <font color="#ff0000"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
               <% else %>
-                  <font color="#ff0000"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
+                  <font color="#009933"><%= number_to_percentage(company.porc_dif_average_stock_price, precision: 2) %></font>
               <% end %>    
 
             </td>          
