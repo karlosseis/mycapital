@@ -16,14 +16,15 @@ class Iex
 
     # 18/11/2021    
     # 17/01/2021
+    # 16/03/2021
     #corotos
-    #@secret_token = "sk_a869f8d2eba140728de5380d3b971899"
+    @secret_token = "sk_a869f8d2eba140728de5380d3b971899"
 
 
     # 21/10/2021
     # 16/02/2021
     #angulo.carlos
-    @secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
+    #@secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
     
   end
 
