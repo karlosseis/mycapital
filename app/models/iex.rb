@@ -22,12 +22,12 @@ class Iex
     # 18/04/2022
     # 25/05/2022
     #corotos
-    @secret_token = "sk_a869f8d2eba140728de5380d3b971899"
+    #@secret_token = "sk_a869f8d2eba140728de5380d3b971899"
 
   
     
     #angulo.carlos
-    #@secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
+    @secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
     
   end
 
