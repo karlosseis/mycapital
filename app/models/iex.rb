@@ -1,6 +1,8 @@
 # no need to require thanks to bundler
 
 class Iex
+
+#test git
   include HTTParty
 
   #base_uri "https://api.iextrading.com/1.0"
