@@ -29,7 +29,7 @@ class Iex
   
     
     #angulo.carlos
-    @secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
+    #@secret_token = "sk_0af9b76d64e744eb99d90e8f8a525da6"
 	
 	#mansiontheone
 	@secret_token = "pk_111c35cf4032482b8bc443797c7acf4e"
