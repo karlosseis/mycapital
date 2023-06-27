@@ -771,7 +771,10 @@ require 'settings.rb'
 
   def IEX_avaliable  
     # Si es el mercado americano (en yahoo no tiene sufijo), podremos recuperar la data de IEX
-    Settings.yahoo_suffixes[self.stockexchange_id] == ""
+
+    # 27/06 Iex ha dejado de ser gratis, tiraremos siempre de google finance hasta nueva orden
+    # Settings.yahoo_suffixes[self.stockexchange_id] == ""
+    return false
   end
 
   def set_stock_price_IEX    
