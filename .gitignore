@@ -18,3 +18,5 @@
 
 
 /privado/*
+client_secret.json
+*.json
