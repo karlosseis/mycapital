@@ -47,8 +47,12 @@
                   <dd><%=  number_to_human(@company.stats('marketcap'), precision: 3)  %> </dd>
 
 
-                  <dt><%= t(:'simple_form.labels.company.year_low') %></dt>
-                  <dd><%=  @company.number_currency_operations(@company.stats('week52low'))  %> - <%=  @company.number_currency_operations(@company.stats('week52high'))  %></dd>
+                  <dt><%= t(:'simple_form.labels.company.year_low') %></dt>                  
+<dd>
+  <%= @company.number_currency_operations(@company.google_low52 || 0) %>
+  -
+  <%= @company.number_currency_operations(@company.google_high52 || 0) %>
+</dd>
 
           
                    

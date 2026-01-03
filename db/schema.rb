@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_115135) do
+ActiveRecord::Schema.define(version: 2026_01_03_080441) do
 
   create_table "accounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name", size: :long
@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2020_03_22_115135) do
     t.float "earnings_sum", default: 0.0
     t.float "earnings_sum_euros", default: 0.0
     t.string "logo_url", default: ""
+    t.decimal "google_high52", precision: 15, scale: 6, default: "0.0", null: false
+    t.decimal "google_low52", precision: 15, scale: 6, default: "0.0", null: false
     t.index ["broker_id"], name: "index_companies_on_broker_id"
     t.index ["country_id"], name: "index_companies_on_country_id"
     t.index ["sector_id"], name: "index_companies_on_sector_id"
@@ -297,16 +299,6 @@ ActiveRecord::Schema.define(version: 2020_03_22_115135) do
     t.integer "user_id"
     t.integer "reference_web_id"
     t.index ["company_id"], name: "index_expert_target_prices_on_company_id"
-  end
-
-  create_table "export_empresas", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "ID"
-    t.text "NAME"
-  end
-
-  create_table "export_empresas_dev", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "ID"
-    t.text "NAME"
   end
 
   create_table "locations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -2,17 +2,6 @@ class SharePricesUpdateJob < ActiveJob::Base
 # SharePricesUpdateJob.perform_now
    queue_as :default
 
-def to_decimal_or_zero(value)
-  s = value.to_s.strip
-  return 0.0 if s.empty? || s == "#N/A" || s.casecmp("N/A").zero?
-
-  s = s.tr(",", ".") # por si viene 1,23
-  Float(s)
-rescue ArgumentError, TypeError
-  0.0
-end
-
-   
   def perform(*args)
     
 
@@ -45,9 +34,6 @@ end
 	  		  			share_price_change_perc=  row[3]
 	  		  			share_price_change =  row[4]   
 
-						low52  = to_decimal_or_zero(row[18])
-						high52 = to_decimal_or_zero(row[17])
-
 	  		  			share_price.sub!(',','.')
 						share_price_change_perc.sub!(',','.')
 						share_price_change.sub!(',','.')
@@ -56,8 +42,6 @@ end
 							q.share_price =  share_price.to_f   
 							q.share_price_change_perc =  share_price_change_perc.to_f
 							q.share_price_change =  share_price_change.to_f     							  
-							q.google_low52 = low52
-							q.google_high52 = high52
 							#q.set_update_summary
 	
 					         if Settings.stockexchange_currency_name[q.stockexchange_id] == 'GBP' then
