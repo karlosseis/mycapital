@@ -2,35 +2,16 @@ class SharePricesUpdateJob < ActiveJob::Base
 # SharePricesUpdateJob.perform_now
    queue_as :default
 
-  def to_decimal_or_zero(value)
-    s = value.to_s.strip
-    return 0.0 if s.empty? || s == "#N/A" || s.casecmp("N/A").zero?
+def to_decimal_or_zero(value)
+  s = value.to_s.strip
+  return 0.0 if s.empty? || s == "#N/A" || s.casecmp("N/A").zero?
 
-    # Normaliza decimales con coma
-    s = s.tr(",", ".")
+  s = s.tr(",", ".") # por si viene 1,23
+  Float(s)
+rescue ArgumentError, TypeError
+  0.0
+end
 
-    # Soporta sufijos K/M/B/T (por si Capitalización viene así: 1.2B)
-    mult = 1.0
-    if s =~ /([kmbt])\z/i
-      mult = { "K" => 1e3, "M" => 1e6, "B" => 1e9, "T" => 1e12 }[$1.upcase] || 1.0
-      s = s[0...-1]
-    end
-
-    # Quita símbolos extra
-    s = s.gsub(/[^\d\.\-]/, "")
-
-    Float(s) * mult
-  rescue ArgumentError, TypeError
-    0.0
-  end
-
-  def near_high52?(price:, high52:, pct: 0.05)
-    p = price.to_f
-    h = high52.to_f
-    return false if p <= 0 || h <= 0
-
-    p <= h && p >= (h * (1.0 - pct))
-  end
    
   def perform(*args)
     
@@ -66,12 +47,6 @@ class SharePricesUpdateJob < ActiveJob::Base
 
 						low52  = to_decimal_or_zero(row[18])
 						high52 = to_decimal_or_zero(row[17])
-						# Fundamentales
-						market_cap = to_decimal_or_zero(row[11]) # Capitalización
-						per        = to_decimal_or_zero(row[12]) # PER
-						bpa        = to_decimal_or_zero(row[13]) # BPA
-						beta       = to_decimal_or_zero(row[14]) # Beta
-
 
 	  		  			share_price.sub!(',','.')
 						share_price_change_perc.sub!(',','.')
@@ -83,18 +58,6 @@ class SharePricesUpdateJob < ActiveJob::Base
 							q.share_price_change =  share_price_change.to_f     							  
 							q.google_low52 = low52
 							q.google_high52 = high52
-
-
-
-							q.google_market_cap = market_cap
-							q.google_per        = per
-							q.google_bpa        = bpa
-							q.google_beta       = beta
-
-							# Boolean persistido
-							q.near_high52 = near_high52?(price: q.share_price, high52: q.google_high52, pct: 0.05)
-
-
 							#q.set_update_summary
 	
 					         if Settings.stockexchange_currency_name[q.stockexchange_id] == 'GBP' then

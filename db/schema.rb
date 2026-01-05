@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_01_03_080441) do
+ActiveRecord::Schema.define(version: 2026_01_05_155056) do
 
   create_table "accounts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name", size: :long
@@ -137,8 +137,14 @@ ActiveRecord::Schema.define(version: 2026_01_03_080441) do
     t.string "logo_url", default: ""
     t.decimal "google_high52", precision: 15, scale: 6, default: "0.0", null: false
     t.decimal "google_low52", precision: 15, scale: 6, default: "0.0", null: false
+    t.decimal "google_market_cap", precision: 20, scale: 2, default: "0.0", null: false
+    t.decimal "google_per", precision: 15, scale: 6, default: "0.0", null: false
+    t.decimal "google_bpa", precision: 15, scale: 6, default: "0.0", null: false
+    t.decimal "google_beta", precision: 15, scale: 6, default: "0.0", null: false
+    t.boolean "near_high52", default: false, null: false
     t.index ["broker_id"], name: "index_companies_on_broker_id"
     t.index ["country_id"], name: "index_companies_on_country_id"
+    t.index ["near_high52"], name: "index_companies_on_near_high52"
     t.index ["sector_id"], name: "index_companies_on_sector_id"
     t.index ["stockexchange_id"], name: "index_companies_on_stockexchange_id"
     t.index ["user_id"], name: "index_companies_on_user_id"

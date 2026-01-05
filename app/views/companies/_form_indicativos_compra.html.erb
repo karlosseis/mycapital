@@ -22,8 +22,11 @@
                   <dt>Próximo dividendo</dt>
                   <dd><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></dt>          
          
-                
+                    <dt>PER</dt>
+                    <dd><%= @company.google_per.to_f.round(2) %></dd>                
 
+                    <dt>Cerca Máximos (≤ 5%)</dt>
+                    <dd><%= @company.near_high52? ? "Sí" : "No" %></dd>    
 
              </dl>         
 
@@ -44,17 +47,24 @@
                
 
                   <dt><%= t(:'simple_form.labels.company.market_capitalization') %></dt>
-                  <dd><%=  number_to_human(@company.stats('marketcap'), precision: 3)  %> </dd>
+                  <dd><%= number_with_delimiter(@company.google_market_cap.to_i) %></dd>
 
 
-                  <dt><%= t(:'simple_form.labels.company.year_low') %></dt>                  
-<dd>
-  <%= @company.number_currency_operations(@company.google_low52 || 0) %>
-  -
-  <%= @company.number_currency_operations(@company.google_high52 || 0) %>
-</dd>
+                  <dt><%= t(:'simple_form.labels.company.year_low') %></dt>    
 
-          
+                    <dd>
+                    <%= @company.number_currency_operations(@company.google_low52 || 0) %>
+                    -
+                    <%= @company.number_currency_operations(@company.google_high52 || 0) %>
+                    </dd>
+                   
+
+
+                    <dt>BPA</dt>
+                    <dd><%= @company.google_bpa.to_f.round(2) %></dd>
+
+
+     
                    
 
                 </dl>    
@@ -81,7 +91,9 @@
                   
                   <dt><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></dt>
                   <dd><%= number_to_percentage(@company.perc_estimated_year_dividend_amount, precision: 2) %></dt>       
-                  
+
+                    <dt>Beta</dt>
+                    <dd><%= @company.google_beta.to_f.round(2) %></dd>
 
                 </dl>    
 
