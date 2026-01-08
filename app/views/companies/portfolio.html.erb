@@ -40,6 +40,12 @@ $(document).ready(function(){
       <!-- NUEVAS COLUMNAS AL FINAL -->
       <th style="text-align:right">High52</th>
       <th style="text-align:center">Near High52</th>
+
+
+      <th style="text-align:right">% Dividendo cobrado (año pasado)</th>
+      <th style="text-align:center">Próximo dividendo (estimado)</th>
+
+
     </tr>
   </thead>
 
@@ -90,7 +96,24 @@ $(document).ready(function(){
         <td style="text-align:center">
           <%= company.near_high52? ? "Sí" : "No" %>
         </td>
-      </tr>
+        <td style="text-align:center">
+          <%= number_to_percentage(company.perc_last_year_dividend_amount, precision: 2) %>
+        </td>
+        <td style="text-align:center">
+
+                           <% if (d = company.estimated_next_dividend_date) %>
+                        <%= l(d) %>
+                    <% else %>
+                        -
+                    <% end %>
+
+                    
+        </td>
+
+
+        
+
+        </tr>
     <% end %>
   </tbody>
 </table>

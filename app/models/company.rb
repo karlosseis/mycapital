@@ -899,6 +899,68 @@ require 'settings.rb'
 
   end
 
+
+## hecho por CHATGPT
+
+def last_year_dividend_amount
+  year = Time.zone.today.year - 1
+  from = Date.new(year, 1, 1)
+  to   = Date.new(year, 12, 31)
+
+  # Ajusta esta condición al tipo de operación de DIVIDENDO en tu app:
+  # - Si tienes constante: Mycapital::OP_DIVIDEND
+  # - o un operationtype_id concreto
+  dividends = operations.where(operationtype_id: Mycapital::OP_DIVIDEND)
+                        .where(operation_date: from..to)
+
+  # Si ya guardas los dividendos en euros en algún campo, usa ese.
+  # Si no, suma amount (y conviértelo si procede).
+  dividends.sum(:net_amount).to_f
+end
+
+def perc_last_year_dividend_amount
+  return 0 if average_price.to_f <= 0
+  (last_year_dividend_amount.to_f / average_price.to_f) * 100
+end
+
+def estimated_next_dividend_date(reference_date: Time.zone.today)
+  last_year = reference_date.year - 1
+
+  from = Date.new(last_year, 1, 1)
+  to   = Date.new(last_year, 12, 31)
+
+  # Ajusta esto a tu tipo de operación de dividendo
+  dividends_last_year = operations
+                          .where(operationtype_id: Mycapital::OP_DIVIDEND)
+                          .where(operation_date: from..to)
+                          .where.not(operation_date: nil)
+                          .order(:operation_date)
+
+  return nil if dividends_last_year.blank?
+
+  # Queremos "la fecha más próxima" (en el calendario) tomando como referencia hoy.
+  # Ej: hoy es 2026-01-08, miramos en 2025 qué dividendos son posteriores a 2025-01-08
+  cutoff = reference_date - 1.year
+
+  candidate = dividends_last_year.where("operation_date >= ?", cutoff).first
+  candidate ||= dividends_last_year.first
+
+  base_date = candidate.operation_date.to_date
+
+  # Copiamos mes y día al año actual
+  estimated = Date.new(reference_date.year, base_date.month, base_date.day) rescue nil
+  return nil unless estimated
+
+  # Si cae hoy o en pasado, lo mandamos al año siguiente
+  estimated += 1.year if estimated <= reference_date
+
+  estimated
+end
+
+
+
+
+
   def retrieve_IEX_dividends_batch
     # recuperamos los dividendos de IEX y los grabamos físicamente como histórico de dividendos
     # 13/03/2020 - usando el servico batch, porque el otro ha dejado de ir bien

@@ -16,6 +16,11 @@
                   <dd><%= number_to_currency(@company.average_price, :unit => @company.stockexchange.currency.symbol)  %>
 
 
+                  <dt><%= t(:'simple_form.labels.company.yoc') %></dt>            
+                  <dd><%=number_to_percentage(@company.expected_yoc, precision: 2) %></dt>            
+        
+                  <dt>Próximo dividendo</dt>
+                  <dd><%= @company.next_dividend[:a]  %><small> (<%= @company.next_dividend[:b]  %>)</small></dt>          
          
                     <dt>PER</dt>
                     <dd><%= @company.google_per.to_f.round(2) %></dd>                
@@ -77,22 +82,23 @@
   
                   <dt><%= t(:'simple_form.labels.company.target_price_1') %></dt>
                   <dd><%=  @company.number_currency_operations(@company.target_price_1)  %></dd>      
+  
+                  <dt><%= t(:'simple_form.labels.company.nearest_announce_date') %></dt>
+                  <dd><small><%= format_date(@company.nearest_announce_date) %></small></dt>                                      
 
-                    <dt>Próximo dividendo (estimado)</dt>
-                    <dd>
-                    <% if (d = @company.estimated_next_dividend_date) %>
-                        <%= l(d) %>
-                    <% else %>
-                        -
-                    <% end %>
-                    </dd>
+                  <dt>Pago próx. dividendo</dt>
+                  <dd><%= number_to_currency(@company.next_dividend_amount, :unit => @company.stockexchange.currency.symbol)  %><small> (<%= format_date(@company.next_dividend_date)  %>)</small></dt>
                   
+                  <dt><%= t(:'simple_form.labels.company.perc_dividend_last_result') %></dt>
+                  <dd><%= number_to_percentage(@company.perc_estimated_year_dividend_amount, precision: 2) %></dt>       
+
 
                 <dt>Dividendo cobrado (año pasado)</dt>
                 <dd><%= @company.number_currency_operations(@company.last_year_dividend_amount) %></dd>
 
                 <dt>% Dividendo cobrado (año pasado)</dt>
                 <dd><%= number_to_percentage(@company.perc_last_year_dividend_amount, precision: 2) %></dd>
+
 
 
 
