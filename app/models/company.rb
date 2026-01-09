@@ -903,6 +903,7 @@ require 'settings.rb'
 ## hecho por CHATGPT
 
 def last_year_dividend_amount
+  # OJO, esto no será correcto cuando haya ampliado o disminuido acciones durante el año (o tenga diferente cantidad que ahora), ya que estoy dividiendo a saco por la cantidad a fecha de hoy
   year = Time.zone.today.year - 1
   from = Date.new(year, 1, 1)
   to   = Date.new(year, 12, 31)
@@ -915,8 +916,16 @@ def last_year_dividend_amount
 
   # Si ya guardas los dividendos en euros en algún campo, usa ese.
   # Si no, suma amount (y conviértelo si procede).
-  dividends.sum(:net_amount).to_f
+  
+  
+
+  dividends.sum(:net_amount).to_f  / self.shares_sum.round(0)
+  
+  
 end
+
+
+
 
 def perc_last_year_dividend_amount
   return 0 if average_price.to_f <= 0
